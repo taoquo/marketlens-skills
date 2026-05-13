@@ -1,0 +1,24 @@
+.DS_Store
+**/.DS_Store
+
+# Work products and raw source files
+reports/
+tmp/
+
+# Build artifacts
+dist/
+
+# Python/cache artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Local editor/system files
+.idea/
+.vscode/
+*.swp
+*.swo

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Equity Research"
+  short_description: "Analyze US, HK, and A-share equities"
+  default_prompt: "Use $equity-research to analyze a listed company across fundamentals, earnings, valuation, and market-specific risks."

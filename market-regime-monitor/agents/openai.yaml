@@ -1,0 +1,4 @@
+interface:
+  display_name: "Market Regime Monitor"
+  short_description: "Assess liquidity, sentiment, and risk regime"
+  default_prompt: "Use $market-regime-monitor to assess current liquidity, sentiment, and risk conditions before adjusting exposure."
