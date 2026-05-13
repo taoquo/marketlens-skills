@@ -1,6 +1,10 @@
 .DS_Store
 **/.DS_Store
 
+# Local Codex and CI config
+.codex/
+.github/
+
 # Work products and raw source files
 reports/
 tmp/
