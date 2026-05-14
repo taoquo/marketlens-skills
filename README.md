@@ -49,8 +49,8 @@ ls dist/*.skill
 Example prompts:
 
 ```text
-Use $equity-research to analyze Tencent's long-term value.
-Use $equity-research to review Kweichow Moutai's latest earnings.
+Use $equity-research to analyze NVIDIA's latest annual results and valuation.
+Use $equity-research to review Tencent's long-term quality and key risks.
 Use $market-regime-monitor to assess whether the US equity market is crowded.
 Use $market-regime-monitor to assess how current liquidity affects Hong Kong and A-share markets.
 ```
@@ -75,7 +75,11 @@ This release adds stricter conclusion gates:
 
 ## Examples
 
-The `examples/` folder contains a sample one-page equity research report. It is included only as an output example and does not constitute investment advice.
+The `examples/` folder contains a Folio-typeset NVIDIA equity research preview generated with `$equity-research`:
+
+![NVIDIA equity research sample](examples/nvidia-nvda-equity-report.png)
+
+The sample demonstrates source dating, data freshness tables, conclusion downgrades when price-sensitive gates are incomplete, and a research-only disclaimer. It is an output-format preview and does not constitute investment advice.
 
 ## Validation
 
