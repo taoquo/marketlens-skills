@@ -14,10 +14,11 @@ Use this file when analyzing non-US stocks or when market-specific rules affect 
 - Primary filings: annual reports, interim reports, quarterly updates if provided, HKEXnews announcements, circulars, company IR.
 - Mandatory checks:
   - Southbound Stock Connect flows and ownership changes when available.
-  - Buybacks, placements, rights issues, convertible bonds, and share pledges.
-  - AH premium/discount for dual-listed names.
+  - Buybacks, cancellation rate, placements, rights issues, convertible bonds, warrants, and share pledges.
+  - AH premium/discount for dual-listed names, including whether the gap reflects liquidity, dividend tax, governance, or capital-control constraints.
   - Related-party transactions, VIE/control structure for platform companies, and auditor changes.
   - HKD/HIBOR and USD liquidity for rate-sensitive sectors.
+  - Southbound concentration in a few large names; do not treat southbound inflow as broad-market support without breadth evidence.
 - Sector notes:
   - Internet/platform: regulation, take rate, buyback execution, shareholder return.
   - Property/financials: refinancing risk, asset impairment, dividend sustainability.
@@ -31,7 +32,8 @@ Use this file when analyzing non-US stocks or when market-specific rules affect 
   - Government policy cycle, procurement/pricing policy, industry capacity cycle.
   - Non-recurring gains/losses, capitalized R&D, receivables, inventory, related-party transactions.
   - Dividend policy, buyback plan, employee stock ownership or incentive plan.
-  - Valuation percentile versus the company's own history and local peer group.
+  - Government subsidies, goodwill impairment, inquiry letters, regulatory penalties, and accounting-estimate changes.
+  - Valuation percentile versus the company's own history, local peer group, and industry cycle.
 - Sector notes:
   - Consumer staples: channel inventory, price discipline, distributor health.
   - Manufacturing/exporters: FX, tariff, overseas revenue quality, capacity expansion.

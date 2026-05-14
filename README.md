@@ -10,8 +10,8 @@ It provides two production-oriented skills:
 
 | Skill | Purpose |
 |---|---|
-| `equity-research` | Equity research for US, Hong Kong, and A-share listed companies, covering earnings, fundamentals, valuation, moat, regional disclosures, and data freshness. |
-| `market-regime-monitor` | Market regime monitoring across liquidity, sentiment, positioning, valuation crowding, and cross-market risk conditions. |
+| `equity-research` | Equity research for US, Hong Kong, and A-share listed companies, covering earnings, fundamentals, valuation, moat, regional disclosures, red flags, and data freshness. |
+| `market-regime-monitor` | Market regime monitoring across liquidity, sentiment, positioning, valuation crowding, scoring confidence, and cross-market risk transmission. |
 
 ## Installation
 
@@ -64,6 +64,14 @@ Both skills require:
 - TTL-based freshness checks;
 - cross-checking price-sensitive or regime-sensitive conclusions;
 - marking missing data as unavailable instead of turning it into a directional signal.
+
+## v0.2 Research Discipline
+
+This release adds stricter conclusion gates:
+
+- equity research must downgrade conclusions when price, filings, valuation inputs, or primary sources are missing;
+- valuation work now includes sector-specific methods for financials, REITs, cyclicals, platforms, exporters, and pre-profit biotech;
+- market regime calls now use indicator scoring, confidence levels, conflict handling, causal channels, and explicit view-change triggers.
 
 ## Examples
 
