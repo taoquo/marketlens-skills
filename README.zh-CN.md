@@ -47,8 +47,8 @@ ls dist/*.skill
 ## 使用示例
 
 ```text
-Use $equity-research 分析一下腾讯控股长期价值。
-Use $equity-research 贵州茅台最新财报怎么看。
+Use $equity-research 分析英伟达最新年度财报和估值。
+Use $equity-research 分析腾讯控股的长期质量和关键风险。
 Use $market-regime-monitor 现在美股市场是不是太拥挤。
 Use $market-regime-monitor 当前流动性对港股/A股影响如何。
 ```
@@ -73,7 +73,11 @@ Use $market-regime-monitor 当前流动性对港股/A股影响如何。
 
 ## 示例
 
-`examples/` 目录包含一个个股研究一页纸示例，仅用于展示输出形态，不构成投资建议。
+`examples/` 目录包含一个使用 `$equity-research` 生成、并用 Folio 排版的英伟达个股研究预览：
+
+![英伟达个股研究案例](examples/nvidia-nvda-equity-report.png)
+
+该案例展示数据日期、实效性表、结论门槛不足时的降级处理，以及研究用途免责声明。它只用于展示输出预览，不构成投资建议。
 
 ## 校验
 
