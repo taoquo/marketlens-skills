@@ -1,0 +1,4 @@
+interface:
+  display_name: "Catalyst Event Monitor"
+  short_description: "Track catalysts, event paths, and thesis updates"
+  default_prompt: "Use $catalyst-event-monitor to map upcoming catalysts, expectation gaps, scenario paths, event watch data, and post-event thesis updates."

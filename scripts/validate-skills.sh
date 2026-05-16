@@ -2,7 +2,7 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-SKILLS=("equity-research" "market-regime-monitor" "sector-industry-research")
+SKILLS=("equity-research" "market-regime-monitor" "sector-industry-research" "catalyst-event-monitor")
 VALIDATOR="${SKILL_VALIDATOR:-$HOME/.codex/skills/.system/skill-creator/scripts/quick_validate.py}"
 
 validate_frontmatter_fallback() {
