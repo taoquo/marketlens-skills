@@ -1,0 +1,44 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><title>MarketLens v0.3 · AI 观察池组合风险案例</title><meta name="author" content="Folio"><meta name="description" content="AI 观察池示例展示等权假设下的集中度、主题重叠和压力期相关性。"><meta name="keywords" content="portfolio risk,AI watchlist,Quant Risk Snapshot"><meta name="generator" content="Folio"><style>
+@font-face { font-family: "LXGW WenKai"; src: local("LXGW WenKai"), local("霞鹜文楷"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "LXGW WenKai"; src: local("LXGW WenKai"), local("霞鹜文楷"); font-weight: 500; font-style: normal; }
+@page { size: A4; margin: 14mm 16mm 16mm 16mm; background: #F6F0EA; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --parchment:#F6F0EA; --ivory:#FBF7F3; --near-black:#191514; --dark-warm:#3A312D; --olive:#5A4A43; --stone:#85776F; --brand:#B83D2E; --border:#E9DED4; --border-soft:#E8DED6; --tag-bg:#F1D2CC; --serif:"LXGW WenKai","Source Han Serif SC","Noto Serif CJK SC","Songti SC","STSong",Georgia,serif; --mono:"JetBrains Mono","SF Mono",Consolas,"LXGW WenKai",monospace; }
+html, body { background: var(--parchment); }
+@media screen { body { max-width: 210mm; margin: 0 auto; padding: 14mm 16mm 16mm; } }
+body { color: var(--near-black); font-family: var(--serif); font-size: 9.2pt; line-height: 1.42; letter-spacing: .25pt; }
+strong { font-weight: 500; } a { color: var(--dark-warm); text-decoration: none; }
+.header { display:flex; justify-content:space-between; gap:16pt; align-items:flex-start; padding-bottom:8pt; border-bottom:1pt solid var(--near-black); margin-bottom:10pt; }
+.eyebrow { color:var(--brand); font-size:8.5pt; letter-spacing:1pt; text-transform:uppercase; margin-bottom:3pt; }
+h1 { font-size:22pt; line-height:1.15; font-weight:500; max-width:430pt; }
+.subtitle { color:var(--olive); font-size:9.5pt; margin-top:3pt; }
+.badge { text-align:right; min-width:98pt; color:var(--stone); font-size:8.5pt; line-height:1.4; }
+.badge strong { display:block; color:var(--brand); font-size:18pt; line-height:1.1; font-variant-numeric:tabular-nums; }
+.metrics { display:grid; grid-template-columns: repeat(4,1fr); gap:9pt; padding:6pt 0; border-top:.5pt solid var(--border); border-bottom:.5pt solid var(--border); margin-bottom:10pt; }
+.metric { display:flex; align-items:baseline; gap:4pt; min-width:0; }
+.metric .v { color:var(--brand); font-size:15pt; font-weight:500; font-variant-numeric:tabular-nums; white-space:nowrap; }
+.metric .l { color:var(--olive); font-size:8pt; line-height:1.25; }
+.grid2 { display:grid; grid-template-columns: 1fr 1fr; gap:12pt; align-items:start; }
+.grid3 { display:grid; grid-template-columns: repeat(3,1fr); gap:8pt; }
+h2 { font-size:13.5pt; font-weight:500; margin:12pt 0 5pt; break-after:avoid; border-left:2.2pt solid var(--brand); padding-left:7pt; }
+h3 { font-size:10.5pt; font-weight:500; color:var(--dark-warm); margin:7pt 0 3pt; }
+p { margin-bottom:5pt; }
+.card { background:var(--ivory); border:.5pt solid var(--border); border-radius:6pt; padding:7pt 8pt; break-inside:avoid; }
+.callout { border-top:.8pt solid var(--brand); border-bottom:.3pt dotted var(--border); padding:6pt 0; margin:6pt 0; break-inside:avoid; }
+.tag { display:inline-block; background:var(--tag-bg); color:var(--brand); border-radius:3pt; padding:1pt 5pt; font-size:8pt; margin:0 3pt 3pt 0; }
+table { width:100%; border-collapse:collapse; font-size:7.7pt; margin:5pt 0 7pt; break-inside:avoid; }
+th { text-align:left; color:var(--dark-warm); font-weight:500; border-top:.8pt solid var(--near-black); border-bottom:.5pt solid var(--border); padding:3pt 4pt; }
+td { border-bottom:.3pt solid var(--border-soft); padding:2.5pt 4pt; vertical-align:top; }
+td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; }
+.footer { margin-top:9pt; padding-top:5pt; border-top:.5pt solid var(--border); color:var(--stone); font-size:7.2pt; line-height:1.35; }
+.flow { display:grid; grid-template-columns: repeat(6,1fr); gap:5pt; margin:6pt 0; }
+.flow div { border-top:.8pt solid var(--brand); padding-top:3pt; color:var(--dark-warm); font-size:7.2pt; line-height:1.25; }
+.warn { color:var(--brand); font-weight:500; }
+ul { padding-left: 12pt; }
+</style></head><body><header class="header"><div><div class="eyebrow">$portfolio-risk-monitor · v0.3 case</div><h1>AI 大盘观察池：看似九只股票，实质是一组高度相关的 AI beta</h1><div class="subtitle">验证 Quant Risk Snapshot、Top 3/Top 5、共同催化剂、压力期相关性和研究标签边界。假设等权重。</div></div><div class="badge"><strong>9 names</strong>Equal-weight<br>观察池，不是资产配置</div></header>
+<div class="metrics"><div class="metric"><span class="v">33%</span><span class="l">Top 3 等权暴露</span></div><div class="metric"><span class="v">56%</span><span class="l">Top 5 等权暴露</span></div><div class="metric"><span class="v">7/9</span><span class="l">AI/云/半导体主线</span></div><div class="metric"><span class="v">High</span><span class="l">压力期相关性</span></div></div>
+<section><h2>Quant Risk Snapshot</h2><table><tr><th>Risk Lens</th><th>Finding</th><th>Evidence / Proxy</th><th>Confidence</th><th>Read-through</th></tr><tr><td>Single-name</td><td>等权下单名 11.1%</td><td>用户假设</td><td>High</td><td>不是组合配置建议</td></tr><tr><td>Top 3 / Top 5</td><td>33% / 56%</td><td>等权计算</td><td>High</td><td>头部名字主导波动</td></tr><tr><td>Theme overlap</td><td>AI capex 与云平台高度重叠</td><td>NVDA/AMD/TSM/ASML/AVGO/MSFT/GOOGL/META</td><td>High</td><td>分散度低于 ticker 数量</td></tr><tr><td>Factor</td><td>成长、动量、长久期、高 beta</td><td>估值和主题暴露 proxy</td><td>Medium</td><td>regime stress 下易同步回撤</td></tr><tr><td>Liquidity</td><td>大盘流动性较好，但拥挤风险高</td><td>大市值/成交活跃</td><td>Medium</td><td>流动性不是主要短板，crowding 是</td></tr><tr><td>Stress correlation</td><td>压力期相关性上升</td><td>共同宏观变量：利率、AI capex、美元流动性</td><td>Medium</td><td>不能把不同子行业当独立风险</td></tr></table></section>
+<section class="grid2"><div><h2>Score Summary</h2><table><tr><th>Dimension</th><th class="num">Score</th><th>Evidence</th><th>Confidence</th></tr><tr><td>Thesis quality</td><td class="num">2</td><td>AI 主线强，但个股差异大</td><td>Medium</td></tr><tr><td>Valuation setup</td><td class="num">1</td><td>多只 PE 较高或估值敏感</td><td>Medium</td></tr><tr><td>Catalyst / timing</td><td class="num">2</td><td>财报、capex、产品周期</td><td>Medium</td></tr><tr><td>Risk control</td><td class="num">1</td><td>同因子和压力相关性突出</td><td>Medium</td></tr><tr><td>Portfolio role</td><td class="num">1</td><td>重复 AI beta，分散不足</td><td>High</td></tr><tr><td>Data confidence</td><td class="num">2</td><td>价格已 dated，权重为假设</td><td>Medium</td></tr></table></div><div><h2>Candidate Review</h2><table><tr><th>Bucket</th><th>Names</th><th>Reason</th></tr><tr><td>high-priority watch</td><td>NVDA, TSM, MSFT</td><td>核心利润池/云平台，但需估值纪律</td></tr><tr><td>hold/watch</td><td>ASML, AVGO, GOOGL, META</td><td>质量强，需验证修正与 capex 回报</td></tr><tr><td>trim-review</td><td>AMD, TSLA</td><td>估值/执行/主题 beta 弹性更高</td></tr><tr><td>evidence-gap</td><td>全组合</td><td>缺少真实权重、成本、税务和风险约束</td></tr></table></div></section>
+<section class="grid2"><div><h2>Red Flags</h2><p>共同风险不是单名新闻，而是 AI capex 修正、估值压缩、美元流动性收紧、利率波动、监管/出口限制和云厂商资本开支回报被质疑。</p></div><div><h2>Decision Impact</h2><p>组合层面应先标记 <span class="tag">risk-concentrated</span> 和 <span class="tag">monitor closely</span>；候选标签不能转化成买卖比例。若真实组合里 Top 5 已很高，进入集中度复核。</p></div></section>
+<section><h2>What Would Change The View</h2><p>升级：盈利修正扩散到更多名字、capex 回报证据增强、估值回落但基本面不破。降级：AI 订单放缓、云 capex 指引下修、regime 转脆弱、多个名字同日放量下跌且无公司特异新闻。</p></section>
+<div class="footer"><strong>Sources:</strong><ul><li>Finance quote snapshot, 2026-05-16 UTC: NVDA, AMD, TSM, ASML, AVGO, MSFT, GOOGL, META, TSLA prices and market caps.</li><li>NVIDIA FY2026 results and TSMC/ASML Q1 2026 releases used as AI infrastructure evidence.</li><li>Equal-weight assumption is for watchlist analysis only; no personal allocation constraints were provided.</li></ul>研究用途示例，不构成投资建议。</div></body></html>

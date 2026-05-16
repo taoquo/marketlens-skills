@@ -1,6 +1,6 @@
 # Research To Trade
 
-Use this file when the user asks how an industry view translates into market expression, timing, catalysts, or risk controls. Keep the output as research guidance, not personalized trading advice.
+Use this file when the user asks how an industry view translates into market expression, timing, catalysts, or risk controls. Keep the output as research guidance, not personalized trading advice. Apply `../../references/scoring-standard.md` for score direction, red flags, and labels.
 
 ## Trader View
 
@@ -30,6 +30,16 @@ When an industry has mixed cycles, score each segment from 0 to 3. Use the score
 | Policy risk | Supportive or low | Mixed | Material uncertainty | Active restriction or margin cap |
 
 For risk dimensions, high score means lower pressure or lower risk. Explain any dimension where the score conflicts with the headline thesis.
+
+## Industry-To-Trade Path
+
+Use this path before naming a trade expression:
+
+```text
+Industry phase -> profit pool -> best expression -> catalyst window -> stop-error -> portfolio overlap
+```
+
+Do not let a favorable industry score replace company-specific valuation, event risk/reward, or portfolio concentration review.
 
 ## Company Role Map
 

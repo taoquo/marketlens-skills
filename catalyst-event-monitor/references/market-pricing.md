@@ -1,10 +1,12 @@
 # Market Pricing
 
-Use this file to rank catalysts and judge whether the market already prices the event.
+Use this file to rank catalysts and judge whether the market already prices the event. Apply `../../references/scoring-standard.md` for confidence, red flags, and labels. Use `trade-setup.md` when an event may create a trading window.
 
 ## Catalyst Scorecard
 
 Score each dimension from 0 to 3. Use the score to prioritize attention, not as a mechanical trading signal.
+
+For all dimensions, 3 means more favorable or better controlled for the setup, and 0 means unavailable, fully priced, high risk, or not actionable as stated.
 
 | Dimension | 3 | 2 | 1 | 0 |
 |---|---|---|---|---|
@@ -22,6 +24,8 @@ Total score:
 - 0-3: likely noise unless new evidence appears.
 
 Do not average away a 0 in timing certainty or financial impact when the request needs a high-conviction catalyst.
+
+Do not call an event attractive to trade solely because it scores high on materiality. If expectation gap is unclear, implied move is demanding, crowding is extreme, or downside is hard to bound, use `event watch` or `monitor closely`.
 
 ## Market Pricing Checklist
 

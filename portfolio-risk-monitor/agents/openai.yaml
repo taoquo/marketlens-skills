@@ -1,0 +1,4 @@
+interface:
+  display_name: "Portfolio Risk Monitor"
+  short_description: "Review watchlist concentration, exposures, and risk signals"
+  default_prompt: "Use $portfolio-risk-monitor to review a portfolio or watchlist across concentration, factor exposure, priority ranking, drawdown risk, triggers, and rebalance watch signals."

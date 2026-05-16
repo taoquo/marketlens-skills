@@ -1,6 +1,6 @@
 # Sector Adjustments
 
-Use this file when the default ROE/ROIC, leverage, free-cash-flow, and moat scorecard would mis-rank the business model.
+Use this file when the default ROE/ROIC, leverage, free-cash-flow, and moat scorecard would mis-rank the business model. Apply `../../references/scoring-standard.md`: in every replacement scorecard, 3 means stronger or lower risk and 0 means weak, unavailable, or high risk.
 
 ## Financials
 
@@ -43,3 +43,14 @@ Use this file when the default ROE/ROIC, leverage, free-cash-flow, and moat scor
 
 - Score cash runway, trial stage, endpoint quality, regulatory path, partner validation, addressable market, and dilution risk.
 - Do not use revenue multiples as the primary valuation method when revenue is not yet commercial.
+
+## Output Discipline
+
+When sector-specific replacements are used, state:
+
+- Which default dimension was replaced.
+- Why the replacement better fits the business model.
+- Whether any red flag caps the rating.
+- How the adjusted score affects the research label without becoming a mechanical buy/sell signal.
+
+Use `Score Summary`, `Red Flags`, `Decision Impact`, and `What Would Change The View` in the final output.

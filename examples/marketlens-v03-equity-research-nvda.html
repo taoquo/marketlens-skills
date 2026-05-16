@@ -1,0 +1,43 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><title>MarketLens v0.3 · NVIDIA 个股研究案例</title><meta name="author" content="Folio"><meta name="description" content="NVIDIA 质量分很强，但估值、市场环境和组合角色必须与质量分分开判断。"><meta name="keywords" content="NVIDIA,NVDA,quick-value-score,MarketLens"><meta name="generator" content="Folio"><style>
+@font-face { font-family: "LXGW WenKai"; src: local("LXGW WenKai"), local("霞鹜文楷"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "LXGW WenKai"; src: local("LXGW WenKai"), local("霞鹜文楷"); font-weight: 500; font-style: normal; }
+@page { size: A4; margin: 14mm 16mm 16mm 16mm; background: #F6F0EA; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --parchment:#F6F0EA; --ivory:#FBF7F3; --near-black:#191514; --dark-warm:#3A312D; --olive:#5A4A43; --stone:#85776F; --brand:#B83D2E; --border:#E9DED4; --border-soft:#E8DED6; --tag-bg:#F1D2CC; --serif:"LXGW WenKai","Source Han Serif SC","Noto Serif CJK SC","Songti SC","STSong",Georgia,serif; --mono:"JetBrains Mono","SF Mono",Consolas,"LXGW WenKai",monospace; }
+html, body { background: var(--parchment); }
+@media screen { body { max-width: 210mm; margin: 0 auto; padding: 14mm 16mm 16mm; } }
+body { color: var(--near-black); font-family: var(--serif); font-size: 9.2pt; line-height: 1.42; letter-spacing: .25pt; }
+strong { font-weight: 500; } a { color: var(--dark-warm); text-decoration: none; }
+.header { display:flex; justify-content:space-between; gap:16pt; align-items:flex-start; padding-bottom:8pt; border-bottom:1pt solid var(--near-black); margin-bottom:10pt; }
+.eyebrow { color:var(--brand); font-size:8.5pt; letter-spacing:1pt; text-transform:uppercase; margin-bottom:3pt; }
+h1 { font-size:22pt; line-height:1.15; font-weight:500; max-width:430pt; }
+.subtitle { color:var(--olive); font-size:9.5pt; margin-top:3pt; }
+.badge { text-align:right; min-width:98pt; color:var(--stone); font-size:8.5pt; line-height:1.4; }
+.badge strong { display:block; color:var(--brand); font-size:18pt; line-height:1.1; font-variant-numeric:tabular-nums; }
+.metrics { display:grid; grid-template-columns: repeat(4,1fr); gap:9pt; padding:6pt 0; border-top:.5pt solid var(--border); border-bottom:.5pt solid var(--border); margin-bottom:10pt; }
+.metric { display:flex; align-items:baseline; gap:4pt; min-width:0; }
+.metric .v { color:var(--brand); font-size:15pt; font-weight:500; font-variant-numeric:tabular-nums; white-space:nowrap; }
+.metric .l { color:var(--olive); font-size:8pt; line-height:1.25; }
+.grid2 { display:grid; grid-template-columns: 1fr 1fr; gap:12pt; align-items:start; }
+.grid3 { display:grid; grid-template-columns: repeat(3,1fr); gap:8pt; }
+h2 { font-size:13.5pt; font-weight:500; margin:12pt 0 5pt; break-after:avoid; border-left:2.2pt solid var(--brand); padding-left:7pt; }
+h3 { font-size:10.5pt; font-weight:500; color:var(--dark-warm); margin:7pt 0 3pt; }
+p { margin-bottom:5pt; }
+.card { background:var(--ivory); border:.5pt solid var(--border); border-radius:6pt; padding:7pt 8pt; break-inside:avoid; }
+.callout { border-top:.8pt solid var(--brand); border-bottom:.3pt dotted var(--border); padding:6pt 0; margin:6pt 0; break-inside:avoid; }
+.tag { display:inline-block; background:var(--tag-bg); color:var(--brand); border-radius:3pt; padding:1pt 5pt; font-size:8pt; margin:0 3pt 3pt 0; }
+table { width:100%; border-collapse:collapse; font-size:7.7pt; margin:5pt 0 7pt; break-inside:avoid; }
+th { text-align:left; color:var(--dark-warm); font-weight:500; border-top:.8pt solid var(--near-black); border-bottom:.5pt solid var(--border); padding:3pt 4pt; }
+td { border-bottom:.3pt solid var(--border-soft); padding:2.5pt 4pt; vertical-align:top; }
+td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; }
+.footer { margin-top:9pt; padding-top:5pt; border-top:.5pt solid var(--border); color:var(--stone); font-size:7.2pt; line-height:1.35; }
+.flow { display:grid; grid-template-columns: repeat(6,1fr); gap:5pt; margin:6pt 0; }
+.flow div { border-top:.8pt solid var(--brand); padding-top:3pt; color:var(--dark-warm); font-size:7.2pt; line-height:1.25; }
+.warn { color:var(--brand); font-weight:500; }
+ul { padding-left: 12pt; }
+</style></head><body><header class="header"><div><div class="eyebrow">$equity-research · v0.3 case</div><h1>NVIDIA 长期核心观察：质量很强，但交易结论必须过估值与环境门槛</h1><div class="subtitle">验证 quick-value-score、估值透支、市场 regime、红线和研究标签分离。</div></div><div class="badge"><strong>11/12</strong>质量分<br>截至 2026-05-16</div></header>
+<div class="metrics"><div class="metric"><span class="v">$215.9B</span><span class="l">FY2026 收入</span></div><div class="metric"><span class="v">$193.7B</span><span class="l">数据中心收入</span></div><div class="metric"><span class="v">71.1%</span><span class="l">FY GAAP 毛利率</span></div><div class="metric"><span class="v">55x</span><span class="l">动态 PE 快照</span></div></div>
+<section class="grid2"><div><h2>Conclusion</h2><p>示例结论为 <span class="tag">hold/watch</span>：NVIDIA 仍是 AI 算力链条里质量最高的核心观察标的之一，但当前价格和估值已经把高增长持续性高度资本化。质量分用于判断“是不是好公司”，不能直接推出“现在可买”。</p><div class="callout">核心分歧：Blackwell/Rubin 需求和生态壁垒仍强，但高基数、客户 capex 周期、出口限制和估值弹性会决定未来 6-12 个月的回报质量。</div></div><div><h2>Score Summary</h2><table><tr><th>Dimension</th><th class="num">Score</th><th>Evidence</th><th>Confidence</th></tr><tr><td>ROIC / 盈利耐久性</td><td class="num">3</td><td>FY26 收入 +65%，数据中心 +68%</td><td>High</td></tr><tr><td>资产负债表</td><td class="num">3</td><td>FY26 FCF $96.6B，回购/分红 $41.1B</td><td>High</td></tr><tr><td>FCF 质量</td><td class="num">3</td><td>高毛利 + 强现金转换</td><td>High</td></tr><tr><td>护城河</td><td class="num">2</td><td>生态强，但客户自研与监管需跟踪</td><td>Medium</td></tr></table></div></section>
+<section class="grid2"><div><h2>Red Flags</h2><p><span class="warn">不能被 11/12 总分抵消：</span>估值对增长失速敏感；单一 AI capex 周期暴露高；中国出口限制和 H20 相关扰动仍需披露跟踪；若市场 regime 转入紧缩/拥挤，高 beta 长久期资产需降级。</p></div><div><h2>Decision Impact</h2><p>质量分支持长期核心观察；估值和 regime 让标签保持 <span class="tag">hold/watch</span>。只有价格重置、盈利修正继续上行或 Blackwell/Rubin 供应约束转化为可验证收入，才进入 <span class="tag">add-candidate watch</span>。</p></div></section>
+<section><h2>What Would Change The View</h2><div class="grid3"><div class="card"><h3>升级</h3><p>数据中心增长继续快于市场预期，毛利维持高位，估值回落但修正未恶化。</p></div><div class="card"><h3>降级</h3><p>云厂商 capex 指引放缓，订单可见度下降，或估值扩张而盈利修正走平。</p></div><div class="card"><h3>退出复核</h3><p>出口限制、客户自研替代、供应链瓶颈或治理/披露问题破坏核心 thesis。</p></div></div></section>
+<div class="footer"><strong>Sources:</strong><ul><li>NVIDIA Newsroom, FY2026/Q4 results, 2026-02-25: FY revenue $215.9B, Data Center FY revenue $193.7B, Q4 revenue $68.1B.</li><li>NVIDIA Investor Relations, FY2026 results: FY free cash flow $96.6B and shareholder returns $41.1B.</li><li>Finance quote snapshot, 2026-05-16 UTC: NVDA $225.32, market cap about $5.52T, PE about 55x.</li></ul>研究用途示例，不构成投资建议。</div></body></html>

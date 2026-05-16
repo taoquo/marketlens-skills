@@ -3,7 +3,7 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 DIST_DIR="$ROOT_DIR/dist"
-SKILLS=("equity-research" "market-regime-monitor" "sector-industry-research" "catalyst-event-monitor")
+SKILLS=("equity-research" "market-regime-monitor" "sector-industry-research" "catalyst-event-monitor" "portfolio-risk-monitor")
 
 command -v zip >/dev/null 2>&1 || {
   echo "ERROR: zip is required" >&2
@@ -24,7 +24,8 @@ for skill in "${SKILLS[@]}"; do
     zip -qr "$DIST_DIR/$skill.skill" \
       "$skill/SKILL.md" \
       "$skill/agents/openai.yaml" \
-      "$skill/references"
+      "$skill/references" \
+      "references"
   )
   echo "Built dist/$skill.skill"
 done

@@ -1,0 +1,44 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><title>MarketLens v0.3 · AI 服务器产业链案例</title><meta name="author" content="Folio"><meta name="description" content="AI 服务器产业链案例展示从行业周期到交易表达的完整路径。"><meta name="keywords" content="AI服务器,产业链,subsector scorecard"><meta name="generator" content="Folio"><style>
+@font-face { font-family: "LXGW WenKai"; src: local("LXGW WenKai"), local("霞鹜文楷"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "LXGW WenKai"; src: local("LXGW WenKai"), local("霞鹜文楷"); font-weight: 500; font-style: normal; }
+@page { size: A4; margin: 14mm 16mm 16mm 16mm; background: #F6F0EA; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --parchment:#F6F0EA; --ivory:#FBF7F3; --near-black:#191514; --dark-warm:#3A312D; --olive:#5A4A43; --stone:#85776F; --brand:#B83D2E; --border:#E9DED4; --border-soft:#E8DED6; --tag-bg:#F1D2CC; --serif:"LXGW WenKai","Source Han Serif SC","Noto Serif CJK SC","Songti SC","STSong",Georgia,serif; --mono:"JetBrains Mono","SF Mono",Consolas,"LXGW WenKai",monospace; }
+html, body { background: var(--parchment); }
+@media screen { body { max-width: 210mm; margin: 0 auto; padding: 14mm 16mm 16mm; } }
+body { color: var(--near-black); font-family: var(--serif); font-size: 9.2pt; line-height: 1.42; letter-spacing: .25pt; }
+strong { font-weight: 500; } a { color: var(--dark-warm); text-decoration: none; }
+.header { display:flex; justify-content:space-between; gap:16pt; align-items:flex-start; padding-bottom:8pt; border-bottom:1pt solid var(--near-black); margin-bottom:10pt; }
+.eyebrow { color:var(--brand); font-size:8.5pt; letter-spacing:1pt; text-transform:uppercase; margin-bottom:3pt; }
+h1 { font-size:22pt; line-height:1.15; font-weight:500; max-width:430pt; }
+.subtitle { color:var(--olive); font-size:9.5pt; margin-top:3pt; }
+.badge { text-align:right; min-width:98pt; color:var(--stone); font-size:8.5pt; line-height:1.4; }
+.badge strong { display:block; color:var(--brand); font-size:18pt; line-height:1.1; font-variant-numeric:tabular-nums; }
+.metrics { display:grid; grid-template-columns: repeat(4,1fr); gap:9pt; padding:6pt 0; border-top:.5pt solid var(--border); border-bottom:.5pt solid var(--border); margin-bottom:10pt; }
+.metric { display:flex; align-items:baseline; gap:4pt; min-width:0; }
+.metric .v { color:var(--brand); font-size:15pt; font-weight:500; font-variant-numeric:tabular-nums; white-space:nowrap; }
+.metric .l { color:var(--olive); font-size:8pt; line-height:1.25; }
+.grid2 { display:grid; grid-template-columns: 1fr 1fr; gap:12pt; align-items:start; }
+.grid3 { display:grid; grid-template-columns: repeat(3,1fr); gap:8pt; }
+h2 { font-size:13.5pt; font-weight:500; margin:12pt 0 5pt; break-after:avoid; border-left:2.2pt solid var(--brand); padding-left:7pt; }
+h3 { font-size:10.5pt; font-weight:500; color:var(--dark-warm); margin:7pt 0 3pt; }
+p { margin-bottom:5pt; }
+.card { background:var(--ivory); border:.5pt solid var(--border); border-radius:6pt; padding:7pt 8pt; break-inside:avoid; }
+.callout { border-top:.8pt solid var(--brand); border-bottom:.3pt dotted var(--border); padding:6pt 0; margin:6pt 0; break-inside:avoid; }
+.tag { display:inline-block; background:var(--tag-bg); color:var(--brand); border-radius:3pt; padding:1pt 5pt; font-size:8pt; margin:0 3pt 3pt 0; }
+table { width:100%; border-collapse:collapse; font-size:7.7pt; margin:5pt 0 7pt; break-inside:avoid; }
+th { text-align:left; color:var(--dark-warm); font-weight:500; border-top:.8pt solid var(--near-black); border-bottom:.5pt solid var(--border); padding:3pt 4pt; }
+td { border-bottom:.3pt solid var(--border-soft); padding:2.5pt 4pt; vertical-align:top; }
+td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; }
+.footer { margin-top:9pt; padding-top:5pt; border-top:.5pt solid var(--border); color:var(--stone); font-size:7.2pt; line-height:1.35; }
+.flow { display:grid; grid-template-columns: repeat(6,1fr); gap:5pt; margin:6pt 0; }
+.flow div { border-top:.8pt solid var(--brand); padding-top:3pt; color:var(--dark-warm); font-size:7.2pt; line-height:1.25; }
+.warn { color:var(--brand); font-weight:500; }
+ul { padding-left: 12pt; }
+</style></head><body><header class="header"><div><div class="eyebrow">$sector-industry-research · v0.3 case</div><h1>AI 服务器产业链：利润池集中在加速器、先进制程、封装与网络</h1><div class="subtitle">验证 subsector scorecard 与 industry phase -> profit pool -> best expression -> catalyst window -> stop-error -> portfolio overlap。</div></div><div class="badge"><strong>Mixed</strong>周期阶段<br>结构成长 + 局部拥挤</div></header>
+<div class="metrics"><div class="metric"><span class="v">$193.7B</span><span class="l">NVDA FY26 数据中心收入</span></div><div class="metric"><span class="v">NT$1.13T</span><span class="l">TSMC Q1'26 收入</span></div><div class="metric"><span class="v">€8.8B</span><span class="l">ASML Q1'26 销售</span></div><div class="metric"><span class="v">51-53%</span><span class="l">ASML 2026 毛利指引</span></div></div>
+<section><h2>Industry-To-Trade Path</h2><div class="flow"><div>Industry phase<br>结构扩张</div><div>Profit pool<br>GPU / HBM / CoWoS / 网络</div><div>Best expression<br>瓶颈供应商</div><div>Catalyst window<br>订单 / capex / 指引</div><div>Stop-error<br>修正走平</div><div>Portfolio overlap<br>AI beta 集中</div></div></section>
+<section><h2>Subsector Scorecard</h2><table><tr><th>Segment</th><th class="num">Demand</th><th class="num">Supply</th><th class="num">Pricing</th><th class="num">Profit</th><th class="num">Valuation</th><th class="num">Policy</th><th>Read-through</th></tr><tr><td>GPU / Accelerator</td><td class="num">3</td><td class="num">3</td><td class="num">3</td><td class="num">3</td><td class="num">1</td><td class="num">1</td><td>最强利润池，但估值和出口管制是红线</td></tr><tr><td>Foundry / Advanced packaging</td><td class="num">3</td><td class="num">3</td><td class="num">2</td><td class="num">2</td><td class="num">2</td><td class="num">2</td><td>瓶颈供应商，订单和产能爬坡决定节奏</td></tr><tr><td>Lithography</td><td class="num">2</td><td class="num">3</td><td class="num">2</td><td class="num">3</td><td class="num">2</td><td class="num">1</td><td>长期稀缺，短期受客户 capex 节奏影响</td></tr><tr><td>Cloud platforms</td><td class="num">3</td><td class="num">1</td><td class="num">1</td><td class="num">1</td><td class="num">2</td><td class="num">2</td><td>需求源头，但资本开支和折旧压力上升</td></tr></table></section>
+<section class="grid2"><div><h2>Red Flags</h2><p>高分不能抵消：AI capex 单一周期暴露、出口控制、HBM/先进封装瓶颈错配、估值扩张快于盈利修正、同一组合里重复持有 GPU/代工/光刻/云平台造成隐性同因子。</p></div><div><h2>Decision Impact</h2><p>最佳表达不是“所有 AI 股票”。优先看 <span class="tag">瓶颈供应商</span> 和 <span class="tag">核心利润池</span>，theme beta 只适合有明确催化和估值纪律时进入 <span class="tag">monitor closely</span>。</p></div></section>
+<section><h2>What Would Change The View</h2><table><tr><th>Upgrade</th><th>Cooldown</th><th>Stop-error</th></tr><tr><td>云厂商 capex 上修、封装产能仍紧、订单能转收入</td><td>价格上行放缓、库存积累、交付周期缩短</td><td>盈利修正走平但估值继续扩张；政策限制改变可服务市场</td></tr></table></section>
+<div class="footer"><strong>Sources:</strong><ul><li>NVIDIA FY2026 results, 2026-02-25: Data Center FY revenue $193.7B.</li><li>TSMC Q1 2026 earnings release, 2026-04-16: consolidated revenue NT$1,134.10B, net income NT$572.48B.</li><li>ASML Q1 2026 results, 2026-04-15: net sales €8.8B, gross margin 53.0%, 2026 sales outlook €36-40B.</li></ul>研究用途示例，不构成投资建议。</div></body></html>

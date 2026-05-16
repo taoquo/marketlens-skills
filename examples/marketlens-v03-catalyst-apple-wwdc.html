@@ -1,0 +1,44 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><title>MarketLens v0.3 · Apple WWDC 催化剂案例</title><meta name="author" content="Folio"><meta name="description" content="Apple WWDC26 示例展示事件重要性与交易设定必须分开判断。"><meta name="keywords" content="Apple,WWDC,catalyst,trade setup"><meta name="generator" content="Folio"><style>
+@font-face { font-family: "LXGW WenKai"; src: local("LXGW WenKai"), local("霞鹜文楷"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "LXGW WenKai"; src: local("LXGW WenKai"), local("霞鹜文楷"); font-weight: 500; font-style: normal; }
+@page { size: A4; margin: 14mm 16mm 16mm 16mm; background: #F6F0EA; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --parchment:#F6F0EA; --ivory:#FBF7F3; --near-black:#191514; --dark-warm:#3A312D; --olive:#5A4A43; --stone:#85776F; --brand:#B83D2E; --border:#E9DED4; --border-soft:#E8DED6; --tag-bg:#F1D2CC; --serif:"LXGW WenKai","Source Han Serif SC","Noto Serif CJK SC","Songti SC","STSong",Georgia,serif; --mono:"JetBrains Mono","SF Mono",Consolas,"LXGW WenKai",monospace; }
+html, body { background: var(--parchment); }
+@media screen { body { max-width: 210mm; margin: 0 auto; padding: 14mm 16mm 16mm; } }
+body { color: var(--near-black); font-family: var(--serif); font-size: 9.2pt; line-height: 1.42; letter-spacing: .25pt; }
+strong { font-weight: 500; } a { color: var(--dark-warm); text-decoration: none; }
+.header { display:flex; justify-content:space-between; gap:16pt; align-items:flex-start; padding-bottom:8pt; border-bottom:1pt solid var(--near-black); margin-bottom:10pt; }
+.eyebrow { color:var(--brand); font-size:8.5pt; letter-spacing:1pt; text-transform:uppercase; margin-bottom:3pt; }
+h1 { font-size:22pt; line-height:1.15; font-weight:500; max-width:430pt; }
+.subtitle { color:var(--olive); font-size:9.5pt; margin-top:3pt; }
+.badge { text-align:right; min-width:98pt; color:var(--stone); font-size:8.5pt; line-height:1.4; }
+.badge strong { display:block; color:var(--brand); font-size:18pt; line-height:1.1; font-variant-numeric:tabular-nums; }
+.metrics { display:grid; grid-template-columns: repeat(4,1fr); gap:9pt; padding:6pt 0; border-top:.5pt solid var(--border); border-bottom:.5pt solid var(--border); margin-bottom:10pt; }
+.metric { display:flex; align-items:baseline; gap:4pt; min-width:0; }
+.metric .v { color:var(--brand); font-size:15pt; font-weight:500; font-variant-numeric:tabular-nums; white-space:nowrap; }
+.metric .l { color:var(--olive); font-size:8pt; line-height:1.25; }
+.grid2 { display:grid; grid-template-columns: 1fr 1fr; gap:12pt; align-items:start; }
+.grid3 { display:grid; grid-template-columns: repeat(3,1fr); gap:8pt; }
+h2 { font-size:13.5pt; font-weight:500; margin:12pt 0 5pt; break-after:avoid; border-left:2.2pt solid var(--brand); padding-left:7pt; }
+h3 { font-size:10.5pt; font-weight:500; color:var(--dark-warm); margin:7pt 0 3pt; }
+p { margin-bottom:5pt; }
+.card { background:var(--ivory); border:.5pt solid var(--border); border-radius:6pt; padding:7pt 8pt; break-inside:avoid; }
+.callout { border-top:.8pt solid var(--brand); border-bottom:.3pt dotted var(--border); padding:6pt 0; margin:6pt 0; break-inside:avoid; }
+.tag { display:inline-block; background:var(--tag-bg); color:var(--brand); border-radius:3pt; padding:1pt 5pt; font-size:8pt; margin:0 3pt 3pt 0; }
+table { width:100%; border-collapse:collapse; font-size:7.7pt; margin:5pt 0 7pt; break-inside:avoid; }
+th { text-align:left; color:var(--dark-warm); font-weight:500; border-top:.8pt solid var(--near-black); border-bottom:.5pt solid var(--border); padding:3pt 4pt; }
+td { border-bottom:.3pt solid var(--border-soft); padding:2.5pt 4pt; vertical-align:top; }
+td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; }
+.footer { margin-top:9pt; padding-top:5pt; border-top:.5pt solid var(--border); color:var(--stone); font-size:7.2pt; line-height:1.35; }
+.flow { display:grid; grid-template-columns: repeat(6,1fr); gap:5pt; margin:6pt 0; }
+.flow div { border-top:.8pt solid var(--brand); padding-top:3pt; color:var(--dark-warm); font-size:7.2pt; line-height:1.25; }
+.warn { color:var(--brand); font-weight:500; }
+ul { padding-left: 12pt; }
+</style></head><body><header class="header"><div><div class="eyebrow">$catalyst-event-monitor · v0.3 case</div><h1>Apple WWDC26：重要事件，但需先证明 AI 预期差才值得升级</h1><div class="subtitle">验证 Trade Setup：consensus、variant、market-implied expectation、implied move、上下行情景和事件后复盘窗口。</div></div><div class="badge"><strong>Jun 8-12</strong>WWDC26<br>Apple 官方日期</div></header>
+<div class="metrics"><div class="metric"><span class="v">$111.2B</span><span class="l">FY26 Q2 收入</span></div><div class="metric"><span class="v">$31.0B</span><span class="l">Services 收入</span></div><div class="metric"><span class="v">$300.23</span><span class="l">AAPL 价格快照</span></div><div class="metric"><span class="v">36x</span><span class="l">PE 快照</span></div></div>
+<section class="grid2"><div><h2>Conclusion</h2><p>示例标签为 <span class="tag">event watch</span> 到 <span class="tag">monitor closely</span> 之间：WWDC26 日期确定，机制清楚，但如果 AI/Siri/开发者生态的可验证商业化路径不足，事件重要性不能自动转化为交易吸引力。</p></div><div><h2>Score Summary</h2><table><tr><th>Dimension</th><th class="num">Score</th><th>Evidence</th><th>Confidence</th></tr><tr><td>Timing certainty</td><td class="num">3</td><td>Apple 官方 WWDC26 日期</td><td>High</td></tr><tr><td>Financial impact</td><td class="num">1</td><td>软件事件，财务传导需后验验证</td><td>Medium</td></tr><tr><td>Expectation gap</td><td class="num">2</td><td>市场关注 Apple AI 追赶</td><td>Medium</td></tr><tr><td>Market pricing</td><td class="num">1</td><td>估值不低，需 implied move 数据</td><td>Low</td></tr><tr><td>Crowding</td><td class="num">2</td><td>大盘核心持仓，非低关注事件</td><td>Medium</td></tr></table></div></section>
+<section><h2>Trade Setup</h2><table><tr><th>Item</th><th>Read</th></tr><tr><td>Consensus View</td><td>WWDC 发布平台软件升级，市场期待 Apple AI 能见度改善。</td></tr><tr><td>Variant View</td><td>若 Siri/端侧 AI/开发者工具展现明确产品路径，可能改变服务与设备换机叙事。</td></tr><tr><td>Market-Implied Expectation</td><td>股价与估值已包含强品牌和服务韧性，AI 惊喜需要超过普通软件发布。</td></tr><tr><td>Implied Move / Volatility</td><td>未在示例中取得期权数据，标记 unavailable，降低置信度。</td></tr><tr><td>Upside Scenario</td><td>明确 AI 功能、开发者 API、设备端落地时间表和商业化路径。</td></tr><tr><td>Downside Scenario</td><td>发布偏渐进，缺少 Siri/AI 兑现路径，形成 sell-the-news。</td></tr><tr><td>Risk/Reward Read</td><td>事件值得跟踪；若无 implied move 与预期差证据，不升级为 priority catalyst。</td></tr><tr><td>Invalidating Evidence</td><td>发布前股价显著抢跑、IV 高企、媒体预期过满或功能延迟。</td></tr><tr><td>Post-Event Review Window</td><td>Keynote 当日、开发者文档发布后、首批 beta 反馈后一周。</td></tr></table></section>
+<section class="grid2"><div><h2>Red Flags</h2><p>未取得 implied move、期权 skew 或事件溢价时，不能判断赔率；软件发布若缺少收入、留存、设备换机或服务 ARPU 机制，只能是 narrative catalyst。</p></div><div><h2>Decision Impact</h2><p>日期确定支持 <span class="tag">event watch</span>；若 keynote 前出现清晰预期差且市场未充分定价，升级 <span class="tag">monitor closely</span>；若事件后没有商业机制，维持中性或 thesis delayed。</p></div></section>
+<section><h2>What Would Change The View</h2><p>升级条件：AI 功能有明确设备覆盖、开发者工具、上线时间和服务/硬件传导。降级条件：发布内容已被充分预期，或 beta 反馈显示功能不稳定、上线推迟。</p></section>
+<div class="footer"><strong>Sources:</strong><ul><li>Apple Newsroom, 2026-03: WWDC26 will run online June 8-12, 2026.</li><li>Apple Q2 FY2026 results, 2026-04-30: revenue $111.2B and Services revenue $30.976B.</li><li>Finance quote snapshot, 2026-05-16 UTC: AAPL $300.23, PE about 36x.</li></ul>研究用途示例，不构成投资建议。</div></body></html>

@@ -9,7 +9,7 @@ description: Use when a user asks which upcoming public-market events matter, ho
 
 Provide public-market catalyst and event research, not personalized investment advice. Match the user's language. State dates for every event and data point, distinguish confirmed events from expected or rumored events, cite sources, show confidence and limits, and end with a short disclaimer that the analysis is for research only and does not constitute investment advice.
 
-This skill handles event timing, expectation gaps, scenario trees, pre-event watch data, and post-event thesis updates. Use `equity-research` for full company valuation and `sector-industry-research` for full industry cycle work.
+This skill handles event timing, expectation gaps, scenario trees, pre-event watch data, trade setup research, and post-event thesis updates. Use `equity-research` for full company valuation and `sector-industry-research` for full industry cycle work.
 
 ## Mode Selection
 
@@ -31,9 +31,12 @@ Read only the references needed:
 - For event categories and materiality tests, read `references/event-taxonomy.md`.
 - For source priority, freshness TTL, and cross-check rules, read `references/data-sources.md`.
 - For catalyst priority scoring, market pricing, pre-event price action, and crowding, read `references/market-pricing.md`.
+- For consensus view, variant view, implied move, risk/reward read, invalidating evidence, and post-event trading window, read `references/trade-setup.md`.
 - For expectation gaps, scenario trees, event reaction paths, and valuation-anchor impact, read `references/scenario-framework.md`.
 - For post-event review and thesis status updates, read `references/post-event-review.md`.
 - For industry-specific event checklists, read `references/sector-event-checklists.md`.
+- For shared scoring, confidence, red-flag, and label discipline, read `../references/scoring-standard.md`.
+- For review of prior catalyst calls, read `../references/review-and-calibration.md`.
 
 ## Evidence Standard
 
@@ -49,7 +52,7 @@ Always include an `Evidence Sources` section with source name, date, link, and w
 
 ## Conclusion Gates
 
-Use research language such as hard catalyst, soft catalyst, narrative catalyst, thesis strengthened, neutral, thesis delayed, thesis impaired, thesis broken, crowded unwind, event watch, or insufficient evidence. Do not present personalized buy/sell advice.
+Use research language such as hard catalyst, soft catalyst, narrative catalyst, priority catalyst, monitor closely, event watch, thesis strengthened, neutral, thesis delayed, thesis impaired, thesis broken, crowded unwind, or evidence-gap. Do not present personalized buy/sell advice.
 
 Do not give a strong event conclusion unless these are satisfied:
 
@@ -61,6 +64,8 @@ Do not give a strong event conclusion unless these are satisfied:
 - At least one post-event data point is defined in advance for judging whether the event strengthened, stayed neutral, delayed, impaired, broke, or triggered a crowded unwind in the thesis.
 
 If any gate fails, downgrade to an event-watch conclusion and state what evidence is missing.
+
+An important event is not automatically an attractive setup. If the expectation gap is unclear, implied move is already demanding, crowding is extreme, or downside is hard to bound, use `event watch` or `monitor closely`.
 
 ## Data Freshness Protocol
 
@@ -82,10 +87,11 @@ For every material event, record time zone and release window when available: pr
 4. Classify each event as hard catalyst, soft catalyst, narrative catalyst, or noise.
 5. Identify the expectation gap: consensus expectation, market-implied expectation, and variant perception.
 6. Analyze market pricing and pre-event price behavior before judging risk/reward.
-7. Map the event mechanism to valuation anchor, financial metric, risk premium, or thesis variable.
-8. Build a scenario tree for material events: upside, base, downside, watch data, thesis read-through, and price reaction path.
-9. Define pre-event data to monitor and post-event review criteria before forming a conclusion.
-10. After the event, compare actual data against pre-event expectations and classify thesis status as strengthened, neutral, delayed, impaired, broken, crowded unwind, or inconclusive.
+7. Build the trade setup when relevant: consensus view, variant view, market-implied expectation, implied move, upside, downside, risk/reward read, invalidating evidence, and review window.
+8. Map the event mechanism to valuation anchor, financial metric, risk premium, or thesis variable.
+9. Build a scenario tree for material events: upside, base, downside, watch data, thesis read-through, and price reaction path.
+10. Define pre-event data to monitor and post-event review criteria before forming a conclusion.
+11. After the event, compare actual data against pre-event expectations and classify thesis status as strengthened, neutral, delayed, impaired, broken, crowded unwind, or inconclusive.
 
 ## Output Template
 
@@ -103,6 +109,13 @@ For every material event, record time zone and release window when available: pr
 | Event | Timing Certainty | Financial Impact | Expectation Gap | Market Pricing | Crowding | Score |
 |---|---:|---:|---:|---:|---:|---:|
 
+## Score Summary
+| Dimension | Score | Evidence | Confidence | Comment |
+|---|---:|---|---|---|
+
+## Red Flags
+[Timing uncertainty, weak financial impact, unclear expectation gap, extreme crowding, demanding implied move, or missing data that cannot be offset by total score.]
+
 ## Event Materiality
 [Which events can change revenue, margin, cash flow, valuation anchor, policy access, legal liability, or sentiment.]
 
@@ -111,6 +124,19 @@ For every material event, record time zone and release window when available: pr
 
 ## Market Pricing
 [Pre-event relative performance, valuation move, implied move/volatility context if available, short interest/borrow cost where relevant, and estimate revisions.]
+
+## Trade Setup
+| Item | Read |
+|---|---|
+| Consensus View |  |
+| Variant View |  |
+| Market-Implied Expectation |  |
+| Implied Move / Volatility |  |
+| Upside Scenario |  |
+| Downside Scenario |  |
+| Risk/Reward Read |  |
+| Invalidating Evidence |  |
+| Post-Event Review Window |  |
 
 ## Scenario Tree
 | Scenario | What Happens | Evidence To Watch | Thesis Read-Through | Price Reaction Path | Post-Event Decision Framework |
@@ -124,6 +150,12 @@ For every material event, record time zone and release window when available: pr
 
 ## Post-Event Review Plan
 [How to classify the result as strengthened, neutral, delayed, impaired, broken, crowded unwind, or inconclusive.]
+
+## Decision Impact
+[How the event score and trade setup affect the label: priority catalyst, monitor closely, event watch, evidence-gap, or thesis status.]
+
+## What Would Change The View
+[Concrete pre-event or post-event evidence that would upgrade, downgrade, or invalidate the setup.]
 
 ## Confidence And Limits
 [Confidence level, missing dates, stale data, rumor risk, unsupported claims avoided.]

@@ -2,7 +2,7 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-SKILLS=("equity-research" "market-regime-monitor" "sector-industry-research" "catalyst-event-monitor")
+SKILLS=("equity-research" "market-regime-monitor" "sector-industry-research" "catalyst-event-monitor" "portfolio-risk-monitor")
 VALIDATOR="${SKILL_VALIDATOR:-$HOME/.codex/skills/.system/skill-creator/scripts/quick_validate.py}"
 
 validate_frontmatter_fallback() {
@@ -46,8 +46,12 @@ skill = sys.argv[2]
 skill_md = root / skill / "SKILL.md"
 text = skill_md.read_text()
 missing = []
-for ref in re.findall(r"`(references/[^`]+\.md)`", text):
-    if not (root / skill / ref).exists():
+for ref in re.findall(r"`((?:\.\./)?references/[^`]+\.md)`", text):
+    if ref.startswith("../"):
+        path = root / ref[3:]
+    else:
+        path = root / skill / ref
+    if not path.exists():
         missing.append(ref)
 if missing:
     raise SystemExit(f"{skill}: missing references: {', '.join(missing)}")
@@ -99,6 +103,11 @@ validate_dist_package() {
   }
   [[ -d "$tmpdir/$skill/references" ]] || {
     echo "ERROR: package missing references for $skill" >&2
+    rm -rf "$tmpdir"
+    exit 1
+  }
+  [[ -d "$tmpdir/references" ]] || {
+    echo "ERROR: package missing shared references for $skill" >&2
     rm -rf "$tmpdir"
     exit 1
   }

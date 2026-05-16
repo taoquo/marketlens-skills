@@ -1,0 +1,44 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><title>MarketLens v0.3 · 市场环境案例</title><meta name="author" content="Folio"><meta name="description" content="美股科技股环境示例强调环境压力分独立使用，不与个股或组合 0-3 分数机械合并。"><meta name="keywords" content="market-regime,SOFR,MOVE,科技股"><meta name="generator" content="Folio"><style>
+@font-face { font-family: "LXGW WenKai"; src: local("LXGW WenKai"), local("霞鹜文楷"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "LXGW WenKai"; src: local("LXGW WenKai"), local("霞鹜文楷"); font-weight: 500; font-style: normal; }
+@page { size: A4; margin: 14mm 16mm 16mm 16mm; background: #F6F0EA; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --parchment:#F6F0EA; --ivory:#FBF7F3; --near-black:#191514; --dark-warm:#3A312D; --olive:#5A4A43; --stone:#85776F; --brand:#B83D2E; --border:#E9DED4; --border-soft:#E8DED6; --tag-bg:#F1D2CC; --serif:"LXGW WenKai","Source Han Serif SC","Noto Serif CJK SC","Songti SC","STSong",Georgia,serif; --mono:"JetBrains Mono","SF Mono",Consolas,"LXGW WenKai",monospace; }
+html, body { background: var(--parchment); }
+@media screen { body { max-width: 210mm; margin: 0 auto; padding: 14mm 16mm 16mm; } }
+body { color: var(--near-black); font-family: var(--serif); font-size: 9.2pt; line-height: 1.42; letter-spacing: .25pt; }
+strong { font-weight: 500; } a { color: var(--dark-warm); text-decoration: none; }
+.header { display:flex; justify-content:space-between; gap:16pt; align-items:flex-start; padding-bottom:8pt; border-bottom:1pt solid var(--near-black); margin-bottom:10pt; }
+.eyebrow { color:var(--brand); font-size:8.5pt; letter-spacing:1pt; text-transform:uppercase; margin-bottom:3pt; }
+h1 { font-size:22pt; line-height:1.15; font-weight:500; max-width:430pt; }
+.subtitle { color:var(--olive); font-size:9.5pt; margin-top:3pt; }
+.badge { text-align:right; min-width:98pt; color:var(--stone); font-size:8.5pt; line-height:1.4; }
+.badge strong { display:block; color:var(--brand); font-size:18pt; line-height:1.1; font-variant-numeric:tabular-nums; }
+.metrics { display:grid; grid-template-columns: repeat(4,1fr); gap:9pt; padding:6pt 0; border-top:.5pt solid var(--border); border-bottom:.5pt solid var(--border); margin-bottom:10pt; }
+.metric { display:flex; align-items:baseline; gap:4pt; min-width:0; }
+.metric .v { color:var(--brand); font-size:15pt; font-weight:500; font-variant-numeric:tabular-nums; white-space:nowrap; }
+.metric .l { color:var(--olive); font-size:8pt; line-height:1.25; }
+.grid2 { display:grid; grid-template-columns: 1fr 1fr; gap:12pt; align-items:start; }
+.grid3 { display:grid; grid-template-columns: repeat(3,1fr); gap:8pt; }
+h2 { font-size:13.5pt; font-weight:500; margin:12pt 0 5pt; break-after:avoid; border-left:2.2pt solid var(--brand); padding-left:7pt; }
+h3 { font-size:10.5pt; font-weight:500; color:var(--dark-warm); margin:7pt 0 3pt; }
+p { margin-bottom:5pt; }
+.card { background:var(--ivory); border:.5pt solid var(--border); border-radius:6pt; padding:7pt 8pt; break-inside:avoid; }
+.callout { border-top:.8pt solid var(--brand); border-bottom:.3pt dotted var(--border); padding:6pt 0; margin:6pt 0; break-inside:avoid; }
+.tag { display:inline-block; background:var(--tag-bg); color:var(--brand); border-radius:3pt; padding:1pt 5pt; font-size:8pt; margin:0 3pt 3pt 0; }
+table { width:100%; border-collapse:collapse; font-size:7.7pt; margin:5pt 0 7pt; break-inside:avoid; }
+th { text-align:left; color:var(--dark-warm); font-weight:500; border-top:.8pt solid var(--near-black); border-bottom:.5pt solid var(--border); padding:3pt 4pt; }
+td { border-bottom:.3pt solid var(--border-soft); padding:2.5pt 4pt; vertical-align:top; }
+td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; }
+.footer { margin-top:9pt; padding-top:5pt; border-top:.5pt solid var(--border); color:var(--stone); font-size:7.2pt; line-height:1.35; }
+.flow { display:grid; grid-template-columns: repeat(6,1fr); gap:5pt; margin:6pt 0; }
+.flow div { border-top:.8pt solid var(--brand); padding-top:3pt; color:var(--dark-warm); font-size:7.2pt; line-height:1.25; }
+.warn { color:var(--brand); font-weight:500; }
+ul { padding-left: 12pt; }
+</style></head><body><header class="header"><div><div class="eyebrow">$market-regime-monitor · v0.3 case</div><h1>美股科技股环境：风险偏好仍可交易，但压力分不能和个股分相加</h1><div class="subtitle">验证流动性/情绪双轴、red-flag override，以及对高 beta 与长久期成长的风险预算影响。</div></div><div class="badge"><strong>-1 / -2</strong>示例压力轴<br>环境分 ≠ 0-3 总分</div></header>
+<div class="metrics"><div class="metric"><span class="v">SOFR</span><span class="l">Funding 红线观察</span></div><div class="metric"><span class="v">MOVE</span><span class="l">利率波动观察</span></div><div class="metric"><span class="v">USD/JPY</span><span class="l">Carry unwind 观察</span></div><div class="metric"><span class="v">PE</span><span class="l">估值拥挤观察</span></div></div>
+<section class="grid2"><div><h2>Conclusion</h2><p>示例标签为 <span class="tag">monitor closely</span>：大型科技股基本面仍强，但 AI 主题持仓拥挤、估值敏感和单日高波动显示边际买方要求更高。若 funding 或 FX 压力升温，应从“追 beta”切到“质量优先、降低拥挤暴露”。</p></div><div><h2>Score Summary</h2><table><tr><th>Axis</th><th class="num">Score</th><th>Evidence</th><th>Confidence</th></tr><tr><td>Liquidity</td><td class="num">0</td><td>需用 Fed H.4.1、SOFR、RRP/TGA 交叉验证</td><td>Medium</td></tr><tr><td>Sentiment / Positioning</td><td class="num">-1</td><td>AI 领涨集中，估值对修正敏感</td><td>Medium</td></tr><tr><td>Red-flag override</td><td class="num">Watch</td><td>SOFR、MOVE、USD/JPY、CNH/HKD funding</td><td>Medium</td></tr></table></div></section>
+<section class="grid2"><div><h2>Red Flags</h2><p>若 SOFR 高于政策区间上沿、Treasury 流动性恶化、MOVE 快速上行、JPY 快速升值或 CNH/HKD funding 承压，直接触发 override。此时不能用“盈利还好”或“指数没跌”抵消 funding stress。</p></div><div><h2>Decision Impact</h2><p>对高 beta、长久期成长、低流动性小盘和拥挤 AI beta 使用更谨慎语言：<span class="tag">monitor closely</span><span class="tag">trim-review</span>。现金流强、估值合理、修正向上的质量股保留 <span class="tag">hold/watch</span>。</p></div></section>
+<section><h2>Regime Transmission</h2><div class="flow"><div>Funding<br>SOFR / RRP / TGA</div><div>Rates vol<br>MOVE / curve</div><div>FX leverage<br>JPY / CNH / HKD</div><div>Valuation<br>duration multiple</div><div>Positioning<br>AI crowding</div><div>Research label<br>risk-budget cap</div></div></section>
+<section><h2>What Would Change The View</h2><table><tr><th>Trigger</th><th>Upgrade / Downgrade</th><th>Read-through</th></tr><tr><td>Funding spreads calm while breadth improves</td><td>Upgrade</td><td>允许更建设性的 risk-on recovery 语言</td></tr><tr><td>MOVE 或 JPY 快速上行</td><td>Downgrade</td><td>高 beta 与拥挤交易转 trim-review</td></tr><tr><td>盈利修正走平但估值扩张</td><td>Downgrade</td><td>脆弱 melt-up，避免机械看多</td></tr></table></section>
+<div class="footer"><strong>Sources:</strong><ul><li>Federal Reserve H.4.1 release is the primary source for reserve balances, TGA and liquidity context.</li><li>New York Fed SOFR page is the primary source for overnight funding rate.</li><li>Cboe/ICE MOVE and market price data are used as volatility and rate-stress proxies when dated.</li></ul>研究用途示例，不构成投资建议。</div></body></html>

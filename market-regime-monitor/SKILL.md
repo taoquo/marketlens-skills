@@ -9,7 +9,7 @@ description: Use when assessing market environment, liquidity, sentiment, positi
 
 Assess the market regime using two axes: liquidity conditions and sentiment/positioning crowding. Match the user's language, state dates for all data, cite sources, show confidence and conflicting evidence, and frame output as research guidance rather than personalized investment advice.
 
-Read `references/data-sources.md` for source priority, freshness TTL, regional proxies, and fallback rules. Read `references/indicator-definitions.md` for formulas and interpretation boundaries. Read `references/scoring-model.md` before assigning the risk regime. Read `references/regional-transmission.md` for Hong Kong, A-share, China, or cross-market transmission.
+Read `../references/scoring-standard.md` for shared confidence, red-flag, and label discipline. Read `../references/review-and-calibration.md` when reviewing a prior regime call. Read `references/data-sources.md` for source priority, freshness TTL, regional proxies, and fallback rules. Read `references/indicator-definitions.md` for formulas and interpretation boundaries. Read `references/scoring-model.md` before assigning the risk regime. Read `references/regional-transmission.md` for Hong Kong, A-share, China, or cross-market transmission.
 
 ## Data Freshness Protocol
 
@@ -56,6 +56,8 @@ Never label "0 overheating warnings" as panic. Panic requires evidence of fear, 
 
 Classify each indicator as supportive, neutral, watch, or alert, then score it using `references/scoring-model.md`. Keep liquidity and sentiment as separate axes before combining them. Do not average away a severe funding-stress alert.
 
+The regime score is an environment-pressure score, not a 0 to 3 company, catalyst, industry, or portfolio score. Use it to adjust risk-budget language and research labels, not to mechanically add or subtract from other scorecards.
+
 Confidence is High only when both axes have fresh, cross-checked evidence and no unresolved conflict. Use Medium when one axis is weaker or partly stale. Use Low when data is thin, mostly secondary, materially delayed, or conflicting.
 
 ## Risk Regime Matrix
@@ -78,6 +80,12 @@ Strong conclusions must include:
 - Alternative Explanation: what else could explain the observed market behavior.
 - What Would Change The View: 3-5 concrete data triggers that would invalidate or upgrade the conclusion.
 
+## Regime Impact Discipline
+
+When the regime is tight, crowded, fragile, or de-risking, downgrade risk-budget language for high beta, long-duration growth, crowded momentum, low-liquidity, high-leverage, and policy-sensitive assets. Use `monitor closely`, `trim-review`, `evidence-gap`, or cautious watchlist language unless fresh evidence shows a specific offsetting catalyst.
+
+Severe funding stress, Treasury liquidity stress, HKD funding pressure, CNH/FX pressure, or forced-flow risk is a red-flag override. Do not neutralize it with slower sentiment data or a benign average.
+
 ## Workflow
 
 1. Identify market scope: US, Hong Kong, A-share, global, technology, crypto, or cross-asset.
@@ -85,7 +93,8 @@ Strong conclusions must include:
 3. Classify each indicator as supportive, neutral, watch, or alert.
 4. Score liquidity and sentiment separately, then map the two axes into the risk regime matrix.
 5. Explain the causal channel and asset impact for the user's scope: US equities, HK equities, A-shares, growth/tech, defensives, rates, USD, or crypto.
-6. Provide alternative explanations and monitoring triggers for the next 1-4 weeks.
+6. Identify red-flag overrides, asset groups that require downgraded risk-budget language, and monitoring triggers for the next 1-4 weeks.
+7. If reviewing a prior call, use `../references/review-and-calibration.md` to separate regime error, timing error, and data-quality error.
 
 If reliable data is unavailable, say so and use the nearest defensible proxy instead of guessing.
 
@@ -112,6 +121,13 @@ If reliable data is unavailable, say so and use the nearest defensible proxy ins
 ## Risk Regime Score
 [Liquidity axis score/confidence] x [sentiment axis score/confidence] => [regime and overall confidence].
 
+## Score Summary
+| Dimension | Score | Evidence | Confidence | Comment |
+|---|---:|---|---|---|
+
+## Red Flags
+[Funding, Treasury liquidity, HKD/CNH/FX, forced-flow, crowding, or data-quality risks that cannot be averaged away.]
+
 ## Causal Channel
 [How funding, rates, FX, flows, valuation, leverage, or positioning transmit into the user's market scope.]
 
@@ -123,6 +139,9 @@ If reliable data is unavailable, say so and use the nearest defensible proxy ins
 
 ## Positioning Bias And Triggers
 [Research stance, hedging/cash bias if relevant, and 3-5 concrete monitoring triggers.]
+
+## Decision Impact
+[How the regime affects risk-budget language, high beta, duration, crowded trades, liquidity risk, and cross-market exposure.]
 
 ## What Would Change The View
 [3-5 data releases or market levels that would invalidate, soften, or strengthen the regime call.]

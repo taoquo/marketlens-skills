@@ -32,7 +32,7 @@ Infer the market from ticker, exchange, company name, or user wording. If unclea
 | Hong Kong | Annual/interim reports, HKEXnews announcements, company IR, exchange filings | Southbound flows, placements, buybacks, AH premium, related-party deals |
 | A-share | Annual/quarterly reports, exchange announcements, CNINFO, inquiry letters | Policy cycle, Northbound flows, margin financing, unlocks, one-off gains/losses |
 
-For regional details, read `references/regional-market-guide.md`. For source priority, freshness TTL, and query patterns, read `references/data-sources.md`. For valuation methods, read `references/valuation-framework.md`. For sector-specific scoring, read `references/sector-adjustments.md`. For accounting, governance, dilution, and disclosure risks, read `references/red-flags.md`.
+For shared scoring, confidence, red-flag, and label discipline, read `../references/scoring-standard.md`. For review of prior scores or labels, read `../references/review-and-calibration.md`. For regional details, read `references/regional-market-guide.md`. For source priority, freshness TTL, and query patterns, read `references/data-sources.md`. For valuation methods, read `references/valuation-framework.md`. For sector-specific scoring, read `references/sector-adjustments.md`. For accounting, governance, dilution, and disclosure risks, read `references/red-flags.md`.
 
 ## Evidence Standard
 
@@ -48,7 +48,7 @@ Always include an `Evidence Sources` section with source name, date, link, and w
 
 ## Conclusion Gates
 
-Use research language such as attractive, reasonable, rich, watch, avoid, add-on-weakness, trim-on-strength, or thesis invalidated. Do not present personalized buy/sell advice.
+Use research language such as attractive, reasonable, rich, watch, high-priority watch, add-candidate watch, hold/watch, trim-review, exit-review, avoid, evidence-gap, or thesis invalidated. Do not present personalized buy/sell advice.
 
 Do not give a strong action conclusion or precise action price unless these are satisfied:
 
@@ -86,7 +86,8 @@ Degrade conclusions as follows:
 3. Identify 1-3 Key Forces that determine future value over the next 3-5 years.
 4. Run only the needed mode(s), loading the relevant reference files for valuation, sector adjustments, and red flags.
 5. Cross-check valuation against current price before offering any action framework.
-6. Output action triggers, kill conditions, monitoring variables, and confidence limits.
+6. Keep company quality, valuation, catalyst/timing, market regime, and portfolio role separate before assigning the final research label.
+7. Output score summary, red flags, decision impact, action triggers, kill conditions, monitoring variables, and confidence limits.
 
 ## `quick-value-score`
 
@@ -100,6 +101,8 @@ Score each dimension from 0 to 3. Use total score only as a research shorthand, 
 | Moat | Multiple strong moats | One clear moat | Weak advantage | No durable advantage |
 
 Rating: A = 10-12, B = 7-9, C = 4-6, D = 0-3. For sector-specific replacements, use `references/sector-adjustments.md`.
+
+A high quality score does not create an action conclusion by itself. Compare company quality with valuation, catalyst timing, market regime, and portfolio role before using action-style research labels.
 
 ## `earnings-deepdive`
 
@@ -119,7 +122,7 @@ For tech or growth companies, explicitly test whether the market narrative is ba
 
 When asked what to do, provide:
 
-- Research classification: watchlist, attractive, reasonable, rich, trim-on-strength, exit-review, or avoid.
+- Research classification: high-priority watch, add-candidate watch, hold/watch, trim-review, exit-review, avoid, or evidence-gap.
 - Fair value range and action price: derive from valuation first, then compare with current price.
 - Entry or exit cadence: staged actions only; avoid all-in language.
 - Add/trim/exit triggers: concrete metrics, dates, prices, or business events.
@@ -144,14 +147,24 @@ Do not provide personalized allocation across the user's total assets unless the
 ## Valuation And Action Framework
 [Fair value range, current price/date, action levels if conclusion gates pass, triggers, kill conditions.]
 
+## Score Summary
+| Dimension | Score | Evidence | Confidence | Comment |
+|---|---:|---|---|---|
+
 ## Regional And Market-Specific Checks
 [US/HK/A-share disclosure, ownership, capital flow, policy, or accounting issues.]
 
-## Red Flags And Thesis Breakers
+## Red Flags
 [Material accounting, governance, dilution, policy, financing, or disclosure risks.]
 
+## Decision Impact
+[How quality, valuation, catalyst/timing, market regime, and portfolio role affect the research label.]
+
+## What Would Change The View
+[Concrete business, valuation, event, regime, or disclosure triggers that would upgrade or downgrade the view.]
+
 ## Confidence And Limits
-[Confidence level, missing data, stale data, unsupported claims avoided, and what would change the view.]
+[Confidence level, missing data, stale data, and unsupported claims avoided.]
 
 ## Data Freshness
 | Data | Value | As of | Published | Retrieved | Source | Freshness |

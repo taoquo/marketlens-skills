@@ -11,6 +11,8 @@ Provide public-market sector and industry research, not personalized investment 
 
 This skill sits between `market-regime-monitor` and `equity-research`: use it to judge the industry field, then use company-level work only for named stocks or final single-stock conclusions.
 
+Use the cross-module chain from `../references/scoring-standard.md`: market regime -> sector / industry setup -> company quality and valuation -> catalyst / timing -> portfolio role and risk -> research label.
+
 ## Mode Selection
 
 Choose the lightest mode that answers the user:
@@ -47,6 +49,8 @@ Read only the references needed:
 - For peer-set construction, winner/loser classification, and valuation context, read `references/peer-comparison.md`.
 - For policy, regulation, subsidy, localization, export control, and technology disruption, read `references/policy-and-technology.md`.
 - For trader view, subsector scorecards, catalysts, stop-error conditions, and research-to-trade mapping, read `references/research-to-trade.md`.
+- For shared scoring, confidence, red-flag, and label discipline, read `../references/scoring-standard.md`.
+- For review of prior industry calls, read `../references/review-and-calibration.md`.
 
 ## Conclusion Gates
 
@@ -62,6 +66,8 @@ Do not give a strong sector stance, ranked beneficiaries, or precise stock-selec
 - Core figures are checked against original wording, unit, period, and source link; quantity-scale anomalies are caveated or excluded.
 
 If any gate fails, downgrade to a watchlist-style conclusion, state the missing data, and explain what evidence would strengthen the view.
+
+Industry research provides expression, risk conditions, and evidence requirements. It does not replace company valuation, event risk/reward, or portfolio position review.
 
 ## Data Freshness Protocol
 
@@ -85,8 +91,9 @@ For core figures, keep an audit trail with original wording, value, unit, period
 6. Build a subsector or segment scorecard when the industry has multiple drivers or mixed cycles.
 7. Build a focused peer set, separating structural leaders, bottleneck suppliers, cyclical beneficiaries, high-beta challengers, value traps, and watchlist-only names.
 8. Translate the research into a trader view: current phase, trading state, best expression, main risk, upgrade triggers, cooldown triggers, and stop-error conditions.
-9. Connect industry read-through to listed companies only after checking exposure, execution, balance sheet, and valuation caveats.
-10. Output monitoring variables, thesis breakers, and confidence limits.
+9. Map industry phase -> profit pool -> best expression -> catalyst window -> stop-error -> portfolio overlap.
+10. Connect industry read-through to listed companies only after checking exposure, execution, balance sheet, and valuation caveats.
+11. Output score summary, red flags, decision impact, monitoring variables, thesis breakers, and confidence limits.
 
 ## Output Template
 
@@ -112,6 +119,13 @@ For core figures, keep an audit trail with original wording, value, unit, period
 | Segment | Demand | Supply Constraint | Pricing | Profit Realization | Valuation Pressure | Policy Risk | Read-Through |
 |---|---:|---:|---:|---:|---:|---:|---|
 
+## Score Summary
+| Dimension | Score | Evidence | Confidence | Comment |
+|---|---:|---|---|---|
+
+## Red Flags
+[Demand, supply, pricing, policy, data-quality, valuation, or profit-pool risks that cannot be offset by the total score.]
+
 ## Policy, Technology, And Regional Checks
 [Policy, regulation, localization, export controls, subsidies, technology shifts.]
 
@@ -121,8 +135,14 @@ For core figures, keep an audit trail with original wording, value, unit, period
 ## Research-To-Trade Map
 [Long-term allocation areas, swing-trade areas, watch-only areas, catalyst windows, stop-error signals.]
 
+## Decision Impact
+[How industry phase, profit pool, best expression, catalyst window, stop-error, and portfolio overlap affect the research label.]
+
 ## Monitoring Variables And Thesis Breakers
 [3-5 data triggers that would upgrade, soften, or invalidate the view.]
+
+## What Would Change The View
+[Concrete demand, supply, pricing, policy, revision, valuation, or company evidence that changes the view.]
 
 ## Confidence And Limits
 [Confidence level, missing data, stale data, conflicts, unsupported claims avoided.]
