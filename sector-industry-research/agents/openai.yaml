@@ -1,0 +1,4 @@
+interface:
+  display_name: "Sector Industry Research"
+  short_description: "Analyze industry cycles, value chains, and peer structure"
+  default_prompt: "Use $sector-industry-research to analyze an industry across cycle stage, supply-demand, value chain power, policy, peer structure, and stock-selection implications."

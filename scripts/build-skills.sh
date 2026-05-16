@@ -3,7 +3,7 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 DIST_DIR="$ROOT_DIR/dist"
-SKILLS=("equity-research" "market-regime-monitor")
+SKILLS=("equity-research" "market-regime-monitor" "sector-industry-research")
 
 command -v zip >/dev/null 2>&1 || {
   echo "ERROR: zip is required" >&2

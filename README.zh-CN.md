@@ -6,12 +6,13 @@ MarketLens Skills 是一个可发布的金融投研 Skill 仓库，用于 AI 辅
 
 仓库地址：https://github.com/taoquo/marketlens-skills
 
-当前包含两个面向生产使用的 Skill：
+当前包含三个面向生产使用的 Skill：
 
 | Skill | 用途 |
 |---|---|
 | `equity-research` | 覆盖美股、港股、A股的个股研究，包含财报、基本面、估值、护城河、区域披露规则、风险信号和数据实效性。 |
 | `market-regime-monitor` | 市场环境判断，覆盖流动性、情绪、仓位、估值拥挤度、置信度评分和跨市场风险传导。 |
+| `sector-industry-research` | 行业与产业链研究，覆盖周期位置、供需、库存、价格、产能、利润池、政策/技术变化、同业比较和上市公司映射。 |
 
 ## 安装
 
@@ -31,10 +32,12 @@ cd marketlens-skills
 mkdir -p your-project/.codex/skills
 ln -s "$PWD/equity-research" your-project/.codex/skills/equity-research
 ln -s "$PWD/market-regime-monitor" your-project/.codex/skills/market-regime-monitor
+ln -s "$PWD/sector-industry-research" your-project/.codex/skills/sector-industry-research
 
 # 方式 B：复制到独立项目
 cp -R equity-research your-project/.codex/skills/
 cp -R market-regime-monitor your-project/.codex/skills/
+cp -R sector-industry-research your-project/.codex/skills/
 ```
 
 从克隆仓库构建可分发 `.skill` 包：
@@ -51,11 +54,13 @@ Use $equity-research 分析英伟达最新年度财报和估值。
 Use $equity-research 分析腾讯控股的长期质量和关键风险。
 Use $market-regime-monitor 现在美股市场是不是太拥挤。
 Use $market-regime-monitor 当前流动性对港股/A股影响如何。
+Use $sector-industry-research 分析某个行业周期和关键上市公司受益方向。
+Use $sector-industry-research 比较中国和全球出口制造产业链的利润池变化。
 ```
 
 ## 数据实效性
 
-两个 Skill 都要求：
+所有 Skill 都要求：
 
 - 优先使用官方源和一手来源；
 - 尽量记录 `as_of`、`published_at`、`retrieved_at`；
@@ -68,6 +73,7 @@ Use $market-regime-monitor 当前流动性对港股/A股影响如何。
 本版本加入更严格的结论门槛：
 
 - 个股研究在价格、财报、估值输入或一手来源不足时，必须降级结论；
+- 行业研究在行业边界、供需证据、同业集合或一手来源不足时，必须降级结论；
 - 估值框架扩展到金融、REIT、周期股、平台互联网、出口制造和 pre-profit biotech 等行业；
 - 市场环境判断加入指标打分、置信度、冲突处理、传导机制和反证触发条件。
 

@@ -2,7 +2,7 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-SKILLS=("equity-research" "market-regime-monitor")
+SKILLS=("equity-research" "market-regime-monitor" "sector-industry-research")
 VALIDATOR="${SKILL_VALIDATOR:-$HOME/.codex/skills/.system/skill-creator/scripts/quick_validate.py}"
 
 validate_frontmatter_fallback() {
@@ -69,14 +69,13 @@ validate_openai_yaml() {
 }
 
 validate_symlinks() {
-  [[ -f "$ROOT_DIR/.codex/skills/equity-research/SKILL.md" ]] || {
-    echo "ERROR: .codex equity-research symlink does not resolve" >&2
-    exit 1
-  }
-  [[ -f "$ROOT_DIR/.codex/skills/market-regime-monitor/SKILL.md" ]] || {
-    echo "ERROR: .codex market-regime-monitor symlink does not resolve" >&2
-    exit 1
-  }
+  local skill
+  for skill in "${SKILLS[@]}"; do
+    [[ -f "$ROOT_DIR/.codex/skills/$skill/SKILL.md" ]] || {
+      echo "ERROR: .codex $skill symlink does not resolve" >&2
+      exit 1
+    }
+  done
   echo "Codex symlinks valid"
 }
 
