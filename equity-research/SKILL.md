@@ -1,6 +1,6 @@
 ---
 name: equity-research
-description: Use when analyzing listed companies or stocks across US, Hong Kong, or A-share markets, including earnings reports, long-term holding quality, fundamentals, valuation, moat, cash flow, management, buy/hold/sell decisions, action price, position triggers, market-specific disclosure rules, or questions like whether a stock is worth buying, holding, adding, trimming, or exiting.
+description: Use when analyzing listed companies or stocks across US, Hong Kong, or A-share markets, including earnings reports, long-term holding quality, fundamentals, valuation, moat, cash flow, management, valuation-derived trigger levels, position review triggers, market-specific disclosure rules, or user questions phrased as whether a stock is worth buying, holding, adding, trimming, or exiting.
 ---
 
 # Equity Research
@@ -8,6 +8,12 @@ description: Use when analyzing listed companies or stocks across US, Hong Kong,
 ## Core Rule
 
 Provide public-market company research, not personalized investment advice. Match the user's language. State dates for all market data, distinguish facts from estimates and opinions, cite sources, state confidence and limits, and end with a short disclaimer that the analysis is for research only and does not constitute investment advice.
+
+When the user asks in buy/sell/add/trim/exit terms, translate the answer into research labels, valuation ranges, staged review triggers, and thesis invalidation conditions. Do not prescribe a personal transaction, allocation, or exact position size.
+
+## Skill Boundary
+
+Use this skill for company quality, fundamentals, valuation, and single-stock research labels. Use `market-regime-monitor` for market environment, liquidity, and sentiment. Use `sector-industry-research` for industry cycle, value-chain, and peer-group work. Use `catalyst-event-monitor` for event timing, expectation gaps, and post-event thesis updates. Use `portfolio-risk-monitor` for portfolio concentration, correlated exposures, and watchlist priority.
 
 ## Mode Selection
 
@@ -17,7 +23,7 @@ Choose the lightest mode that answers the user:
 |---|---|---|
 | Long-term quality, Buffett-style, "worth holding" | `quick-value-score` | Four-dimension score plus key risks |
 | Latest earnings, quarterly/annual report, guidance | `earnings-deepdive` | Key forces plus focused module analysis |
-| "Can I buy/sell/add/trim now?" | `decision-framework` | Valuation, margin of safety, triggers |
+| "Can I buy/sell/add/trim now?" | `decision-framework` | Research label, valuation, margin of safety, triggers |
 | Broad or ambiguous stock analysis | Hybrid | Start with conclusion, then combine the needed modes |
 
 If the company is a bank, insurer, broker, REIT, utility, highly cyclical commodity business, platform internet company, exporter, or pre-profit biotech, adjust the scoring and valuation criteria before rating and explain the adjustment.
@@ -32,7 +38,17 @@ Infer the market from ticker, exchange, company name, or user wording. If unclea
 | Hong Kong | Annual/interim reports, HKEXnews announcements, company IR, exchange filings | Southbound flows, placements, buybacks, AH premium, related-party deals |
 | A-share | Annual/quarterly reports, exchange announcements, CNINFO, inquiry letters | Policy cycle, Northbound flows, margin financing, unlocks, one-off gains/losses |
 
-For shared scoring, confidence, red-flag, and label discipline, read `../references/scoring-standard.md`. For review of prior scores or labels, read `../references/review-and-calibration.md`. For regional details, read `references/regional-market-guide.md`. For source priority, freshness TTL, and query patterns, read `references/data-sources.md`. For valuation methods, read `references/valuation-framework.md`. For sector-specific scoring, read `references/sector-adjustments.md`. For accounting, governance, dilution, and disclosure risks, read `references/red-flags.md`.
+## Reference Loading
+
+Read only the references needed:
+
+- For shared scoring, confidence, red-flag, and label discipline, read `../references/scoring-standard.md`.
+- For review of prior scores or labels, read `../references/review-and-calibration.md`.
+- For regional details, read `references/regional-market-guide.md`.
+- For source priority, freshness TTL, and query patterns, read `references/data-sources.md`.
+- For valuation methods, read `references/valuation-framework.md`.
+- For sector-specific scoring, read `references/sector-adjustments.md`.
+- For accounting, governance, dilution, and disclosure risks, read `references/red-flags.md`.
 
 ## Evidence Standard
 
@@ -48,9 +64,9 @@ Always include an `Evidence Sources` section with source name, date, link, and w
 
 ## Conclusion Gates
 
-Use research language such as attractive, reasonable, rich, watch, high-priority watch, add-candidate watch, hold/watch, trim-review, exit-review, avoid, evidence-gap, or thesis invalidated. Do not present personalized buy/sell advice.
+Use research language such as attractive, reasonable, rich, watch, high-priority watch, add-candidate watch, hold/watch, trim-review, exit-review, avoid, evidence-gap, or thesis invalidated. Do not present personalized buy/sell advice or exact allocation instructions.
 
-Do not give a strong action conclusion or precise action price unless these are satisfied:
+Do not give a strong action-style research label or precise valuation-derived trigger level unless these are satisfied:
 
 - Latest price and market cap are dated and cross-checked from two sources.
 - Latest relevant filing/report is identified by period and publication date.
@@ -67,13 +83,13 @@ Do not use a financial data point unless its source date is known. Record:
 - `published_at`: when the source published it, if available.
 - `retrieved_at`: when you fetched or viewed it.
 
-Treat stale or undated data as lower confidence. For action-price, add/trim/exit, or valuation-sensitive conclusions, verify the current price and at least one core valuation input from two sources. Do not turn missing data into a bullish or bearish signal; mark it unavailable and explain the impact on confidence.
+Treat stale or undated data as lower confidence. For trigger-price, add-candidate, trim-review, exit-review, or valuation-sensitive conclusions, verify the current price and at least one core valuation input from two sources. Do not turn missing data into a bullish or bearish signal; mark it unavailable and explain the impact on confidence.
 
 Degrade conclusions as follows:
 
 | Missing or stale item | Required handling |
 |---|---|
-| Current price is not latest trading day | Avoid precise action-price language |
+| Current price is not latest trading day | Avoid precise trigger-price language |
 | Latest filing/report cannot be verified | Do not call the analysis a latest-earnings review |
 | Only secondary financial data is available | Cap confidence at Medium |
 | Only one valuation input is available | Give directional valuation only |
@@ -85,9 +101,9 @@ Degrade conclusions as follows:
 2. Collect the latest price, market cap, recent filing/report, and 3-5 years of key financials when available, with freshness timestamps.
 3. Identify 1-3 Key Forces that determine future value over the next 3-5 years.
 4. Run only the needed mode(s), loading the relevant reference files for valuation, sector adjustments, and red flags.
-5. Cross-check valuation against current price before offering any action framework.
+5. Cross-check valuation against current price before offering any decision framework.
 6. Keep company quality, valuation, catalyst/timing, market regime, and portfolio role separate before assigning the final research label.
-7. Output score summary, red flags, decision impact, action triggers, kill conditions, monitoring variables, and confidence limits.
+7. Output score summary, red flags, decision impact, review triggers, kill conditions, monitoring variables, and confidence limits.
 
 ## `quick-value-score`
 
@@ -120,12 +136,12 @@ For tech or growth companies, explicitly test whether the market narrative is ba
 
 ## `decision-framework`
 
-When asked what to do, provide:
+When asked what to do, translate the request into a research framework:
 
 - Research classification: high-priority watch, add-candidate watch, hold/watch, trim-review, exit-review, avoid, or evidence-gap.
-- Fair value range and action price: derive from valuation first, then compare with current price.
-- Entry or exit cadence: staged actions only; avoid all-in language.
-- Add/trim/exit triggers: concrete metrics, dates, prices, or business events.
+- Fair value range and trigger levels: derive from valuation first, then compare with current price.
+- Review cadence: staged review language only; avoid all-in or transaction-prescriptive language.
+- Add-candidate, trim-review, or exit-review triggers: concrete metrics, dates, prices, or business events.
 - Kill conditions: what would invalidate the thesis.
 
 Do not provide personalized allocation across the user's total assets unless the user gives risk tolerance, horizon, portfolio context, and constraints.
@@ -144,8 +160,8 @@ Do not provide personalized allocation across the user's total assets unless the
 ## Fundamentals And Earnings
 [Focused findings from the selected mode.]
 
-## Valuation And Action Framework
-[Fair value range, current price/date, action levels if conclusion gates pass, triggers, kill conditions.]
+## Valuation And Decision Framework
+[Fair value range, current price/date, trigger levels if conclusion gates pass, review triggers, kill conditions.]
 
 ## Score Summary
 | Dimension | Score | Evidence | Confidence | Comment |

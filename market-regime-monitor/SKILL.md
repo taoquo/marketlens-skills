@@ -9,7 +9,35 @@ description: Use when assessing market environment, liquidity, sentiment, positi
 
 Assess the market regime using two axes: liquidity conditions and sentiment/positioning crowding. Match the user's language, state dates for all data, cite sources, show confidence and conflicting evidence, and frame output as research guidance rather than personalized investment advice.
 
-Read `../references/scoring-standard.md` for shared confidence, red-flag, and label discipline. Read `../references/review-and-calibration.md` when reviewing a prior regime call. Read `references/data-sources.md` for source priority, freshness TTL, regional proxies, and fallback rules. Read `references/indicator-definitions.md` for formulas and interpretation boundaries. Read `references/scoring-model.md` before assigning the risk regime. Read `references/regional-transmission.md` for Hong Kong, A-share, China, or cross-market transmission.
+Translate risk-on, de-risking, hedge, or exposure questions into market-regime labels, risk-budget language, and monitoring triggers. Do not prescribe personal allocation, cash levels, hedges, or position sizes.
+
+## Skill Boundary
+
+Use this skill for market environment, liquidity, sentiment, positioning, and cross-market transmission. Use `sector-industry-research` for industry cycle and sector expression. Use `equity-research` for single-company fundamentals and valuation. Use `catalyst-event-monitor` for event-specific risk/reward. Use `portfolio-risk-monitor` for portfolio concentration, correlated exposures, and watchlist priority.
+
+## Mode Selection
+
+Choose the lightest mode that answers the user:
+
+| User intent | Mode | Output depth |
+|---|---|---|
+| "How is liquidity?" / Fed, SOFR, MOVE, FX stress | `liquidity-scan` | Liquidity dashboard, red flags, causal channel |
+| "Is sentiment crowded or washed out?" | `sentiment-scan` | Positioning dashboard, valuation crowding, confidence |
+| "What is the market regime?" | `regime-score` | Two-axis score, matrix label, asset impact |
+| Hong Kong, A-share, China, yen carry, cross-asset spillover | `cross-market-transmission` | Transmission channel, proxies, regional limits |
+| Review a prior market call | `prior-call-review` | Regime error, timing error, data-quality error |
+| Broad or ambiguous market request | Hybrid | Start with regime score, then analyze the binding axis |
+
+## Reference Loading
+
+Read only the references needed:
+
+- For shared confidence, red-flag, and label discipline, read `../references/scoring-standard.md`.
+- For review of prior regime calls, read `../references/review-and-calibration.md`.
+- For source priority, freshness TTL, regional proxies, and fallback rules, read `references/data-sources.md`.
+- For formulas and interpretation boundaries, read `references/indicator-definitions.md`.
+- For scoring and confidence caps, read `references/scoring-model.md`.
+- For Hong Kong, A-share, China, or cross-market transmission, read `references/regional-transmission.md`.
 
 ## Data Freshness Protocol
 
@@ -62,15 +90,15 @@ Confidence is High only when both axes have fresh, cross-checked evidence and no
 
 ## Risk Regime Matrix
 
-Combine the two axes before recommending stance.
+Combine the two axes before assigning regime label impact.
 
-| Liquidity | Sentiment / Positioning | Regime | Research stance |
+| Liquidity | Sentiment / Positioning | Regime | Research label impact |
 |---|---|---|---|
-| Easy | Washed out | Risk-on recovery | Gradual risk add can be considered |
-| Easy | Crowded | Late-cycle melt-up risk | Hold quality, tighten trims and hedges |
-| Tight | Washed out | Volatile bottoming | Avoid leverage, add only in stages |
-| Tight | Crowded | Fragile / de-risking | Reduce beta, raise cash, hedge tail risk |
-| Neutral | Neutral | Balanced | Maintain exposure, monitor inflection points |
+| Easy | Washed out | Risk-on recovery | Risk-budget language can shift toward staged risk-on watch |
+| Easy | Crowded | Late-cycle melt-up risk | Quality-hold/watch, trim-review, and hedge-review labels tighten |
+| Tight | Washed out | Volatile bottoming | Leverage-sensitive assets remain cautious watch; staged review only |
+| Tight | Crowded | Fragile / de-risking | High-beta, crowded, and low-liquidity assets move toward trim-review or hedge-review language |
+| Neutral | Neutral | Balanced | Maintain neutral watch language and monitor inflection points |
 
 If indicators conflict, state the conflict and identify which data point would resolve it.
 
@@ -138,7 +166,7 @@ If reliable data is unavailable, say so and use the nearest defensible proxy ins
 [Impact on the user's market scope, with emphasis on beta, duration, leverage, and crowded trades.]
 
 ## Positioning Bias And Triggers
-[Research stance, hedging/cash bias if relevant, and 3-5 concrete monitoring triggers.]
+[Research label impact, hedge-review or cash-buffer language if relevant, and 3-5 concrete monitoring triggers.]
 
 ## Decision Impact
 [How the regime affects risk-budget language, high beta, duration, crowded trades, liquidity risk, and cross-market exposure.]

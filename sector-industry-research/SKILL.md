@@ -13,6 +13,10 @@ This skill sits between `market-regime-monitor` and `equity-research`: use it to
 
 Use the cross-module chain from `../references/scoring-standard.md`: market regime -> sector / industry setup -> company quality and valuation -> catalyst / timing -> portfolio role and risk -> research label.
 
+## Skill Boundary
+
+Use this skill for sector setup, industry cycle, value-chain structure, policy/technology disruption, peer maps, and industry-to-stock read-through. Use `market-regime-monitor` for market environment and cross-asset liquidity/sentiment. Use `equity-research` for company-specific valuation and research labels. Use `catalyst-event-monitor` for dated catalyst analysis and expectation gaps. Use `portfolio-risk-monitor` for portfolio overlap, correlated exposure, and watchlist priority.
+
 ## Mode Selection
 
 Choose the lightest mode that answers the user:
@@ -23,7 +27,7 @@ Choose the lightest mode that answers the user:
 | Industry deep dive or产业链 analysis | `industry-deepdive` | Supply-demand, pricing, capacity, value chain, policy, technology |
 | Compare leaders and beneficiaries | `peer-map` | Peer set, factor exposure, winners/losers, valuation context |
 | "How to express this view?" / trading read-through | `research-to-trade` | Trader view, best expression, catalysts, stop-error conditions |
-| "Which stock benefits?" / sector allocation question | Hybrid | Start with industry conclusion, then list candidate types and evidence needed before single-stock calls |
+| "Which stock benefits?" / sector expression question | Hybrid | Start with industry conclusion, then list candidate types and evidence needed before single-stock calls |
 
 If the industry has regulated, balance-sheet-driven, capital-intensive, commodity-like, digital/platform, consumer/channel, export-driven, policy-heavy, or science/technology-risk characteristics, adjust the indicators before judging and explain the adjustment.
 
@@ -54,9 +58,9 @@ Read only the references needed:
 
 ## Conclusion Gates
 
-Use research language such as improving, resilient, cyclical recovery, late-cycle, crowded, pressured, structurally challenged, watch, or avoid. Do not present personalized buy/sell advice.
+Use research language such as improving, resilient, cyclical recovery, late-cycle, crowded, pressured, structurally challenged, watch, or avoid. Do not present personalized buy/sell advice, exact allocation instructions, or transaction-prescriptive trade expression.
 
-Do not give a strong sector stance, ranked beneficiaries, or precise stock-selection conclusion unless these are satisfied:
+Do not give a strong sector research label, ranked beneficiaries, or precise stock-selection conclusion unless these are satisfied:
 
 - Industry scope and geography are explicit.
 - At least one demand indicator and one supply/capacity/pricing indicator are dated.
@@ -101,7 +105,7 @@ For core figures, keep an audit trail with original wording, value, unit, period
 # [Industry / Sector] Research
 
 ## Conclusion
-[Industry stance, cycle stage, confidence, and the main reason.]
+[Industry research label, cycle stage, confidence, and the main reason.]
 
 ## Key Forces
 [1-3 decisive forces tied to evidence.]
@@ -133,7 +137,7 @@ For core figures, keep an audit trail with original wording, value, unit, period
 [Defined peer set, leaders/beneficiaries/laggards, exposure and valuation caveats.]
 
 ## Research-To-Trade Map
-[Long-term allocation areas, swing-trade areas, watch-only areas, catalyst windows, stop-error signals.]
+[Long-term research areas, tactical watch areas, watch-only areas, catalyst windows, stop-error signals.]
 
 ## Decision Impact
 [How industry phase, profit pool, best expression, catalyst window, stop-error, and portfolio overlap affect the research label.]

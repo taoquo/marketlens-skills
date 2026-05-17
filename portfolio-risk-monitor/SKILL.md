@@ -13,6 +13,10 @@ This skill does not decide the user's total asset allocation, risk tolerance, or
 
 This skill summarizes and connects conclusions from `market-regime-monitor`, `sector-industry-research`, `equity-research`, and `catalyst-event-monitor` when available. It should not repeat full company, industry, or catalyst deep dives.
 
+## Skill Boundary
+
+Use this skill for portfolio or watchlist concentration, correlated exposures, risk clusters, priority ranking, drawdown scenarios, and rebalance-watch signals. Use `market-regime-monitor` for market environment and liquidity/sentiment regime. Use `sector-industry-research` for industry cycle and sector expression. Use `equity-research` for company fundamentals and valuation. Use `catalyst-event-monitor` for event timing, expectation gaps, and event review.
+
 ## Mode Selection
 
 Choose the lightest mode that answers the user:
@@ -54,7 +58,7 @@ Always include an `Evidence Sources` section with source name, date, link, and w
 
 ## Conclusion Gates
 
-Use research language such as high-priority watch, add-candidate watch, trim-review, exit-review, risk-concentrated, balanced watchlist, evidence gap, or insufficient data. Do not present personalized buy/sell/allocation advice.
+Use research language such as high-priority watch, add-candidate watch, trim-review, exit-review, risk-concentrated, balanced watchlist, evidence gap, or insufficient data. Do not present personalized buy/sell/allocation advice, target weights, exact position sizes, or transaction instructions.
 
 Do not give a strong portfolio-risk conclusion unless these are satisfied:
 

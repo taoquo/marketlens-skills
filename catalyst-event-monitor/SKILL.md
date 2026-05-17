@@ -11,6 +11,10 @@ Provide public-market catalyst and event research, not personalized investment a
 
 This skill handles event timing, expectation gaps, scenario trees, pre-event watch data, trade setup research, and post-event thesis updates. Use `equity-research` for full company valuation and `sector-industry-research` for full industry cycle work.
 
+## Skill Boundary
+
+Use this skill for dated catalysts, event materiality, expectation gaps, scenario paths, and post-event thesis updates. Use `equity-research` for company fundamentals and valuation. Use `sector-industry-research` for industry cycle and value-chain context. Use `market-regime-monitor` for liquidity, sentiment, and market-wide risk appetite. Use `portfolio-risk-monitor` for portfolio-level exposure and watchlist priority.
+
 ## Mode Selection
 
 Choose the lightest mode that answers the user:
@@ -52,7 +56,7 @@ Always include an `Evidence Sources` section with source name, date, link, and w
 
 ## Conclusion Gates
 
-Use research language such as hard catalyst, soft catalyst, narrative catalyst, priority catalyst, monitor closely, event watch, thesis strengthened, neutral, thesis delayed, thesis impaired, thesis broken, crowded unwind, or evidence-gap. Do not present personalized buy/sell advice.
+Use research language such as hard catalyst, soft catalyst, narrative catalyst, priority catalyst, monitor closely, event watch, thesis strengthened, neutral, thesis delayed, thesis impaired, thesis broken, crowded unwind, or evidence-gap. Do not present personalized buy/sell advice, exact allocation instructions, or transaction-prescriptive event trades.
 
 Do not give a strong event conclusion unless these are satisfied:
 
