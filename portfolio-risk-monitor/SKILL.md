@@ -1,6 +1,9 @@
 ---
 name: portfolio-risk-monitor
 description: Use when reviewing a public-market portfolio or watchlist for risk concentration, factor exposure, sector/geography/currency overlap, style crowding, drawdown risk, watchlist priority, add/trim/exit candidates, rebalance watch signals, correlated theses, or questions like which names matter most, which holdings share the same risk driver, or whether risk is concentrated in valuation, earnings, policy, FX, rates, liquidity, or market regime.
+license: MIT
+metadata:
+  version: 0.4
 ---
 
 # Portfolio Risk Monitor
@@ -11,11 +14,11 @@ Provide public-market portfolio and watchlist research, not personalized investm
 
 This skill does not decide the user's total asset allocation, risk tolerance, or exact position size. It diagnoses concentration, correlated exposures, priority, drawdown risk, trigger conditions, and rebalance watch signals.
 
-This skill summarizes and connects conclusions from `market-regime-monitor`, `sector-industry-research`, `equity-research`, and `catalyst-event-monitor` when available. It should not repeat full company, industry, or catalyst deep dives.
+Reuse conclusions from upstream skills when they are available instead of repeating full company, industry, or catalyst deep dives. See `../references/skill-routing.md` for which skill owns which input.
 
 ## Skill Boundary
 
-Use this skill for portfolio or watchlist concentration, correlated exposures, risk clusters, priority ranking, drawdown scenarios, and rebalance-watch signals. Use `market-regime-monitor` for market environment and liquidity/sentiment regime. Use `sector-industry-research` for industry cycle and sector expression. Use `equity-research` for company fundamentals and valuation. Use `catalyst-event-monitor` for event timing, expectation gaps, and event review.
+Use this skill for portfolio or watchlist concentration, correlated exposures, risk clusters, quantitative risk snapshots, priority ranking, drawdown scenarios, and rebalance-watch signals. For anything outside that scope, route through `../references/skill-routing.md`.
 
 ## Mode Selection
 
@@ -42,6 +45,7 @@ Read only the references needed:
 - For drawdown scenarios, risk drivers, and monitoring triggers, read `references/risk-triggers.md`.
 - For rebalance watch signals and research follow-up workflow, read `references/rebalance-watch.md`.
 - For shared scoring, confidence, red-flag, and label discipline, read `../references/scoring-standard.md`.
+- For deciding which skill owns a question, read `../references/skill-routing.md`.
 - For review of prior portfolio risk calls, read `../references/review-and-calibration.md`.
 
 ## Evidence Standard

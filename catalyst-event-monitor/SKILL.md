@@ -1,6 +1,9 @@
 ---
 name: catalyst-event-monitor
 description: Use when a user asks which upcoming public-market events matter, how to rank catalysts, what expectations are priced in, how an event could move a stock/sector, what data to watch before/after earnings, guidance, approvals, policy decisions, buybacks, unlocks, litigation, M&A, investor days, or whether a completed event strengthened, delayed, impaired, broke, or left neutral an investment thesis.
+license: MIT
+metadata:
+  version: 0.4
 ---
 
 # Catalyst Event Monitor
@@ -9,11 +12,11 @@ description: Use when a user asks which upcoming public-market events matter, ho
 
 Provide public-market catalyst and event research, not personalized investment advice. Match the user's language. State dates for every event and data point, distinguish confirmed events from expected or rumored events, cite sources, show confidence and limits, and end with a short disclaimer that the analysis is for research only and does not constitute investment advice.
 
-This skill handles event timing, expectation gaps, scenario trees, pre-event watch data, trade setup research, and post-event thesis updates. Use `equity-research` for full company valuation and `sector-industry-research` for full industry cycle work.
+Separate event importance from whether the event is tradable. An event can be material to the thesis and still offer no usable setup.
 
 ## Skill Boundary
 
-Use this skill for dated catalysts, event materiality, expectation gaps, scenario paths, and post-event thesis updates. Use `equity-research` for company fundamentals and valuation. Use `sector-industry-research` for industry cycle and value-chain context. Use `market-regime-monitor` for liquidity, sentiment, and market-wide risk appetite. Use `portfolio-risk-monitor` for portfolio-level exposure and watchlist priority.
+Use this skill for dated catalysts, event materiality, expectation gaps, market-implied pricing, scenario paths, and post-event thesis updates. For anything outside that scope, route through `../references/skill-routing.md`.
 
 ## Mode Selection
 
@@ -40,6 +43,7 @@ Read only the references needed:
 - For post-event review and thesis status updates, read `references/post-event-review.md`.
 - For industry-specific event checklists, read `references/sector-event-checklists.md`.
 - For shared scoring, confidence, red-flag, and label discipline, read `../references/scoring-standard.md`.
+- For deciding which skill owns a question, read `../references/skill-routing.md`.
 - For review of prior catalyst calls, read `../references/review-and-calibration.md`.
 
 ## Evidence Standard

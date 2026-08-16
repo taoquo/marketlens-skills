@@ -1,6 +1,9 @@
 ---
 name: equity-research
 description: Use when analyzing listed companies or stocks across US, Hong Kong, or A-share markets, including earnings reports, long-term holding quality, fundamentals, valuation, moat, cash flow, management, valuation-derived trigger levels, position review triggers, market-specific disclosure rules, or user questions phrased as whether a stock is worth buying, holding, adding, trimming, or exiting.
+license: MIT
+metadata:
+  version: 0.4
 ---
 
 # Equity Research
@@ -13,7 +16,7 @@ When the user asks in buy/sell/add/trim/exit terms, translate the answer into re
 
 ## Skill Boundary
 
-Use this skill for company quality, fundamentals, valuation, and single-stock research labels. Use `market-regime-monitor` for market environment, liquidity, and sentiment. Use `sector-industry-research` for industry cycle, value-chain, and peer-group work. Use `catalyst-event-monitor` for event timing, expectation gaps, and post-event thesis updates. Use `portfolio-risk-monitor` for portfolio concentration, correlated exposures, and watchlist priority.
+Use this skill for company quality, fundamentals, earnings, valuation, moat, regional disclosure checks, and single-stock research labels. For anything outside that scope, route through `../references/skill-routing.md`.
 
 ## Mode Selection
 
@@ -43,6 +46,7 @@ Infer the market from ticker, exchange, company name, or user wording. If unclea
 Read only the references needed:
 
 - For shared scoring, confidence, red-flag, and label discipline, read `../references/scoring-standard.md`.
+- For deciding which skill owns a question, read `../references/skill-routing.md`.
 - For review of prior scores or labels, read `../references/review-and-calibration.md`.
 - For regional details, read `references/regional-market-guide.md`.
 - For source priority, freshness TTL, and query patterns, read `references/data-sources.md`.
@@ -191,5 +195,5 @@ Do not provide personalized allocation across the user's total assets unless the
 |---|---|---|---|
 
 ## Disclaimer
-This is public-information research for reference only and does not constitute investment advice.
+This is public-market research for reference only and does not constitute investment advice.
 ```

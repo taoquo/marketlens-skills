@@ -6,7 +6,7 @@ MarketLens Skills is a publishable skill repository for AI-assisted public-marke
 
 Repository: https://github.com/taoquo/marketlens-skills
 
-It provides five production-oriented skills:
+It provides six production-oriented skills:
 
 | Skill | Purpose |
 |---|---|
@@ -15,6 +15,7 @@ It provides five production-oriented skills:
 | `sector-industry-research` | Sector and industry research across cycle stage, supply-demand, value chains, policy/technology shifts, peer structure, trade expression, and listed-company read-through. |
 | `catalyst-event-monitor` | Event-driven research for upcoming catalysts, expectation gaps, market pricing, trade setup, scenario paths, pre-event watch data, and post-event thesis updates. |
 | `portfolio-risk-monitor` | Portfolio and watchlist risk review across concentration, quantitative risk snapshots, exposures, priority ranking, drawdown scenarios, and rebalance watch signals. |
+| `trade-plan-risk-manager` | Converts market, sector, stock, catalyst, and portfolio research into non-personalized conditional trade plans with setup quality, risk triggers, execution checks, and post-trade review. |
 
 ## Installation
 
@@ -24,26 +25,27 @@ Install from the open-source repository:
 npx skills add https://github.com/taoquo/marketlens-skills --all
 ```
 
-Or clone and link/copy the skill directories into a Codex project:
+Or clone and link/copy the skill directories into a Codex project. Every skill loads
+shared rules through `../references/...`, so the top-level `references/` directory must sit
+next to the skill directories:
 
 ```bash
 git clone https://github.com/taoquo/marketlens-skills.git
 cd marketlens-skills
 
-# Option A: symlink for local development
 mkdir -p your-project/.codex/skills
-ln -s "$PWD/equity-research" your-project/.codex/skills/equity-research
-ln -s "$PWD/market-regime-monitor" your-project/.codex/skills/market-regime-monitor
-ln -s "$PWD/sector-industry-research" your-project/.codex/skills/sector-industry-research
-ln -s "$PWD/catalyst-event-monitor" your-project/.codex/skills/catalyst-event-monitor
-ln -s "$PWD/portfolio-risk-monitor" your-project/.codex/skills/portfolio-risk-monitor
+
+# Option A: symlink for local development
+for skill in */SKILL.md; do
+  ln -s "$PWD/${skill%/SKILL.md}" "your-project/.codex/skills/${skill%/SKILL.md}"
+done
+ln -s "$PWD/references" your-project/.codex/skills/references
 
 # Option B: copy for a standalone project
-cp -R equity-research your-project/.codex/skills/
-cp -R market-regime-monitor your-project/.codex/skills/
-cp -R sector-industry-research your-project/.codex/skills/
-cp -R catalyst-event-monitor your-project/.codex/skills/
-cp -R portfolio-risk-monitor your-project/.codex/skills/
+for skill in */SKILL.md; do
+  cp -R "${skill%/SKILL.md}" your-project/.codex/skills/
+done
+cp -R references your-project/.codex/skills/
 ```
 
 Build distributable `.skill` packages from a clone:
@@ -68,6 +70,8 @@ Use $catalyst-event-monitor to map the next 12 weeks of events that could change
 Use $catalyst-event-monitor to review whether a product launch strengthened or weakened the thesis.
 Use $portfolio-risk-monitor to review a watchlist for concentration, shared risk drivers, and priority names.
 Use $portfolio-risk-monitor to identify which holdings belong in add-candidate, trim-review, or exit-review buckets.
+Use $trade-plan-risk-manager to convert a stock thesis into a conditional trade plan with entry, invalidation, risk unit, and review triggers.
+Use $trade-plan-risk-manager to review whether a completed trade was a thesis error, timing error, risk framing error, or execution error.
 ```
 
 ## Data Freshness
@@ -80,37 +84,22 @@ All skills require:
 - cross-checking price-sensitive or regime-sensitive conclusions;
 - marking missing data as unavailable instead of turning it into a directional signal.
 
-## v0.2 Research Discipline
+## Decision Chain
 
-This release adds stricter conclusion gates:
-
-- equity research must downgrade conclusions when price, filings, valuation inputs, or primary sources are missing;
-- sector research must downgrade conclusions when industry scope, dated demand/supply evidence, peer set, or primary sources are missing;
-- catalyst research must downgrade conclusions when event timing, source quality, expectation baseline, or post-event review criteria are missing;
-- portfolio research must downgrade conclusions when holdings, weights/assumptions, price dates, or risk-driver evidence are missing;
-- valuation work now includes sector-specific methods for financials, REITs, cyclicals, platforms, exporters, and pre-profit biotech;
-- market regime calls now use indicator scoring, confidence levels, conflict handling, causal channels, and explicit view-change triggers.
-
-## v0.3 Scoring And Trading Discipline
-
-This release unifies the scoring and research-label system across all skills:
-
-- shared scoring rules define 0-3 score direction, confidence, data quality, red-flag overrides, and allowed research labels;
-- market-regime scores remain separate environment-pressure scores and are used to adjust risk-budget language, not to mechanically change company or portfolio totals;
-- catalyst work now separates event importance from trade setup through consensus view, variant view, market-implied expectation, implied move, risk/reward read, invalidating evidence, and post-event review window;
-- portfolio work now adds a lightweight quantitative risk snapshot covering concentration, top 3/top 5 exposure, factor/theme overlap, liquidity, stress correlation, and drawdown contribution;
-- all score-based outputs include `Score Summary`, `Red Flags`, `Decision Impact`, and `What Would Change The View`;
-- research can be reviewed through a calibration loop covering original score, evidence, 1-week/1-month/3-month outcomes, error attribution, and rule updates.
-
-Use the full decision chain when multiple skills apply:
+Each skill owns one layer of the research process. `references/skill-routing.md` holds
+the ownership table, and `references/scoring-standard.md` holds the shared scoring and
+research-label rules. When multiple skills apply, use the full chain:
 
 ```text
-Market Regime -> Sector / Industry Setup -> Company Quality And Valuation -> Catalyst / Timing -> Portfolio Role And Risk -> Research Label
+Market Regime -> Sector / Industry Setup -> Company Quality And Valuation -> Catalyst / Timing -> Portfolio Role And Risk -> Research Label -> Conditional Trade Plan And Risk Review
 ```
+
+Release-by-release changes are tracked in [CHANGELOG.md](CHANGELOG.md).
 
 ## Examples
 
-The `examples/` folder contains five Folio-typeset v0.3 validation cases, one per skill:
+The `examples/` folder contains six Folio-typeset validation cases. Each case ships as
+`.png` (previewed below), `.html`, and `.pdf`:
 
 `equity-research` · NVIDIA long-term quality, valuation discipline, and research label separation.
 
@@ -132,13 +121,29 @@ The `examples/` folder contains five Folio-typeset v0.3 validation cases, one pe
 
 ![Portfolio risk case](examples/marketlens-v03-portfolio-ai-watchlist.png)
 
-These samples demonstrate the unified `Score Summary`, `Red Flags`, `Decision Impact`, and `What Would Change The View` blocks, plus catalyst trade setup and portfolio quantitative risk snapshots. They are output-format previews and do not constitute investment advice.
+`trade-plan-risk-manager` · NVIDIA conditional trade plan, setup quality, risk-unit framing, execution checks, and post-trade review.
+
+![Trade plan risk case](examples/marketlens-v03-trade-plan-nvda.png)
+
+These samples demonstrate the mandatory `Red Flags`, `Decision Impact`, `What Would Change
+The View`, `Data Freshness`, `Evidence Sources`, and `Disclaimer` blocks. Scored outputs add
+a `Score Summary` table; `trade-plan-risk-manager` uses `Setup Quality` instead, as allowed by
+`references/scoring-standard.md`. They are output-format previews and do not constitute
+investment advice.
 
 ## Validation
 
 ```bash
+# structure, frontmatter, reference routing, and required output blocks
 bash scripts/validate-skills.sh
+
+# rebuild packages, then require dist/*.skill to match the working tree byte for byte
+bash scripts/build-skills.sh
+REQUIRE_DIST=1 bash scripts/validate-skills.sh
 ```
+
+Skills are discovered from the directory layout, so a new skill needs no script or CI
+edit. GitHub Actions runs the same three commands on every push and pull request.
 
 ## Disclaimer
 

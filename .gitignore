@@ -1,9 +1,8 @@
 .DS_Store
 **/.DS_Store
 
-# Local Codex and CI config
+# Local Codex workspace config (skill symlinks are machine-specific)
 .codex/
-.github/
 
 # Work products and raw source files
 reports/

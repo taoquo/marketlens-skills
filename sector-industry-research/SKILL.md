@@ -1,6 +1,9 @@
 ---
 name: sector-industry-research
 description: Use when analyzing sectors, industries,产业链, peer groups, industry cycles, supply-demand, inventory, pricing, capacity, profit pools, policy or technology disruption, competitive structure, subsector scorecards, industry beta, sector rotation, trade expression, catalysts, stop-loss/stop-error triggers, or questions like which companies benefit most from an industry trend across US, Hong Kong, or A-share markets.
+license: MIT
+metadata:
+  version: 0.4
 ---
 
 # Sector Industry Research
@@ -9,13 +12,11 @@ description: Use when analyzing sectors, industries,产业链, peer groups, indu
 
 Provide public-market sector and industry research, not personalized investment advice. Match the user's language. State dates for all market, industry, and macro data; separate facts from estimates and opinions; cite sources; show confidence and limits; and end with a short disclaimer that the analysis is for research only and does not constitute investment advice.
 
-This skill sits between `market-regime-monitor` and `equity-research`: use it to judge the industry field, then use company-level work only for named stocks or final single-stock conclusions.
-
-Use the cross-module chain from `../references/scoring-standard.md`: market regime -> sector / industry setup -> company quality and valuation -> catalyst / timing -> portfolio role and risk -> research label.
+Judge the industry field first, then hand named stocks and final single-stock conclusions to company-level work. Follow the cross-module chain in `../references/scoring-standard.md`: market regime -> sector / industry setup -> company quality and valuation -> catalyst / timing -> portfolio role and risk -> research label.
 
 ## Skill Boundary
 
-Use this skill for sector setup, industry cycle, value-chain structure, policy/technology disruption, peer maps, and industry-to-stock read-through. Use `market-regime-monitor` for market environment and cross-asset liquidity/sentiment. Use `equity-research` for company-specific valuation and research labels. Use `catalyst-event-monitor` for dated catalyst analysis and expectation gaps. Use `portfolio-risk-monitor` for portfolio overlap, correlated exposure, and watchlist priority.
+Use this skill for sector setup, industry cycle, supply and demand, value-chain structure, profit pools, policy/technology disruption, peer maps, and industry-to-stock read-through. For anything outside that scope, route through `../references/skill-routing.md`.
 
 ## Mode Selection
 
@@ -54,6 +55,7 @@ Read only the references needed:
 - For policy, regulation, subsidy, localization, export control, and technology disruption, read `references/policy-and-technology.md`.
 - For trader view, subsector scorecards, catalysts, stop-error conditions, and research-to-trade mapping, read `references/research-to-trade.md`.
 - For shared scoring, confidence, red-flag, and label discipline, read `../references/scoring-standard.md`.
+- For deciding which skill owns a question, read `../references/skill-routing.md`.
 - For review of prior industry calls, read `../references/review-and-calibration.md`.
 
 ## Conclusion Gates

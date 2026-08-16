@@ -1,6 +1,9 @@
 ---
 name: market-regime-monitor
 description: Use when assessing market environment, liquidity, sentiment, positioning, greed/fear, overheating, de-risking, hedging, Fed liquidity, SOFR, MOVE, yen carry trade, NAAIM, institutional allocation, retail flows, valuation crowding, hedge fund leverage, or how macro and sentiment conditions affect US stocks, Hong Kong stocks, A-shares, technology shares, or crypto risk assets.
+license: MIT
+metadata:
+  version: 0.4
 ---
 
 # Market Regime Monitor
@@ -13,7 +16,7 @@ Translate risk-on, de-risking, hedge, or exposure questions into market-regime l
 
 ## Skill Boundary
 
-Use this skill for market environment, liquidity, sentiment, positioning, and cross-market transmission. Use `sector-industry-research` for industry cycle and sector expression. Use `equity-research` for single-company fundamentals and valuation. Use `catalyst-event-monitor` for event-specific risk/reward. Use `portfolio-risk-monitor` for portfolio concentration, correlated exposures, and watchlist priority.
+Use this skill for market environment, liquidity, sentiment, positioning, valuation crowding, cross-market transmission, and risk-budget language. For anything outside that scope, route through `../references/skill-routing.md`.
 
 ## Mode Selection
 
@@ -33,6 +36,7 @@ Choose the lightest mode that answers the user:
 Read only the references needed:
 
 - For shared confidence, red-flag, and label discipline, read `../references/scoring-standard.md`.
+- For deciding which skill owns a question, read `../references/skill-routing.md`.
 - For review of prior regime calls, read `../references/review-and-calibration.md`.
 - For source priority, freshness TTL, regional proxies, and fallback rules, read `references/data-sources.md`.
 - For formulas and interpretation boundaries, read `references/indicator-definitions.md`.

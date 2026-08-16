@@ -100,7 +100,15 @@ The chain prevents one attractive score from overpowering the full decision cont
 
 ## Standard Output Blocks
 
-Any output with a scorecard should include:
+Every MarketLens output must include these blocks, in this order at the end of the
+report: `Red Flags`, `Decision Impact`, `What Would Change The View`, `Data Freshness`,
+`Evidence Sources`, and `Disclaimer`. Use this exact disclaimer sentence:
+
+```text
+This is public-market research for reference only and does not constitute investment advice.
+```
+
+Any output with a 0-3 scorecard must additionally include:
 
 ```markdown
 ## Score Summary
@@ -117,3 +125,6 @@ Any output with a scorecard should include:
 [Concrete upgrade or downgrade triggers.]
 ```
 
+Skills that judge quality without a numeric scorecard may replace `Score Summary` with a
+named read table, such as the `Setup Quality` table in `trade-plan-risk-manager`. The
+other blocks stay mandatory.

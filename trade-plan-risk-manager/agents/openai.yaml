@@ -1,0 +1,4 @@
+interface:
+  display_name: "Trade Plan Risk Manager"
+  short_description: "Convert research into conditional trade plans"
+  default_prompt: "Use $trade-plan-risk-manager to convert a market, sector, stock, catalyst, or portfolio thesis into a conditional trade plan with risk triggers and review rules."
