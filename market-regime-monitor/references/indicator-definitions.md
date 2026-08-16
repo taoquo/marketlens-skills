@@ -13,6 +13,17 @@ Use these definitions to avoid vague macro language. State the data date and sou
 | USD/CNH | Offshore RMB exchange rate versus USD | Rising USD/CNH can reflect China outflow pressure or broad USD strength |
 | HIBOR / HKD Liquidity | Hong Kong interbank rates, HKMA aggregate balance, and USDHKD pressure | High HIBOR or weak HKD liquidity can tighten HK equity conditions |
 | China Policy Liquidity | PBOC OMO, MLF, LPR, RRR, credit aggregates, and fiscal-policy signals | Easing supports local liquidity; credit impulse matters more than a single operation |
+| IG Credit Spread | Investment-grade OAS over Treasuries | Widening from a low base is an early risk-appetite warning; the direction matters more than the level |
+| HY Credit Spread | High-yield OAS, plus the CCC minus BB gap | High yield usually leads equity drawdowns more reliably than equity volatility. Equity strength alongside HY widening is a divergence, not confirmation |
+| Real Yield | 10-year TIPS yield, or the local real-rate proxy | Rising real yields compress long-duration multiples independently of earnings |
+| Breakeven Inflation | Nominal minus real yield at 5y, 10y, and 5y5y | Separates a nominal-rate move into growth, inflation, and premium components |
+| Term Premium | Long-yield decomposition, or 10s2s and 10s30s curve shape | A term-premium-led bear steepener pressures duration-sensitive equity even with sound growth data |
+| Cross-Currency Basis | USD funding basis versus EUR, JPY, and CNH | Negative basis widening signals offshore dollar scarcity and transmits to Hong Kong and EM equity |
+
+Credit definitions, single-name credit checks, and the credit-equity divergence
+table are in `../../references/credit-and-cross-asset.md`. A liquidity read built
+only on central-bank and funding-rate data is incomplete: credit spreads are where
+risk appetite prices first.
 
 ## Sentiment And Positioning
 
@@ -34,6 +45,7 @@ Use these definitions to avoid vague macro language. State the data date and sou
 
 ## Boundaries
 
+- Crypto, FX, and commodity indicators here are risk-appetite proxies only. Directional views on those assets are out of scope; see `../../references/skill-routing.md`.
 - A single indicator is never enough for a strong regime call.
 - A level without trend can be misleading; check latest level, weekly change, and 4-week direction when available.
 - Survey and prime-broker data are delayed by design; do not call them real-time positioning.

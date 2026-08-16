@@ -15,6 +15,10 @@ Use this file to diagnose concentration and shared risk drivers. Use `quant-risk
 | Earnings | Shared reporting season, guidance sensitivity, margin assumptions |
 | Policy / regulation | Same regulator, subsidy, antitrust, export control, reimbursement, data rules |
 | Liquidity / crowding | Low float, high short interest, crowded long, ETF/index flow, borrow cost |
+| Credit / funding | Shared refinancing windows, covenant sensitivity, cash-runway limits, and dependence on the same issuance market. See `../../references/credit-and-cross-asset.md` |
+| Direction | Whether apparent long and short exposures actually offset, or express the same driver twice |
+| Implied assumption | How many holdings require a demanding or priced-for-perfection assumption. Names in different sectors that all need above-historical growth are one valuation bet. See `../../references/implied-expectations.md` |
+| Earnings quality | How many holdings share the same quality weakness, such as poor cash conversion, heavy capitalization, or dependence on one-off gains. See `../../references/earnings-quality-screens.md` |
 | Thesis overlap | Multiple names depending on the same customer, product cycle, policy, or narrative |
 
 ## Concentration Flags
@@ -29,6 +33,11 @@ Use these as research flags, not hard rules:
 - "Diversified" watchlist is mostly one industry chain or one macro regime.
 - Stress-period correlation is likely to rise across names that look unrelated in normal markets.
 - Top 3/top 5 exposure, equal-weight watchlist impact, or shared catalyst exposure dominates the conclusion.
+- Several names depend on the same refinancing window or the same issuance market.
+- A hedge or short leg is assumed to offset a long but shares its driver, so the pair is one directional bet rather than two.
+- Gross exposure is treated as diversified because net exposure looks small.
+- Several holdings require an above-historical growth or margin assumption, so the portfolio is one duration bet regardless of sector labels.
+- Two or more holdings breach the same earnings-quality screens, which usually means one accounting practice or one industry convention rather than two independent situations.
 
 ## Correlated Risk Cluster
 

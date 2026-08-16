@@ -3,7 +3,7 @@ name: portfolio-risk-monitor
 description: Use when reviewing a public-market portfolio or watchlist for risk concentration, factor exposure, sector/geography/currency overlap, style crowding, drawdown risk, watchlist priority, add/trim/exit candidates, rebalance watch signals, correlated theses, or questions like which names matter most, which holdings share the same risk driver, or whether risk is concentrated in valuation, earnings, policy, FX, rates, liquidity, or market regime.
 license: MIT
 metadata:
-  version: 0.5
+  version: 0.7
 ---
 
 # Portfolio Risk Monitor
@@ -47,7 +47,12 @@ Read only the references needed:
 - For shared scoring, confidence, red-flag, and label discipline, read `../references/scoring-standard.md`.
 - For timestamps, freshness grades, evidence tiers, unit and calendar rules, and user-input handling, read `../references/data-discipline.md`.
 - For deciding which skill owns a question, read `../references/skill-routing.md`.
-- For review of prior portfolio risk calls, read `../references/review-and-calibration.md`.
+- For review of prior portfolio risk calls, and for how an unreconfirmed holding thesis decays, read `../references/review-and-calibration.md`.
+- For shared refinancing windows, covenant sensitivity, and funding-driven correlation, read `../references/credit-and-cross-asset.md`.
+- For whether a hedge or short leg actually offsets a long, and for gross versus net exposure, read `../references/short-and-relative-value.md`.
+- For the reference class behind any drawdown or stress probability, read `../references/base-rates.md`.
+- For whether multiple holdings share the same demanding implied assumption, which is a valuation-driven risk cluster, read `../references/implied-expectations.md`.
+- For whether several holdings share the same earnings-quality weakness, read `../references/earnings-quality-screens.md`.
 
 ## Evidence Standard
 

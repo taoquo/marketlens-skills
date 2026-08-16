@@ -34,6 +34,7 @@ For material events, check what the market appears to price:
 - Price action: 1-week, 1-month, and 3-month absolute and relative return.
 - Volume and liquidity: unusual volume, turnover, float constraints, block trades.
 - Valuation: multiple expansion/compression versus peers and history.
+- Implied assumption: what the current price already requires, solved through `../../references/implied-expectations.md`. If the event delivers exactly what the price implies, the expectation gap is zero regardless of how material the event is.
 - Options: implied move, IV rank/percentile, skew, event premium where available.
 - Short pressure: short interest, days to cover, borrow cost, utilization where available.
 - Revisions: consensus revenue, EPS, EBITDA, margin, target price, or guidance revisions.
@@ -49,3 +50,5 @@ If options, borrow, or flow data is unavailable, mark it unavailable and lower c
 - Low valuation alone is not a catalyst.
 - Estimate revisions matter more when the event can start or stop a revision cycle.
 - If valuation expands while revisions flatten, treat the setup as fragile.
+- An earnings beat driven by accruals, capitalization, one-off gains, or a tax item is not a thesis confirmation. Run the screens in `../../references/earnings-quality-screens.md` on the released period before scoring the surprise, and state which line produced the beat.
+- The cleanest expectation gap exists when the price implies an assumption the event can directly falsify. Name that assumption before the event, not after.

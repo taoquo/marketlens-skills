@@ -30,6 +30,12 @@ Map the event to one or more anchors:
 
 ## Scenario Tree
 
+Before assigning any probability or likelihood word to a scenario, establish the
+reference class and its historical rate using `../../references/base-rates.md`.
+Approval rates, deal-completion rates, guidance-hit rates, and post-event drift all
+have observable histories, and a scenario weight that ignores them is an opinion
+formatted as a number.
+
 Use three scenarios unless the event is binary:
 
 | Scenario | What Happens | Evidence To Watch | Thesis Read-Through | Price Reaction Path |
@@ -44,11 +50,18 @@ For binary regulatory, legal, or approval events, use approved / delayed / rejec
 
 Only assign probabilities when:
 
+- A reference class and its historical rate have been stated, per `../../references/base-rates.md`.
 - There is enough historical, regulatory, legal, or company-specific evidence.
 - The probabilities add to 100%.
 - The output explains why the probability is research judgment, not certainty.
 
 If evidence is thin, use qualitative labels: higher likelihood, balanced, lower likelihood, unknown.
+
+When probabilities appear, include the base-rate table from
+`../../references/base-rates.md`: the claim, the reference class, the unadjusted
+base rate, the sample size, the adjustment with its evidence, and the adjusted
+estimate. Keeping the unadjusted rate visible is what lets a later review separate
+a wrong reference class from a wrong adjustment.
 
 ## Event Reaction Framework
 

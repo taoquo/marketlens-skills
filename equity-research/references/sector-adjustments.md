@@ -2,6 +2,12 @@
 
 Use this file when the default ROE/ROIC, leverage, free-cash-flow, and moat scorecard would mis-rank the business model. Apply `../../references/scoring-standard.md`: in every replacement scorecard, 3 means stronger or lower risk and 0 means weak, unavailable, or high risk.
 
+Two shared files carry the sector substitutions that matter most. Use the
+`Sector Substitutions` table in `../../references/earnings-quality-screens.md` for
+which quality ratios to replace, and the `Implied Variable By Business Type` table
+in `../../references/implied-expectations.md` for what the price should be solved
+for. Both must be stated when a replacement is used.
+
 ## Financials
 
 - Banks: replace ROIC with ROE relative to cost of equity, CET1/capital adequacy, NPL ratio, coverage ratio, NIM, deposit franchise, and credit-cycle exposure.
@@ -50,6 +56,7 @@ When sector-specific replacements are used, state:
 
 - Which default dimension was replaced.
 - Why the replacement better fits the business model.
+- Which quality screens were skipped or substituted, and which implied variable was solved for instead of the default.
 - Whether any red flag caps the rating.
 - How the adjusted score affects the research label without becoming a mechanical buy/sell signal.
 

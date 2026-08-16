@@ -40,6 +40,30 @@ Use this file when analyzing non-US stocks or when market-specific rules affect 
   - SOEs: policy mandate, dividend yield, asset injection/restructuring potential.
   - Cyclicals: normalized margin and replacement cost matter more than latest-year PE.
 
+## Frictions And Net Return
+
+A cross-market comparison stated in gross terms is not a comparison. Dividend
+withholding, stamp duty, access-channel rules, and hedging cost differ enough
+across these venues to change the ranking of two otherwise similar names,
+especially for income-driven theses. Note the applicable frictions whenever two
+listing venues are compared or a dividend yield carries the thesis.
+
+| Friction | Where it bites |
+|---|---|
+| Dividend withholding | Materially different by venue, by investor domicile, and for mainland investors accessing Hong Kong through Stock Connect, where the rate also differs between H shares and red chips. A gross yield comparison across venues is not comparable |
+| Transaction taxes and levies | Hong Kong stamp duty and exchange levies, A-share stamp duty on sales, and US regulatory fees. Highest impact on high-turnover expressions |
+| Access channel constraints | Stock Connect eligibility lists, daily and aggregate quotas, holiday-calendar mismatches, and the absence of certain order types. A name outside the eligible list is not accessible to that investor base regardless of the thesis |
+| Short-side rules | Hong Kong designated securities list, A-share securities-lending scope and cost, US locate requirements. See `../../references/short-and-relative-value.md` |
+| FX and hedging cost | Translation exposure plus the carry cost of hedging it. For a CNH or HKD asset held against USD, the hedge cost can consume a mid-single-digit yield advantage |
+| Settlement and corporate-action mechanics | Settlement cycle differences, ADR depositary fees, and trading suspensions around A-share corporate actions |
+
+Rules:
+
+- State whether a quoted yield is gross or net, and name the withholding assumption. Never compare a gross yield in one venue with a net yield in another.
+- Do not treat an AH or ADR gap as mispricing before checking whether tax, access rules, or fungibility explain it.
+- Never present these frictions as tax advice or planning. They are return drags to be named, per `../../references/skill-routing.md`.
+- Rates and eligibility rules change. Cite the rate as of a date, or state it as directional rather than numeric.
+
 ## Region-Aware Output
 
 Always add a "Regional And Market-Specific Checks" section for Hong Kong and A-share names. For US names, include it only when ownership, regulation, macro, or listing structure materially affects the thesis.

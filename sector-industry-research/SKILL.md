@@ -3,7 +3,7 @@ name: sector-industry-research
 description: Use when analyzing sectors, industries,产业链, peer groups, industry cycles, supply-demand, inventory, pricing, capacity, profit pools, policy or technology disruption, competitive structure, subsector scorecards, industry beta, sector rotation, trade expression, catalysts, stop-loss/stop-error triggers, or questions like which companies benefit most from an industry trend across US, Hong Kong, or A-share markets.
 license: MIT
 metadata:
-  version: 0.5
+  version: 0.7
 ---
 
 # Sector Industry Research
@@ -59,7 +59,12 @@ Read only the references needed:
 - For shared scoring, confidence, red-flag, and label discipline, read `../references/scoring-standard.md`.
 - For timestamps, freshness grades, evidence tiers, unit and calendar rules, and user-input handling, read `../references/data-discipline.md`.
 - For deciding which skill owns a question, read `../references/skill-routing.md`.
-- For review of prior industry calls, read `../references/review-and-calibration.md`.
+- For review of prior industry calls, and for how a cycle call decays when it is not reconfirmed, read `../references/review-and-calibration.md`.
+- For cycle-duration, capex-cycle, and share-shift base rates before any probability or timing claim, read `../references/base-rates.md`.
+- For the displaced side of an industry shift, and for pairs within a peer set, read `../references/short-and-relative-value.md`.
+- For capital-intensive industries where cost of debt and refinancing set returns on new capacity, read `../references/credit-and-cross-asset.md`.
+- For what a sector multiple implies about industry growth, terminal margin, or mid-cycle earnings, read `../references/implied-expectations.md`.
+- For comparing earnings quality across a peer set, or for testing whether a cyclical peak is accrual-driven, read `../references/earnings-quality-screens.md`.
 
 ## Conclusion Gates
 

@@ -6,6 +6,16 @@ Timestamps, freshness grades, evidence tiers, unit and calendar rules, and
 user-input handling live in `data-discipline.md`. Load it alongside this file: a
 score is only as good as the grade of the data behind it.
 
+Any probability, likelihood word, or scenario weight in an output must satisfy
+`base-rates.md` first. A number without a reference class is not a score, it is a
+guess with a decimal point.
+
+Any valuation that carries a conclusion must state what the current price implies,
+per `implied-expectations.md`, and any conclusion resting on reported earnings must
+pass the screens in `earnings-quality-screens.md`. A multiple is not a valuation
+read until the assumption behind it is named, and reported profit is not evidence
+until it has been reconciled to cash.
+
 ## Purpose
 
 Scores are research heuristics. They make comparisons explicit, but they are not a trading system, a buy/sell signal, a target weight, or a substitute for evidence.
@@ -72,6 +82,8 @@ Red flags cannot be averaged away by a high total score:
 - Extreme crowding, high unwind risk, or implied move that already prices the event.
 - Portfolio concentration, hidden factor overlap, or stress-period correlation that dominates stock-specific theses.
 - Industry data with wrong unit, wrong period, or quantity-scale anomaly.
+- Reported earnings that do not reconcile to cash flow across multiple periods.
+- A valuation whose implied assumption has no precedent in the company or industry record.
 
 When a red flag is present, state it in `Red Flags`, downgrade the research label if needed, and name the evidence required to remove it.
 
@@ -102,10 +114,13 @@ label on its own; it must map to one before the output states a stance.
 | Market regime | Risk-on recovery, balanced, volatile bottoming, late-cycle melt-up risk, fragile / de-risking | A risk-budget modifier, not a label. It caps or releases the labels below |
 | Sector / industry | Improving, resilient, cyclical recovery, late-cycle, crowded, pressured, structurally challenged | `high-priority watch` when improving or resilient; `hold/watch` when late-cycle; `trim-review` or `avoid` when crowded, pressured, or structurally challenged |
 | Company | Rating A/B/C/D, attractive, reasonable, rich | `high-priority watch` or `add-candidate watch` when attractive; `hold/watch` when reasonable; `trim-review` when rich; `avoid` when the balance sheet, governance, or structure fails |
+| Valuation | Undemanding, reasonable, demanding, priced for perfection, not solvable | Defined in `implied-expectations.md`. Undemanding can support `add-candidate watch` only if quality and evidence gates also pass; demanding caps valuation-driven upgrades; priced for perfection maps to `trim-review`; not solvable maps to `evidence-gap` on valuation |
+| Earnings quality | Clean, watch, suspected, failed | Defined in `earnings-quality-screens.md`. `watch` caps confidence at Medium; `suspected` caps the label at `hold/watch`; `failed` maps to `avoid` or `evidence-gap` |
 | Catalyst | Hard catalyst, soft catalyst, narrative catalyst, noise, priority catalyst | `high-priority watch` for a priority hard catalyst; `event watch` when timing, pricing, or gap is weak; `monitor closely` in between |
 | Post-event | Thesis strengthened, neutral, delayed, impaired, broken, crowded unwind | Strengthened raises the prior label by one step; delayed holds it; impaired or crowded unwind moves to `trim-review`; broken moves to `exit-review` |
 | Portfolio | Risk-concentrated, balanced watchlist | Not a name-level label. `risk-concentrated` forces at least one name into `trim-review` or `exit-review` |
 | Trade plan | Tradable setup, conditional setup, risk too high, plan violated, thesis intact, thesis impaired, thesis broken | `tradable setup` requires the upstream label to be `high-priority watch` or `add-candidate watch`; otherwise use `conditional setup` or `monitor closely`. `risk too high` maps to `avoid` |
+| Short / relative value | Short candidate, short watch, crowded short, not shortable, avoid only | Defined in `short-and-relative-value.md`. All five map to `avoid` at the name level. `short candidate` additionally requires verified borrow, float, and crowding data plus a dated catalyst; without them the read is `avoid only` |
 
 When a domain read has no defensible mapping because evidence is missing, use
 `evidence-gap` rather than the nearest optimistic label.
@@ -140,6 +155,12 @@ label.
 | Catalyst is fully priced, crowded, or has a demanding implied move | No `high-priority watch` driven by that catalyst. Use `event watch` |
 | Portfolio already holds the same risk driver at high concentration | A new name in the same cluster cannot be `add-candidate watch`. State the overlap and use `monitor closely` or `evidence-gap` |
 | Any layer is `evidence-gap` | The final label cannot be stronger than `monitor closely`, and the output must name the missing evidence |
+| A maturity, covenant test, or cash-runway limit falls inside the thesis horizon | No label stronger than `monitor closely` until the funding path is stated with a source. See `credit-and-cross-asset.md` |
+| Credit is weakening while equity is holding | Treat as a red flag, cap confidence at Medium, and name the divergence explicitly |
+| A probability is stated without a reference class | Replace the number with directional language and cap confidence at Medium |
+| Implied expectations are demanding or priced for perfection | No `add-candidate watch` on valuation. State the specific assumption the price requires. See `implied-expectations.md` |
+| Earnings quality shows four or more screen breaches | No label above `hold/watch` on fundamentals until the quality question is resolved. See `earnings-quality-screens.md` |
+| Earnings quality is suspect and implied expectations are demanding | Cap at `avoid`. A low multiple is not support when the earnings base is in question |
 
 Upstream layers can only tighten a label, never loosen one. If an upstream
 input is unavailable, say so and treat the layer as neutral rather than

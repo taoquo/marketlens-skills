@@ -3,7 +3,7 @@ name: catalyst-event-monitor
 description: Use when a user asks which upcoming public-market events matter, how to rank catalysts, what expectations are priced in, how an event could move a stock/sector, what data to watch before/after earnings, guidance, approvals, policy decisions, buybacks, unlocks, litigation, M&A, investor days, or whether a completed event strengthened, delayed, impaired, broke, or left neutral an investment thesis.
 license: MIT
 metadata:
-  version: 0.5
+  version: 0.7
 ---
 
 # Catalyst Event Monitor
@@ -47,7 +47,12 @@ Read only the references needed:
 - For shared scoring, confidence, red-flag, and label discipline, read `../references/scoring-standard.md`.
 - For timestamps, freshness grades, evidence tiers, unit and calendar rules, and user-input handling, read `../references/data-discipline.md`.
 - For deciding which skill owns a question, read `../references/skill-routing.md`.
-- For review of prior catalyst calls, read `../references/review-and-calibration.md`.
+- For review of prior catalyst calls, and for how an unconfirmed catalyst thesis decays, read `../references/review-and-calibration.md`.
+- For the reference class behind any scenario probability, approval rate, deal-completion rate, or post-event drift claim, read `../references/base-rates.md`.
+- For crowded shorts, squeeze conditions, and how an event can support a negative thesis, read `../references/short-and-relative-value.md`.
+- For refinancing, covenant, placement, or rating-action events, read `../references/credit-and-cross-asset.md`.
+- For whether the pre-event price already implies the outcome the event would deliver, read `../references/implied-expectations.md`.
+- For earnings events where the beat or miss may be accrual-driven rather than operational, read `../references/earnings-quality-screens.md`.
 
 ## Evidence Standard
 

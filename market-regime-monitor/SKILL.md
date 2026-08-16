@@ -3,7 +3,7 @@ name: market-regime-monitor
 description: Use when assessing market environment, liquidity, sentiment, positioning, greed/fear, overheating, de-risking, hedging, Fed liquidity, SOFR, MOVE, yen carry trade, NAAIM, institutional allocation, retail flows, valuation crowding, hedge fund leverage, or how macro and sentiment conditions affect US stocks, Hong Kong stocks, A-shares, technology shares, or crypto risk assets.
 license: MIT
 metadata:
-  version: 0.5
+  version: 0.7
 ---
 
 # Market Regime Monitor
@@ -40,7 +40,10 @@ Read only the references needed:
 - For shared confidence, red-flag, and label discipline, read `../references/scoring-standard.md`.
 - For timestamps, freshness grades, evidence tiers, unit and calendar rules, and user-input handling, read `../references/data-discipline.md`.
 - For deciding which skill owns a question, read `../references/skill-routing.md`.
-- For review of prior regime calls, read `../references/review-and-calibration.md`.
+- For review of prior regime calls, and for how a regime read decays with age, read `../references/review-and-calibration.md`.
+- For credit spreads, real yields, breakevens, term premium, and cross-currency basis as risk-appetite inputs, read `../references/credit-and-cross-asset.md`.
+- For historical analogues before assigning a probability to a regime path, read `../references/base-rates.md`.
+- For what an index-level multiple implies about aggregate growth or margin, when index valuation carries the crowding read, read `../references/implied-expectations.md`.
 - For source priority, freshness TTL, regional proxies, and fallback rules, read `references/data-sources.md`.
 - For formulas and interpretation boundaries, read `references/indicator-definitions.md`.
 - For scoring and confidence caps, read `references/scoring-model.md`.

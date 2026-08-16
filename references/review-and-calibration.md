@@ -89,17 +89,51 @@ from this date.
 If the user does not want files written, ask them to paste the earlier output and
 label the review as unverified history.
 
+## Thesis Decay
+
+A thesis has a shelf life. Confidence recorded at the original date is not
+confidence today, because the evidence behind it aged while the unverified
+assumptions stayed unverified. Without an explicit decay rule, a stale call keeps
+its original label indefinitely, which is the most common way a research framework
+quietly stops working.
+
+Apply this at every review, and whenever an open log entry is reused as an input.
+
+| Condition at review | Effect on the earlier label |
+|---|---|
+| Expected catalyst window passed with no confirming evidence | Downgrade one step and record a timing error candidate |
+| Two consecutive review windows with no new primary evidence | Cap at `monitor closely` regardless of the original label |
+| The key assumption is still unverified after the period in which it should have been observable | Move the assumption into `evidence-gap` and cap the label |
+| Price moved materially toward the thesis while fundamental evidence did not follow | Reduce, do not raise, confidence. Price is not confirmation |
+| The price now implies a more demanding assumption than at the original date | Re-solve the implied variable. A thesis that was undemanding at entry can become demanding without any news |
+| A new reporting period is available and the quality screens were not re-run | Treat the earnings-quality read as expired and re-compute before reusing the label |
+| Price moved materially against the thesis with no new information | Hold the label but re-check the invalidation condition; do not widen it |
+| A new red flag appeared after the original date | Re-run the red-flag overrides in `scoring-standard.md` before reusing the label |
+| The regime layer behind the call is more than one review window old | Treat regime as neutral rather than supportive |
+
+Rules:
+
+- Decay is automatic. A label that has not been reconfirmed is not intact by default.
+- Never re-derive confidence from the current price. Confirmation must come from the evidence the original thesis named.
+- An open log entry older than its own review window cannot serve as a Tier 1 input to a new call. Cite it as a dated prior view and refresh the inputs that matter.
+- Record the decay action in the entry `Results` section so the review history shows when confidence was reduced and why.
+
 ## Error Attribution
 
 Separate these error types:
 
 - Fundamental error: revenue, margin, cash flow, balance sheet, or competitive thesis was wrong.
 - Valuation error: business view was right, but expected multiple or margin of safety was wrong.
+- Implied-expectation error: the thesis was correct but the price already contained it, so being right produced no return. See `implied-expectations.md`.
+- Earnings-quality error: the reported base was overstated, so the multiple was measured against a number that did not repeat. See `earnings-quality-screens.md`.
 - Timing error: direction was right, but catalyst or market window was too early or too late.
 - Market-regime error: liquidity, rates, FX, volatility, or positioning dominated the thesis.
 - Data-quality error: source was stale, incomplete, secondary, or misread.
 - Event-pricing error: the event mattered but was already priced, crowded, or had poor implied-move setup.
 - Portfolio-correlation error: names were more correlated in stress than the research assumed.
+- Base-rate error: the reference class was wrong, too small, or overridden by case detail. See `base-rates.md`.
+- Credit or funding error: the equity thesis was reasonable but a maturity, covenant, or issuance-window constraint decided the outcome.
+- Decay error: the conclusion was correct at the original date but was reused after its evidence had aged.
 
 ## Calibration Rules
 

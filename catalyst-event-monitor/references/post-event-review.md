@@ -7,7 +7,8 @@ Use this file after an event happens. Judge the result against the pre-event exp
 1. Identify the pre-event thesis variable and expected outcome.
 2. Record the actual event result with source, timestamp, and data period.
 3. Compare actual versus expectation: beat, in line, miss, delayed, ambiguous, or not disclosed.
-4. Identify the valuation-anchor change: revenue, margin, cash flow, multiple, balance sheet, policy/legal, or sentiment.
+4. Decompose the result into its source before judging it: volume, price, mix, cost, accrual, capitalization, one-off item, or tax. Use `../../references/earnings-quality-screens.md` for the earnings case. A beat and a quality beat are different outcomes.
+5. Identify the valuation-anchor change: revenue, margin, cash flow, multiple, balance sheet, policy/legal, or sentiment.
 5. Separate thesis impact from price reaction: fundamental change, expectation reset, squeeze, sell-the-news, or crowded unwind.
 6. Classify thesis status and next monitoring data.
 
@@ -15,7 +16,7 @@ Use this file after an event happens. Judge the result against the pre-event exp
 
 | Status | Meaning | Required Evidence |
 |---|---|---|
-| Thesis strengthened | Event confirms or improves a key thesis variable | Actual data exceeds expectation and connects to financial or risk anchor |
+| Thesis strengthened | Event confirms or improves a key thesis variable | Actual data exceeds expectation, connects to a financial or risk anchor, and the improvement is visible in cash rather than only in accruals |
 | Neutral | Event matches expectation or lacks new information | No material change to key assumptions |
 | Thesis delayed | Core thesis may still be intact, but timing moved out | Delay with unchanged long-term evidence |
 | Thesis impaired | Event weakens a core assumption but does not fully break it | Miss, margin pressure, weaker adoption, higher risk, or worse terms |
@@ -38,6 +39,8 @@ Include:
 ## Common Mistakes
 
 - Calling a headline beat positive while guidance or cash flow deteriorates.
+- Treating a beat as confirmation without checking whether it came from working capital, capitalization, a one-off gain, or a tax rate change.
+- Failing to ask whether the result cleared the assumption the price implied, rather than the consensus estimate.
 - Ignoring that the stock may have moved because expectations were higher or lower.
 - Treating management optimism as confirmation without data.
 - Forgetting to update kill conditions after a failed catalyst.

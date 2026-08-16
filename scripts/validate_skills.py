@@ -4,6 +4,7 @@
 Checks, per skill directory discovered under the repository root:
   - SKILL.md frontmatter (name, description, license, metadata.version)
   - every referenced reference file exists, and every reference file is routed to
+  - every shared file in the top-level references/ directory is routed by a skill
   - agents/openai.yaml carries the required interface fields
   - the standard output blocks required by references/scoring-standard.md
   - dist/<skill>.skill matches the working tree byte for byte
@@ -148,6 +149,19 @@ def check_references(skill: str, text: str, errors: list[str]) -> None:
             errors.append(f"{skill}: {rel} exists but SKILL.md never loads it")
 
 
+def check_shared_reference_use(routed: set[str], errors: list[str]) -> None:
+    """No shared reference should sit in the repo without a skill that loads it.
+
+    SHARED_REFERENCES covers the files every skill must route. This catches the
+    rest: a cross-cutting file loaded by trigger still needs at least one caller,
+    otherwise it is dead weight that drifts out of date.
+    """
+    for path in sorted((ROOT / "references").glob("*.md")):
+        rel = "../references/" + path.name
+        if rel not in routed:
+            errors.append(f"references/{path.name} exists but no SKILL.md loads it")
+
+
 def check_output_blocks(skill: str, text: str, errors: list[str]) -> None:
     for block in STANDARD_OUTPUT_BLOCKS:
         if block not in text:
@@ -218,6 +232,7 @@ def main() -> int:
         return 1
 
     errors: list[str] = []
+    routed_shared: set[str] = set()
     for skill in skills:
         text = (ROOT / skill / "SKILL.md").read_text(encoding="utf-8")
         check_frontmatter(skill, text, errors)
@@ -225,6 +240,9 @@ def main() -> int:
         check_output_blocks(skill, text, errors)
         check_agent_metadata(skill, errors)
         check_package(skill, errors, require_dist)
+        routed_shared.update(REFERENCE_RE.findall(text))
+
+    check_shared_reference_use(routed_shared, errors)
 
     if errors:
         for error in errors:

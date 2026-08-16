@@ -10,7 +10,7 @@ It provides six production-oriented skills:
 
 | Skill | Purpose |
 |---|---|
-| `equity-research` | Equity research for US, Hong Kong, and A-share listed companies, covering quality scoring, earnings, fundamentals, valuation, moat, regional disclosures, red flags, and data freshness. |
+| `equity-research` | Equity research for US, Hong Kong, and A-share listed companies, covering quality scoring, earnings-quality screens, fundamentals, implied-expectation valuation, moat, regional disclosures, red flags, and data freshness. |
 | `market-regime-monitor` | Market regime monitoring across liquidity, sentiment, positioning, valuation crowding, scoring confidence, risk-budget impact, and cross-market risk transmission. |
 | `sector-industry-research` | Sector and industry research across cycle stage, supply-demand, value chains, policy/technology shifts, peer structure, trade expression, and listed-company read-through. |
 | `catalyst-event-monitor` | Event-driven research for upcoming catalysts, expectation gaps, market pricing, trade setup, scenario paths, pre-event watch data, and post-event thesis updates. |
@@ -94,13 +94,33 @@ noted and ignored.
 A skill has no memory between sessions, so `references/review-and-calibration.md` defines
 a `research-log/` append-only record. A call is written there when it is made, which is what
 lets the 1-week, 1-month, and 3-month review cadence actually close. The directory is
-gitignored and never created without asking first.
+gitignored and never created without asking first. The same file defines `Thesis Decay`: a
+label that has not been reconfirmed is not intact by default, and price moving toward the
+thesis without fundamental follow-through reduces confidence rather than raising it.
+
+## Cross-Cutting Coverage
+
+Five shared references are not owned by any one skill, because they change the
+conclusion in more than one layer. `references/skill-routing.md` lists the trigger
+for each:
+
+- `references/implied-expectations.md` inverts the valuation question from what a company is worth to what its price requires. It splits enterprise value into the no-growth and growth components, runs a reverse DCF that solves for exactly one variable and translates it into an absolute quantity, reads each common multiple as an implied statement, and names what to solve for when a DCF does not fit the business model. Margin of safety is expressed as the distance between the implied assumption and the historical record, not as a discount to a computed fair value.
+- `references/earnings-quality-screens.md` converts the qualitative red-flag list into computed ratios with thresholds. Cash conversion, accrual ratios, working-capital versus revenue growth, cost capitalization, and balance-sheet integrity are all computable from one filing plus the prior-year comparative. The breach count maps to a confidence cap and a label cap, and a sector table states which screens do not apply and what replaces them.
+- `references/credit-and-cross-asset.md` treats equity as the junior claim. Market-level credit spreads, real yields, breakevens, term premium, and funding basis feed the regime read; maturity ladders, covenant headroom, and rating trajectory feed single-name work. For property, financials, capital-intensive, and pre-profit sectors, an equity conclusion without a credit read is capped rather than merely flagged.
+- `references/base-rates.md` requires a reference class and its historical rate before any probability, likelihood word, or scenario weight. It covers approval rates, deal completion, guidance reliability, cycle duration, margin recovery, turnarounds, capacity cycles, and post-event drift, and keeps the unadjusted rate visible next to the adjusted estimate.
+- `references/short-and-relative-value.md` adds the short side and the relative-value pair as first-class reads, so a confirmed red flag becomes a research object rather than only a confidence deduction. Short-side language requires verified borrow, float, and crowding data; without them the read stays `avoid only`.
+
+`references/skill-routing.md` also carries an `Out Of Scope` table. Crypto, standalone
+FX, commodity futures, bond selection, options strategy, convertibles, private
+companies, fund selection, portfolio optimization, tax and legal advice, ESG scoring,
+intraday execution, and personal financial planning are outside coverage. Each row
+names the in-scope adjacent read.
 
 ## Decision Chain
 
 Each skill owns one layer of the research process. `references/skill-routing.md` holds
 the ownership table, and `references/scoring-standard.md` holds the shared scoring and
-research-label rules, the mapping from each layer to the nine shared labels, and the
+research-label rules, the mapping from each layer to the shared labels, and the
 binding chain constraints. When multiple skills apply, use the full chain:
 
 ```text
@@ -111,32 +131,34 @@ Release-by-release changes are tracked in [CHANGELOG.md](CHANGELOG.md).
 
 ## Examples
 
-The `examples/` folder contains six Folio-typeset validation cases. Each case ships as
-`.png` (previewed below), `.html`, and `.pdf`:
+The `examples/` folder contains six Folio-typeset validation cases, rebuilt for v0.7 so that
+each one exercises the release's new gates: what the price implies, whether the reported
+earnings survive the screens, and which label the answer is allowed to carry. Each case ships
+as `.png` (previewed below, one continuous page), `.html`, and `.pdf` (A4 pagination):
 
-`equity-research` · NVIDIA long-term quality, valuation discipline, and research label separation.
+`equity-research` · NVIDIA at 14/15 quality with a clean earnings-quality read, against a reverse DCF where 80 percent of EV is growth and the implied FY36 revenue is 7.8x the current year.
 
-![Equity research case](examples/marketlens-v03-equity-research-nvda.png)
+![Equity research case](examples/marketlens-v07-equity-research-nvda.png)
 
-`market-regime-monitor` · US technology-stock regime, liquidity/sentiment axes, and risk-budget impact.
+`market-regime-monitor` · US technology-stock regime on three axes, where equities are still rising while credit and real rates already score negative, totalling -3 for tight or crowded.
 
-![Market regime case](examples/marketlens-v03-market-regime-tech.png)
+![Market regime case](examples/marketlens-v07-market-regime-tech.png)
 
-`sector-industry-research` · AI server supply chain, profit pools, subsector scorecard, and trade expression.
+`sector-industry-research` · AI server supply chain ranked by implied assumption rather than multiple, which reverses the order, plus the structural loser of the same shift.
 
-![Sector industry case](examples/marketlens-v03-sector-ai-server.png)
+![Sector industry case](examples/marketlens-v07-sector-ai-server.png)
 
-`catalyst-event-monitor` · Apple WWDC26 event watch, expectation gap, and trade setup discipline.
+`catalyst-event-monitor` · Apple WWDC26, asking first whether the event only delivers what 36x already implies, then decomposing the reported result into volume, price, mix, cost, accrual, capitalization, one-off, and tax.
 
-![Catalyst event case](examples/marketlens-v03-catalyst-apple-wwdc.png)
+![Catalyst event case](examples/marketlens-v07-catalyst-apple-wwdc.png)
 
-`portfolio-risk-monitor` · Equal-weight AI watchlist, concentration, factor overlap, and stress-correlation risk.
+`portfolio-risk-monitor` · Equal-weight AI watchlist where nine tickers resolve into one duration bet across four subsectors, plus one shared accounting practice.
 
-![Portfolio risk case](examples/marketlens-v03-portfolio-ai-watchlist.png)
+![Portfolio risk case](examples/marketlens-v07-portfolio-ai-watchlist.png)
 
-`trade-plan-risk-manager` · NVIDIA conditional trade plan, setup quality, risk-unit framing, execution checks, and post-trade review.
+`trade-plan-risk-manager` · NVIDIA plan downgraded to monitor closely because the upside case restates what the price already requires, with liquidity measured as Deep and volatility inputs stated as unmeasured.
 
-![Trade plan risk case](examples/marketlens-v03-trade-plan-nvda.png)
+![Trade plan risk case](examples/marketlens-v07-trade-plan-nvda.png)
 
 These samples demonstrate the mandatory `Red Flags`, `Decision Impact`, `What Would Change
 The View`, `Data Freshness`, `Evidence Sources`, and `Disclaimer` blocks. Scored outputs add

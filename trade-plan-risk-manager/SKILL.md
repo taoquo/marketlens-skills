@@ -3,7 +3,7 @@ name: trade-plan-risk-manager
 description: Use when converting market regime, sector, equity, catalyst, or portfolio research into a non-personalized public-market trade plan framework, including setup quality, entry triggers, invalidation conditions, risk unit, stop/review triggers, time stop, event-risk window, liquidity checks, execution checklist, and post-trade review.
 license: MIT
 metadata:
-  version: 0.5
+  version: 0.7
 ---
 
 # Trade Plan Risk Manager
@@ -46,7 +46,12 @@ Read only the references needed:
 - For entry, stop, review, and invalidation triggers, read `references/trigger-framework.md`.
 - For risk unit, liquidity, event, volatility, and execution checks, read `references/risk-and-execution.md`.
 - For post-trade review and rule updates, read `references/post-trade-review.md`.
-- For reviewing prior plans or labels over time, read `../references/review-and-calibration.md`.
+- For reviewing prior plans or labels over time, and for how a plan decays when its catalyst window passes, read `../references/review-and-calibration.md`.
+- For short-side feasibility, squeeze conditions, pairs, and how the same view differs by expression, read `../references/short-and-relative-value.md`.
+- For maturity, covenant, or cash-runway limits inside the plan horizon, read `../references/credit-and-cross-asset.md`.
+- For the reference class behind any probability in the plan, read `../references/base-rates.md`.
+- For whether the upside case requires an assumption the price already contains, read `../references/implied-expectations.md`.
+- For whether the thesis rests on reported earnings that have not been reconciled to cash, read `../references/earnings-quality-screens.md`.
 
 ## Evidence Standard
 

@@ -4,6 +4,11 @@ Use red flags to reduce confidence, require more evidence, or define kill condit
 
 ## Financial Quality
 
+Every item below has a computed screen with a threshold in
+`../../references/earnings-quality-screens.md`. Measure it there rather than judging
+it by eye, then bring the result back here to classify. A described concern and a
+quantified breach are not the same evidence.
+
 - Revenue grows faster than cash collection for multiple periods.
 - Receivables, contract assets, or inventory rise materially faster than sales.
 - Free cash flow persistently trails accounting profit without a clear reinvestment reason.
@@ -36,3 +41,39 @@ Use red flags to reduce confidence, require more evidence, or define kill condit
 - If a red flag affects the thesis, move it into kill conditions or monitoring triggers.
 - If a red flag cannot be verified from primary sources, label it unverified and do not use it as a decisive claim.
 - If several moderate red flags point in the same direction, lower confidence even if each item is individually explainable.
+
+## Confirmation Status
+
+Lowering confidence is the right response to a suspected red flag. It is the wrong
+response to a confirmed one, because a confirmed flag is information about the
+company rather than about the analysis. Classify each flag before deciding what it
+does to the output.
+
+| Status | Definition | Required response |
+|---|---|---|
+| Confirmed | Stated in a primary filing, auditor report, regulator action, or company disclosure | Becomes a kill condition or a stated negative thesis, not merely a confidence deduction |
+| Suspected | Derived from a computed screen breach, a pattern across periods, or a credible secondary report | Becomes a named verification task with the specific document that would settle it |
+| Watch | Structurally plausible but not yet visible in the data | Becomes a monitoring trigger with the release that would show it first |
+
+For financial-quality flags, the aggregate read table in
+`../../references/earnings-quality-screens.md` sets the status: two to three screen
+breaches is `Watch`, four to six is `Suspected`, and seven or more is treated as a
+quality failure until disproven. Do not assign a status to a financial-quality flag
+without the breach count and its direction over time.
+
+A confirmed flag that keeps a name at `avoid` with no further work discards the
+most useful output of the analysis. Route it as follows.
+
+| Confirmed flag | Where it goes next |
+|---|---|
+| Accounting quality or disclosure failure | An accounting short thesis in `../../references/short-and-relative-value.md`, or `avoid only` if feasibility is unverified. Cite the screen breaches rather than the narrative |
+| Refinancing, covenant, or runway limit | A funding read using `../../references/credit-and-cross-asset.md`, plus a dated maturity or covenant test |
+| Structural demand loss or substitution | A structural-decline read, and a check of whether a peer is the other side of the same shift |
+| Governance or capital-allocation leakage | A permanent quality discount in valuation, and a governance short thesis only if it has a dated catalyst |
+| Dilution or supply overhang | A dated supply event with a size estimate, feeding the trade-plan event-gap check |
+
+Boundaries: a confirmed flag never becomes short-side language before the
+feasibility checks in `../../references/short-and-relative-value.md` are run and
+sourced. If borrow, float, or crowding data is unavailable, the read is `avoid
+only`. Never present a short thesis as lower risk because the accounting evidence
+is strong; timing risk and carry are independent of thesis quality.
