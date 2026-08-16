@@ -3,7 +3,7 @@ name: portfolio-risk-monitor
 description: Use when reviewing a public-market portfolio or watchlist for risk concentration, factor exposure, sector/geography/currency overlap, style crowding, drawdown risk, watchlist priority, add/trim/exit candidates, rebalance watch signals, correlated theses, or questions like which names matter most, which holdings share the same risk driver, or whether risk is concentrated in valuation, earnings, policy, FX, rates, liquidity, or market regime.
 license: MIT
 metadata:
-  version: 0.4
+  version: 0.5
 ---
 
 # Portfolio Risk Monitor
@@ -24,13 +24,13 @@ Use this skill for portfolio or watchlist concentration, correlated exposures, r
 
 Choose the lightest mode that answers the user:
 
-| User intent | Mode | Output depth |
-|---|---|---|
-| "Review my watchlist" / "who matters most?" | `watchlist-priority` | Priority ranking, thesis status, evidence gaps |
-| "Where is my portfolio risk?" | `risk-dashboard` | Concentration, factor/geography/sector/currency exposure |
-| "Which names should I add/trim/exit?" | `candidate-review` | Research classifications and trigger-based candidates, not personal allocation |
-| "What could hurt this portfolio?" | `drawdown-scenario` | Scenario shocks, correlated losses, monitoring variables |
-| Broad or ambiguous portfolio request | Hybrid | Start with risk dashboard, then rank the highest-impact names |
+| User intent | Mode | Minimum input | Output depth |
+|---|---|---|---|
+| "Review my watchlist" / "who matters most?" | `watchlist-priority` | The name list with tickers | Priority ranking, thesis status, evidence gaps |
+| "Where is my portfolio risk?" | `risk-dashboard` | The name list plus weights, or an explicit equal-weight assumption | Concentration, factor/geography/sector/currency exposure |
+| "Which names should I add/trim/exit?" | `candidate-review` | The name list, weights, and dated current prices | Research classifications and trigger-based candidates, not personal allocation |
+| "What could hurt this portfolio?" | `drawdown-scenario` | The name list plus weights and sector or factor tags | Scenario shocks, correlated losses, monitoring variables |
+| Broad or ambiguous portfolio request | Hybrid | The name list | Start with risk dashboard, then rank the highest-impact names |
 
 If weights, cost basis, risk constraints, or current prices are missing, use equal-weight or user-provided watchlist analysis and label the limitation clearly.
 
@@ -45,6 +45,7 @@ Read only the references needed:
 - For drawdown scenarios, risk drivers, and monitoring triggers, read `references/risk-triggers.md`.
 - For rebalance watch signals and research follow-up workflow, read `references/rebalance-watch.md`.
 - For shared scoring, confidence, red-flag, and label discipline, read `../references/scoring-standard.md`.
+- For timestamps, freshness grades, evidence tiers, unit and calendar rules, and user-input handling, read `../references/data-discipline.md`.
 - For deciding which skill owns a question, read `../references/skill-routing.md`.
 - For review of prior portfolio risk calls, read `../references/review-and-calibration.md`.
 
@@ -54,15 +55,17 @@ Use primary or official sources first. Do not fabricate citations or quote text 
 
 | Tier | Sources | Use |
 |---|---|---|
-| Tier 1 | User-provided holdings/watchlist, company filings, official announcements, exchange disclosures | Positions, thesis inputs, company-specific risks |
+| Tier 1 | Company filings, official announcements, exchange disclosures, index-provider classifications | Company-specific risks, sector and currency classification, disclosed exposures |
 | Tier 2 | Exchange data, company IR, official macro/rates/FX data, sector index data | Prices, sector/geography/currency, market regime context |
 | Tier 3 | Financial platforms, broker notes, media, consensus datasets, ETF/flow summaries | Context and proxy data only |
 
-Always include an `Evidence Sources` section with source name, date, link, and what it supports. For user-provided data, label it as user-provided and do not infer missing personal constraints.
+Holdings, weights, cost basis, and constraints are user-provided plan parameters, not evidence. Accept them as given, label them `user-provided`, and classify and check them using the User-Provided Input rules in `../references/data-discipline.md`. Any factual claim inside the user input still needs a Tier 1 or Tier 2 source.
+
+Always include an `Evidence Sources` section with source name, date, link, and what it supports. Do not infer missing personal constraints.
 
 ## Conclusion Gates
 
-Use research language such as high-priority watch, add-candidate watch, trim-review, exit-review, risk-concentrated, balanced watchlist, evidence gap, or insufficient data. Do not present personalized buy/sell/allocation advice, target weights, exact position sizes, or transaction instructions.
+Use research language such as high-priority watch, add-candidate watch, hold/watch, trim-review, exit-review, risk-concentrated, balanced watchlist, or evidence-gap. Map the portfolio read to a shared label using the `Label Layering` table in `../references/scoring-standard.md`. Do not present personalized buy/sell/allocation advice, target weights, exact position sizes, or transaction instructions.
 
 Do not give a strong portfolio-risk conclusion unless these are satisfied:
 
@@ -76,13 +79,25 @@ If any gate fails, downgrade to a watchlist-style risk review and state what dat
 
 ## Data Freshness Protocol
 
-Do not use a portfolio or market data point unless its source date is known. Record:
+Timestamps, freshness grades, evidence tiers, unit and calendar rules, and user-input checks are defined in `../references/data-discipline.md`. Load that file before writing the `Data Freshness` table and use its five freshness grades verbatim.
 
-- `as_of`: the portfolio date, market date, reporting period, or disclosure date.
-- `published_at`: when the source published it, if available.
-- `retrieved_at`: when you fetched or viewed it.
+Portfolio-specific additions:
 
-For price-sensitive classifications, use latest available market prices and mark stale data. Do not turn missing weights, prices, or constraints into bullish or bearish conclusions.
+- Record the portfolio `as_of` date separately from the market `as_of` date. A portfolio snapshot and its prices can be dated differently.
+- Run the user-input consistency checks before any exposure math: weights summing correctly, plausible prices, and no conflicting statements.
+- State the currency of every weight and value, and name the FX rate and its date whenever positions span currencies.
+
+Degrade conclusions as follows:
+
+| Missing or stale item | Required handling |
+|---|---|
+| Weights are missing | Use equal weight, state the assumption, and call it a watchlist review rather than an allocation review |
+| Weights do not sum to the stated total | Report the discrepancy before any exposure math, and do not normalize silently |
+| Current prices are stale | No price-sensitive trim-review or exit-review label; describe direction only |
+| Cost basis is unavailable | No gain/loss or tax-related framing |
+| Sector, factor, or currency tags are unavailable | Mark the exposure as unmeasured, not as diversified |
+| Correlation or volatility data is unavailable | Give qualitative cluster analysis only, no quant risk snapshot |
+| Risk constraints were never stated | Do not infer them; frame everything as research triggers |
 
 ## Workflow
 

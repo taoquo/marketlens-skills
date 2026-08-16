@@ -3,7 +3,7 @@ name: equity-research
 description: Use when analyzing listed companies or stocks across US, Hong Kong, or A-share markets, including earnings reports, long-term holding quality, fundamentals, valuation, moat, cash flow, management, valuation-derived trigger levels, position review triggers, market-specific disclosure rules, or user questions phrased as whether a stock is worth buying, holding, adding, trimming, or exiting.
 license: MIT
 metadata:
-  version: 0.4
+  version: 0.5
 ---
 
 # Equity Research
@@ -22,12 +22,14 @@ Use this skill for company quality, fundamentals, earnings, valuation, moat, reg
 
 Choose the lightest mode that answers the user:
 
-| User intent | Mode | Output depth |
-|---|---|---|
-| Long-term quality, Buffett-style, "worth holding" | `quick-value-score` | Four-dimension score plus key risks |
-| Latest earnings, quarterly/annual report, guidance | `earnings-deepdive` | Key forces plus focused module analysis |
-| "Can I buy/sell/add/trim now?" | `decision-framework` | Research label, valuation, margin of safety, triggers |
-| Broad or ambiguous stock analysis | Hybrid | Start with conclusion, then combine the needed modes |
+| User intent | Mode | Minimum input | Output depth |
+|---|---|---|---|
+| Long-term quality, Buffett-style, "worth holding" | `quick-value-score` | Ticker or company name, plus the latest annual or interim report | Four-dimension score plus key risks |
+| Latest earnings, quarterly/annual report, guidance | `earnings-deepdive` | Ticker, reporting period, and the filing or release for that period | Key forces plus focused module analysis |
+| "Can I buy/sell/add/trim now?" | `decision-framework` | Ticker, dated current price, and at least two valuation inputs | Research label, valuation, margin of safety, triggers |
+| Broad or ambiguous stock analysis | Hybrid | Ticker or company name | Start with conclusion, then combine the needed modes |
+
+If the minimum input cannot be obtained, drop to a lighter mode, name the missing input, and label the output as a partial read rather than filling the gap with an assumption.
 
 If the company is a bank, insurer, broker, REIT, utility, highly cyclical commodity business, platform internet company, exporter, or pre-profit biotech, adjust the scoring and valuation criteria before rating and explain the adjustment.
 
@@ -46,6 +48,7 @@ Infer the market from ticker, exchange, company name, or user wording. If unclea
 Read only the references needed:
 
 - For shared scoring, confidence, red-flag, and label discipline, read `../references/scoring-standard.md`.
+- For timestamps, freshness grades, evidence tiers, unit and calendar rules, and user-input handling, read `../references/data-discipline.md`.
 - For deciding which skill owns a question, read `../references/skill-routing.md`.
 - For review of prior scores or labels, read `../references/review-and-calibration.md`.
 - For regional details, read `references/regional-market-guide.md`.
@@ -68,7 +71,7 @@ Always include an `Evidence Sources` section with source name, date, link, and w
 
 ## Conclusion Gates
 
-Use research language such as attractive, reasonable, rich, watch, high-priority watch, add-candidate watch, hold/watch, trim-review, exit-review, avoid, evidence-gap, or thesis invalidated. Do not present personalized buy/sell advice or exact allocation instructions.
+Use research language such as attractive, reasonable, rich, watch, high-priority watch, add-candidate watch, hold/watch, trim-review, exit-review, avoid, evidence-gap, or thesis invalidated. Map the company read to a shared label using the `Label Layering` table in `../references/scoring-standard.md`. Do not present personalized buy/sell advice or exact allocation instructions.
 
 Do not give a strong action-style research label or precise valuation-derived trigger level unless these are satisfied:
 
@@ -81,13 +84,13 @@ If any gate fails, downgrade to a watchlist-style conclusion, state the missing 
 
 ## Data Freshness Protocol
 
-Do not use a financial data point unless its source date is known. Record:
+Timestamps, freshness grades, evidence tiers, unit and calendar rules, and the core figure check are defined in `../references/data-discipline.md`. Load that file before writing the `Data Freshness` table and use its five freshness grades verbatim.
 
-- `as_of`: the period or market date the value describes.
-- `published_at`: when the source published it, if available.
-- `retrieved_at`: when you fetched or viewed it.
+Equity-specific additions:
 
-Treat stale or undated data as lower confidence. For trigger-price, add-candidate, trim-review, exit-review, or valuation-sensitive conclusions, verify the current price and at least one core valuation input from two sources. Do not turn missing data into a bullish or bearish signal; mark it unavailable and explain the impact on confidence.
+- For trigger-price, add-candidate, trim-review, exit-review, or valuation-sensitive conclusions, verify the current price and at least one core valuation input from two sources.
+- Price data older than the latest completed trading session is `Stale` for any price-sensitive conclusion, even if it sits inside a generic TTL.
+- Run every figure that carries the valuation or rating through the core figure check in `../references/data-discipline.md` before stating a strong label.
 
 Degrade conclusions as follows:
 
@@ -98,6 +101,8 @@ Degrade conclusions as follows:
 | Only secondary financial data is available | Cap confidence at Medium |
 | Only one valuation input is available | Give directional valuation only |
 | Material announcement search is incomplete | Add a pending-disclosure caveat |
+| Fiscal calendar or accounting standard is unclear | Do not compare the multiple against peers in another market |
+| A user-provided figure conflicts with the filing | Use the filing, state the conflict, mark the user figure unverified |
 
 ## Workflow
 

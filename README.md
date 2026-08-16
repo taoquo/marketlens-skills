@@ -74,21 +74,34 @@ Use $trade-plan-risk-manager to convert a stock thesis into a conditional trade 
 Use $trade-plan-risk-manager to review whether a completed trade was a thesis error, timing error, risk framing error, or execution error.
 ```
 
-## Data Freshness
+## Data Discipline
 
-All skills require:
+`references/data-discipline.md` holds the rules every skill inherits. Each `SKILL.md`
+adds only what is specific to its domain:
 
-- official and primary sources first;
-- `as_of`, `published_at`, and `retrieved_at` timestamps when available;
-- TTL-based freshness checks;
-- cross-checking price-sensitive or regime-sensitive conclusions;
-- marking missing data as unavailable instead of turning it into a directional signal.
+- official and primary sources first, under one shared three-tier evidence model;
+- `as_of`, `published_at`, and `retrieved_at` recorded separately, never collapsed;
+- a closed set of freshness grades: `Fresh`, `Lagged`, `Stale`, `Undated`, `Unavailable`;
+- a core figure check with original wording, unit, period, cross-check, and one of four treatments;
+- unit, currency, accounting-standard, and fiscal-calendar labelling before any cross-market comparison;
+- user input classified as plan parameter, fact claim, or preference, with consistency checks before use;
+- missing data marked unavailable and treated as a confidence limit, never as a directional signal.
+
+Every skill also carries a degradation table mapping each missing or stale input to the
+required handling, so a data gap changes the output in a defined way instead of being
+noted and ignored.
+
+A skill has no memory between sessions, so `references/review-and-calibration.md` defines
+a `research-log/` append-only record. A call is written there when it is made, which is what
+lets the 1-week, 1-month, and 3-month review cadence actually close. The directory is
+gitignored and never created without asking first.
 
 ## Decision Chain
 
 Each skill owns one layer of the research process. `references/skill-routing.md` holds
 the ownership table, and `references/scoring-standard.md` holds the shared scoring and
-research-label rules. When multiple skills apply, use the full chain:
+research-label rules, the mapping from each layer to the nine shared labels, and the
+binding chain constraints. When multiple skills apply, use the full chain:
 
 ```text
 Market Regime -> Sector / Industry Setup -> Company Quality And Valuation -> Catalyst / Timing -> Portfolio Role And Risk -> Research Label -> Conditional Trade Plan And Risk Review

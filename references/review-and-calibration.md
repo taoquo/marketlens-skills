@@ -41,6 +41,54 @@ Use this structure:
 | Error source | Fundamental, valuation, timing, market regime, data quality, event read, or portfolio correlation |
 | Calibration action | Keep, tighten, loosen, add red flag, or revise scoring language |
 
+## Research Log
+
+A Codex skill has no memory between sessions. The cadence and record above only
+work if the original call was written to a file, so persistence is part of the
+workflow rather than an optional extra.
+
+Write each new call to an append-only log in the current working directory:
+
+| Scope | Path |
+|---|---|
+| Company, stock, or trade plan | `research-log/equity/TICKER.md` |
+| Sector or industry | `research-log/sector/industry-slug.md` |
+| Market regime | `research-log/regime/market.md` |
+| Portfolio or watchlist | `research-log/portfolio/name.md` |
+| Event or catalyst | `research-log/equity/TICKER.md`, in the same entry as the thesis it tests |
+
+Rules:
+
+- Ask once before creating `research-log/` the first time. Never write outside the working directory.
+- One entry per call. Head it with the ISO date, the skill name, and the research label, then record the fields from `Review Record`.
+- Mark each entry `Status: open` until a review closes it, then `Status: reviewed`.
+- The original claim lines are immutable. Later results and corrections are appended to the same entry under a `Results` heading, with their own dates.
+- A correction that changes the label is a new entry that cites the original date. Do not edit the earlier label.
+
+Entry skeleton:
+
+```markdown
+### 2026-08-16 equity-research high-priority watch
+Status: open
+- Scope:
+- Original score:
+- Key evidence:
+- Key assumption:
+- Red flags:
+- Invalidation condition:
+
+#### Results
+- 2026-08-23 (1w):
+```
+
+When a review is requested and no log entry exists, say so plainly. Do not
+reconstruct a prior call from memory or from the current price. Offer to record
+the present call as the first entry instead, and state that calibration starts
+from this date.
+
+If the user does not want files written, ask them to paste the earlier output and
+label the review as unverified history.
+
 ## Error Attribution
 
 Separate these error types:
@@ -77,4 +125,3 @@ Separate these error types:
 ## Calibration Action
 [Keep, tighten, loosen, add red flag, or revise scoring language.]
 ```
-

@@ -33,7 +33,12 @@ MAX_DESCRIPTION = 1024
 
 ALLOWED_FRONTMATTER_KEYS = {"name", "description", "license", "allowed-tools", "metadata"}
 REQUIRED_AGENT_FIELDS = ("display_name:", "short_description:", "default_prompt:")
-SHARED_REFERENCES = ("references/scoring-standard.md", "references/review-and-calibration.md")
+SHARED_REFERENCES = (
+    "references/scoring-standard.md",
+    "references/review-and-calibration.md",
+    "references/data-discipline.md",
+    "references/skill-routing.md",
+)
 STANDARD_OUTPUT_BLOCKS = (
     "## Red Flags",
     "## Decision Impact",

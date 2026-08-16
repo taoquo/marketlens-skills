@@ -71,20 +71,31 @@ Use $trade-plan-risk-manager 把一个个股 thesis 转成包含入场、失效�
 Use $trade-plan-risk-manager 复盘一笔交易属于 thesis 错误、时机错误、风险框架错误还是执行错误。
 ```
 
-## 数据实效性
+## 数据纪律
 
-所有 Skill 都要求：
+`references/data-discipline.md` 存放所有 skill 共用的数据规则，各份 `SKILL.md`
+只补充自己领域特有的部分：
 
-- 优先使用官方源和一手来源；
-- 尽量记录 `as_of`、`published_at`、`retrieved_at`；
-- 按 TTL 判断数据是否过期；
-- 对价格敏感或市场状态敏感的结论做交叉验证；
-- 缺失数据只能标记为 unavailable，不得硬转成看多或看空信号。
+- 优先使用官方源和一手来源，全仓统一的三级证据模型；
+- `as_of`、`published_at`、`retrieved_at` 分开记录，不得合并成一个日期；
+- 封闭枚举的时效等级：`Fresh`、`Lagged`、`Stale`、`Undated`、`Unavailable`；
+- 核心数字校验表：原文措词、单位、期间、交叉核对，以及四种处理方式之一；
+- 跳市场对比前必须标注单位、币种、会计准则和财年口径；
+- 用户输入分为计划参数、事实声明、偏好三类，使用前先跑一致性检查；
+- 缺失数据标记为 unavailable 并当作置信度上限，不得硬转成看多或看空信号。
+
+每个 skill 还各自带一张降级矩阵，把“缺失或过期的输入”映射到“必须采取的处理方式”，
+让数据缺口以确定方式改变输出，而不是写一句备注就过。
+
+skill 在不同会话之间没有记忆，所以 `references/review-and-calibration.md` 定义了
+`research-log/` 追加式记录：下结论时就写入日志，1 周 / 1 个月 / 3 个月的复盘
+节奏才能真正闭环。该目录已 gitignore，首次创建前必须先询问用户。
 
 ## 决策链
 
-每个 skill 负责研究流程中的一层。归属划分见 `references/skill-routing.md`，共享评分和研究标签
-规则见 `references/scoring-standard.md`。多个 skill 同时适用时，按完整决策链处理：
+每个 skill 负责研究流程中的一层。归属划分见 `references/skill-routing.md`。
+`references/scoring-standard.md` 存放共享评分规则、各层领域读数到九个共用标签的映射，
+以及具有约束力的决策链限制。多个 skill 同时适用时，按完整决策链处理：
 
 ```text
 市场环境 -> 行业/产业设置 -> 公司质量与估值 -> 催化剂/时机 -> 组合角色与风险 -> 研究标签 -> 条件交易计划与风险复核

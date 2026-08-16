@@ -3,6 +3,40 @@
 Release history for MarketLens Skills. Versions match `metadata.version` in each
 `SKILL.md`.
 
+## v0.5 Data Discipline And Chain Constraints
+
+This release closes methodology gaps rather than repo tooling. The previous version
+stated shared rules; this one makes them executable.
+
+- New `references/data-discipline.md` holds the rules every skill inherits: the three
+  timestamps, a closed set of freshness grades (`Fresh`, `Lagged`, `Stale`, `Undated`,
+  `Unavailable`), the shared three-tier evidence model, the core figure check, unit and
+  fiscal-calendar rules, and how to classify user input. The `Freshness` column of the
+  `Data Freshness` table previously had no defined vocabulary at all.
+- `references/scoring-standard.md` gains `Label Layering`, which maps each skill's domain
+  read to the nine shared research labels. Regime, sector, catalyst, portfolio, and trade
+  vocabularies were previously disconnected from the shared label set.
+- The cross-module decision chain gains `Chain Constraints`: seven binding rules for how
+  an upstream layer caps a downstream label, plus `Chain Provenance` requiring each
+  upstream input to be attributed to a dated prior output, a user view, or an assumption.
+  An assumed layer cannot support a strong label, and any `evidence-gap` layer caps the
+  final label at `monitor closely`.
+- Every skill now carries a degradation table mapping each missing or stale input to the
+  required handling. Only `equity-research` had one before.
+- `market-regime-monitor` gains the `Evidence Standard` and `Conclusion Gates` sections it
+  was missing, so all six skills share the same structure.
+- `portfolio-risk-monitor` and `trade-plan-risk-manager` no longer treat user-provided
+  holdings or a user thesis as Tier 1 evidence. User input is a plan parameter, a fact
+  claim to verify, or a preference, and a plan resting on unverified user claims cannot be
+  labelled `tradable setup`.
+- Every `Mode Selection` table gains a `Minimum input` column, so a mode is chosen against
+  what is actually available instead of being run with silent gaps.
+- `references/review-and-calibration.md` gains `Research Log`, defining where a call is
+  written so the 1-week, 1-month, and 3-month review cadence can close. A skill has no
+  memory between sessions, so the calibration loop was previously unable to complete.
+- The validator now requires all four shared references to be routed from every
+  `SKILL.md`.
+
 ## v0.4 Toolchain And Shared Routing
 
 - CI now actually runs. `.github/` is no longer git-ignored, and the workflow

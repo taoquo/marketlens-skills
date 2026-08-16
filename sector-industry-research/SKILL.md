@@ -3,7 +3,7 @@ name: sector-industry-research
 description: Use when analyzing sectors, industries,产业链, peer groups, industry cycles, supply-demand, inventory, pricing, capacity, profit pools, policy or technology disruption, competitive structure, subsector scorecards, industry beta, sector rotation, trade expression, catalysts, stop-loss/stop-error triggers, or questions like which companies benefit most from an industry trend across US, Hong Kong, or A-share markets.
 license: MIT
 metadata:
-  version: 0.4
+  version: 0.5
 ---
 
 # Sector Industry Research
@@ -22,13 +22,15 @@ Use this skill for sector setup, industry cycle, supply and demand, value-chain 
 
 Choose the lightest mode that answers the user:
 
-| User intent | Mode | Output depth |
-|---|---|---|
-| "How is this industry doing?" / sector quick view | `cycle-scan` | Cycle stage, key indicators, 3-5 monitoring variables |
-| Industry deep dive or产业链 analysis | `industry-deepdive` | Supply-demand, pricing, capacity, value chain, policy, technology |
-| Compare leaders and beneficiaries | `peer-map` | Peer set, factor exposure, winners/losers, valuation context |
-| "How to express this view?" / trading read-through | `research-to-trade` | Trader view, best expression, catalysts, stop-error conditions |
-| "Which stock benefits?" / sector expression question | Hybrid | Start with industry conclusion, then list candidate types and evidence needed before single-stock calls |
+| User intent | Mode | Minimum input | Output depth |
+|---|---|---|---|
+| "How is this industry doing?" / sector quick view | `cycle-scan` | Industry and geography, plus one dated demand and one dated supply or price indicator | Cycle stage, key indicators, 3-5 monitoring variables |
+| Industry deep dive or产业链 analysis | `industry-deepdive` | Industry, geography, and value-chain segment, plus dated demand, capacity, and pricing data | Supply-demand, pricing, capacity, value chain, policy, technology |
+| Compare leaders and beneficiaries | `peer-map` | A defined peer set with stated inclusion and exclusion rules | Peer set, factor exposure, winners/losers, valuation context |
+| "How to express this view?" / trading read-through | `research-to-trade` | The industry view being expressed, plus its cycle stage and key forces | Trader view, best expression, catalysts, stop-error conditions |
+| "Which stock benefits?" / sector expression question | Hybrid | Industry and geography | Start with industry conclusion, then list candidate types and evidence needed before single-stock calls |
+
+If neither a demand nor a supply indicator can be dated, do not assign a cycle stage. Describe the structure and name the data required.
 
 If the industry has regulated, balance-sheet-driven, capital-intensive, commodity-like, digital/platform, consumer/channel, export-driven, policy-heavy, or science/technology-risk characteristics, adjust the indicators before judging and explain the adjustment.
 
@@ -55,12 +57,13 @@ Read only the references needed:
 - For policy, regulation, subsidy, localization, export control, and technology disruption, read `references/policy-and-technology.md`.
 - For trader view, subsector scorecards, catalysts, stop-error conditions, and research-to-trade mapping, read `references/research-to-trade.md`.
 - For shared scoring, confidence, red-flag, and label discipline, read `../references/scoring-standard.md`.
+- For timestamps, freshness grades, evidence tiers, unit and calendar rules, and user-input handling, read `../references/data-discipline.md`.
 - For deciding which skill owns a question, read `../references/skill-routing.md`.
 - For review of prior industry calls, read `../references/review-and-calibration.md`.
 
 ## Conclusion Gates
 
-Use research language such as improving, resilient, cyclical recovery, late-cycle, crowded, pressured, structurally challenged, watch, or avoid. Do not present personalized buy/sell advice, exact allocation instructions, or transaction-prescriptive trade expression.
+Use research language such as improving, resilient, cyclical recovery, late-cycle, crowded, pressured, structurally challenged, watch, or avoid. Map the industry read to a shared label using the `Label Layering` table in `../references/scoring-standard.md`. Do not present personalized buy/sell advice, exact allocation instructions, or transaction-prescriptive trade expression.
 
 Do not give a strong sector research label, ranked beneficiaries, or precise stock-selection conclusion unless these are satisfied:
 
@@ -77,15 +80,25 @@ Industry research provides expression, risk conditions, and evidence requirement
 
 ## Data Freshness Protocol
 
-Do not use an industry data point unless its source date is known. Record:
+Timestamps, freshness grades, evidence tiers, unit and calendar rules, and the core figure check are defined in `../references/data-discipline.md`. Load that file before writing the `Data Check` table and use its five freshness grades and four treatment values verbatim.
 
-- `as_of`: the period or market date the value describes.
-- `published_at`: when the source published it, if available.
-- `retrieved_at`: when you fetched or viewed it.
+Industry-specific additions:
 
-Industry data often lags. Label stale or survey-based data, reduce confidence, and never convert missing data into a bullish or bearish signal.
+- Most industry data lags by design. Grade monthly output, customs, inventory, and survey series as `Lagged` and print the reference period.
+- Keep the `Data Check` audit trail for every core figure that carries a conclusion.
+- State whether a figure is production, shipment, installation, order, or revenue based. These are different quantities and are not interchangeable.
 
-For core figures, keep an audit trail with original wording, value, unit, period, publisher, link, cross-check result, and treatment. Use only these treatments: `Use`, `Use with caveat`, `Proxy only`, or `Exclude`.
+Degrade conclusions as follows:
+
+| Missing or stale item | Required handling |
+|---|---|
+| Only a demand indicator is dated | Describe demand direction only, no cycle-stage label |
+| Only a supply or capacity indicator is dated | Describe supply direction only, no cycle-stage label |
+| Pricing or spread data is unavailable | No margin-transmission or profit-pool conclusion |
+| Inventory data is unavailable | Do not call a restock or destock phase |
+| Peer set cannot be defined from disclosed segments | No winner/loser ranking; list candidate types instead |
+| Only broker or expert-call data supports a core figure | Mark it `Proxy only` and cap confidence at Medium |
+| A figure shows a quantity-scale anomaly | Mark it `Use with caveat` or `Exclude`; never smooth it into the narrative |
 
 ## Workflow
 

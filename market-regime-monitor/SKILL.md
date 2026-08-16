@@ -3,7 +3,7 @@ name: market-regime-monitor
 description: Use when assessing market environment, liquidity, sentiment, positioning, greed/fear, overheating, de-risking, hedging, Fed liquidity, SOFR, MOVE, yen carry trade, NAAIM, institutional allocation, retail flows, valuation crowding, hedge fund leverage, or how macro and sentiment conditions affect US stocks, Hong Kong stocks, A-shares, technology shares, or crypto risk assets.
 license: MIT
 metadata:
-  version: 0.4
+  version: 0.5
 ---
 
 # Market Regime Monitor
@@ -22,20 +22,23 @@ Use this skill for market environment, liquidity, sentiment, positioning, valuat
 
 Choose the lightest mode that answers the user:
 
-| User intent | Mode | Output depth |
-|---|---|---|
-| "How is liquidity?" / Fed, SOFR, MOVE, FX stress | `liquidity-scan` | Liquidity dashboard, red flags, causal channel |
-| "Is sentiment crowded or washed out?" | `sentiment-scan` | Positioning dashboard, valuation crowding, confidence |
-| "What is the market regime?" | `regime-score` | Two-axis score, matrix label, asset impact |
-| Hong Kong, A-share, China, yen carry, cross-asset spillover | `cross-market-transmission` | Transmission channel, proxies, regional limits |
-| Review a prior market call | `prior-call-review` | Regime error, timing error, data-quality error |
-| Broad or ambiguous market request | Hybrid | Start with regime score, then analyze the binding axis |
+| User intent | Mode | Minimum input | Output depth |
+|---|---|---|---|
+| "How is liquidity?" / Fed, SOFR, MOVE, FX stress | `liquidity-scan` | At least two dated liquidity or funding indicators | Liquidity dashboard, red flags, causal channel |
+| "Is sentiment crowded or washed out?" | `sentiment-scan` | At least two dated positioning, flow, or valuation indicators | Positioning dashboard, valuation crowding, confidence |
+| "What is the market regime?" | `regime-score` | At least one dated indicator on each axis | Two-axis score, matrix label, asset impact |
+| Hong Kong, A-share, China, yen carry, cross-asset spillover | `cross-market-transmission` | Market scope plus one dated indicator per transmission leg | Transmission channel, proxies, regional limits |
+| Review a prior market call | `prior-call-review` | The prior call, its date, and the regime label it stated | Regime error, timing error, data-quality error |
+| Broad or ambiguous market request | Hybrid | Market scope | Start with regime score, then analyze the binding axis |
+
+If an axis has no usable indicator, do not score it. Report a single-axis read, mark the other axis `evidence-gap`, and cap overall confidence at Low.
 
 ## Reference Loading
 
 Read only the references needed:
 
 - For shared confidence, red-flag, and label discipline, read `../references/scoring-standard.md`.
+- For timestamps, freshness grades, evidence tiers, unit and calendar rules, and user-input handling, read `../references/data-discipline.md`.
 - For deciding which skill owns a question, read `../references/skill-routing.md`.
 - For review of prior regime calls, read `../references/review-and-calibration.md`.
 - For source priority, freshness TTL, regional proxies, and fallback rules, read `references/data-sources.md`.
@@ -43,17 +46,57 @@ Read only the references needed:
 - For scoring and confidence caps, read `references/scoring-model.md`.
 - For Hong Kong, A-share, China, or cross-market transmission, read `references/regional-transmission.md`.
 
+## Evidence Standard
+
+Use primary or official sources first. Do not fabricate citations or quote text you cannot verify. Tier definitions are in `../references/data-discipline.md`.
+
+| Tier | Sources | Use |
+|---|---|---|
+| Tier 1 | Central bank and Treasury releases, official RRP/reserve/balance-sheet data, exchange and regulator statistics, official policy statements | Liquidity levels, policy settings, official flow and funding data |
+| Tier 2 | Exchange and index data, official rates/FX series, index-provider valuation data, published survey series such as NAAIM or AAII, prime-broker and exchange positioning reports | Prices, volatility, valuation, positioning, cross-market proxies |
+| Tier 3 | Financial platforms, media commentary, broker notes, aggregator dashboards, derived sentiment composites | Context and proxy only; never the sole basis for a de-risking or risk-on call |
+
+Survey and prime-broker positioning data is `Lagged` by design. State the reference date and never present it as live positioning.
+
+Always include an `Evidence Sources` section with source name, date, link, and what it supports.
+
+## Conclusion Gates
+
+Use research language such as risk-on recovery, balanced, volatile bottoming, late-cycle melt-up risk, fragile / de-risking, monitor closely, hedge-review, trim-review, or evidence-gap. The regime read is a risk-budget modifier that caps or releases the labels below it; see `Label Layering` and `Chain Constraints` in `../references/scoring-standard.md`. Do not prescribe personal allocation, cash levels, hedge ratios, or position sizes.
+
+Do not give a strong regime conclusion unless these are satisfied:
+
+- At least one liquidity indicator and one sentiment/positioning indicator are dated and sourced.
+- The binding axis is named, and the conflict between axes is stated when they disagree.
+- The causal channel is explicit: funding, discount rates, risk appetite, flows, or forced selling.
+- At least one alternative explanation for current market behavior is considered and weighed.
+- Indicator readings are compared against a stated historical reference range, not judged in isolation.
+- 3-5 concrete data triggers that would invalidate or upgrade the call are defined in advance.
+
+If any gate fails, report a single-axis or directional read, cap confidence, and state the missing indicator.
+
+A single extreme indicator is not a regime. Do not label a regime from one data point, and do not average away a severe funding-stress alert.
+
 ## Data Freshness Protocol
 
-Do not use a market indicator unless its data date is known. Record:
+Timestamps, freshness grades, evidence tiers, unit and calendar rules, and the core figure check are defined in `../references/data-discipline.md`. Load that file before writing the `Data Freshness` table and use its five freshness grades verbatim.
 
-- `as_of`: the market date or release period.
-- `published_at`: when the source published it, if available.
-- `retrieved_at`: when you fetched or viewed it.
+Regime-specific additions:
 
-Many regime indicators are delayed by design. Label stale data, reduce confidence, and never convert missing data into a bullish or bearish signal. For strong de-risking, hedging, or risk-on conclusions, cross-check at least one liquidity indicator and one sentiment/positioning indicator from primary or reputable secondary sources.
+- Many regime indicators are delayed by design. Grade them `Lagged`, not `Fresh`, and print the reference date next to the value.
+- For strong de-risking, hedging, or risk-on conclusions, cross-check at least one liquidity indicator and one sentiment/positioning indicator from primary or reputable secondary sources.
+- Cap confidence according to `references/scoring-model.md` when data is stale, paywalled, unavailable, or from a secondary summary.
 
-If data is stale, paywalled, unavailable, or from a secondary summary, show it as a limitation and cap confidence according to `references/scoring-model.md`.
+Degrade conclusions as follows:
+
+| Missing or stale item | Required handling |
+|---|---|
+| Only one axis has usable data | Report a single-axis read, no matrix regime label, confidence Low |
+| A liquidity indicator is past its TTL | Drop the precise level language and describe direction only |
+| Positioning data is a weekly or monthly survey | Grade it `Lagged`, state the reference date, do not call it current positioning |
+| Only Tier 3 or aggregator data supports the read | Cap confidence at Medium, no risk-on or de-risking call |
+| No historical reference range is available | Describe the change, not the extreme |
+| Indicators conflict and no resolving data exists | Label the regime as unresolved and name the data point that would settle it |
 
 ## Regime Axes
 

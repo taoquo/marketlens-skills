@@ -3,7 +3,7 @@ name: catalyst-event-monitor
 description: Use when a user asks which upcoming public-market events matter, how to rank catalysts, what expectations are priced in, how an event could move a stock/sector, what data to watch before/after earnings, guidance, approvals, policy decisions, buybacks, unlocks, litigation, M&A, investor days, or whether a completed event strengthened, delayed, impaired, broke, or left neutral an investment thesis.
 license: MIT
 metadata:
-  version: 0.4
+  version: 0.5
 ---
 
 # Catalyst Event Monitor
@@ -22,14 +22,16 @@ Use this skill for dated catalysts, event materiality, expectation gaps, market-
 
 Choose the lightest mode that answers the user:
 
-| User intent | Mode | Output depth |
-|---|---|---|
-| "What events matter in the next 1-12 weeks?" | `event-calendar` | Dated event list, catalyst score, source, expected impact |
-| "Which event is worth tracking?" | `catalyst-priority` | Scorecard using certainty, impact, expectation gap, pricing, crowding |
-| "Will this event change the thesis?" | `catalyst-analysis` | Event mechanism, market pricing, expectation gap, valuation-anchor impact |
-| "What are the scenarios before/after the event?" | `scenario-tree` | Base/upside/downside paths, price reaction path, evidence to watch |
-| "What changed after the event?" | `post-event-review` | Actual vs expected, thesis status, next watch items |
-| Broad or ambiguous event request | Hybrid | Start with event calendar, then analyze the highest-impact events |
+| User intent | Mode | Minimum input | Output depth |
+|---|---|---|---|
+| "What events matter in the next 1-12 weeks?" | `event-calendar` | Ticker or scope, plus a stated current date | Dated event list, catalyst score, source, expected impact |
+| "Which event is worth tracking?" | `catalyst-priority` | Two or more candidate events with sourced dates | Scorecard using certainty, impact, expectation gap, pricing, crowding |
+| "Will this event change the thesis?" | `catalyst-analysis` | The event, its source and date, and the thesis it is tested against | Event mechanism, market pricing, expectation gap, valuation-anchor impact |
+| "What are the scenarios before/after the event?" | `scenario-tree` | The event date plus one dated pricing or expectation input | Base/upside/downside paths, price reaction path, evidence to watch |
+| "What changed after the event?" | `post-event-review` | The actual outcome, its source, and the pre-event expectation | Actual vs expected, thesis status, next watch items |
+| Broad or ambiguous event request | Hybrid | Ticker or scope | Start with event calendar, then analyze the highest-impact events |
+
+If no event date can be sourced, do not build a scenario tree or trade setup. Report the calendar gap and what disclosure would fill it.
 
 ## Reference Loading
 
@@ -43,6 +45,7 @@ Read only the references needed:
 - For post-event review and thesis status updates, read `references/post-event-review.md`.
 - For industry-specific event checklists, read `references/sector-event-checklists.md`.
 - For shared scoring, confidence, red-flag, and label discipline, read `../references/scoring-standard.md`.
+- For timestamps, freshness grades, evidence tiers, unit and calendar rules, and user-input handling, read `../references/data-discipline.md`.
 - For deciding which skill owns a question, read `../references/skill-routing.md`.
 - For review of prior catalyst calls, read `../references/review-and-calibration.md`.
 
@@ -60,7 +63,7 @@ Always include an `Evidence Sources` section with source name, date, link, and w
 
 ## Conclusion Gates
 
-Use research language such as hard catalyst, soft catalyst, narrative catalyst, priority catalyst, monitor closely, event watch, thesis strengthened, neutral, thesis delayed, thesis impaired, thesis broken, crowded unwind, or evidence-gap. Do not present personalized buy/sell advice, exact allocation instructions, or transaction-prescriptive event trades.
+Use research language such as hard catalyst, soft catalyst, narrative catalyst, priority catalyst, monitor closely, event watch, thesis strengthened, neutral, thesis delayed, thesis impaired, thesis broken, crowded unwind, or evidence-gap. Map the catalyst and post-event read to a shared label using the `Label Layering` table in `../references/scoring-standard.md`. Do not present personalized buy/sell advice, exact allocation instructions, or transaction-prescriptive event trades.
 
 Do not give a strong event conclusion unless these are satisfied:
 
@@ -77,15 +80,25 @@ An important event is not automatically an attractive setup. If the expectation 
 
 ## Data Freshness Protocol
 
-Do not use an event or market data point unless its source date is known. Record:
+Timestamps, freshness grades, evidence tiers, unit and calendar rules, and the core figure check are defined in `../references/data-discipline.md`. Load that file before writing the `Data Freshness` table and use its five freshness grades verbatim.
 
-- `as_of`: the event date, reporting period, or market date the value describes.
-- `published_at`: when the source published it, if available.
-- `retrieved_at`: when you fetched or viewed it.
+Catalyst-specific additions:
 
-Label stale calendars, outdated consensus, media-only rumors, and unconfirmed dates. Do not convert missing event data into a bullish or bearish signal.
+- Classify every event date as confirmed, expected, rumored, or conditional, and keep that status next to the date.
+- For every material event, record time zone and release window when available: pre-market, regular session, post-market, exact clock time, regulatory deadline, exchange effective date, or data-release time.
+- An `as_of` in the future is normal for an event date and must not be graded `Stale`. Grade the freshness of the source that establishes the date, not the date itself.
 
-For every material event, record time zone and release window when available: pre-market, regular session, post-market, exact clock time, regulatory deadline, exchange effective date, or data-release time. If timing is unavailable, mark it unknown and reduce confidence.
+Degrade conclusions as follows:
+
+| Missing or stale item | Required handling |
+|---|---|
+| Event date is unconfirmed or media-only | Use `event watch`, no scenario tree with dated price paths |
+| Release window or time zone is unknown | Mark it unknown, no pre-market or post-market reaction language |
+| Consensus expectation is unavailable or stale | State the expectation gap as unknown, no variant-perception claim |
+| Implied move, options, or volatility data is unavailable | Describe pricing qualitatively, no implied-move arithmetic |
+| Crowding, short interest, or borrow data is unavailable | Do not rule out a crowded unwind; state it as unmeasured |
+| Post-event data point was not defined in advance | Do not declare the thesis strengthened or broken; reopen the review |
+| Event calendar coverage is incomplete | Add a pending-disclosure caveat and state the window searched |
 
 ## Workflow
 
