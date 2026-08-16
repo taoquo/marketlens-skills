@@ -3,7 +3,7 @@ name: portfolio-risk-monitor
 description: Use when reviewing a public-market portfolio or watchlist for risk concentration, factor exposure, sector/geography/currency overlap, style crowding, drawdown risk, watchlist priority, add/trim/exit candidates, rebalance watch signals, correlated theses, or questions like which names matter most, which holdings share the same risk driver, or whether risk is concentrated in valuation, earnings, policy, FX, rates, liquidity, or market regime.
 license: MIT
 metadata:
-  version: 0.7
+  version: 0.8
 ---
 
 # Portfolio Risk Monitor
@@ -53,6 +53,7 @@ Read only the references needed:
 - For the reference class behind any drawdown or stress probability, read `../references/base-rates.md`.
 - For whether multiple holdings share the same demanding implied assumption, which is a valuation-driven risk cluster, read `../references/implied-expectations.md`.
 - For whether several holdings share the same earnings-quality weakness, read `../references/earnings-quality-screens.md`.
+- For whether several holdings share the same reinvestment-dependent thesis, which is a capital-allocation risk cluster rather than a stock-specific one, read `../references/capital-allocation-record.md`.
 
 ## Evidence Standard
 

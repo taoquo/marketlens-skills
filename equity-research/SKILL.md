@@ -3,7 +3,7 @@ name: equity-research
 description: Use when analyzing listed companies or stocks across US, Hong Kong, or A-share markets, including earnings reports, long-term holding quality, fundamentals, valuation, moat, cash flow, management, valuation-derived trigger levels, position review triggers, market-specific disclosure rules, or user questions phrased as whether a stock is worth buying, holding, adding, trimming, or exiting.
 license: MIT
 metadata:
-  version: 0.7
+  version: 0.8
 ---
 
 # Equity Research
@@ -24,7 +24,7 @@ Choose the lightest mode that answers the user:
 
 | User intent | Mode | Minimum input | Output depth |
 |---|---|---|---|
-| Long-term quality, Buffett-style, "worth holding" | `quick-value-score` | Ticker or company name, plus the latest annual or interim report | Five-dimension score plus key risks |
+| Long-term quality, Buffett-style, "worth holding" | `quick-value-score` | Ticker or company name, plus the latest annual or interim report | Six-dimension score plus key risks |
 | Latest earnings, quarterly/annual report, guidance | `earnings-deepdive` | Ticker, reporting period, and the filing or release for that period | Key forces plus focused module analysis |
 | "Can I buy/sell/add/trim now?" | `decision-framework` | Ticker, dated current price, share count, net debt, and the latest cash flow statement | Research label, implied expectations, margin of safety, triggers |
 | Broad or ambiguous stock analysis | Hybrid | Ticker or company name | Start with conclusion, then combine the needed modes |
@@ -56,6 +56,7 @@ Read only the references needed:
 - For confirmed red flags that support a negative thesis, or for a relative-value read against a peer, read `../references/short-and-relative-value.md`.
 - For any multiple, fair value range, cheap-or-expensive judgement, or margin-of-safety claim, read `../references/implied-expectations.md` and solve for what the price requires before valuing the company.
 - For any conclusion resting on reported profit, margin, growth, or cash conversion, read `../references/earnings-quality-screens.md` and compute the screens rather than describing the concern.
+- For long-term holding quality, management assessment, M&A or issuance history, or any conclusion that credits future reinvestment, read `../references/capital-allocation-record.md` and build the sources-and-uses ledger before judging the record.
 - For regional details, read `references/regional-market-guide.md`.
 - For source priority, freshness TTL, and query patterns, read `references/data-sources.md`.
 - For valuation methods, read `references/valuation-framework.md`.
@@ -86,6 +87,7 @@ Do not give a strong action-style research label or precise valuation-derived tr
 - Valuation uses at least two relevant methods or explains why only one method is defensible.
 - The implied assumption behind the current price is stated with its discount-rate range, converted to an absolute quantity, and compared with the company own record.
 - The cash-conversion screens have been computed for any conclusion that rests on reported earnings, with the breach count stated.
+- For a long-term holding or reinvestment-driven conclusion, the capital-allocation ledger reconciles, ROIIC is reported on both bases over two windows, and the aggregate allocation read is stated.
 
 If any gate fails, downgrade to a watchlist-style conclusion, state the missing data, and explain what evidence would be required to strengthen the view.
 
@@ -109,6 +111,8 @@ Degrade conclusions as follows:
 | Only one valuation input is available | Give directional valuation only |
 | The implied assumption cannot be solved, or WACC is a pure guess | Use the `not solvable` read, give directional language, and do not state a fair value range |
 | Cash flow statement for the period is unavailable | Do not state an earnings quality read; treat reported profit as unverified and cap confidence at Medium |
+| Fewer than three years of cash flow and invested capital data | Do not state an ROIIC or allocation read; mark the capital-allocation dimension unavailable |
+| Remuneration or insider-holding disclosure is unavailable or aggregated only | Mark the incentive-alignment screens unavailable rather than inferring alignment from the total pay figure |
 | Material announcement search is incomplete | Add a pending-disclosure caveat |
 | Fiscal calendar or accounting standard is unclear | Do not compare the multiple against peers in another market |
 | A user-provided figure conflicts with the filing | Use the filing, state the conflict, mark the user figure unverified |
@@ -133,9 +137,10 @@ Score each dimension from 0 to 3. Use total score only as a research shorthand, 
 | Balance sheet safety | Net cash or low leverage | Manageable leverage | Needs monitoring | High refinancing or solvency risk |
 | Free cash flow quality | FCF consistently covers earnings | Usually cash generative | Volatile conversion | Negative or poor conversion |
 | Earnings quality | 0-1 screen breaches, all explained | 2-3 breaches, each with a named verification task | 4-6 breaches, or a deteriorating trend | 7+ breaches, or the cash flow statement is unavailable |
+| Capital allocation | `disciplined`: ROIIC above WACC, no net dilution, promises kept | `adequate`: 2-3 breaches, each disclosed and explained | `value-leaking`: 4-6 breaches, or ROIIC trending toward WACC | `destructive`: 7+ breaches, or ROIIC below WACC while spending expands |
 | Moat | Multiple strong moats | One clear moat | Weak advantage | No durable advantage |
 
-Rating: A = 12-15, B = 8-11, C = 4-7, D = 0-3. Score the earnings quality dimension from the aggregate read table in `../references/earnings-quality-screens.md`. For sector-specific replacements, use `references/sector-adjustments.md`.
+Rating: A = 15-18, B = 10-14, C = 5-9, D = 0-4. Score the earnings quality dimension from the aggregate read table in `../references/earnings-quality-screens.md`, and the capital allocation dimension from the aggregate read table in `../references/capital-allocation-record.md`. Do not count a screen twice when it appears in both files. For sector-specific replacements, use `references/sector-adjustments.md`.
 
 A high quality score does not create an action conclusion by itself. Compare company quality with valuation, catalyst timing, market regime, and portfolio role before using action-style research labels.
 
@@ -183,6 +188,9 @@ Do not provide personalized allocation across the user's total assets unless the
 
 ## Earnings Quality
 [Computed screens with inputs and period, breach count and direction, aggregate read, and the specific disclosure that would resolve each breach. State which screens were skipped or substituted for the business model.]
+
+## Capital Allocation And Management Record
+[Sources-and-uses ledger over the stated window with the two sides reconciled, the three ledger ratios, ROIIC on both bases over three and five years, buyback timing and net dilution, guidance hit rate and milestone slippage, incentive alignment facts, and the aggregate read: disciplined, adequate, value-leaking, or destructive. State the reinvestment credit this read permits in the valuation below.]
 
 ## Implied Expectations
 [Growth value share of EV, the solved implied variable with its WACC range and terminal assumption, the absolute quantity it requires, the company own historical rate, and the resulting read: undemanding, reasonable, demanding, priced for perfection, or not solvable.]

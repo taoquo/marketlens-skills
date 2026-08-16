@@ -37,6 +37,7 @@ An event is material only if it can change at least one:
 
 - Treating every dated event as a catalyst.
 - Treating a product announcement as adoption without revenue, customer, or usage evidence.
-- Treating buybacks as bullish without checking valuation, cash flow, and dilution.
+- Treating buybacks as bullish without checking valuation, cash flow, and dilution. Score the timing and net effect with `../../references/capital-allocation-record.md` rather than reading the announced amount.
+- Treating an acquisition or equity raise as a standalone event. The company prior allocation record sets the prior on this one, so check the ledger and post-deal ROIC history before pricing the announcement.
 - Treating rumors as events without clearly labeling source quality.
 - Ignoring that the event may already be fully priced in.

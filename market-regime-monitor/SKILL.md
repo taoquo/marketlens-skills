@@ -3,7 +3,7 @@ name: market-regime-monitor
 description: Use when assessing market environment, liquidity, sentiment, positioning, greed/fear, overheating, de-risking, hedging, Fed liquidity, SOFR, MOVE, yen carry trade, NAAIM, institutional allocation, retail flows, valuation crowding, hedge fund leverage, or how macro and sentiment conditions affect US stocks, Hong Kong stocks, A-shares, technology shares, or crypto risk assets.
 license: MIT
 metadata:
-  version: 0.7
+  version: 0.8
 ---
 
 # Market Regime Monitor

@@ -16,6 +16,11 @@ pass the screens in `earnings-quality-screens.md`. A multiple is not a valuation
 read until the assumption behind it is named, and reported profit is not evidence
 until it has been reconciled to cash.
 
+Any conclusion that credits future reinvestment, or that relies on management plans
+and guidance, must first pass the ledger and return screens in
+`capital-allocation-record.md`. Growth spending is only a value driver when the
+incremental return on it has been measured.
+
 ## Purpose
 
 Scores are research heuristics. They make comparisons explicit, but they are not a trading system, a buy/sell signal, a target weight, or a substitute for evidence.
@@ -84,6 +89,7 @@ Red flags cannot be averaged away by a high total score:
 - Industry data with wrong unit, wrong period, or quantity-scale anomaly.
 - Reported earnings that do not reconcile to cash flow across multiple periods.
 - A valuation whose implied assumption has no precedent in the company or industry record.
+- Incremental return on invested capital persistently below WACC while capex or acquisition spending continues to expand.
 
 When a red flag is present, state it in `Red Flags`, downgrade the research label if needed, and name the evidence required to remove it.
 
@@ -116,6 +122,7 @@ label on its own; it must map to one before the output states a stance.
 | Company | Rating A/B/C/D, attractive, reasonable, rich | `high-priority watch` or `add-candidate watch` when attractive; `hold/watch` when reasonable; `trim-review` when rich; `avoid` when the balance sheet, governance, or structure fails |
 | Valuation | Undemanding, reasonable, demanding, priced for perfection, not solvable | Defined in `implied-expectations.md`. Undemanding can support `add-candidate watch` only if quality and evidence gates also pass; demanding caps valuation-driven upgrades; priced for perfection maps to `trim-review`; not solvable maps to `evidence-gap` on valuation |
 | Earnings quality | Clean, watch, suspected, failed | Defined in `earnings-quality-screens.md`. `watch` caps confidence at Medium; `suspected` caps the label at `hold/watch`; `failed` maps to `avoid` or `evidence-gap` |
+| Capital allocation | Disciplined, adequate, value-leaking, destructive | Defined in `capital-allocation-record.md`. `disciplined` allows reinvestment to be credited at historical ROIIC; `adequate` caps that credit at WACC; `value-leaking` blocks `add-candidate watch`; `destructive` caps the label at `hold/watch` and forces a no-growth valuation anchor |
 | Catalyst | Hard catalyst, soft catalyst, narrative catalyst, noise, priority catalyst | `high-priority watch` for a priority hard catalyst; `event watch` when timing, pricing, or gap is weak; `monitor closely` in between |
 | Post-event | Thesis strengthened, neutral, delayed, impaired, broken, crowded unwind | Strengthened raises the prior label by one step; delayed holds it; impaired or crowded unwind moves to `trim-review`; broken moves to `exit-review` |
 | Portfolio | Risk-concentrated, balanced watchlist | Not a name-level label. `risk-concentrated` forces at least one name into `trim-review` or `exit-review` |
@@ -161,6 +168,10 @@ label.
 | Implied expectations are demanding or priced for perfection | No `add-candidate watch` on valuation. State the specific assumption the price requires. See `implied-expectations.md` |
 | Earnings quality shows four or more screen breaches | No label above `hold/watch` on fundamentals until the quality question is resolved. See `earnings-quality-screens.md` |
 | Earnings quality is suspect and implied expectations are demanding | Cap at `avoid`. A low multiple is not support when the earnings base is in question |
+| Capital allocation reads `value-leaking` | No `add-candidate watch`. Apply a stated quality discount in valuation and name the screens that produced the read. See `capital-allocation-record.md` |
+| Capital allocation reads `destructive` | Cap at `hold/watch` or lower, and switch the valuation anchor to a no-growth or replacement basis. The reinvestment premium cannot be assumed |
+| Guidance hit rate is below the threshold in `capital-allocation-record.md` | Any forecast that uses management guidance must be rebuilt on the company own historical rate per `base-rates.md`, and confidence capped at Medium |
+| Reinvestment rate is high while ROIIC is below WACC and implied expectations are demanding | Cap at `avoid`. The price pays for growth that the company funding is destroying |
 
 Upstream layers can only tighten a label, never loosen one. If an upstream
 input is unavailable, say so and treat the layer as neutral rather than

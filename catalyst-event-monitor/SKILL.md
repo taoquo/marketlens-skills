@@ -3,7 +3,7 @@ name: catalyst-event-monitor
 description: Use when a user asks which upcoming public-market events matter, how to rank catalysts, what expectations are priced in, how an event could move a stock/sector, what data to watch before/after earnings, guidance, approvals, policy decisions, buybacks, unlocks, litigation, M&A, investor days, or whether a completed event strengthened, delayed, impaired, broke, or left neutral an investment thesis.
 license: MIT
 metadata:
-  version: 0.7
+  version: 0.8
 ---
 
 # Catalyst Event Monitor
@@ -53,6 +53,7 @@ Read only the references needed:
 - For refinancing, covenant, placement, or rating-action events, read `../references/credit-and-cross-asset.md`.
 - For whether the pre-event price already implies the outcome the event would deliver, read `../references/implied-expectations.md`.
 - For earnings events where the beat or miss may be accrual-driven rather than operational, read `../references/earnings-quality-screens.md`.
+- For buyback, dividend, equity-raise, or M&A events, read `../references/capital-allocation-record.md` and price the announcement against the company own allocation record rather than its headline size.
 
 ## Evidence Standard
 

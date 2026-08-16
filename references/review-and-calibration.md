@@ -126,6 +126,7 @@ Separate these error types:
 - Valuation error: business view was right, but expected multiple or margin of safety was wrong.
 - Implied-expectation error: the thesis was correct but the price already contained it, so being right produced no return. See `implied-expectations.md`.
 - Earnings-quality error: the reported base was overstated, so the multiple was measured against a number that did not repeat. See `earnings-quality-screens.md`.
+- Capital-allocation error: the operating thesis held, but reinvestment, acquisitions, buyback timing, or issuance moved value away from shareholders. See `capital-allocation-record.md`.
 - Timing error: direction was right, but catalyst or market window was too early or too late.
 - Market-regime error: liquidity, rates, FX, volatility, or positioning dominated the thesis.
 - Data-quality error: source was stale, incomplete, secondary, or misread.

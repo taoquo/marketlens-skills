@@ -22,6 +22,7 @@ Use peer comparison to turn industry conclusions into listed-company read-throug
 | Valuation | P/E, EV/EBITDA, EV/sales, P/B, NAV, FCF yield, sector-appropriate metrics |
 | Implied assumption | What each peer multiple requires in growth, terminal margin, or sustainable ROE. See `../../references/implied-expectations.md` |
 | Earnings quality | Cash conversion, accrual ratio, and working capital versus revenue growth, computed on the same basis across the set. See `../../references/earnings-quality-screens.md` |
+| Capital allocation | Reinvestment rate, ROIIC on both bases, net dilution, and cumulative impairment rate, over the same window for every peer. Ranks who converted the same industry conditions into return. See `../../references/capital-allocation-record.md` |
 
 ## Classification
 

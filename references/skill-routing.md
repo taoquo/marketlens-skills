@@ -17,7 +17,7 @@ needs one routing entry instead of an edit in every other SKILL.md.
 
 ## Cross-Cutting References
 
-Five shared files are not owned by any single skill because they change the
+Six shared files are not owned by any single skill because they change the
 conclusion in more than one layer. Load them by trigger rather than by skill.
 
 | File | Load when |
@@ -27,6 +27,7 @@ conclusion in more than one layer. Load them by trigger rather than by skill.
 | `references/short-and-relative-value.md` | The conclusion is negative and the user asks about the other side, a pair or hedge is discussed, red flags are confirmed rather than suspected, or a relative-value gap such as AH, ADR, or holdco discount is the subject |
 | `references/implied-expectations.md` | Any multiple, fair value range, target level, cheap-or-expensive judgement, or margin-of-safety claim carries the conclusion; or a growth narrative needs to be tested against what the price already requires |
 | `references/earnings-quality-screens.md` | A conclusion rests on reported profit, margin, or growth; cash conversion or working capital looks inconsistent with the income statement; or a red flag in the financial-quality family needs to be measured rather than described |
+| `references/capital-allocation-record.md` | The question is long-term holding quality or management assessment; an acquisition, buyback, dividend policy, or equity issuance is part of the thesis; the valuation credits future reinvestment and needs an ROIIC input; or a capital-allocation red flag needs to be measured. Not needed for a quick multiple check or a pure event-timing question |
 
 ## Routing Rules
 

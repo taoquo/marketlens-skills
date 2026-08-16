@@ -95,7 +95,7 @@ skill 在不同会话之间没有记忆，所以 `references/review-and-calibrat
 
 ## 跨层覆盖
 
-五份共享 reference 不归任何单一 skill，因为它们会影响决策链上不止一层。
+六份共享 reference 不归任何单一 skill，因为它们会影响决策链上不止一层。
 各自的加载触发条件列在 `references/skill-routing.md`：
 
 - `references/implied-expectations.md`：把估值问题从“值多少钱”反转为“当前价格隐含了什么假设”。先拆分 EV 中的零增长部分与增长部分，再用反向 DCF 只求解一个变量并将其翻译成绝对量（终局年收入、销量、隐含市占率），并将常见倍数读作一条可检验的命题。DCF 不适用的业务模型（银行、保险、REIT、公用事业、周期品、未盈利平台、未有收入生物科技）另有对应的求解对象。安全边际不再表达为对测算公平价值的折价，而是隐含假设与历史记录的距离。
@@ -103,6 +103,7 @@ skill 在不同会话之间没有记忆，所以 `references/review-and-calibrat
 - `references/credit-and-cross-asset.md`：股权是次级索偿权。市场层面的信用利差、实际利率、通胀预期、期限溢价、美元互换基差进入市场环境判断；到期债阶梯、契约安全垫、评级轨迹进入个股分析。地产、金融、重资产、未盈利成长行业，缺信用读数不是“精度略低”，而是直接封顶标签。
 - `references/base-rates.md`：任何概率、可能性用词、情景权重之前，必须先给出参照类和历史基准率。覆盖审批通过率、并购完成率、指引兽现率、周期时长、利润率修复、转型成功率、产能周期、事件后漂移，并要求未调整基准率与调整后估值并列。
 - `references/short-and-relative-value.md`：把空头视角和相对价值配对升为一等研究对象，已确认的红旗不再只能用来扣置信度。使用空头语言前必须有已核实的借券、自由流通、拥挤度数据；拿不到就只能停在 `avoid only`。
+- `references/capital-allocation-record.md`：衡量管理层把现金花到哪里去了。先做五年来源与使用账本，两侧必须配平，才允许对记录下判断；再用 12 条回报筛子衡量每条路径挣回了多少：含商誉与剔除商誉双口径、三年与五年双窗口的 ROIIC，累计减值对累计并购对价，大额并购前后三年 ROIC 变化，回购均价在公司自身股价区间的分位数，回购金额对 SBC，以及净稀释。另有 7 条筛子衡量说过的话兑现了几次，从指引兑现率到薪酬 KPI 里究竟有没有资本效率指标。聚合读数决定估值允许给出多少再投资信用：`disciplined` 按历史 ROIIC 计，`adequate` 封顶在 WACC，`value-leaking` 低于 WACC，`destructive` 直接切换到零增长锚。
 
 `references/skill-routing.md` 同时给出 `Out Of Scope` 表：加密资产、外汇直盘、商品期货、
 债券选券、期权策略、可转债定价、未上市公司、基金筛选、组合优化与仓位计算、
@@ -123,33 +124,33 @@ skill 在不同会话之间没有记忆，所以 `references/review-and-calibrat
 
 ## 示例
 
-`examples/` 目录包含 6 个使用 Folio 排版的验证案例，已按 v0.7 重建，每个案例都用来检验本版新增的
-判定门槛：价格隐含了什么、报表利润能否通过筛子、以及结论允许挂什么标签。每个案例提供 `.png`
-（下方预览，单页连续长图）、`.html` 和 `.pdf`（A4 分页）三种格式：
+`examples/` 目录包含 6 个使用 Folio 排版的验证案例，已按 v0.8 重建，每个案例都用来检验本版的判定
+门槛：价格隐含了什么、报表利润能否通过筛子、经营现金流实际流向了哪里、以及结论允许挂什么标签。
+每个案例提供 `.png`（下方预览，单页连续长图）、`.html` 和 `.pdf`（A4 分页）三种格式：
 
-`equity-research` · NVIDIA 质量分 14/15 且盈利质量 clean，但反向 DCF 显示 EV 的 80% 来自增长，隐含 FY36 收入是当年的 7.8 倍。
+`equity-research` · NVIDIA 六维质量分 16/18，盈利质量 clean、资本配置读数 adequate，但反向 DCF 显示 EV 的 80% 来自增长。
 
-![个股研究案例](examples/marketlens-v07-equity-research-nvda.png)
+![个股研究案例](examples/marketlens-v08-equity-research-nvda.png)
 
 `market-regime-monitor` · 美股科技股三轴环境：股票还在涨，但信用与实际利率轴已经转负，合计 -3 落入 tight or crowded。
 
-![市场环境案例](examples/marketlens-v07-market-regime-tech.png)
+![市场环境案例](examples/marketlens-v08-market-regime-tech.png)
 
-`sector-industry-research` · AI 服务器产业链按隐含假设而非倍数排序，名次因此反转，并点出同一转移的 structural loser。
+`sector-industry-research` · AI 服务器产业链按倍数、隐含假设、增量资本回报各排一次，三张名单只在一段产业上重合。
 
-![行业研究案例](examples/marketlens-v07-sector-ai-server.png)
+![行业研究案例](examples/marketlens-v08-sector-ai-server.png)
 
-`catalyst-event-monitor` · Apple WWDC26 先问事件是否只交付 36x 已隐含之物，再把结果按量、价、结构、成本、应计、资本化、一次性和税项分解。
+`catalyst-event-monitor` · Apple WWDC26 先问事件是否只交付 36x 已隐含之物，再按来源分解结果，并把回购公告按公司自身配置记录而非公告规模定价。
 
-![事件催化案例](examples/marketlens-v07-catalyst-apple-wwdc.png)
+![事件催化案例](examples/marketlens-v08-catalyst-apple-wwdc.png)
 
-`portfolio-risk-monitor` · 等权 AI 观察池，九个 ticker 归结为跨四个子行业的一个久期押注，加上一套共用的会计惯例。
+`portfolio-risk-monitor` · 等权 AI 观察池，九个 ticker 归结为一个久期押注、一套共用的会计惯例，以及对同一批管理层投放决定的再投资依赖。
 
-![组合风险案例](examples/marketlens-v07-portfolio-ai-watchlist.png)
+![组合风险案例](examples/marketlens-v08-portfolio-ai-watchlist.png)
 
-`trade-plan-risk-manager` · NVIDIA 计划因 upside case 重述价格已隐含的假设而降为 monitor closely，流动性实测为 Deep，波动率输入标为未测量。
+`trade-plan-risk-manager` · NVIDIA 计划因 upside case 重述价格已隐含的假设而降为 monitor closely，流动性实测为 Deep，仓位意图因交付依赖再折一档。
 
-![交易计划风险案例](examples/marketlens-v07-trade-plan-nvda.png)
+![交易计划风险案例](examples/marketlens-v08-trade-plan-nvda.png)
 
 这些案例展示强制输出块 `Red Flags`、`Decision Impact`、`What Would Change The View`、`Data
 Freshness`、`Evidence Sources` 和 `Disclaimer`。带评分的输出额外包含 `Score Summary` 表；

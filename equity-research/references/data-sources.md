@@ -8,6 +8,7 @@ Use primary sources first. Use secondary platforms only to cross-check or fill g
 - Company IR: earnings releases, presentations, transcripts, supplemental metrics.
 - Exchanges and market data: NASDAQ, NYSE, Cboe, FINRA short interest.
 - Macro and rates: FRED, Federal Reserve, New York Fed, US Treasury.
+- Capital allocation: DEF 14A for incentive-plan metrics and insider holdings, Form 4 for insider net activity, and the Issuer Purchases of Equity Securities table in 10-Q and 10-K for monthly repurchase price and volume.
 - Secondary checks: Yahoo Finance, Koyfin, TIKR, Macrotrends, Finviz, analyst consensus sources.
 
 ## Hong Kong
@@ -16,6 +17,7 @@ Use primary sources first. Use secondary platforms only to cross-check or fill g
 - Company IR: presentations, results announcements, conference calls.
 - Stock Connect: southbound flows and eligible-stock data from HKEX or exchange data vendors.
 - Market/rates: HKMA, HIBOR fixings, USDHKD, sector index data.
+- Capital allocation: HKEX daily Report on Share Buy-backs for repurchase price and volume, Disclosure of Interests for holder and pledge changes, and the annual report remuneration note, which is the coarsest of the three markets.
 - Secondary checks: AAStocks, ETNet, TradingView, company filings mirrored by financial platforms.
 
 ## A-Share
@@ -25,6 +27,7 @@ Use primary sources first. Use secondary platforms only to cross-check or fill g
 - Company IR: investor relations activity records, presentations, performance briefings.
 - Market structure: northbound flows, margin financing/securities lending, unlock calendars.
 - Policy and macro: PBOC, NBS, CSRC, ministry/regulator policy releases.
+- Capital allocation: repurchase progress announcements, share-pledge announcements, and the annual report sections on performance of undertakings and on use of raised funds with project benefit realization.
 - Secondary checks: Eastmoney, iFinD/同花顺, Wind/Choice if available, exchange or broker summaries.
 
 ## Source Discipline

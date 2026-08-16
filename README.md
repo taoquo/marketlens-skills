@@ -100,7 +100,7 @@ thesis without fundamental follow-through reduces confidence rather than raising
 
 ## Cross-Cutting Coverage
 
-Five shared references are not owned by any one skill, because they change the
+Six shared references are not owned by any one skill, because they change the
 conclusion in more than one layer. `references/skill-routing.md` lists the trigger
 for each:
 
@@ -109,6 +109,7 @@ for each:
 - `references/credit-and-cross-asset.md` treats equity as the junior claim. Market-level credit spreads, real yields, breakevens, term premium, and funding basis feed the regime read; maturity ladders, covenant headroom, and rating trajectory feed single-name work. For property, financials, capital-intensive, and pre-profit sectors, an equity conclusion without a credit read is capped rather than merely flagged.
 - `references/base-rates.md` requires a reference class and its historical rate before any probability, likelihood word, or scenario weight. It covers approval rates, deal completion, guidance reliability, cycle duration, margin recovery, turnarounds, capacity cycles, and post-event drift, and keeps the unadjusted rate visible next to the adjusted estimate.
 - `references/short-and-relative-value.md` adds the short side and the relative-value pair as first-class reads, so a confirmed red flag becomes a research object rather than only a confidence deduction. Short-side language requires verified borrow, float, and crowding data; without them the read stays `avoid only`.
+- `references/capital-allocation-record.md` measures what management did with the cash. A five-year sources-and-uses ledger has to reconcile before any judgement is made, then twelve return screens measure what each destination earned: ROIIC on both a with-goodwill and an ex-goodwill basis over two windows, cumulative impairment against cumulative acquisition consideration, post-deal ROIC change, buyback timing as a percentile of the company own trading range, buyback spend against SBC, and net dilution. Seven further screens measure whether stated intentions were met, starting from the guidance hit rate and whether the incentive plan pays for capital efficiency at all. The aggregate read sets the reinvestment credit the valuation is allowed to take: historical ROIIC when `disciplined`, WACC when `adequate`, below WACC when `value-leaking`, and a no-growth anchor when `destructive`.
 
 `references/skill-routing.md` also carries an `Out Of Scope` table. Crypto, standalone
 FX, commodity futures, bond selection, options strategy, convertibles, private
@@ -131,34 +132,35 @@ Release-by-release changes are tracked in [CHANGELOG.md](CHANGELOG.md).
 
 ## Examples
 
-The `examples/` folder contains six Folio-typeset validation cases, rebuilt for v0.7 so that
-each one exercises the release's new gates: what the price implies, whether the reported
-earnings survive the screens, and which label the answer is allowed to carry. Each case ships
-as `.png` (previewed below, one continuous page), `.html`, and `.pdf` (A4 pagination):
+The `examples/` folder contains six Folio-typeset validation cases, rebuilt for v0.8 so that
+each one exercises the release's gates: what the price implies, whether the reported earnings
+survive the screens, where the cash actually went, and which label the answer is allowed to
+carry. Each case ships as `.png` (previewed below, one continuous page), `.html`, and `.pdf`
+(A4 pagination):
 
-`equity-research` · NVIDIA at 14/15 quality with a clean earnings-quality read, against a reverse DCF where 80 percent of EV is growth and the implied FY36 revenue is 7.8x the current year.
+`equity-research` · NVIDIA at 16/18 quality across six dimensions, with a clean earnings read, an adequate capital-allocation record, and a reverse DCF where 80 percent of EV is growth.
 
-![Equity research case](examples/marketlens-v07-equity-research-nvda.png)
+![Equity research case](examples/marketlens-v08-equity-research-nvda.png)
 
 `market-regime-monitor` · US technology-stock regime on three axes, where equities are still rising while credit and real rates already score negative, totalling -3 for tight or crowded.
 
-![Market regime case](examples/marketlens-v07-market-regime-tech.png)
+![Market regime case](examples/marketlens-v08-market-regime-tech.png)
 
-`sector-industry-research` · AI server supply chain ranked by implied assumption rather than multiple, which reverses the order, plus the structural loser of the same shift.
+`sector-industry-research` · AI server supply chain ranked three times, by multiple, by implied assumption, and by return on incremental capital, producing three different lists that overlap on one segment.
 
-![Sector industry case](examples/marketlens-v07-sector-ai-server.png)
+![Sector industry case](examples/marketlens-v08-sector-ai-server.png)
 
-`catalyst-event-monitor` · Apple WWDC26, asking first whether the event only delivers what 36x already implies, then decomposing the reported result into volume, price, mix, cost, accrual, capitalization, one-off, and tax.
+`catalyst-event-monitor` · Apple WWDC26, asking first whether the event only delivers what 36x already implies, then decomposing the result by source, and pricing buyback announcements by the company's own allocation record rather than by headline size.
 
-![Catalyst event case](examples/marketlens-v07-catalyst-apple-wwdc.png)
+![Catalyst event case](examples/marketlens-v08-catalyst-apple-wwdc.png)
 
-`portfolio-risk-monitor` · Equal-weight AI watchlist where nine tickers resolve into one duration bet across four subsectors, plus one shared accounting practice.
+`portfolio-risk-monitor` · Equal-weight AI watchlist where nine tickers resolve into one duration bet, one shared accounting practice, and one reinvestment dependence on the same set of management teams.
 
-![Portfolio risk case](examples/marketlens-v07-portfolio-ai-watchlist.png)
+![Portfolio risk case](examples/marketlens-v08-portfolio-ai-watchlist.png)
 
-`trade-plan-risk-manager` · NVIDIA plan downgraded to monitor closely because the upside case restates what the price already requires, with liquidity measured as Deep and volatility inputs stated as unmeasured.
+`trade-plan-risk-manager` · NVIDIA plan downgraded to monitor closely because the upside case restates what the price already requires, with liquidity measured as Deep and position intent discounted one notch for delivery dependence.
 
-![Trade plan risk case](examples/marketlens-v07-trade-plan-nvda.png)
+![Trade plan risk case](examples/marketlens-v08-trade-plan-nvda.png)
 
 These samples demonstrate the mandatory `Red Flags`, `Decision Impact`, `What Would Change
 The View`, `Data Freshness`, `Evidence Sources`, and `Disclaimer` blocks. Scored outputs add

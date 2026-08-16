@@ -3,7 +3,7 @@ name: trade-plan-risk-manager
 description: Use when converting market regime, sector, equity, catalyst, or portfolio research into a non-personalized public-market trade plan framework, including setup quality, entry triggers, invalidation conditions, risk unit, stop/review triggers, time stop, event-risk window, liquidity checks, execution checklist, and post-trade review.
 license: MIT
 metadata:
-  version: 0.7
+  version: 0.8
 ---
 
 # Trade Plan Risk Manager
@@ -52,6 +52,7 @@ Read only the references needed:
 - For the reference class behind any probability in the plan, read `../references/base-rates.md`.
 - For whether the upside case requires an assumption the price already contains, read `../references/implied-expectations.md`.
 - For whether the thesis rests on reported earnings that have not been reconciled to cash, read `../references/earnings-quality-screens.md`.
+- For whether the upside case depends on management delivering a stated plan, in which case the guidance hit rate sets the haircut, read `../references/capital-allocation-record.md`.
 
 ## Evidence Standard
 

@@ -3,7 +3,7 @@ name: sector-industry-research
 description: Use when analyzing sectors, industries,产业链, peer groups, industry cycles, supply-demand, inventory, pricing, capacity, profit pools, policy or technology disruption, competitive structure, subsector scorecards, industry beta, sector rotation, trade expression, catalysts, stop-loss/stop-error triggers, or questions like which companies benefit most from an industry trend across US, Hong Kong, or A-share markets.
 license: MIT
 metadata:
-  version: 0.7
+  version: 0.8
 ---
 
 # Sector Industry Research
@@ -65,6 +65,7 @@ Read only the references needed:
 - For capital-intensive industries where cost of debt and refinancing set returns on new capacity, read `../references/credit-and-cross-asset.md`.
 - For what a sector multiple implies about industry growth, terminal margin, or mid-cycle earnings, read `../references/implied-expectations.md`.
 - For comparing earnings quality across a peer set, or for testing whether a cyclical peak is accrual-driven, read `../references/earnings-quality-screens.md`.
+- For ranking which peers converted the same industry conditions into return on incremental capital, or for judging an industry-wide capacity build, read `../references/capital-allocation-record.md`.
 
 ## Conclusion Gates
 

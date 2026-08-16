@@ -3,6 +3,74 @@
 Release history for MarketLens Skills. Versions match `metadata.version` in each
 `SKILL.md`.
 
+## v0.8 Capital Allocation: Where The Cash Went, And Whether The Promises Held
+
+v0.7 made the reported numbers and the valuation method testable. Both still stopped
+at the income statement. This release adds the one question a long-term holder
+actually needs answered: over five years, where did every dollar the company
+produced go, what did each destination earn, and how many times did management do
+what it said it would do. A company can pass every earnings-quality screen and still
+destroy value by reinvesting below its cost of capital.
+
+- New `references/capital-allocation-record.md`. The capital-allocation red flags previously
+  said M&A should have a clear strategic fit and buybacks should not merely offset
+  compensation, which no threshold decides. The file starts with a five-year sources-and-uses
+  ledger whose two sides must reconcile, with depreciation as the declared maintenance-capex
+  proxy, and derives three framing ratios: reinvestment rate against cumulative NOPAT,
+  shareholder return rate against cumulative FCF, and external funding dependence. Twelve
+  return screens then measure what the spending earned: ROIIC over the window, the gap between
+  the with-goodwill and ex-goodwill bases, incremental capital productivity, goodwill and
+  acquired intangibles as a share of invested capital, cumulative impairment against cumulative
+  acquisition consideration, post-acquisition ROIC change, buyback timing as a percentile of the
+  company own trading range, buyback spend against SBC, net dilution, the implied-expectations
+  read at the time of the largest repurchases, dividend coverage and its funding source, and
+  idle cash. ROIIC carries three mandatory rules: both bases, both a three-year and a five-year
+  window, and no single-year figure. Seven further screens measure stated intentions against
+  outcomes: guidance hit rate, milestone slippage, strategic priority drift, whether the
+  incentive plan contains any capital-efficiency metric, insider ownership depth excluding
+  unvested options, insider net activity against company repurchases, and controlling-shareholder
+  pledge. A sector table replaces the return screens for banks, insurers, REITs, utilities,
+  pre-revenue biotech, commodity producers, and serial acquirers. An A-share section treats the
+  performance-of-undertakings and use-of-raised-funds disclosures as primary evidence, because
+  they are the only place any market publishes a project-level allocation audit, and a shortfall
+  stated there is `Confirmed` rather than suspected. `Aggregate Read` maps the breach count to
+  `disciplined`, `adequate`, `value-leaking`, and `destructive`, and an interaction table converts
+  each read into the reinvestment credit the valuation may take.
+- Overlap with `earnings-quality-screens.md` is declared rather than duplicated. Six screens
+  already live there: share count trend, SBC intensity, ROIC versus WACC, goodwill share,
+  impairment absence, and related-party share. They are computed once and carried over, and a
+  breach is never counted in both aggregate reads. The division is by purpose: earnings quality
+  asks whether the reported figures can be relied on, this file asks whether the decisions
+  behind them were competent.
+- `references/scoring-standard.md` adds capital allocation as a label layer and four binding
+  chain constraints: `value-leaking` blocks `add-candidate watch`; `destructive` caps the label
+  at `hold/watch` and forces a no-growth or replacement valuation anchor; a guidance hit rate
+  below threshold forces any management-guidance forecast to be rebuilt on the company own
+  historical rate; and a high reinvestment rate with ROIIC below WACC and demanding implied
+  expectations caps the label at `avoid`. A new red-flag override covers reinvestment that keeps
+  expanding while its incremental return sits below WACC.
+- `equity-research`: `quick-value-score` goes from five dimensions to six, with the new
+  Capital allocation dimension scored from the aggregate read. Rating bands are rebased to
+  A = 15-18, B = 10-14, C = 5-9, D = 0-4. The output template adds
+  `Capital Allocation And Management Record` before `Implied Expectations`, because ROIIC is an
+  input to the reverse valuation rather than a comment on it. A conclusion gate requires the
+  ledger to reconcile and ROIIC to be reported on both bases over two windows; two degradation
+  rows mark the dimension unavailable when history is under three years or remuneration
+  disclosure is aggregated only.
+- `red-flags.md`: the Capital Allocation And Dilution section now routes to the computed
+  screens, gains two items for below-WACC reinvestment and repeated unmet commitments, and the
+  confirmation table maps the four allocation reads to `Watch`, `Suspected`, and failure, with
+  the two A-share disclosures named as `Confirmed` without further work.
+- The other five skills load the file by trigger: acquisition, buyback, dividend, and
+  equity-raise events in `catalyst-event-monitor`; shared reinvestment-dependent theses as a risk
+  cluster in `portfolio-risk-monitor`; peer ranking on return-on-incremental-capital in
+  `sector-industry-research`, which also adds a capital-allocation comparison dimension; and the
+  guidance-hit-rate haircut on plans that depend on management delivery in
+  `trade-plan-risk-manager`. `review-and-calibration.md` adds capital-allocation error as a
+  fourteenth attribution category, and `equity-research/references/data-sources.md` adds the
+  market-specific primary sources for each screen.
+- All six skills move to `metadata.version: 0.8`. Examples rebuilt as `marketlens-v08-*`.
+
 ## v0.7 Valuation: What The Price Requires, And Whether The Earnings Are Real
 
 v0.6 widened what the toolkit could look at. This release fixes the two places where

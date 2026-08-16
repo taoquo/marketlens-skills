@@ -25,10 +25,18 @@ quantified breach are not the same evidence.
 
 ## Capital Allocation And Dilution
 
+Every item below has a computed screen with a threshold in
+`../../references/capital-allocation-record.md`. Build the sources-and-uses ledger
+first, then measure the item there rather than judging strategic fit by eye. An
+acquisition with an unclear rationale and one with a measured post-deal ROIC decline
+are not the same evidence.
+
 - Buybacks that only offset SBC or repeated share issuance.
 - Hong Kong placements, rights issues, convertible bonds, or warrants at large discounts.
 - A-share private placements, incentive plans, or unlock schedules that may pressure supply.
 - M&A with unclear strategic fit, high goodwill, or aggressive synergy assumptions.
+- Reinvestment continuing at scale while the incremental return on it sits below the cost of capital.
+- Repeated failure to meet stated guidance, project timelines, or disclosed commitments.
 
 ## Market-Specific Checks
 
@@ -61,6 +69,14 @@ breaches is `Watch`, four to six is `Suspected`, and seven or more is treated as
 quality failure until disproven. Do not assign a status to a financial-quality flag
 without the breach count and its direction over time.
 
+For capital-allocation flags, the aggregate read table in
+`../../references/capital-allocation-record.md` sets the status the same way:
+`adequate` is `Watch`, `value-leaking` is `Suspected`, and `destructive` is
+treated as an allocation failure until disproven. Two exceptions are `Confirmed`
+without further work, because the company states them itself: an unfulfilled
+commitment in the A-share performance-of-undertakings section, and a funded project
+disclosed as below its committed benefit.
+
 A confirmed flag that keeps a name at `avoid` with no further work discards the
 most useful output of the analysis. Route it as follows.
 
@@ -69,7 +85,7 @@ most useful output of the analysis. Route it as follows.
 | Accounting quality or disclosure failure | An accounting short thesis in `../../references/short-and-relative-value.md`, or `avoid only` if feasibility is unverified. Cite the screen breaches rather than the narrative |
 | Refinancing, covenant, or runway limit | A funding read using `../../references/credit-and-cross-asset.md`, plus a dated maturity or covenant test |
 | Structural demand loss or substitution | A structural-decline read, and a check of whether a peer is the other side of the same shift |
-| Governance or capital-allocation leakage | A permanent quality discount in valuation, and a governance short thesis only if it has a dated catalyst |
+| Governance or capital-allocation leakage | A permanent quality discount in valuation sized by the allocation read in `../../references/capital-allocation-record.md`, and a governance short thesis only if it has a dated catalyst |
 | Dilution or supply overhang | A dated supply event with a size estimate, feeding the trade-plan event-gap check |
 
 Boundaries: a confirmed flag never becomes short-side language before the
