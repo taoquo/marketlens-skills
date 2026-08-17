@@ -70,6 +70,13 @@ destroy value by reinvesting below its cost of capital.
   fourteenth attribution category, and `equity-research/references/data-sources.md` adds the
   market-specific primary sources for each screen.
 - All six skills move to `metadata.version: 0.8`. Examples rebuilt as `marketlens-v08-*`.
+- Example completeness pass. Every case now carries a `Data Freshness` section, which none of
+  them had before, with the three timestamps from `references/data-discipline.md` and one of the
+  five closed grades per input, so each stated confidence cap traces back to a named lagged or
+  missing input rather than to prose. The market-regime case also gained the `Decision Impact`
+  block it was missing, mapping the -3 axis total into what each downstream layer is and is not
+  allowed to conclude. Both READMEs add a Coverage table recording the one-case-per-skill mapping
+  and stating that `Evidence Sources` and `Disclaimer` are carried by the typeset footer.
 
 ## v0.7 Valuation: What The Price Requires, And Whether The Earnings Are Real
 

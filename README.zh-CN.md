@@ -152,10 +152,28 @@ skill 在不同会话之间没有记忆，所以 `references/review-and-calibrat
 
 ![交易计划风险案例](examples/marketlens-v08-trade-plan-nvda.png)
 
-这些案例展示强制输出块 `Red Flags`、`Decision Impact`、`What Would Change The View`、`Data
-Freshness`、`Evidence Sources` 和 `Disclaimer`。带评分的输出额外包含 `Score Summary` 表；
-`trade-plan-risk-manager` 按 `references/scoring-standard.md` 的例外规则改用 `Setup Quality`。
-它们只用于展示输出预览，不构成投资建议。
+### 覆盖情况
+
+覆盖关系是一个 skill 对一个案例，6 个 skill 对 6 个案例：没有哪个 skill 缺少完整案例，
+也没有哪个案例对不上已发布的 skill。
+
+| Skill | 案例 | HTML / PDF 页数 |
+|---|---|---|
+| `equity-research` | `marketlens-v08-equity-research-nvda` | 5 |
+| `market-regime-monitor` | `marketlens-v08-market-regime-tech` | 2 |
+| `sector-industry-research` | `marketlens-v08-sector-ai-server` | 3 |
+| `catalyst-event-monitor` | `marketlens-v08-catalyst-apple-wwdc` | 3 |
+| `portfolio-risk-monitor` | `marketlens-v08-portfolio-ai-watchlist` | 4 |
+| `trade-plan-risk-manager` | `marketlens-v08-trade-plan-nvda` | 4 |
+
+每个案例都带齐六个强制输出块：`Red Flags`、`Decision Impact`、`What Would Change The View`、
+`Data Freshness`、`Evidence Sources` 和 `Disclaimer`。在排版案例里，后两者由页脚的
+`Sources` 列表与结尾免责声明承担，不单独立标题。每张 `Data Freshness` 表都记录
+`references/data-discipline.md` 定义的三个时间戳，并用五个封闭枚举值
+`Fresh` / `Lagged` / `Stale` / `Undated` / `Unavailable` 给每一项输入定级，
+因此每个案例的置信度封顶都能追溯到具体某一项缺失或滞后的输入。带评分的输出额外包含
+`Score Summary` 表；`trade-plan-risk-manager` 按 `references/scoring-standard.md` 的例外规则
+改用 `Setup Quality`。它们只用于展示输出预览，不构成投资建议。
 
 ## 校验
 

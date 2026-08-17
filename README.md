@@ -162,9 +162,28 @@ carry. Each case ships as `.png` (previewed below, one continuous page), `.html`
 
 ![Trade plan risk case](examples/marketlens-v08-trade-plan-nvda.png)
 
-These samples demonstrate the mandatory `Red Flags`, `Decision Impact`, `What Would Change
-The View`, `Data Freshness`, `Evidence Sources`, and `Disclaimer` blocks. Scored outputs add
-a `Score Summary` table; `trade-plan-risk-manager` uses `Setup Quality` instead, as allowed by
+### Coverage
+
+Coverage is one case per skill, six skills and six cases, with no skill left without a worked
+example and no example that does not map back to a shipped skill:
+
+| Skill | Case | HTML / PDF pages |
+|---|---|---|
+| `equity-research` | `marketlens-v08-equity-research-nvda` | 5 |
+| `market-regime-monitor` | `marketlens-v08-market-regime-tech` | 2 |
+| `sector-industry-research` | `marketlens-v08-sector-ai-server` | 3 |
+| `catalyst-event-monitor` | `marketlens-v08-catalyst-apple-wwdc` | 3 |
+| `portfolio-risk-monitor` | `marketlens-v08-portfolio-ai-watchlist` | 4 |
+| `trade-plan-risk-manager` | `marketlens-v08-trade-plan-nvda` | 4 |
+
+Every case carries the six mandatory blocks: `Red Flags`, `Decision Impact`,
+`What Would Change The View`, `Data Freshness`, `Evidence Sources`, and `Disclaimer`.
+In the typeset cases the last two are carried by the footer `Sources` list and the closing
+disclaimer line rather than by their own headings. Each `Data Freshness` table records the
+three timestamps from `references/data-discipline.md` and grades every input with one of the five
+closed grades `Fresh` / `Lagged` / `Stale` / `Undated` / `Unavailable`, so the confidence cap in
+each case is traceable to a named missing or lagged input. Scored outputs add a
+`Score Summary` table; `trade-plan-risk-manager` uses `Setup Quality` instead, as allowed by
 `references/scoring-standard.md`. They are output-format previews and do not constitute
 investment advice.
 
