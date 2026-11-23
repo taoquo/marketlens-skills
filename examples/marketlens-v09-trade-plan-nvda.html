@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<!-- ==================================================================
+     ONE-PAGER · English · parchment design system
+     Single A4 proposal / report / executive summary
+     Build: python3 scripts/build.py one-pager-en
+     Target: exactly 1 page
+     ================================================================== -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>NVIDIA: when the upside case is what the price already requires, it is agreement, not edge</title>
+<meta name="author" content="MarketLens">
+<meta name="description" content="NVIDIA is monitor closely, not tradable: the upside case restates the implied assumption, so edge is zero despite quality 16/18.">
+<meta name="keywords" content="NVIDIA,trade plan,setup quality,implied expectations,monitor closely">
+<meta name="generator" content="Folio">
+<style>
+
+  @page {
+    size: A4;
+    margin: 15mm 18mm 15mm 18mm;
+    background: #F6F0EA;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --color-surface-page: #F6F0EA;
+    --color-surface-card:     #FBF7F3;
+    --color-text-primary:#191514;
+    --color-text-warm: #3A312D;
+    --color-text-secondary:     #5A4A43;
+    --color-text-muted: #756A63;
+    --color-accent-brand:     #B83D2E;
+    --color-border-default: #E6DACD;
+    --color-border-soft: #E5DBCD;
+    --color-accent-tag:    #F1D2CC;
+
+    --serif: "Source Serif 4", Charter, Georgia,
+             Palatino, "Times New Roman", serif;
+    --sans: var(--serif);
+  }
+
+  html, body { background: var(--color-surface-page); }
+
+  @media screen {
+    body { max-width: 210mm; margin: 0 auto; padding: 15mm 18mm; }
+  }
+
+  body {
+    color: var(--color-text-primary);
+    font-family: var(--serif);
+    font-size: 10pt;
+    line-height: 1.45;
+    /* Paragraph flow; declared in references/profiles/typography/folio-v1.yaml. */
+    widows: 2;
+    orphans: 2;
+    hyphens: manual;
+  }
+
+  .serif { font-family: var(--serif); }
+
+  .header {
+    border-top: 1.2pt solid var(--color-accent-brand);
+    padding-top: 7pt;
+    margin-bottom: 12pt;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20pt;
+  }
+  .title-block { flex: 1; }
+  .eyebrow {
+    font-size: 9pt;
+    color: var(--color-accent-brand);
+    letter-spacing: 1pt;
+    text-transform: uppercase;
+    margin-bottom: 4pt;
+    font-weight: 500;
+  }
+  h1 {
+    font-family: var(--serif);
+    font-size: 26pt;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    line-height: 1.12;
+    letter-spacing: -0.3pt;
+    margin-bottom: 5pt;
+  }
+  .subtitle {
+    font-size: 11.5pt;
+    color: var(--color-text-secondary);
+    line-height: 1.4;
+  }
+  .meta {
+    font-size: 9pt;
+    color: var(--color-text-muted);
+    text-align: right;
+    line-height: 1.5;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* METRICS - horizontal baseline, no containers (matches resume aesthetic). */
+  .metrics {
+    display: flex;
+    gap: 12pt;
+    margin-bottom: 14pt;
+    padding: 6pt 0;
+    border-top: 0.5pt solid var(--color-border-default);
+    border-bottom: 0.5pt solid var(--color-border-default);
+  }
+  .metric {
+    flex: 1;
+    background: transparent;
+    padding: 0;
+    display: flex;
+    align-items: baseline;
+    gap: 5pt;
+    break-inside: avoid;
+  }
+  .metric-value {
+    font-family: var(--serif);
+    font-size: 22pt;
+    font-weight: 500;
+    color: var(--color-accent-brand);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    letter-spacing: -0.3pt;
+  }
+  .metric-label {
+    font-size: 9pt;
+    color: var(--color-text-secondary);
+    line-height: 1.3;
+  }
+
+  section { margin-bottom: 18pt; break-inside: avoid; }
+  section:last-of-type { margin-bottom: 0; }
+
+  h2 {
+    font-family: var(--serif);
+    font-size: 16pt;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    margin-bottom: 6pt;
+  }
+  h2 .sub {
+    font-size: 9pt;
+    color: var(--color-text-muted);
+    font-weight: 400;
+    margin-left: 6pt;
+  }
+
+  p { margin-bottom: 6pt; line-height: 1.45; }
+  p:last-child { margin-bottom: 0; }
+
+  .lead {
+    font-size: 12.5pt;
+    line-height: 1.5;
+    color: var(--color-text-warm);
+    margin-bottom: 10pt;
+  }
+
+  .decision-strip {
+    display: grid;
+    grid-template-columns: 66pt 1fr 82pt;
+    gap: 10pt;
+    align-items: baseline;
+    padding: 7pt 0;
+    margin: 0 0 14pt 0;
+    border-top: 0.8pt solid var(--color-text-primary);
+    border-bottom: 0.3pt dotted var(--color-border-default);
+    break-inside: avoid;
+  }
+  .decision-label {
+    font-size: 8.5pt;
+    color: var(--color-text-muted);
+    letter-spacing: 0.7pt;
+    text-transform: uppercase;
+  }
+  .decision-text {
+    font-size: 11pt;
+    color: var(--color-text-primary);
+    line-height: 1.42;
+  }
+  .decision-owner {
+    font-size: 9pt;
+    color: var(--color-text-secondary);
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hl { color: var(--color-accent-brand); font-weight: 500; }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18pt;
+  }
+
+  ul.dash {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  ul.dash li {
+    position: relative;
+    padding-left: 14pt;
+    margin-bottom: 4pt;
+    line-height: 1.45;
+  }
+  ul.dash li::before {
+    content: "\2013";
+    position: absolute;
+    left: 0;
+    color: var(--color-accent-brand);
+  }
+
+  .timeline {
+    display: flex;
+    gap: 12pt;
+    margin-top: 6pt;
+  }
+  .tl-step { flex: 1; break-inside: avoid; }
+  .tl-year {
+    font-family: var(--serif);
+    font-size: 11pt;
+    font-weight: 500;
+    color: var(--color-accent-brand);
+    margin-bottom: 2pt;
+    letter-spacing: 0.3pt;
+    text-transform: uppercase;
+  }
+  .tl-head {
+    font-size: 10pt;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    margin-bottom: 2pt;
+  }
+  .tl-body {
+    font-size: 9pt;
+    color: var(--color-text-secondary);
+    line-height: 1.45;
+  }
+
+  .tag {
+    display: inline-block;
+    background: var(--color-accent-tag);
+    color: var(--color-accent-brand);
+    font-size: 9pt;
+    font-weight: 500;
+    padding: 1pt 6pt;
+    border-radius: 3pt;
+    letter-spacing: 0.4pt;
+    text-transform: uppercase;
+    margin-right: 3pt;
+  }
+
+  /* TABLE (folio-table) */
+  table, .folio-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9pt;
+    margin: 8pt 0;
+    break-inside: avoid;
+  }
+  table th, .folio-table th {
+    text-align: left;
+    font-weight: 500;
+    color: var(--color-text-warm);
+    padding: 4pt 6pt;
+    border-bottom: 1pt solid var(--color-border-default);
+    background: transparent;
+  }
+  table td, .folio-table td {
+    padding: 3pt 6pt;
+    border-bottom: 0.3pt solid var(--color-border-soft);
+    vertical-align: top;
+  }
+  table.compact th, .folio-table.compact th { padding: 2pt 5pt; font-size: 8pt; }
+  table.compact td, .folio-table.compact td { padding: 1pt 5pt; font-size: 8pt; line-height: 1.4; }
+  table.financial td:not(:first-child), .folio-table.financial td:not(:first-child) {
+    text-align: right; font-variant-numeric: tabular-nums;
+  }
+  table.financial th:not(:first-child), .folio-table.financial th:not(:first-child) { text-align: right; }
+  table.striped tbody tr:nth-child(even) td, .folio-table.striped tbody tr:nth-child(even) td {
+    background: var(--color-surface-card);
+  }
+  table .total td, .folio-table .total td {
+    font-weight: 500; border-top: 1pt solid var(--color-accent-brand); border-bottom: none; color: var(--color-text-primary);
+  }
+
+  /* CALLOUT - transparent, single brand bar. No filled container. */
+  .callout {
+    background: transparent;
+    border-left: 1.8pt solid var(--color-accent-brand);
+    padding: 4pt 0 4pt 14pt;
+    margin: 10pt 0;
+    font-size: 10.5pt;
+    line-height: 1.55;
+    color: var(--color-text-secondary);
+    break-inside: avoid;
+  }
+  .callout .hl, .callout .em-brand { color: var(--color-accent-brand); }
+
+  .footer {
+    margin-top: 18pt;
+    padding-top: 6pt;
+    border-top: 0.3pt dotted var(--color-border-default);
+    font-size: 9pt;
+    color: var(--color-text-muted);
+    display: flex;
+    justify-content: space-between;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.3pt;
+  }
+.footer { gap: 18pt; } .footer span:last-child { flex: 0 1 46%; text-align: right; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="title-block">
+    <div class="eyebrow">$trade-plan-risk-manager · v0.9 case</div>
+    <h1>NVIDIA: when the upside case is what the price already requires, it is agreement, not edge</h1>
+    <div class="subtitle">Quality 16/18 and Deep liquidity cannot restore a tradable label when the variant view restates the implied assumption.</div>
+  </div>
+  <div class="meta">
+    MarketLens<br>
+    2026.05.16<br>
+    v0.9 case
+  </div>
+</div>
+
+<div class="metrics"><div class="metric"><div class="metric-value">16/18</div><div class="metric-label">Quality</div></div><div class="metric"><div class="metric-value">80%</div><div class="metric-label">EV in growth</div></div><div class="metric"><div class="metric-value">0</div><div class="metric-label">Edge</div></div><div class="metric"><div class="metric-value">3/4</div><div class="metric-label">Guide hits</div></div></div>
+
+<p class="lead">The research is strong: quality 16/18, FCF/NI 0.97, net cash, and Deep liquidity. The setup is not. The upside case — Blackwell/Rubin demand, data center growth, stable margins — is the same sentence the reverse DCF already requires: 80% of EV in growth, 22.5% ten-year NOPAT CAGR, FY36 revenue of $1.69T, 7.8x FY26. That is agreement, not edge. The label is <span class="hl">monitor closely</span>.</p>
+
+<div class="decision-strip">
+  <div class="decision-label">Setup</div>
+  <div class="decision-text">No entry trigger until price resets the implied assumption or new evidence changes the terminal requirement. Conditional review only.</div>
+  <div class="decision-owner">Risk: 1 unit intent, one notch down</div>
+</div>
+
+<table class="compact financial"><thead><tr><th>Dimension</th><th>Read</th><th>Confidence</th></tr></thead><tbody><tr><td>Thesis clarity</td><td>3</td><td>High</td></tr><tr><td>Edge / expectation gap</td><td>0</td><td>High</td></tr><tr><td>Timing</td><td>2</td><td>Medium</td></tr><tr><td>Asymmetry</td><td>1</td><td>Medium</td></tr><tr><td>Regime alignment</td><td>1</td><td>Medium</td></tr><tr><td>Liquidity / execution</td><td>3</td><td>High</td></tr><tr><td>Invalidation clarity</td><td>2</td><td>Medium</td></tr><tr><td>Delivery dependence</td><td>2</td><td>Medium</td></tr></tbody></table>
+
+<div class="two-col">
+  <section>
+    <h2>Red Flags</h2>
+    <ul class="dash"><li>The upside case restates the implied assumption. This is the direct reason for the downgrade.</li><li>The probability lacks a reference class: no historical sample is given for a $200B-revenue company sustaining 20%+ growth for a decade.</li><li>The regime is tight or crowded, and the setup depends on beta and crowded momentum.</li><li>Plan return depends on management continuing to invest at high returns while the allocation read is only adequate. Liquidity is Deep, so it is not a cap.</li></ul>
+  </section>
+  <section>
+    <h2>Decision Impact</h2>
+    <ul class="dash"><li>Research quality and Deep liquidity cannot pull the label back to tradable. Two overrides hold it at monitor closely.</li><li>The delivery-dependence discount cuts position intent one notch. It does not change the label.</li><li>The only upgrade paths are a price reset that makes the implied assumption acceptable, or new evidence the price does not contain.</li><li>A louder narrative without stronger evidence is not an upgrade. If the user holds a real position with high AI exposure, this becomes a portfolio-concentration question.</li></ul>
+  </section>
+</div>
+
+<section>
+  <h2>What Would Change The View <span class="sub">Upgrade / downgrade / review</span></h2>
+  <div class="timeline"><div class="tl-step"><div class="tl-year">Entry</div><div class="tl-head">Price resets</div><div class="tl-body">Implied CAGR returns to about 15% with revisions intact; dated ATR and implied move become available to size invalidation.</div></div><div class="tl-step"><div class="tl-year">Confirmation</div><div class="tl-head">New terminal evidence</div><div class="tl-body">A terminal evidence point the price does not contain, such as an inference market materially above the consensus path.</div></div><div class="tl-step"><div class="tl-year">Invalidation</div><div class="tl-head">Evidence breaks</div><div class="tl-body">Multiple expands while revisions flatten; guidance hit rate falls below 2/4; idle cash rises or an out-of-scope acquisition appears; FCF/NI below 0.8.</div></div></div>
+</section>
+
+<div class="callout">A high quality score describes the company. It does not create edge when the upside case is already in the price.</div>
+
+<section>
+  <h2>Data Freshness</h2>
+  <table class="compact financial"><thead><tr><th>Data</th><th>Value</th><th>As of</th><th>Published</th><th>Retrieved</th><th>Source</th><th>Freshness</th></tr></thead><tbody><tr><td>NVDA price / multiple</td><td>$225.32 / 55x</td><td>2026-05-15</td><td>2026-05-16</td><td>2026-05-16</td><td>Quote snapshot</td><td>Fresh</td></tr><tr><td>Reverse DCF inputs</td><td>Stated assumptions</td><td>2026-05-16</td><td>n/a</td><td>2026-05-16</td><td>MarketLens model</td><td>Fresh</td></tr><tr><td>Liquidity / ADV / spread</td><td>Deep (illustrative)</td><td>2026-05-15</td><td>2026-05-16</td><td>2026-05-16</td><td>Market data</td><td>Fresh</td></tr><tr><td>ATR / implied move</td><td>Not measured</td><td>n/a</td><td>n/a</td><td>2026-05-16</td><td>Volatility data unavailable</td><td>Unavailable</td></tr><tr><td>Guidance hit rate</td><td>3/4 (illustrative)</td><td>2026-02-25</td><td>2026-02-25</td><td>2026-05-16</td><td>NVIDIA results history</td><td>Lagged</td></tr></tbody></table>
+</section>
+
+<div class="footer">
+  <span><strong>Sources:</strong> NVIDIA filings and IR; market quote and liquidity snapshot; MarketLens setup-quality and implied-expectations methodology.</span>
+  <span>This is public-market research for reference only and does not constitute investment advice.</span>
+</div>
+
+</body>
+</html>

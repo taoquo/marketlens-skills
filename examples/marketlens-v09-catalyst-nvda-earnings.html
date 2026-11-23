@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<!-- ==================================================================
+     ONE-PAGER · English · parchment design system
+     Single A4 proposal / report / executive summary
+     Build: python3 scripts/build.py one-pager-en
+     Target: exactly 1 page
+     ================================================================== -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>NVIDIA earnings: an event is a catalyst only if it delivers what the price does not already contain</title>
+<meta name="author" content="MarketLens">
+<meta name="description" content="NVIDIA earnings are an event watch, not a tradable setup: the base case is already in the price and the expectation gap is thin.">
+<meta name="keywords" content="NVIDIA,earnings,catalyst,expectation gap,event watch">
+<meta name="generator" content="Folio">
+<style>
+
+  @page {
+    size: A4;
+    margin: 15mm 18mm 15mm 18mm;
+    background: #F6F0EA;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --color-surface-page: #F6F0EA;
+    --color-surface-card:     #FBF7F3;
+    --color-text-primary:#191514;
+    --color-text-warm: #3A312D;
+    --color-text-secondary:     #5A4A43;
+    --color-text-muted: #756A63;
+    --color-accent-brand:     #B83D2E;
+    --color-border-default: #E6DACD;
+    --color-border-soft: #E5DBCD;
+    --color-accent-tag:    #F1D2CC;
+
+    --serif: "Source Serif 4", Charter, Georgia,
+             Palatino, "Times New Roman", serif;
+    --sans: var(--serif);
+  }
+
+  html, body { background: var(--color-surface-page); }
+
+  @media screen {
+    body { max-width: 210mm; margin: 0 auto; padding: 15mm 18mm; }
+  }
+
+  body {
+    color: var(--color-text-primary);
+    font-family: var(--serif);
+    font-size: 10pt;
+    line-height: 1.45;
+    /* Paragraph flow; declared in references/profiles/typography/folio-v1.yaml. */
+    widows: 2;
+    orphans: 2;
+    hyphens: manual;
+  }
+
+  .serif { font-family: var(--serif); }
+
+  .header {
+    border-top: 1.2pt solid var(--color-accent-brand);
+    padding-top: 7pt;
+    margin-bottom: 12pt;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20pt;
+  }
+  .title-block { flex: 1; }
+  .eyebrow {
+    font-size: 9pt;
+    color: var(--color-accent-brand);
+    letter-spacing: 1pt;
+    text-transform: uppercase;
+    margin-bottom: 4pt;
+    font-weight: 500;
+  }
+  h1 {
+    font-family: var(--serif);
+    font-size: 26pt;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    line-height: 1.12;
+    letter-spacing: -0.3pt;
+    margin-bottom: 5pt;
+  }
+  .subtitle {
+    font-size: 11.5pt;
+    color: var(--color-text-secondary);
+    line-height: 1.4;
+  }
+  .meta {
+    font-size: 9pt;
+    color: var(--color-text-muted);
+    text-align: right;
+    line-height: 1.5;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* METRICS - horizontal baseline, no containers (matches resume aesthetic). */
+  .metrics {
+    display: flex;
+    gap: 12pt;
+    margin-bottom: 14pt;
+    padding: 6pt 0;
+    border-top: 0.5pt solid var(--color-border-default);
+    border-bottom: 0.5pt solid var(--color-border-default);
+  }
+  .metric {
+    flex: 1;
+    background: transparent;
+    padding: 0;
+    display: flex;
+    align-items: baseline;
+    gap: 5pt;
+    break-inside: avoid;
+  }
+  .metric-value {
+    font-family: var(--serif);
+    font-size: 22pt;
+    font-weight: 500;
+    color: var(--color-accent-brand);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    letter-spacing: -0.3pt;
+  }
+  .metric-label {
+    font-size: 9pt;
+    color: var(--color-text-secondary);
+    line-height: 1.3;
+  }
+
+  section { margin-bottom: 18pt; break-inside: avoid; }
+  section:last-of-type { margin-bottom: 0; }
+
+  h2 {
+    font-family: var(--serif);
+    font-size: 16pt;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    margin-bottom: 6pt;
+  }
+  h2 .sub {
+    font-size: 9pt;
+    color: var(--color-text-muted);
+    font-weight: 400;
+    margin-left: 6pt;
+  }
+
+  p { margin-bottom: 6pt; line-height: 1.45; }
+  p:last-child { margin-bottom: 0; }
+
+  .lead {
+    font-size: 12.5pt;
+    line-height: 1.5;
+    color: var(--color-text-warm);
+    margin-bottom: 10pt;
+  }
+
+  .decision-strip {
+    display: grid;
+    grid-template-columns: 66pt 1fr 82pt;
+    gap: 10pt;
+    align-items: baseline;
+    padding: 7pt 0;
+    margin: 0 0 14pt 0;
+    border-top: 0.8pt solid var(--color-text-primary);
+    border-bottom: 0.3pt dotted var(--color-border-default);
+    break-inside: avoid;
+  }
+  .decision-label {
+    font-size: 8.5pt;
+    color: var(--color-text-muted);
+    letter-spacing: 0.7pt;
+    text-transform: uppercase;
+  }
+  .decision-text {
+    font-size: 11pt;
+    color: var(--color-text-primary);
+    line-height: 1.42;
+  }
+  .decision-owner {
+    font-size: 9pt;
+    color: var(--color-text-secondary);
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hl { color: var(--color-accent-brand); font-weight: 500; }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18pt;
+  }
+
+  ul.dash {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  ul.dash li {
+    position: relative;
+    padding-left: 14pt;
+    margin-bottom: 4pt;
+    line-height: 1.45;
+  }
+  ul.dash li::before {
+    content: "\2013";
+    position: absolute;
+    left: 0;
+    color: var(--color-accent-brand);
+  }
+
+  .timeline {
+    display: flex;
+    gap: 12pt;
+    margin-top: 6pt;
+  }
+  .tl-step { flex: 1; break-inside: avoid; }
+  .tl-year {
+    font-family: var(--serif);
+    font-size: 11pt;
+    font-weight: 500;
+    color: var(--color-accent-brand);
+    margin-bottom: 2pt;
+    letter-spacing: 0.3pt;
+    text-transform: uppercase;
+  }
+  .tl-head {
+    font-size: 10pt;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    margin-bottom: 2pt;
+  }
+  .tl-body {
+    font-size: 9pt;
+    color: var(--color-text-secondary);
+    line-height: 1.45;
+  }
+
+  .tag {
+    display: inline-block;
+    background: var(--color-accent-tag);
+    color: var(--color-accent-brand);
+    font-size: 9pt;
+    font-weight: 500;
+    padding: 1pt 6pt;
+    border-radius: 3pt;
+    letter-spacing: 0.4pt;
+    text-transform: uppercase;
+    margin-right: 3pt;
+  }
+
+  /* TABLE (folio-table) */
+  table, .folio-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9pt;
+    margin: 8pt 0;
+    break-inside: avoid;
+  }
+  table th, .folio-table th {
+    text-align: left;
+    font-weight: 500;
+    color: var(--color-text-warm);
+    padding: 4pt 6pt;
+    border-bottom: 1pt solid var(--color-border-default);
+    background: transparent;
+  }
+  table td, .folio-table td {
+    padding: 3pt 6pt;
+    border-bottom: 0.3pt solid var(--color-border-soft);
+    vertical-align: top;
+  }
+  table.compact th, .folio-table.compact th { padding: 2pt 5pt; font-size: 8pt; }
+  table.compact td, .folio-table.compact td { padding: 1pt 5pt; font-size: 8pt; line-height: 1.4; }
+  table.financial td:not(:first-child), .folio-table.financial td:not(:first-child) {
+    text-align: right; font-variant-numeric: tabular-nums;
+  }
+  table.financial th:not(:first-child), .folio-table.financial th:not(:first-child) { text-align: right; }
+  table.striped tbody tr:nth-child(even) td, .folio-table.striped tbody tr:nth-child(even) td {
+    background: var(--color-surface-card);
+  }
+  table .total td, .folio-table .total td {
+    font-weight: 500; border-top: 1pt solid var(--color-accent-brand); border-bottom: none; color: var(--color-text-primary);
+  }
+
+  /* CALLOUT - transparent, single brand bar. No filled container. */
+  .callout {
+    background: transparent;
+    border-left: 1.8pt solid var(--color-accent-brand);
+    padding: 4pt 0 4pt 14pt;
+    margin: 10pt 0;
+    font-size: 10.5pt;
+    line-height: 1.55;
+    color: var(--color-text-secondary);
+    break-inside: avoid;
+  }
+  .callout .hl, .callout .em-brand { color: var(--color-accent-brand); }
+
+  .footer {
+    margin-top: 18pt;
+    padding-top: 6pt;
+    border-top: 0.3pt dotted var(--color-border-default);
+    font-size: 9pt;
+    color: var(--color-text-muted);
+    display: flex;
+    justify-content: space-between;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.3pt;
+  }
+.footer { gap: 18pt; } .footer span:last-child { flex: 0 1 46%; text-align: right; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="title-block">
+    <div class="eyebrow">$catalyst-event-monitor · v0.9 case</div>
+    <h1>NVIDIA earnings: an event is a catalyst only if it delivers what the price does not already contain</h1>
+    <div class="subtitle">At 55x and 80% of EV in growth, the base case is already priced; the event watch is about the gap, not the importance.</div>
+  </div>
+  <div class="meta">
+    MarketLens<br>
+    2026.05.16<br>
+    v0.9 case
+  </div>
+</div>
+
+<div class="metrics"><div class="metric"><div class="metric-value">May 27</div><div class="metric-label">Event date</div></div><div class="metric"><div class="metric-value">80%</div><div class="metric-label">EV growth share</div></div><div class="metric"><div class="metric-value">22.5%</div><div class="metric-label">10y CAGR</div></div><div class="metric"><div class="metric-value">7.6%</div><div class="metric-label">Terminal g</div></div></div>
+
+<p class="lead">The earnings date is confirmed and the mechanism is clear: data center demand, gross margin, and guidance. The problem is the <span class="hl">expectation gap</span>. A reverse DCF at a 9% WACC already requires 22.5% ten-year NOPAT CAGR and 7.6% perpetual growth; an in-line quarter with a steady guide delivers exactly what the price contains. The label is <span class="hl">event watch</span>, not a tradable setup.</p>
+
+<div class="decision-strip">
+  <div class="decision-label">Event</div>
+  <div class="decision-text">Define the post-event data point and the decomposition before the print. Do not upgrade on importance alone.</div>
+  <div class="decision-owner">Confidence: Medium</div>
+</div>
+
+<table class="compact financial"><thead><tr><th>Dimension</th><th>Read</th><th>Evidence</th><th>Confidence</th></tr></thead><tbody><tr><td>Timing certainty</td><td>3</td><td>Event date is set</td><td>High</td></tr><tr><td>Financial impact</td><td>2</td><td>Revenue, margin, and guidance transmission</td><td>Medium</td></tr><tr><td>Expectation gap</td><td>1</td><td>Implied growth already contains the base case</td><td>Medium</td></tr><tr><td>Market pricing</td><td>0</td><td>Implied move unavailable</td><td>Low</td></tr><tr><td>Crowding</td><td>2</td><td>Large-cap core holding, not a low-attention event</td><td>Medium</td></tr><tr><td>Priority</td><td>1</td><td>Important, but not yet an attractive setup</td><td>Medium</td></tr></tbody></table>
+
+<div class="two-col">
+  <section>
+    <h2>Red Flags</h2>
+    <ul class="dash"><li>Implied move, skew, and event premium are unavailable, so the odds cannot be judged. State that as a confidence limit.</li><li>A demanding implied expectation means an in-line event can produce a negative price reaction. That is not irrationality; it is a zero gap.</li><li>An important event is not automatically an attractive setup. If downside is hard to bound, use event watch or monitor closely.</li><li>Do not price a buyback announcement by headline size without the company's own allocation record.</li></ul>
+  </section>
+  <section>
+    <h2>Decision Impact</h2>
+    <ul class="dash"><li>Date certainty supports event watch; demanding implied expectations block an upgrade.</li><li>Only a mechanism the price does not contain can move the label to monitor closely: a new pricing tier, a measurable ARPU path, or a shorter replacement cycle.</li><li>Post-event, classify the result as strengthened, neutral, delayed, impaired, or broken. Accrual, capitalization, one-off, or tax-driven beats are not confirmation.</li><li>The event score is not a trade instruction. The setup still needs a bounded downside and a dated review window.</li></ul>
+  </section>
+</div>
+
+<section>
+  <h2>What Would Change The View <span class="sub">Upgrade / downgrade / review</span></h2>
+  <div class="timeline"><div class="tl-step"><div class="tl-year">Pre-event</div><div class="tl-head">Set the gap</div><div class="tl-body">Write the consensus, market-implied, and variant expectations before the print; define the one post-event data point that would confirm the thesis.</div></div><div class="tl-step"><div class="tl-year">Event</div><div class="tl-head">Decompose</div><div class="tl-body">Separate volume, price, mix, cost, accrual, capitalization, one-off, and tax. Only operating sources count as thesis confirmation.</div></div><div class="tl-step"><div class="tl-year">Post-event</div><div class="tl-head">Classify</div><div class="tl-body">Strengthened, neutral, delayed, impaired, broken, crowded unwind, or inconclusive — then update the label.</div></div></div>
+</section>
+
+<div class="callout">An important event is not automatically a tradable setup. The gap is the trade; the headline is not.</div>
+
+<section>
+  <h2>Data Freshness</h2>
+  <table class="compact financial"><thead><tr><th>Data</th><th>Value</th><th>As of</th><th>Published</th><th>Retrieved</th><th>Source</th><th>Freshness</th></tr></thead><tbody><tr><td>Event date</td><td>2026-05-27 (illustrative)</td><td>2026-05-27</td><td>2026-05-16</td><td>2026-05-16</td><td>Company calendar</td><td>Fresh</td></tr><tr><td>NVDA price / multiple</td><td>$225.32 / 55x</td><td>2026-05-15</td><td>2026-05-16</td><td>2026-05-16</td><td>Quote snapshot</td><td>Fresh</td></tr><tr><td>Consensus expectation</td><td>Illustrative placeholder</td><td>2026-05-12</td><td>2026-05-13</td><td>2026-05-16</td><td>Consensus dataset</td><td>Fresh</td></tr><tr><td>Implied move / volatility</td><td>Not measured</td><td>n/a</td><td>n/a</td><td>2026-05-16</td><td>Options data unavailable</td><td>Unavailable</td></tr><tr><td>Short interest / borrow</td><td>Not measured</td><td>n/a</td><td>n/a</td><td>2026-05-16</td><td>Borrow data unavailable</td><td>Unavailable</td></tr></tbody></table>
+</section>
+
+<div class="footer">
+  <span><strong>Sources:</strong> NVIDIA filings and IR; consensus and options data where available; MarketLens implied-expectations and event methodology.</span>
+  <span>This is public-market research for reference only and does not constitute investment advice.</span>
+</div>
+
+</body>
+</html>

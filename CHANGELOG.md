@@ -1,7 +1,70 @@
 # Changelog
 
 Release history for MarketLens Skills. Versions match `metadata.version` in each
-`SKILL.md`.
+`SKILL.md` and the top-level `VERSION` file.
+
+## v0.10 Historical Valuation Band: A Rolling, Point-In-Time Cross-Check
+
+This release adds one valuation-layer method, not a new skill. It answers whether the current
+multiple is cheap or expensive against the company's own history, without turning that answer
+into a forecast or a standalone signal.
+
+- `equity-research/references/valuation-framework.md`: new `Historical Valuation Band` section.
+  It defines the TTM denominator from point-in-time filings, total market cap, rolling windows
+  of at least 750 trading days (prefer 1,250 days or a full cycle), percentile-first bands
+  (P20/P80 or P16/P84), a log-PE cross-check, and the failure boundaries: structural break,
+  denominator collapse or peak, one-offs, negative earnings, corporate actions, and rates.
+- The same section includes a `Figure Contract` for a `Valuation Band` chart: the point-in-time
+  PE line, rolling lower/middle/upper bands, current-value annotations, and a compact table
+  fallback when the host cannot render a chart.
+- `equity-research/SKILL.md`: new `valuation-band` mode and trigger, a reference-loading pointer,
+  a conclusion-gate guardrail, a data-freshness rule, a workflow note, and an output-template
+  line. The mode is explicitly a valuation-layer cross-check; it cannot satisfy the two-method
+  gate or support a strong action label by itself.
+- `equity-research/agents/openai.yaml`: metadata mentions historical valuation bands.
+- New `scripts/pe_band_chart.py`: a dependency-free CSV-to-SVG utility that computes the
+  rolling point-in-time band, emits the Figure Contract elements, and optionally writes the
+  per-date band table and a latest-observation JSON summary. It remains the standalone
+  fallback; the typeset case uses Folio's `line-chart` drawing instead.
+- New `docs/valuation-band.md` and `docs/valuation-band.zh-CN.md`: the data contract, CLI
+  options, point-in-time construction, reading guide, skill-mode usage, Figure Contract, and
+  table fallback.
+- New illustrative case `examples/marketlens-v010-valuation-band-nvda` in `.html`, `.pdf`, and
+  `.png`, using `examples/data/nvda-pe-ttm-illustrative.csv`. It embeds a Folio `line-chart`
+  fixture (`examples/data/nvda-pe-band-folio.json`) with eight quarterly samples, PE plus P20/P80
+  series, a current-median rule, and the visible accessible table. NVIDIA at 55x sits at the 51st
+  percentile of a 750-observation window, with a falling rolling median; the case keeps the
+  band as a cross-check and leaves the label at hold/watch.
+- READMEs updated for the new release, the seventh case, the chart utility, and the tutorial.
+  The six v0.9 English examples remain current.
+- `VERSION` and all `metadata.version` fields move to 0.10.
+
+## v0.9 Shared Contract: One Copy Of The Rules, Enforced
+
+This release changes structure, not methodology. It removes the duplicated operating rules
+that every skill carried and makes the output contract executable.
+
+- New `references/skill-contract.md` holds the rules every skill inherits: public-market
+  research only, no personalized advice, the four mandatory shared routes, evidence-tier
+  discipline, conclusion-gate behavior, the three timestamps and five freshness grades, and
+  the six mandatory output blocks in order.
+- Every `SKILL.md` now loads the contract and keeps only its domain-specific Core Rule,
+  evidence sources, gates, degradation table, workflow, and output template. Shared
+  boilerplate drops from six copies to one.
+- `VERSION` is the single release source. The validator now checks that every
+  `metadata.version`, `VERSION`, and the latest `CHANGELOG.md` heading agree.
+- Validator hardening: output blocks are checked inside the fenced `Output Template` and
+  must keep their relative order; the substring loophole that let
+  `## Data Freshness Protocol` satisfy `## Data Freshness` is closed; the exact disclaimer
+  is required inside the template; README coverage rows, example files, and README image
+  paths are checked in both languages.
+- Output templates aligned with the contract: `market-regime-monitor` moves
+  `Data Freshness` to the end and adds `Confidence And Limits`; `sector-industry-research`
+  adds a `Data Freshness` block and a `Freshness` column to its `Data Check` audit table.
+- Examples rebuilt as six English Folio cases with NVIDIA as the core case, shipped as
+  `examples/marketlens-v09-*` in `.html`, `.pdf`, and `.png`. The README coverage tables and
+  image paths in both languages now point at the v0.9 files. The underlying case data stays
+  illustrative and is not a live feed.
 
 ## v0.8 Capital Allocation: Where The Cash Went, And Whether The Promises Held
 

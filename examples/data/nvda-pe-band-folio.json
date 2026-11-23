@@ -1,0 +1,87 @@
+{
+  "schema_version": "3.0",
+  "kind": "line-chart",
+  "title": "NVIDIA PE(TTM) Band",
+  "unit": "x",
+  "locale": "en-US",
+  "language": "en-US",
+  "source": "Illustrative daily series; P20/P80 band from a trailing window of up to 750 observations (first quarter about 600); quarterly samples",
+  "value_format": {
+    "precision": 1,
+    "compact": false,
+    "grouping": false,
+    "unit_position": "suffix"
+  },
+  "categories": [
+    "2023-Q3",
+    "2023-Q4",
+    "2024-Q1",
+    "2024-Q3",
+    "2025-Q1",
+    "2025-Q3",
+    "2026-Q1",
+    "2026-Q2"
+  ],
+  "series": [
+    {
+      "id": "pe",
+      "label": "PE(TTM)",
+      "values": [
+        97.1,
+        81.21,
+        80.77,
+        59.97,
+        38.79,
+        46.28,
+        51.59,
+        55.0
+      ]
+    },
+    {
+      "id": "lower",
+      "label": "P20 lower",
+      "values": [
+        58.9,
+        60.9,
+        62.24,
+        60.9,
+        52.69,
+        44.76,
+        44.76,
+        44.76
+      ]
+    },
+    {
+      "id": "upper",
+      "label": "P80 upper",
+      "values": [
+        94.46,
+        94.46,
+        93.6,
+        93.6,
+        92.47,
+        92.47,
+        86.39,
+        82.05
+      ]
+    }
+  ],
+  "focus_series": "pe",
+  "missing_policy": "error",
+  "height": 440,
+  "reference_lines": [
+    {
+      "id": "median",
+      "label": "median 54.7x",
+      "value": 54.72
+    }
+  ],
+  "annotations": [
+    {
+      "id": "current",
+      "text": "55.0x \u00b7 P51",
+      "series": "pe",
+      "category": "2026-Q2"
+    }
+  ]
+}

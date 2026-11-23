@@ -3,16 +3,16 @@ name: market-regime-monitor
 description: Use when assessing market environment, liquidity, sentiment, positioning, greed/fear, overheating, de-risking, hedging, Fed liquidity, SOFR, MOVE, yen carry trade, NAAIM, institutional allocation, retail flows, valuation crowding, hedge fund leverage, or how macro and sentiment conditions affect US stocks, Hong Kong stocks, A-shares, technology shares, or crypto risk assets.
 license: MIT
 metadata:
-  version: 0.8
+  version: 0.10
 ---
 
 # Market Regime Monitor
 
 ## Core Rule
 
-Assess the market regime using two axes: liquidity conditions and sentiment/positioning crowding. Match the user's language, state dates for all data, cite sources, show confidence and conflicting evidence, and frame output as research guidance rather than personalized investment advice.
+Shared operating rules are in `../references/skill-contract.md`: public-market research only, no personalized investment advice, dated and sourced evidence, confidence and limits, and the exact disclaimer. Apply them to every output.
 
-Translate risk-on, de-risking, hedge, or exposure questions into market-regime labels, risk-budget language, and monitoring triggers. Do not prescribe personal allocation, cash levels, hedges, or position sizes.
+Assess the market regime using two axes: liquidity conditions and sentiment/positioning crowding. Translate risk-on, de-risking, hedge, or exposure questions into market-regime labels, risk-budget language, and monitoring triggers. Do not prescribe personal allocation, cash levels, hedges, or position sizes.
 
 ## Skill Boundary
 
@@ -37,10 +37,8 @@ If an axis has no usable indicator, do not score it. Report a single-axis read, 
 
 Read only the references needed:
 
-- For shared confidence, red-flag, and label discipline, read `../references/scoring-standard.md`.
-- For timestamps, freshness grades, evidence tiers, unit and calendar rules, and user-input handling, read `../references/data-discipline.md`.
-- For deciding which skill owns a question, read `../references/skill-routing.md`.
-- For review of prior regime calls, and for how a regime read decays with age, read `../references/review-and-calibration.md`.
+- For the shared operating, evidence, gate, freshness, and output contract, read `../references/skill-contract.md`.
+- Required shared files: `../references/scoring-standard.md`, `../references/data-discipline.md`, `../references/skill-routing.md`, and `../references/review-and-calibration.md`.
 - For credit spreads, real yields, breakevens, term premium, and cross-currency basis as risk-appetite inputs, read `../references/credit-and-cross-asset.md`.
 - For historical analogues before assigning a probability to a regime path, read `../references/base-rates.md`.
 - For what an index-level multiple implies about aggregate growth or margin, when index valuation carries the crowding read, read `../references/implied-expectations.md`.
@@ -51,7 +49,7 @@ Read only the references needed:
 
 ## Evidence Standard
 
-Use primary or official sources first. Do not fabricate citations or quote text you cannot verify. Tier definitions are in `../references/data-discipline.md`.
+Tier definitions and the decisive-claim rule are in `../references/data-discipline.md` and `../references/skill-contract.md`. Domain sources:
 
 | Tier | Sources | Use |
 |---|---|---|
@@ -61,13 +59,11 @@ Use primary or official sources first. Do not fabricate citations or quote text 
 
 Survey and prime-broker positioning data is `Lagged` by design. State the reference date and never present it as live positioning.
 
-Always include an `Evidence Sources` section with source name, date, link, and what it supports.
-
 ## Conclusion Gates
 
-Use research language such as risk-on recovery, balanced, volatile bottoming, late-cycle melt-up risk, fragile / de-risking, monitor closely, hedge-review, trim-review, or evidence-gap. The regime read is a risk-budget modifier that caps or releases the labels below it; see `Label Layering` and `Chain Constraints` in `../references/scoring-standard.md`. Do not prescribe personal allocation, cash levels, hedge ratios, or position sizes.
+The regime read is a risk-budget modifier that caps or releases the labels below it; see `Label Layering` and `Chain Constraints` in `../references/scoring-standard.md` and the shared gate rules in `../references/skill-contract.md`. Do not prescribe personal allocation, cash levels, hedge ratios, or position sizes.
 
-Do not give a strong regime conclusion unless these are satisfied:
+Domain-specific gates. Do not give a strong regime conclusion unless these are satisfied:
 
 - At least one liquidity indicator and one sentiment/positioning indicator are dated and sourced.
 - The binding axis is named, and the conflict between axes is stated when they disagree.
@@ -76,13 +72,13 @@ Do not give a strong regime conclusion unless these are satisfied:
 - Indicator readings are compared against a stated historical reference range, not judged in isolation.
 - 3-5 concrete data triggers that would invalidate or upgrade the call are defined in advance.
 
-If any gate fails, report a single-axis or directional read, cap confidence, and state the missing indicator.
+If any gate fails, report a single-axis or directional read, cap confidence, state the missing indicator, and apply the downgrade rule in `../references/skill-contract.md`.
 
 A single extreme indicator is not a regime. Do not label a regime from one data point, and do not average away a severe funding-stress alert.
 
 ## Data Freshness Protocol
 
-Timestamps, freshness grades, evidence tiers, unit and calendar rules, and the core figure check are defined in `../references/data-discipline.md`. Load that file before writing the `Data Freshness` table and use its five freshness grades verbatim.
+Apply the timestamp, freshness, and core-figure rules in `../references/data-discipline.md` and `../references/skill-contract.md`. Domain additions:
 
 Regime-specific additions:
 
@@ -184,10 +180,6 @@ If reliable data is unavailable, say so and use the nearest defensible proxy ins
 ## Conclusion
 [Risk regime, confidence, and the main reason.]
 
-## Data Freshness
-| Data | Value | As of | Published | Retrieved | Source | Freshness |
-|---|---:|---|---|---|---|---|
-
 ## Liquidity Dashboard
 | Indicator | Latest | Date | Status | Read-through |
 |---|---:|---|---|---|
@@ -223,6 +215,13 @@ If reliable data is unavailable, say so and use the nearest defensible proxy ins
 
 ## What Would Change The View
 [3-5 data releases or market levels that would invalidate, soften, or strengthen the regime call.]
+
+## Confidence And Limits
+[Confidence level, missing indicators, stale data, conflicts, and unsupported claims avoided.]
+
+## Data Freshness
+| Data | Value | As of | Published | Retrieved | Source | Freshness |
+|---|---:|---|---|---|---|---|
 
 ## Evidence Sources
 | Source | Date | Type | Supports |

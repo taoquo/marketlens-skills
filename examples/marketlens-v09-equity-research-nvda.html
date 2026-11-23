@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<!-- ==================================================================
+     EQUITY REPORT · English · parchment design system
+     2-3 page A4 equity research / valuation / investment memo
+     Structure: header -> metrics -> charts -> financials -> comps -> risks -> summary
+     ================================================================== -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>NVIDIA · Equity Report</title>
+<meta name="author" content="MarketLens">
+<meta name="description" content="NVIDIA quality is A, but the price already requires the next decade; hold/watch with a priced-for-perfection valuation read.">
+<meta name="keywords" content="NVIDIA,NVDA,equity research,ROIIC,reverse DCF,capital allocation">
+<meta name="generator" content="Folio">
+<style>
+
+  @page {
+    size: A4;
+    margin: 16mm 18mm 18mm 18mm;
+    background: #F6F0EA;
+
+    @bottom-center {
+      content: counter(page) "  ·  NVIDIA Report";
+      font-family: var(--serif);
+      font-size: 9pt;
+      color: var(--color-text-muted);
+    }
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    /* Status: what a value means, always used with a word. */
+    --color-status-positive: #B83D2E;
+    --color-status-caution: #906327;
+    --color-status-negative: #5A6B7A;
+    --color-status-caution-tint: #F6EBD9;
+    --color-surface-page: #F6F0EA;
+    --color-surface-card:     #FBF7F3;
+    --color-text-primary:#191514;
+    --color-text-warm: #3A312D;
+    --color-text-secondary:     #5A4A43;
+    --color-text-muted: #756A63;
+    --color-accent-brand:     #B83D2E;
+    --color-border-default: #E6DACD;
+    --color-border-soft: #E5DBCD;
+    --color-accent-tag:    #F1D2CC;
+
+    --serif: "Source Serif 4", Charter, Georgia,
+             Palatino, "Times New Roman", serif;
+    --sans: var(--serif);
+    --mono:  "JetBrains Mono", "SF Mono", "Fira Code",
+             Consolas, Monaco, monospace;
+  }
+
+  html, body { background: var(--color-surface-page); }
+
+  @media screen {
+    body { max-width: 210mm; margin: 0 auto; padding: 16mm 18mm 18mm 18mm; }
+  }
+
+  body {
+    color: var(--color-text-primary);
+    font-family: var(--serif);
+    font-size: 9.8pt;
+    line-height: 1.45;
+    /* Paragraph flow; declared in references/profiles/typography/folio-v1.yaml. */
+    widows: 2;
+    orphans: 2;
+    hyphens: manual;
+  }
+
+  strong { font-weight: 500; }
+  .hl { color: var(--color-accent-brand); font-weight: 500; }
+
+  /* HEADER */
+  .report-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12pt;
+    padding-bottom: 8pt;
+    border-bottom: 1pt solid var(--color-text-primary);
+  }
+  .ticker-block { flex: 1; }
+  .ticker-eyebrow {
+    font-family: var(--sans);
+    font-size: 9pt;
+    color: var(--color-accent-brand);
+    letter-spacing: 1.5pt;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 4pt;
+  }
+  .ticker-name {
+    font-family: var(--serif);
+    font-size: 26pt;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    line-height: 1.12;
+    letter-spacing: -0.3pt;
+    margin-bottom: 4pt;
+  }
+  .ticker-sub {
+    font-size: 10pt;
+    color: var(--color-text-secondary);
+    line-height: 1.4;
+  }
+  .price-block {
+    text-align: right;
+    padding-top: 4pt;
+  }
+  .price-current {
+    font-family: var(--serif);
+    font-size: 30pt;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.5pt;
+  }
+  .price-change {
+    font-size: 10pt;
+    font-weight: 500;
+    margin-top: 2pt;
+    font-variant-numeric: tabular-nums;
+  }
+  .price-change.up { color: var(--color-status-positive); }
+  .price-change.down { color: var(--color-status-negative); }
+  .price-date {
+    font-size: 9pt;
+    color: var(--color-text-muted);
+    margin-top: 2pt;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* METRICS */
+  .metrics {
+    display: flex;
+    gap: 10pt;
+    margin-bottom: 14pt;
+    padding: 6pt 0;
+    border-top: 0.5pt solid var(--color-border-default);
+    border-bottom: 0.5pt solid var(--color-border-default);
+  }
+  .metric {
+    flex: 1;
+    display: flex;
+    align-items: baseline;
+    gap: 5pt;
+  }
+  .metric-value {
+    font-family: var(--serif);
+    font-size: 18pt;
+    font-weight: 500;
+    color: var(--color-accent-brand);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    letter-spacing: -0.3pt;
+  }
+  .metric-label {
+    font-size: 9pt;
+    color: var(--color-text-secondary);
+    line-height: 1.3;
+  }
+
+  /* SECTIONS */
+  h2 {
+    font-family: var(--serif);
+    font-size: 16pt;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    margin: 18pt 0 6pt 0;
+    break-after: avoid;
+  }
+
+  h3 {
+    font-size: 13pt;
+    font-weight: 500;
+    color: var(--color-text-warm);
+    margin: 12pt 0 4pt 0;
+    break-after: avoid;
+  }
+
+  p { margin: 0 0 8pt 0; line-height: 1.5; }
+
+  ul, ol {
+    margin: 4pt 0 8pt 0;
+    padding-left: 18pt;
+    line-height: 1.5;
+  }
+  ul li::marker { color: var(--color-accent-brand); }
+  ol li::marker { color: var(--color-accent-brand); font-weight: 500; }
+
+  /* TAG */
+  .tag {
+    display: inline-block;
+    background: var(--color-accent-tag);
+    color: var(--color-accent-brand);
+    font-family: var(--sans);
+    font-size: 9pt;
+    font-weight: 500;
+    padding: 1pt 6pt;
+    border-radius: 3pt;
+    letter-spacing: 0.4pt;
+    text-transform: uppercase;
+    margin-right: 3pt;
+  }
+
+  /* TABLE (folio-table) */
+  table, .folio-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9.5pt;
+    margin: 8pt 0;
+    break-inside: avoid;
+  }
+  table th, .folio-table th {
+    text-align: left;
+    font-family: var(--sans);
+    font-weight: 500;
+    color: var(--color-text-warm);
+    padding: 4pt 6pt;
+    border-top: 0.8pt solid var(--color-text-primary);
+    border-bottom: 0.5pt solid var(--color-border-default);
+    background: transparent;
+  }
+  table td, .folio-table td {
+    padding: 3pt 6pt;
+    border-bottom: 0.3pt solid var(--color-border-soft);
+    vertical-align: top;
+  }
+  table.compact th, .folio-table.compact th { padding: 3pt 6pt; font-size: 8pt; }
+  table.compact td, .folio-table.compact td { padding: 2pt 6pt; font-size: 8pt; line-height: 1.4; }
+  table.financial td:not(:first-child), .folio-table.financial td:not(:first-child) {
+    text-align: right; font-variant-numeric: tabular-nums;
+  }
+  table.financial th:not(:first-child), .folio-table.financial th:not(:first-child) { text-align: right; }
+  table.striped tbody tr:nth-child(even) td, .folio-table.striped tbody tr:nth-child(even) td {
+    background: var(--color-surface-card);
+  }
+  table .total td, .folio-table .total td {
+    font-weight: 500; border-top: 1pt solid var(--color-accent-brand); border-bottom: none; color: var(--color-text-primary);
+  }
+
+  /* CALLOUT */
+  .callout {
+    background: transparent;
+    border-top: 0.8pt solid var(--color-accent-brand);
+    border-bottom: 0.3pt dotted var(--color-border-default);
+    padding: 6pt 0;
+    border-radius: 0;
+    margin: 10pt 0;
+    line-height: 1.5;
+    break-inside: avoid;
+  }
+
+  /* FIGURE */
+  figure { margin: 12pt 0; break-inside: avoid; }
+  figcaption {
+    font-family: var(--sans);
+    font-size: 9pt;
+    color: var(--color-text-muted);
+    margin-top: 4pt;
+    text-align: left;
+  }
+
+  .research-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 14pt;
+    align-items: start;
+  }
+
+  .data-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8pt;
+    margin: 8pt 0;
+    padding: 5pt 0;
+    border-top: 0.5pt solid var(--color-border-default);
+    border-bottom: 0.3pt dotted var(--color-border-default);
+  }
+  .data-strip .label {
+    font-size: 8pt;
+    color: var(--color-text-muted);
+    letter-spacing: 0.5pt;
+    text-transform: uppercase;
+  }
+  .data-strip .value {
+    font-size: 13pt;
+    color: var(--color-text-primary);
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* RISK MATRIX */
+  .risk-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10pt;
+    margin: 8pt 0;
+  }
+  .risk-item {
+    padding: 5pt 0;
+    background: transparent;
+    border-top: 0.3pt solid var(--color-border-default);
+    border-radius: 0;
+    break-inside: avoid;
+  }
+  .risk-label {
+    font-family: var(--sans);
+    font-size: 9pt;
+    font-weight: 500;
+    color: var(--color-accent-brand);
+    letter-spacing: 0.3pt;
+    text-transform: uppercase;
+    margin-bottom: 2pt;
+  }
+  .risk-desc {
+    font-size: 9pt;
+    color: var(--color-text-secondary);
+    line-height: 1.45;
+  }
+
+  /* TWO-COLUMN */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16pt;
+  }
+
+  /* ANALYST SUMMARY */
+  .analyst-box {
+    background: transparent;
+    border-top: 1pt solid var(--color-text-primary);
+    border-radius: 0;
+    padding: 8pt 0 0 0;
+    margin: 12pt 0;
+    break-inside: avoid;
+  }
+
+  /* CHART PLACEHOLDER */
+  .chart-placeholder {
+    background: var(--color-surface-card);
+    border-radius: 4pt;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-muted);
+    font-size: 9pt;
+  }
+  .analyst-label {
+    font-family: var(--sans);
+    font-size: 9pt;
+    color: var(--color-accent-brand);
+    letter-spacing: 1pt;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 4pt;
+  }
+
+  /* FOOTER */
+  .report-footer {
+    margin-top: 16pt;
+    padding-top: 6pt;
+    border-top: 0.3pt dotted var(--color-border-default);
+    font-size: 9pt;
+    color: var(--color-text-muted);
+    display: flex;
+    justify-content: space-between;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .page-break { break-before: page; }
+.risk-grid, .research-grid, .callout, .analyst-box { break-inside: avoid; }
+h2 { break-after: avoid; }
+</style>
+</head>
+<body>
+
+<div class="report-header">
+  <div class="ticker-block">
+    <div class="ticker-eyebrow">$equity-research · v0.9 case</div>
+    <div class="ticker-name">NVIDIA Corporation <span style="font-size: 14pt; color: var(--color-text-muted);">NVDA</span></div>
+    <div class="ticker-sub">Semiconductors · NASDAQ · Quality A, but the price already requires the next decade.</div>
+  </div>
+  <div class="price-block">
+    <div class="price-current">$225.32</div>
+    <div class="price-change up">+2.8%</div>
+    <div class="price-date">2026-05-16 snapshot</div>
+  </div>
+</div>
+
+<div class="metrics">
+  <div class="metric"><div class="metric-value">$5.52T</div><div class="metric-label">Market cap</div></div>
+  <div class="metric"><div class="metric-value">55x</div><div class="metric-label">P/E</div></div>
+  <div class="metric"><div class="metric-value">$215.9B</div><div class="metric-label">FY26 rev</div></div>
+  <div class="metric"><div class="metric-value">71.1%</div><div class="metric-label">Gross margin</div></div>
+</div>
+
+<h2>Investment Thesis</h2>
+<div class="research-grid">
+  <p>NVIDIA earns a <span class="hl">16/18 quality score</span>: 71% gross margin, $96.6B of FY26 free cash flow, net cash, and a CUDA moat that still converts AI demand into cash. The problem is the price. At $5.52T, a reverse DCF at a 9% WACC puts <span class="hl">80% of enterprise value in growth</span> that has not happened yet, and the 10-year NOPAT CAGR required is 22.5%. Capital allocation is <span class="hl">adequate rather than disciplined</span> — buybacks clustered in the 75th percentile of the company's own range and 39% of assets sit in undeployed cash — so the model credits reinvestment at WACC, not the historical 213% ROIIC. The label is hold/watch: the company is strong, the price is the risk.</p>
+  <div class="data-strip">
+    <div><div class="label">Rating</div><div class="value">HOLD</div></div>
+    <div><div class="label">Reference</div><div class="value">$3.32T</div></div>
+    <div><div class="label">Horizon</div><div class="value">12-18 mo</div></div>
+  </div>
+</div>
+
+<div class="callout">
+  The quality score describes the company. The implied-expectations read describes the price. They point in different directions, and the label follows the price.
+</div>
+
+<h2>Price Action</h2>
+<figure>
+  <svg viewBox="0 0 760 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="20-session price action">
+      <rect width="100%" height="100%" fill="#F6F0EA"/>
+      <line x1="56" y1="210" x2="716" y2="210" stroke="#E9DED4" stroke-width="0.8"/>
+      <line x1="56" y1="115" x2="716" y2="115" stroke="#E9DED4" stroke-width="0.5" stroke-dasharray="3 4"/>
+      <line x1="56" y1="20" x2="716" y2="20" stroke="#E9DED4" stroke-width="0.5" stroke-dasharray="3 4"/>
+      <g font-family="'Source Serif 4',Charter,Georgia,serif" font-size="9" fill="#85776F" text-anchor="end">
+        <text x="48" y="214">100</text><text x="48" y="119">115</text><text x="48" y="24">130</text>
+      </g>
+      <g stroke="#B83D2E" fill="#B83D2E">
+        <line x1="80" y1="150" x2="80" y2="182"/><rect x="76" y="158" width="8" height="18" rx="1"/>
+        <line x1="112" y1="140" x2="112" y2="172"/><rect x="108" y="146" width="8" height="20" rx="1"/>
+        <line x1="144" y1="156" x2="144" y2="190"/><rect x="140" y="162" width="8" height="22" rx="1"/>
+        <line x1="176" y1="168" x2="176" y2="200"/><rect x="172" y="174" width="8" height="20" rx="1"/>
+        <line x1="208" y1="176" x2="208" y2="206"/><rect x="204" y="180" width="8" height="22" rx="1"/>
+        <line x1="240" y1="170" x2="240" y2="198"/><rect x="236" y="176" width="8" height="16" rx="1"/>
+        <line x1="272" y1="158" x2="272" y2="186"/><rect x="268" y="164" width="8" height="16" rx="1"/>
+        <line x1="304" y1="148" x2="304" y2="178"/><rect x="300" y="154" width="8" height="18" rx="1"/>
+        <line x1="336" y1="138" x2="336" y2="168"/><rect x="332" y="144" width="8" height="18" rx="1"/>
+        <line x1="368" y1="128" x2="368" y2="158"/><rect x="364" y="134" width="8" height="18" rx="1"/>
+      </g>
+      <g stroke="#4A6B52" fill="#4A6B52">
+        <line x1="400" y1="112" x2="400" y2="146"/><rect x="396" y="118" width="8" height="22" rx="1"/>
+        <line x1="432" y1="102" x2="432" y2="136"/><rect x="428" y="108" width="8" height="22" rx="1"/>
+        <line x1="464" y1="94" x2="464" y2="126"/><rect x="460" y="100" width="8" height="20" rx="1"/>
+        <line x1="496" y1="86" x2="496" y2="118"/><rect x="492" y="92" width="8" height="20" rx="1"/>
+        <line x1="528" y1="78" x2="528" y2="110"/><rect x="524" y="84" width="8" height="20" rx="1"/>
+        <line x1="560" y1="86" x2="560" y2="116"/><rect x="556" y="92" width="8" height="18" rx="1"/>
+        <line x1="592" y1="72" x2="592" y2="104"/><rect x="588" y="78" width="8" height="20" rx="1"/>
+        <line x1="624" y1="64" x2="624" y2="96"/><rect x="620" y="70" width="8" height="20" rx="1"/>
+        <line x1="656" y1="56" x2="656" y2="88"/><rect x="652" y="62" width="8" height="20" rx="1"/>
+        <line x1="688" y1="48" x2="688" y2="80"/><rect x="684" y="54" width="8" height="20" rx="1"/>
+      </g>
+      <g font-family="'Source Serif 4',Charter,Georgia,serif" font-size="9" fill="#5A4A43">
+        <text x="56" y="238">Session 1</text>
+        <text x="380" y="238">Recovery</text>
+        <text x="640" y="238">Session 20</text>
+      </g>
+    </svg>
+  <figcaption>Illustrative 20-session price action. The case uses a 2026-05-16 snapshot, not live market data.</figcaption>
+</figure>
+
+<h2>Financial Overview</h2>
+<table class="financial striped"><thead><tr><th>Metric</th><th>FY2024A</th><th>FY2025A</th><th>FY2026A</th></tr></thead><tbody><tr><td>Revenue</td><td>$60.9B</td><td>$130.5B</td><td>$215.9B</td></tr><tr><td>Net income</td><td>$29.8B</td><td>$72.9B</td><td>$100.0B</td></tr><tr><td>EPS</td><td>$1.20</td><td>$2.94</td><td>$4.10</td></tr><tr><td>Gross margin</td><td>72.7%</td><td>75.0%</td><td>71.1%</td></tr><tr><td>ROE</td><td>69%</td><td>91%</td><td>76%</td></tr></tbody></table>
+<p><em>Illustrative case inputs reconstructed from the v0.8 example; not a live data feed.</em></p>
+
+<h2>Revenue Breakdown</h2>
+<figure>
+  
+<svg viewBox="0 0 760 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="FY26 revenue by segment">
+  <rect width="100%" height="100%" fill="#F6F0EA"/>
+  <g font-family="Charter, Georgia, serif" font-size="10" fill="#5A4A43">
+    <text x="56" y="42">Data Center</text>
+    <rect x="180" y="30" width="360" height="16" fill="#B83D2E" rx="2"/>
+    <text x="552" y="42" fill="#85776F">90%</text>
+    <text x="56" y="84">Gaming</text>
+    <rect x="180" y="72" width="20" height="16" fill="#C97A63" rx="2"/>
+    <text x="212" y="84" fill="#85776F">5%</text>
+    <text x="56" y="126">Professional Visualization</text>
+    <rect x="180" y="114" width="8" height="16" fill="#8B8078" rx="2"/>
+    <text x="200" y="126" fill="#85776F">2%</text>
+    <text x="56" y="168">Automotive / OEM</text>
+    <rect x="180" y="156" width="12" height="16" fill="#B9ACA3" rx="2"/>
+    <text x="204" y="168" fill="#85776F">3%</text>
+  </g>
+</svg>
+
+  <figcaption>FY26 revenue mix: data center is now the company.</figcaption>
+</figure>
+
+<h2>Competitive Landscape</h2>
+<p>The AI accelerator profit pool is concentrated, but the comparison set is not like-for-like: NVIDIA sells a platform, TSMC sells capacity, Broadcom sells custom silicon and networking, and AMD sells a competing GPU stack. Multiples are useful only after the implied assumption is named.</p>
+<table class="financial compact striped"><thead><tr><th>Company</th><th>Mkt cap</th><th>P/E</th><th>Revenue growth</th><th>Gross margin</th></tr></thead><tbody><tr><td><strong>NVIDIA</strong></td><td>$5.52T</td><td>55x</td><td>+65%</td><td>71%</td></tr><tr><td>AMD</td><td>$280B</td><td>35x</td><td>+25%</td><td>53%</td></tr><tr><td>Broadcom</td><td>$1.1T</td><td>45x</td><td>+30%</td><td>75%</td></tr><tr><td>TSMC</td><td>$900B</td><td>25x</td><td>+30%</td><td>58%</td></tr></tbody></table>
+<p><em>Illustrative peer values; not a live screen.</em></p>
+
+<h2>Red Flags</h2>
+<div class="risk-grid">
+  <div class="risk-item"><div class="risk-label">Valuation / implied expectations</div><div class="risk-desc">80% of EV is growth. At a 9% WACC the price requires a 22.5% ten-year NOPAT CAGR and FY36 revenue of $1.69T — 7.8x FY26 and above the entire 2025 semiconductor market of about $0.7T.</div></div>
+  <div class="risk-item"><div class="risk-label">AI capex concentration</div><div class="risk-desc">One customer group and one spending cycle. A cloud capex revision hits revenue and multiple together; the quality score does not cushion that.</div></div>
+  <div class="risk-item"><div class="risk-label">Export controls / geopolitics</div><div class="risk-desc">China restrictions cap the serviceable market and can force product stratification. The terminal revenue requirement assumes access, not just demand.</div></div>
+  <div class="risk-item"><div class="risk-label">Capital allocation</div><div class="risk-desc">Buybacks at the 75th percentile of the company's own range and 39% of assets in undeployed cash. The aggregate read is adequate, not disciplined; the reinvestment credit is therefore WACC, not historical ROIIC.</div></div>
+</div>
+
+<h2>Decision Impact</h2>
+<p>Company layer A (16/18) supports long-term watch; valuation layer <span class="hl">priced for perfection</span> blocks any valuation-driven upgrade; earnings quality clean imposes no confidence cap; capital allocation adequate does not cap the label but cuts the reinvestment credit to WACC, raising the implied CAGR hurdle from 22.5% to 24.8%. The four layers leave the label at <span class="hl">hold/watch</span>. An add-candidate watch requires either a price reset that brings the implied CAGR near 15% or new evidence that the absolute revenue requirement is serviceable.</p>
+
+<h2>What Would Change The View</h2>
+<div class="risk-grid">
+  <div class="risk-item"><div class="risk-label">Upgrade</div><div class="risk-desc">Price reset to about $3.32T EV with earnings revisions intact; or buybacks move to the lower quartile of the company's range and idle cash gets a stated use, lifting allocation to disciplined and restoring historical ROIIC credit.</div></div>
+  <div class="risk-item"><div class="risk-label">Downgrade</div><div class="risk-desc">Cloud capex guidance cut, order visibility falls, or the multiple expands while revisions flatten (growth share above 85%); or reinvestment rises while incremental capital productivity falls for three years.</div></div>
+  <div class="risk-item"><div class="risk-label">Exit review</div><div class="risk-desc">Export controls widen, customer self-design accelerates, FCF/NI falls below 0.8 for two periods, or a large acquisition pushes goodwill/invested capital above 30% and the with-goodwill/ex-goodwill ROIIC ratio below 0.9.</div></div>
+  <div class="risk-item"><div class="risk-label">Evidence needed</div><div class="risk-desc">A dated buyback price series, a disclosed idle-cash policy, and a normalized FY24-FY26 cash conversion series. Without them, the allocation read stays adequate and the confidence cap stays Medium.</div></div>
+</div>
+
+<h2>Data Freshness</h2>
+<table class="compact financial"><thead><tr><th>Data</th><th>Value</th><th>As of</th><th>Published</th><th>Retrieved</th><th>Source</th><th>Freshness</th></tr></thead><tbody><tr><td>NVDA price / market cap</td><td>$225.32 / ~$5.52T</td><td>2026-05-15</td><td>2026-05-16</td><td>2026-05-16</td><td>Quote snapshot</td><td>Fresh</td></tr><tr><td>FY2026 revenue / gross margin</td><td>$215.9B / 71.1%</td><td>2026-01-25</td><td>2026-02-25</td><td>2026-05-16</td><td>NVIDIA FY26 results</td><td>Lagged</td></tr><tr><td>FY2026 FCF / shareholder returns</td><td>$96.6B / $41.1B</td><td>2026-01-25</td><td>2026-02-25</td><td>2026-05-16</td><td>NVIDIA IR</td><td>Lagged</td></tr><tr><td>Five-year sources and uses</td><td>FY22-FY26 aggregate</td><td>2026-01-25</td><td>2026-02-25</td><td>2026-05-16</td><td>Reconstructed from filings</td><td>Lagged</td></tr><tr><td>Consensus / peer multiples</td><td>Illustrative placeholder</td><td>2026-05-12</td><td>2026-05-13</td><td>2026-05-16</td><td>Third-party platform</td><td>Fresh</td></tr><tr><td>Buyback price percentile</td><td>Not measured</td><td>n/a</td><td>n/a</td><td>2026-05-16</td><td>Requires quarterly 10-Q</td><td>Unavailable</td></tr><tr><td>Idle cash threshold</td><td>Not measured</td><td>n/a</td><td>n/a</td><td>2026-05-16</td><td>Company does not disclose</td><td>Unavailable</td></tr><tr><td>Maintenance capex split</td><td>Depreciation proxy</td><td>2026-01-25</td><td>2026-02-25</td><td>2026-05-16</td><td>Non-disclosed split</td><td>Lagged</td></tr><tr><td>13F / insider activity</td><td>Illustrative placeholder</td><td>2026-03-31</td><td>2026-05-15</td><td>2026-05-16</td><td>SEC filings</td><td>Lagged</td></tr></tbody></table>
+
+<h2>Evidence Sources</h2>
+<table class="compact"><thead><tr><th>Source</th><th>Date</th><th>Type</th><th>Supports</th></tr></thead><tbody><tr><td>NVIDIA Newsroom, FY2026/Q4 results</td><td>2026-02-25</td><td>Primary</td><td>Revenue $215.9B, data center $193.7B, GAAP gross margin 71.1%</td></tr><tr><td>NVIDIA Investor Relations, FY2026 results</td><td>2026-02-25</td><td>Primary</td><td>FCF $96.6B, shareholder returns $41.1B</td></tr><tr><td>Market quote snapshot</td><td>2026-05-16</td><td>Tier 2</td><td>NVDA $225.32, market cap ~$5.52T, P/E ~55x</td></tr><tr><td>MarketLens reverse DCF</td><td>2026-05-16</td><td>Model</td><td>Stated assumptions: NOPAT base $100B, ROIC 30%, terminal growth 3%, 10-year window</td></tr><tr><td>MarketLens five-year ledger</td><td>2026-05-16</td><td>Model</td><td>Illustrative FY22-FY26 aggregate, rounded to $1B and reconciled by construction</td></tr></tbody></table>
+
+<h2>Disclaimer</h2>
+<p>This is public-market research for reference only and does not constitute investment advice.</p>
+
+<div class="analyst-box">
+  <div class="analyst-label">Analyst Summary</div>
+  <p>NVIDIA is a high-quality company with a clean earnings read and a credible AI franchise. The issue is that the price already contains the next decade: 80% of EV is growth, the required ten-year NOPAT CAGR is 22.5%, and the capital-allocation read only earns WACC on reinvestment. The result is hold/watch, not because the business is weak, but because the evidence does not support paying for the terminal state today. Upgrade on a price reset that brings the implied assumption back into the historical distribution, or on new evidence that the absolute revenue requirement is serviceable. This is an illustrative case, not investment advice.</p>
+</div>
+
+<div class="report-footer">
+  <span>MarketLens · Illustrative case, not investment advice</span>
+  <span>2026-05-16 · v0.9</span>
+</div>
+
+</body>
+</html>

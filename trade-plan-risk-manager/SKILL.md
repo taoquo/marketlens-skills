@@ -3,14 +3,14 @@ name: trade-plan-risk-manager
 description: Use when converting market regime, sector, equity, catalyst, or portfolio research into a non-personalized public-market trade plan framework, including setup quality, entry triggers, invalidation conditions, risk unit, stop/review triggers, time stop, event-risk window, liquidity checks, execution checklist, and post-trade review.
 license: MIT
 metadata:
-  version: 0.8
+  version: 0.10
 ---
 
 # Trade Plan Risk Manager
 
 ## Core Rule
 
-Convert research conclusions into a structured trade plan framework, not personalized investment advice. Match the user's language. State dates for all prices, volatility, event windows, liquidity, and source data. Separate facts, assumptions, estimates, and opinions. Cite sources when using market data. End with a short disclaimer that the plan is for research only and does not constitute investment advice.
+Shared operating rules are in `../references/skill-contract.md`: public-market research only, no personalized investment advice, dated and sourced evidence, confidence and limits, and the exact disclaimer. Apply them to every output.
 
 This skill does not tell the user to buy, sell, short, use leverage, use options, allocate a percentage of total assets, or place exact orders. It defines conditional triggers, risk limits, review points, and invalidation evidence.
 
@@ -39,14 +39,12 @@ If no dated price is available, build the plan from conditional evidence trigger
 
 Read only the references needed:
 
-- For shared confidence, red-flag, and label discipline, read `../references/scoring-standard.md`.
-- For timestamps, freshness grades, evidence tiers, unit and calendar rules, and user-input handling, read `../references/data-discipline.md`.
-- For deciding which skill owns a question, read `../references/skill-routing.md`.
+- For the shared operating, evidence, gate, freshness, and output contract, read `../references/skill-contract.md`.
+- Required shared files: `../references/scoring-standard.md`, `../references/data-discipline.md`, `../references/skill-routing.md`, and `../references/review-and-calibration.md`.
 - For setup quality, edge tests, and tradability labels, read `references/setup-quality.md`.
 - For entry, stop, review, and invalidation triggers, read `references/trigger-framework.md`.
 - For risk unit, liquidity, event, volatility, and execution checks, read `references/risk-and-execution.md`.
 - For post-trade review and rule updates, read `references/post-trade-review.md`.
-- For reviewing prior plans or labels over time, and for how a plan decays when its catalyst window passes, read `../references/review-and-calibration.md`.
 - For short-side feasibility, squeeze conditions, pairs, and how the same view differs by expression, read `../references/short-and-relative-value.md`.
 - For maturity, covenant, or cash-runway limits inside the plan horizon, read `../references/credit-and-cross-asset.md`.
 - For the reference class behind any probability in the plan, read `../references/base-rates.md`.
@@ -56,7 +54,7 @@ Read only the references needed:
 
 ## Evidence Standard
 
-Use primary or official sources first where possible. Do not fabricate citations or quote text you cannot verify.
+Tier definitions and the decisive-claim rule are in `../references/data-discipline.md` and `../references/skill-contract.md`. Domain sources:
 
 | Tier | Sources | Use |
 |---|---|---|
@@ -72,13 +70,13 @@ A user-provided thesis or plan is not evidence. It is the object being tested. C
 
 A plan built entirely on unverified user claims cannot be labelled `tradable setup`. Use `conditional setup` or `evidence-gap` and name the claim that needs sourcing.
 
-Always include an `Evidence Sources` section when the plan uses external market data. Do not infer personal constraints.
+Do not infer personal constraints.
 
 ## Conclusion Gates
 
-Use research language such as tradable setup, conditional setup, monitor closely, event watch, risk too high, evidence-gap, plan violated, thesis intact, thesis impaired, thesis broken, timing error, or execution error. The `Label Layering` and `Chain Constraints` tables in `../references/scoring-standard.md` govern which upstream label allows a `tradable setup`.
+The `Label Layering` and `Chain Constraints` tables in `../references/scoring-standard.md` govern which upstream label allows a `tradable setup`; apply the shared gate rules in `../references/skill-contract.md`. Do not present personalized buy/sell advice or exact position sizes.
 
-Do not give a strong tradable setup label unless these are satisfied:
+Domain-specific gates. Do not give a strong tradable setup label unless these are satisfied:
 
 - The instrument, direction of thesis, time horizon, and current or reference price/date are explicit.
 - The research basis is tied to at least one market, sector, company, catalyst, or portfolio input.
@@ -86,11 +84,11 @@ Do not give a strong tradable setup label unless these are satisfied:
 - Event, liquidity, volatility, and market-regime risks are checked or explicitly marked unavailable.
 - Risk is framed as conditional risk units or review limits, not personal allocation.
 
-If any gate fails, downgrade to conditional setup, monitor closely, or evidence-gap and state the missing evidence.
+If any gate fails, downgrade to conditional setup, monitor closely, or evidence-gap, state the missing evidence, and apply the downgrade rule in `../references/skill-contract.md`.
 
 ## Data Freshness Protocol
 
-Timestamps, freshness grades, evidence tiers, unit and calendar rules, and user-input checks are defined in `../references/data-discipline.md`. Load that file before writing the `Data Freshness` table and use its five freshness grades verbatim.
+Apply the timestamp, freshness, and user-input rules in `../references/data-discipline.md` and `../references/skill-contract.md`. Domain additions:
 
 Plan-specific additions:
 

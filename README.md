@@ -10,7 +10,7 @@ It provides six production-oriented skills:
 
 | Skill | Purpose |
 |---|---|
-| `equity-research` | Equity research for US, Hong Kong, and A-share listed companies, covering quality scoring, earnings-quality screens, fundamentals, implied-expectation valuation, moat, regional disclosures, red flags, and data freshness. |
+| `equity-research` | Equity research for US, Hong Kong, and A-share listed companies, covering quality scoring, earnings-quality screens, fundamentals, implied-expectation valuation, historical valuation bands, moat, regional disclosures, red flags, and data freshness. |
 | `market-regime-monitor` | Market regime monitoring across liquidity, sentiment, positioning, valuation crowding, scoring confidence, risk-budget impact, and cross-market risk transmission. |
 | `sector-industry-research` | Sector and industry research across cycle stage, supply-demand, value chains, policy/technology shifts, peer structure, trade expression, and listed-company read-through. |
 | `catalyst-event-monitor` | Event-driven research for upcoming catalysts, expectation gaps, market pricing, trade setup, scenario paths, pre-event watch data, and post-event thesis updates. |
@@ -74,6 +74,18 @@ Use $trade-plan-risk-manager to convert a stock thesis into a conditional trade 
 Use $trade-plan-risk-manager to review whether a completed trade was a thesis error, timing error, risk framing error, or execution error.
 ```
 
+## Shared Contract
+
+`references/skill-contract.md` holds the operating rules every skill inherits: public-market
+research only, no personalized advice, the four mandatory shared routes, evidence-tier
+discipline, conclusion-gate behavior, the three timestamps and five freshness grades, and the
+six mandatory output blocks in order. Each `SKILL.md` keeps only its domain-specific Core Rule,
+evidence sources, gates, degradation table, workflow, and output template.
+
+`VERSION` is the single release source. `scripts/validate-skills.sh` checks that every
+`SKILL.md`, `VERSION`, and the latest `CHANGELOG.md` heading agree, and that README example
+coverage and image paths match `examples/`.
+
 ## Data Discipline
 
 `references/data-discipline.md` holds the rules every skill inherits. Each `SKILL.md`
@@ -132,49 +144,55 @@ Release-by-release changes are tracked in [CHANGELOG.md](CHANGELOG.md).
 
 ## Examples
 
-The `examples/` folder contains six Folio-typeset validation cases, rebuilt for v0.8 so that
-each one exercises the release's gates: what the price implies, whether the reported earnings
-survive the screens, where the cash actually went, and which label the answer is allowed to
-carry. Each case ships as `.png` (previewed below, one continuous page), `.html`, and `.pdf`
-(A4 pagination):
+The `examples/` folder contains seven English Folio-typeset validation cases: the six v0.9
+cases, rebuilt with NVIDIA as the core case, plus a v0.10 historical valuation-band case. Each
+one exercises the release's gates: what the price implies, whether the reported earnings survive
+the screens, where the cash actually went, and which label the answer is allowed to carry. Each
+case ships as `.png` (previewed below, one continuous page), `.html`, and `.pdf` (A4 pagination):
 
 `equity-research` · NVIDIA at 16/18 quality across six dimensions, with a clean earnings read, an adequate capital-allocation record, and a reverse DCF where 80 percent of EV is growth.
 
-![Equity research case](examples/marketlens-v08-equity-research-nvda.png)
+![Equity research case](examples/marketlens-v09-equity-research-nvda.png)
 
-`market-regime-monitor` · US technology-stock regime on three axes, where equities are still rising while credit and real rates already score negative, totalling -3 for tight or crowded.
+`equity-research` · NVIDIA PE(TTM) band: 55x sits at the 51st percentile of its own 750-observation history, the rolling median is falling, and the band remains a cross-check rather than a label. The case uses a Folio line chart with eight quarterly samples and a visible data table. Illustrative data.
 
-![Market regime case](examples/marketlens-v08-market-regime-tech.png)
+![Valuation band case](examples/marketlens-v010-valuation-band-nvda.png)
 
-`sector-industry-research` · AI server supply chain ranked three times, by multiple, by implied assumption, and by return on incremental capital, producing three different lists that overlap on one segment.
+`market-regime-monitor` · US technology-stock regime on three axes, where equities are still rising while credit and real rates already score negative, totalling -3 for tight or crowded, with NVIDIA as the cleanest expression of the duration bet.
 
-![Sector industry case](examples/marketlens-v08-sector-ai-server.png)
+![Market regime case](examples/marketlens-v09-market-regime-nvda.png)
 
-`catalyst-event-monitor` · Apple WWDC26, asking first whether the event only delivers what 36x already implies, then decomposing the result by source, and pricing buyback announcements by the company's own allocation record rather than by headline size.
+`sector-industry-research` · AI server supply chain ranked three times, by multiple, by implied assumption, and by return on incremental capital, producing three different lists that overlap on the bottleneck suppliers.
 
-![Catalyst event case](examples/marketlens-v08-catalyst-apple-wwdc.png)
+![Sector industry case](examples/marketlens-v09-sector-ai-server.png)
+
+`catalyst-event-monitor` · NVIDIA earnings, asking first whether the event only delivers what 55x and 80 percent growth share already imply, then decomposing the result by operating source, accrual, capitalization, one-off, and tax.
+
+![Catalyst event case](examples/marketlens-v09-catalyst-nvda-earnings.png)
 
 `portfolio-risk-monitor` · Equal-weight AI watchlist where nine tickers resolve into one duration bet, one shared accounting practice, and one reinvestment dependence on the same set of management teams.
 
-![Portfolio risk case](examples/marketlens-v08-portfolio-ai-watchlist.png)
+![Portfolio risk case](examples/marketlens-v09-portfolio-ai-nvda.png)
 
 `trade-plan-risk-manager` · NVIDIA plan downgraded to monitor closely because the upside case restates what the price already requires, with liquidity measured as Deep and position intent discounted one notch for delivery dependence.
 
-![Trade plan risk case](examples/marketlens-v08-trade-plan-nvda.png)
+![Trade plan risk case](examples/marketlens-v09-trade-plan-nvda.png)
 
 ### Coverage
 
-Coverage is one case per skill, six skills and six cases, with no skill left without a worked
-example and no example that does not map back to a shipped skill:
+Coverage is at least one case per skill: six skills and seven cases, with a second
+`equity-research` case for the historical valuation band. No skill is left without a worked
+example, and no example fails to map back to a shipped skill:
 
 | Skill | Case | HTML / PDF pages |
 |---|---|---|
-| `equity-research` | `marketlens-v08-equity-research-nvda` | 5 |
-| `market-regime-monitor` | `marketlens-v08-market-regime-tech` | 2 |
-| `sector-industry-research` | `marketlens-v08-sector-ai-server` | 3 |
-| `catalyst-event-monitor` | `marketlens-v08-catalyst-apple-wwdc` | 3 |
-| `portfolio-risk-monitor` | `marketlens-v08-portfolio-ai-watchlist` | 4 |
-| `trade-plan-risk-manager` | `marketlens-v08-trade-plan-nvda` | 4 |
+| `equity-research` | `marketlens-v09-equity-research-nvda` | 4 |
+| `equity-research` | `marketlens-v010-valuation-band-nvda` | 2 |
+| `market-regime-monitor` | `marketlens-v09-market-regime-nvda` | 2 |
+| `sector-industry-research` | `marketlens-v09-sector-ai-server` | 2 |
+| `catalyst-event-monitor` | `marketlens-v09-catalyst-nvda-earnings` | 2 |
+| `portfolio-risk-monitor` | `marketlens-v09-portfolio-ai-nvda` | 2 |
+| `trade-plan-risk-manager` | `marketlens-v09-trade-plan-nvda` | 2 |
 
 Every case carries the six mandatory blocks: `Red Flags`, `Decision Impact`,
 `What Would Change The View`, `Data Freshness`, `Evidence Sources`, and `Disclaimer`.
@@ -185,12 +203,26 @@ closed grades `Fresh` / `Lagged` / `Stale` / `Undated` / `Unavailable`, so the c
 each case is traceable to a named missing or lagged input. Scored outputs add a
 `Score Summary` table; `trade-plan-risk-manager` uses `Setup Quality` instead, as allowed by
 `references/scoring-standard.md`. They are output-format previews and do not constitute
-investment advice.
+investment advice. v0.9 rebuilt the examples in English; v0.10 adds the historical valuation
+band method and a seventh case. The v0.9 example cases remain current.
+
+The method, data format, command-line utility, and interpretation are documented in the
+[Valuation Band Guide](docs/valuation-band.md). The case is a Folio `line-chart` drawing; the
+local chart utility remains the dependency-free standalone fallback:
+
+```bash
+python3 scripts/pe_band_chart.py \
+  --input examples/data/nvda-pe-ttm-illustrative.csv \
+  --output pe-band.svg \
+  --table-output pe-band.csv \
+  --summary-json summary.json
+```
 
 ## Validation
 
 ```bash
-# structure, frontmatter, reference routing, and required output blocks
+# structure, frontmatter, reference routing, shared contract, output block order,
+# version consistency, and example coverage
 bash scripts/validate-skills.sh
 
 # rebuild packages, then require dist/*.skill to match the working tree byte for byte

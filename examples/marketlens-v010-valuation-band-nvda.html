@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<!-- ==================================================================
+     ONE-PAGER · English · parchment design system
+     Single A4 proposal / report / executive summary
+     Build: python3 scripts/build.py one-pager-en
+     Target: exactly 1 page
+     ================================================================== -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>NVIDIA at 55x: mid-band, but the centre is falling</title>
+<meta name="author" content="MarketLens">
+<meta name="description" content="NVIDIA at 55x sits at the 51st percentile of its own 750-observation PE band; the band is a cross-check, not a buy signal.">
+<meta name="keywords" content="NVIDIA,NVDA,PE band,valuation,historical multiple,percentile,reverse DCF">
+<meta name="generator" content="Folio">
+<style>
+
+  @page {
+    size: A4;
+    margin: 15mm 18mm 15mm 18mm;
+    background: #F6F0EA;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --color-surface-page: #F6F0EA;
+    --color-surface-card:     #FBF7F3;
+    --color-text-primary:#191514;
+    --color-text-warm: #3A312D;
+    --color-text-secondary:     #5A4A43;
+    --color-text-muted: #756A63;
+    --color-accent-brand:     #B83D2E;
+    --color-border-default: #E6DACD;
+    --color-border-soft: #E5DBCD;
+    --color-accent-tag:    #F1D2CC;
+
+    --serif: "Source Serif 4", Charter, Georgia,
+             Palatino, "Times New Roman", serif;
+    --sans: var(--serif);
+  }
+
+  html, body { background: var(--color-surface-page); }
+
+  @media screen {
+    body { max-width: 210mm; margin: 0 auto; padding: 15mm 18mm; }
+  }
+
+  body {
+    color: var(--color-text-primary);
+    font-family: var(--serif);
+    font-size: 10pt;
+    line-height: 1.45;
+    /* Paragraph flow; declared in references/profiles/typography/folio-v1.yaml. */
+    widows: 2;
+    orphans: 2;
+    hyphens: manual;
+  }
+
+  .serif { font-family: var(--serif); }
+
+  .header {
+    border-top: 1.2pt solid var(--color-accent-brand);
+    padding-top: 7pt;
+    margin-bottom: 12pt;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20pt;
+  }
+  .title-block { flex: 1; }
+  .eyebrow {
+    font-size: 9pt;
+    color: var(--color-accent-brand);
+    letter-spacing: 1pt;
+    text-transform: uppercase;
+    margin-bottom: 4pt;
+    font-weight: 500;
+  }
+  h1 {
+    font-family: var(--serif);
+    font-size: 26pt;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    line-height: 1.12;
+    letter-spacing: -0.3pt;
+    margin-bottom: 5pt;
+  }
+  .subtitle {
+    font-size: 11.5pt;
+    color: var(--color-text-secondary);
+    line-height: 1.4;
+  }
+  .meta {
+    font-size: 9pt;
+    color: var(--color-text-muted);
+    text-align: right;
+    line-height: 1.5;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* METRICS - horizontal baseline, no containers (matches resume aesthetic). */
+  .metrics {
+    display: flex;
+    gap: 12pt;
+    margin-bottom: 14pt;
+    padding: 6pt 0;
+    border-top: 0.5pt solid var(--color-border-default);
+    border-bottom: 0.5pt solid var(--color-border-default);
+  }
+  .metric {
+    flex: 1;
+    background: transparent;
+    padding: 0;
+    display: flex;
+    align-items: baseline;
+    gap: 5pt;
+    break-inside: avoid;
+  }
+  .metric-value {
+    font-family: var(--serif);
+    font-size: 22pt;
+    font-weight: 500;
+    color: var(--color-accent-brand);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    letter-spacing: -0.3pt;
+  }
+  .metric-label {
+    font-size: 9pt;
+    color: var(--color-text-secondary);
+    line-height: 1.3;
+  }
+
+  section { margin-bottom: 18pt; break-inside: avoid; }
+  section:last-of-type { margin-bottom: 0; }
+
+  h2 {
+    font-family: var(--serif);
+    font-size: 16pt;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    margin-bottom: 6pt;
+  }
+  h2 .sub {
+    font-size: 9pt;
+    color: var(--color-text-muted);
+    font-weight: 400;
+    margin-left: 6pt;
+  }
+
+  p { margin-bottom: 6pt; line-height: 1.45; }
+  p:last-child { margin-bottom: 0; }
+
+  .lead {
+    font-size: 12.5pt;
+    line-height: 1.5;
+    color: var(--color-text-warm);
+    margin-bottom: 10pt;
+  }
+
+  .decision-strip {
+    display: grid;
+    grid-template-columns: 66pt 1fr 82pt;
+    gap: 10pt;
+    align-items: baseline;
+    padding: 7pt 0;
+    margin: 0 0 14pt 0;
+    border-top: 0.8pt solid var(--color-text-primary);
+    border-bottom: 0.3pt dotted var(--color-border-default);
+    break-inside: avoid;
+  }
+  .decision-label {
+    font-size: 8.5pt;
+    color: var(--color-text-muted);
+    letter-spacing: 0.7pt;
+    text-transform: uppercase;
+  }
+  .decision-text {
+    font-size: 11pt;
+    color: var(--color-text-primary);
+    line-height: 1.42;
+  }
+  .decision-owner {
+    font-size: 9pt;
+    color: var(--color-text-secondary);
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hl { color: var(--color-accent-brand); font-weight: 500; }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18pt;
+  }
+
+  ul.dash {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  ul.dash li {
+    position: relative;
+    padding-left: 14pt;
+    margin-bottom: 4pt;
+    line-height: 1.45;
+  }
+  ul.dash li::before {
+    content: "\2013";
+    position: absolute;
+    left: 0;
+    color: var(--color-accent-brand);
+  }
+
+  .timeline {
+    display: flex;
+    gap: 12pt;
+    margin-top: 6pt;
+  }
+  .tl-step { flex: 1; break-inside: avoid; }
+  .tl-year {
+    font-family: var(--serif);
+    font-size: 11pt;
+    font-weight: 500;
+    color: var(--color-accent-brand);
+    margin-bottom: 2pt;
+    letter-spacing: 0.3pt;
+    text-transform: uppercase;
+  }
+  .tl-head {
+    font-size: 10pt;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    margin-bottom: 2pt;
+  }
+  .tl-body {
+    font-size: 9pt;
+    color: var(--color-text-secondary);
+    line-height: 1.45;
+  }
+
+  .tag {
+    display: inline-block;
+    background: var(--color-accent-tag);
+    color: var(--color-accent-brand);
+    font-size: 9pt;
+    font-weight: 500;
+    padding: 1pt 6pt;
+    border-radius: 3pt;
+    letter-spacing: 0.4pt;
+    text-transform: uppercase;
+    margin-right: 3pt;
+  }
+
+  /* TABLE (folio-table) */
+  table, .folio-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9pt;
+    margin: 8pt 0;
+    break-inside: avoid;
+  }
+  table th, .folio-table th {
+    text-align: left;
+    font-weight: 500;
+    color: var(--color-text-warm);
+    padding: 4pt 6pt;
+    border-bottom: 1pt solid var(--color-border-default);
+    background: transparent;
+  }
+  table td, .folio-table td {
+    padding: 3pt 6pt;
+    border-bottom: 0.3pt solid var(--color-border-soft);
+    vertical-align: top;
+  }
+  table.compact th, .folio-table.compact th { padding: 2pt 5pt; font-size: 8pt; }
+  table.compact td, .folio-table.compact td { padding: 1pt 5pt; font-size: 8pt; line-height: 1.4; }
+  table.financial td:not(:first-child), .folio-table.financial td:not(:first-child) {
+    text-align: right; font-variant-numeric: tabular-nums;
+  }
+  table.financial th:not(:first-child), .folio-table.financial th:not(:first-child) { text-align: right; }
+  table.striped tbody tr:nth-child(even) td, .folio-table.striped tbody tr:nth-child(even) td {
+    background: var(--color-surface-card);
+  }
+  table .total td, .folio-table .total td {
+    font-weight: 500; border-top: 1pt solid var(--color-accent-brand); border-bottom: none; color: var(--color-text-primary);
+  }
+
+  /* CALLOUT - transparent, single brand bar. No filled container. */
+  .callout {
+    background: transparent;
+    border-left: 1.8pt solid var(--color-accent-brand);
+    padding: 4pt 0 4pt 14pt;
+    margin: 10pt 0;
+    font-size: 10.5pt;
+    line-height: 1.55;
+    color: var(--color-text-secondary);
+    break-inside: avoid;
+  }
+  .callout .hl, .callout .em-brand { color: var(--color-accent-brand); }
+
+  .footer {
+    margin-top: 18pt;
+    padding-top: 6pt;
+    border-top: 0.3pt dotted var(--color-border-default);
+    font-size: 9pt;
+    color: var(--color-text-muted);
+    display: flex;
+    justify-content: space-between;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.3pt;
+  }
+.footer { gap: 18pt; } .footer span:last-child { flex: 0 1 46%; text-align: right; }
+
+figure[data-folio-diagram-slot="pe-band"], .folio-figure { margin: 4pt 0 6pt; break-inside: avoid; }
+figure[data-folio-diagram-slot="pe-band"] svg, .folio-figure svg { width: 100%; height: auto; display: block; }
+figure[data-folio-diagram-slot="pe-band"] figcaption, .folio-figure figcaption { font-size: 8pt; color: var(--color-text-muted); margin-top: 4pt; line-height: 1.45; }
+.folio-diagram-artifact svg text[font-size="8"],
+.folio-diagram-artifact svg text[font-size="9"] { font-size: 13px; }
+.folio-data-summary { font-size: 7pt !important; margin-bottom: 2pt !important; }
+.folio-data-fallback { margin-top: 4pt !important; }
+.folio-data-fallback table { font-size: 6.8pt !important; }
+.folio-data-fallback th, .folio-data-fallback td { padding: 0.5pt 4pt !important; }
+.lead { line-height: 1.45; margin-bottom: 8pt; }
+.decision-strip { margin-bottom: 8pt; }
+section { margin-bottom: 6pt; }
+h2 { margin-bottom: 4pt; }
+ul.dash li { margin-bottom: 1pt; }
+.callout { margin: 6pt 0; }
+table { margin: 3pt 0; }
+table.compact th, table.compact td { padding: 0.5pt 5pt; }
+table.compact td { font-size: 7.5pt; }
+.footer { margin-top: 6pt; padding-top: 4pt; }
+
+</style>
+<style id="folio-diagram-host-styles">
+  .folio-diagram-artifact { display: flex; justify-content: center; width: 100%; max-width: var(--folio-host-max-width, 100%); overflow: hidden; }
+  .folio-diagram-artifact svg { display: block; width: 100% !important; max-width: var(--folio-host-fit-width, 100%); height: auto; max-height: var(--folio-host-max-height, none); min-width: 0 !important; }
+  .folio-data-fallback { margin-top: 8pt; break-inside: avoid; }
+  .folio-data-summary { margin: 0 0 4pt; color: #5A4A43; font-size: 8.5pt; }
+  .folio-data-fallback table { width: 100%; border-collapse: collapse; font-size: 7.5pt; }
+  .folio-data-fallback th { text-align: left; color: #5A4A43; border-bottom: 0.75pt solid #E9DED4; padding: 2pt 4pt; }
+  .folio-data-fallback td { border-bottom: 0.5pt solid #E9DED4; padding: 2pt 4pt; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="title-block">
+    <div class="eyebrow">$equity-research · v0.10 case</div>
+    <h1>NVIDIA at 55x: mid-band, but the centre is falling</h1>
+    <div class="subtitle">A rolling, point-in-time PE(TTM) band places 55x at the 51st percentile of its own 750-observation history. The band is a cross-check; the implied expectations still set the label.</div>
+  </div>
+  <div class="meta">
+    MarketLens<br>
+    2026.05.16<br>
+    v0.10 case
+  </div>
+</div>
+
+<div class="metrics"><div class="metric"><div class="metric-value">55.0x</div><div class="metric-label">PE(TTM)</div></div><div class="metric"><div class="metric-value">51st</div><div class="metric-label">Percentile</div></div><div class="metric"><div class="metric-value">44.8x</div><div class="metric-label">Lower band</div></div><div class="metric"><div class="metric-value">82.0x</div><div class="metric-label">Upper band</div></div></div>
+
+<p class="lead">The band answers a narrow question: where does 55x sit in NVIDIA's own history? At the 51st percentile it is almost exactly at the median of its trailing 750-observation window. That is neither cheap nor expensive; it is unremarkable. The useful part is the slope: the rolling median has fallen from roughly 87x in late 2023 to 55x today, so the same absolute multiple now demands less than it did two years ago. The band cannot tell you whether the earnings base or the implied growth is right; the reverse DCF still does that work.</p>
+
+<figure data-folio-diagram-slot="pe-band" data-folio-kind="line-chart" data-folio-profile="embed" data-folio-theme="folio" data-folio-variant="plain" data-folio-fixture-sha256="cb7fc6d8156a8e029e9e57d45dc22817e23301d44ee9a2625a2b045b3466d0ee" data-folio-artifact-sha256="059346d881d2b50880078fa40736f5a9c64b3454e2c94f8d7f2952a7a28a2980" role="group" aria-labelledby="folio-caption-pe-band" aria-describedby="folio-data-pe-band">
+<div class="folio-diagram-artifact" style="--folio-host-max-width:166mm;--folio-host-max-height:140.25mm;--folio-host-fit-width:166.0mm">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" style="display:block;width:100%;height:auto" viewBox="0 0 960 440" role="img" aria-labelledby="host-pe-band-cb7fc6d815--drawing-title host-pe-band-cb7fc6d815--drawing-description" lang="en-US" data-folio-namespace="host-pe-band-cb7fc6d815" data-folio-variant="plain"><title id="host-pe-band-cb7fc6d815--drawing-title" data-folio-id="drawing-title">NVIDIA PE(TTM) Band</title><desc id="host-pe-band-cb7fc6d815--drawing-description" data-folio-id="drawing-description">NVIDIA PE(TTM) Band. PE(TTM): 2023-Q3 97.1, 2023-Q4 81.21, 2024-Q1 80.77, 2024-Q3 59.97, 2025-Q1 38.79, 2025-Q3 46.28, 2026-Q1 51.59, 2026-Q2 55.0; P20 lower: 2023-Q3 58.9, 2023-Q4 60.9, 2024-Q1 62.24, 2024-Q3 60.9, 2025-Q1 52.69, 2025-Q3 44.76, 2026-Q1 44.76, 2026-Q2 44.76; P80 upper: 2023-Q3 94.46, 2023-Q4 94.46, 2024-Q1 93.6, 2024-Q3 93.6, 2025-Q1 92.47, 2025-Q3 92.47, 2026-Q1 86.39, 2026-Q2 82.05. Source: Illustrative daily series; P20/P80 band from a trailing window of up to 750 observations (first quarter about 600); quarterly samples. References: median 54.7x 54.72. Annotations: 55.0x · P51</desc><rect data-folio-role="canvas" x="0" y="0" width="960" height="440" fill="#F6F0EA" /><text x="480" y="40" fill="#191514" font-size="24" font-family='"Source Serif 4", Charter, Georgia, serif' text-anchor="middle">NVIDIA PE(TTM) Band</text><line id="host-pe-band-cb7fc6d815--grid:0" data-folio-id="grid:0" x1="100" y1="320" x2="820" y2="320" fill="none" stroke="#E6DACD" stroke-width="0.8" /><text x="88" y="324" fill="#5A4A43" font-size="8" font-family="'JetBrains Mono', monospace" text-anchor="end">20.0x</text><line id="host-pe-band-cb7fc6d815--grid:1" data-folio-id="grid:1" x1="100" y1="260" x2="820" y2="260" fill="none" stroke="#E6DACD" stroke-width="0.8" /><text x="88" y="264" fill="#5A4A43" font-size="8" font-family="'JetBrains Mono', monospace" text-anchor="end">40.0x</text><line id="host-pe-band-cb7fc6d815--grid:2" data-folio-id="grid:2" x1="100" y1="200" x2="820" y2="200" fill="none" stroke="#E6DACD" stroke-width="0.8" /><text x="88" y="204" fill="#5A4A43" font-size="8" font-family="'JetBrains Mono', monospace" text-anchor="end">60.0x</text><line id="host-pe-band-cb7fc6d815--grid:3" data-folio-id="grid:3" x1="100" y1="140" x2="820" y2="140" fill="none" stroke="#E6DACD" stroke-width="0.8" /><text x="88" y="144" fill="#5A4A43" font-size="8" font-family="'JetBrains Mono', monospace" text-anchor="end">80.0x</text><line id="host-pe-band-cb7fc6d815--grid:4" data-folio-id="grid:4" x1="100" y1="80" x2="820" y2="80" fill="none" stroke="#E6DACD" stroke-width="0.8" /><text x="88" y="84" fill="#5A4A43" font-size="8" font-family="'JetBrains Mono', monospace" text-anchor="end">100.0x</text><line id="host-pe-band-cb7fc6d815--axis:y" data-folio-id="axis:y" x1="100" y1="80" x2="100" y2="320" fill="none" stroke="#5A4A43" stroke-width="1" /><line id="host-pe-band-cb7fc6d815--axis:x" data-folio-id="axis:x" x1="100" y1="320" x2="820" y2="320" fill="none" stroke="#5A4A43" stroke-width="1" /><text x="100" y="344" fill="#5A4A43" font-size="8" font-family="'JetBrains Mono', monospace" text-anchor="middle">2023-Q3</text><text x="204" y="344" fill="#5A4A43" font-size="8" font-family="'JetBrains Mono', monospace" text-anchor="middle">2023-Q4</text><text x="304" y="344" fill="#5A4A43" font-size="8" font-family="'JetBrains Mono', monospace" text-anchor="middle">2024-Q1</text><text x="408" y="344" fill="#5A4A43" font-size="8" font-family="'JetBrains Mono', monospace" text-anchor="middle">2024-Q3</text><text x="512" y="344" fill="#5A4A43" font-size="8" font-family="'JetBrains Mono', monospace" text-anchor="middle">2025-Q1</text><text x="616" y="344" fill="#5A4A43" font-size="8" font-family="'JetBrains Mono', monospace" text-anchor="middle">2025-Q3</text><text x="716" y="344" fill="#5A4A43" font-size="8" font-family="'JetBrains Mono', monospace" text-anchor="middle">2026-Q1</text><text x="820" y="344" fill="#5A4A43" font-size="8" font-family="'JetBrains Mono', monospace" text-anchor="middle">2026-Q2</text><line id="host-pe-band-cb7fc6d815--reference:median" data-folio-id="reference:median" role="listitem" data-reading-order="24" x1="100" y1="216" x2="820" y2="216" fill="none" stroke="#74665F" stroke-width="1" stroke-dasharray="6 4" /><text x="812" y="232" fill="#5A4A43" font-size="8" font-family="'JetBrains Mono', monospace" text-anchor="end">median 54.7x</text><circle id="host-pe-band-cb7fc6d815--point:pe:66237de1d7" data-folio-id="point:pe:66237de1d7" role="listitem" data-reading-order="0" cx="100" cy="88" r="4" fill="#F6F0EA" stroke="#B83D2E" stroke-width="1.4" /><circle id="host-pe-band-cb7fc6d815--point:pe:460fd17ae8" data-folio-id="point:pe:460fd17ae8" role="listitem" data-reading-order="1" cx="204" cy="136" r="4" fill="#F6F0EA" stroke="#B83D2E" stroke-width="1.4" /><circle id="host-pe-band-cb7fc6d815--point:pe:b9c8dbd889" data-folio-id="point:pe:b9c8dbd889" role="listitem" data-reading-order="2" cx="304" cy="136" r="4" fill="#F6F0EA" stroke="#B83D2E" stroke-width="1.4" /><circle id="host-pe-band-cb7fc6d815--point:pe:c0ad173b15" data-folio-id="point:pe:c0ad173b15" role="listitem" data-reading-order="3" cx="408" cy="200" r="4" fill="#F6F0EA" stroke="#B83D2E" stroke-width="1.4" /><circle id="host-pe-band-cb7fc6d815--point:pe:1c4c3f1313" data-folio-id="point:pe:1c4c3f1313" role="listitem" data-reading-order="4" cx="512" cy="264" r="4" fill="#F6F0EA" stroke="#B83D2E" stroke-width="1.4" /><circle id="host-pe-band-cb7fc6d815--point:pe:72d5c67070" data-folio-id="point:pe:72d5c67070" role="listitem" data-reading-order="5" cx="616" cy="240" r="4" fill="#F6F0EA" stroke="#B83D2E" stroke-width="1.4" /><circle id="host-pe-band-cb7fc6d815--point:pe:5a7cf683f7" data-folio-id="point:pe:5a7cf683f7" role="listitem" data-reading-order="6" cx="716" cy="224" r="4" fill="#F6F0EA" stroke="#B83D2E" stroke-width="1.4" /><circle id="host-pe-band-cb7fc6d815--point:pe:97b27aed5e" data-folio-id="point:pe:97b27aed5e" role="listitem" data-reading-order="7" cx="820" cy="216" r="4" fill="#F6F0EA" stroke="#B83D2E" stroke-width="1.4" /><polyline id="host-pe-band-cb7fc6d815--line:pe:0" data-folio-id="line:pe:0" points="100,88 204,136 304,136 408,200 512,264 616,240 716,224 820,216" fill="none" stroke="#B83D2E" stroke-width="1.6" /><text x="844" y="112" fill="#B83D2E" font-size="9" font-family='"Source Serif 4", Charter, Georgia, serif'>PE(TTM)</text><circle id="host-pe-band-cb7fc6d815--point:lower:66237de1d7" data-folio-id="point:lower:66237de1d7" role="listitem" data-reading-order="8" cx="100" cy="204" r="4" fill="#F6F0EA" stroke="#74665F" stroke-width="1.4" /><circle id="host-pe-band-cb7fc6d815--point:lower:460fd17ae8" data-folio-id="point:lower:460fd17ae8" role="listitem" data-reading-order="9" cx="204" cy="196" r="4" fill="#F6F0EA" stroke="#74665F" stroke-width="1.4" /><circle id="host-pe-band-cb7fc6d815--point:lower:b9c8dbd889" data-folio-id="point:lower:b9c8dbd889" role="listitem" data-reading-order="10" cx="304" cy="192" r="4" fill="#F6F0EA" stroke="#74665F" stroke-width="1.4" /><circle id="host-pe-band-cb7fc6d815--point:lower:c0ad173b15" data-folio-id="point:lower:c0ad173b15" role="listitem" data-reading-order="11" cx="408" cy="196" r="4" fill="#F6F0EA" stroke="#74665F" stroke-width="1.4" /><circle id="host-pe-band-cb7fc6d815--point:lower:1c4c3f1313" data-folio-id="point:lower:1c4c3f1313" role="listitem" data-reading-order="12" cx="512" cy="220" r="4" fill="#F6F0EA" stroke="#74665F" stroke-width="1.4" /><circle id="host-pe-band-cb7fc6d815--point:lower:72d5c67070" data-folio-id="point:lower:72d5c67070" role="listitem" data-reading-order="13" cx="616" cy="244" r="4" fill="#F6F0EA" stroke="#74665F" stroke-width="1.4" /><circle id="host-pe-band-cb7fc6d815--point:lower:5a7cf683f7" data-folio-id="point:lower:5a7cf683f7" role="listitem" data-reading-order="14" cx="716" cy="244" r="4" fill="#F6F0EA" stroke="#74665F" stroke-width="1.4" /><circle id="host-pe-band-cb7fc6d815--point:lower:97b27aed5e" data-folio-id="point:lower:97b27aed5e" role="listitem" data-reading-order="15" cx="820" cy="244" r="4" fill="#F6F0EA" stroke="#74665F" stroke-width="1.4" /><polyline id="host-pe-band-cb7fc6d815--line:lower:0" data-folio-id="line:lower:0" points="100,204 204,196 304,192 408,196 512,220 616,244 716,244 820,244" fill="none" stroke="#74665F" stroke-width="1.6" stroke-dasharray="4 3" /><text x="844" y="136" fill="#5A4A43" font-size="9" font-family='"Source Serif 4", Charter, Georgia, serif'>P20 lower</text><circle id="host-pe-band-cb7fc6d815--point:upper:66237de1d7" data-folio-id="point:upper:66237de1d7" role="listitem" data-reading-order="16" cx="100" cy="96" r="4" fill="#F6F0EA" stroke="#8B8078" stroke-width="1.4" /><circle id="host-pe-band-cb7fc6d815--point:upper:460fd17ae8" data-folio-id="point:upper:460fd17ae8" role="listitem" data-reading-order="17" cx="204" cy="96" r="4" fill="#F6F0EA" stroke="#8B8078" stroke-width="1.4" /><circle id="host-pe-band-cb7fc6d815--point:upper:b9c8dbd889" data-folio-id="point:upper:b9c8dbd889" role="listitem" data-reading-order="18" cx="304" cy="100" r="4" fill="#F6F0EA" stroke="#8B8078" stroke-width="1.4" /><circle id="host-pe-band-cb7fc6d815--point:upper:c0ad173b15" data-folio-id="point:upper:c0ad173b15" role="listitem" data-reading-order="19" cx="408" cy="100" r="4" fill="#F6F0EA" stroke="#8B8078" stroke-width="1.4" /><circle id="host-pe-band-cb7fc6d815--point:upper:1c4c3f1313" data-folio-id="point:upper:1c4c3f1313" role="listitem" data-reading-order="20" cx="512" cy="104" r="4" fill="#F6F0EA" stroke="#8B8078" stroke-width="1.4" /><circle id="host-pe-band-cb7fc6d815--point:upper:72d5c67070" data-folio-id="point:upper:72d5c67070" role="listitem" data-reading-order="21" cx="616" cy="104" r="4" fill="#F6F0EA" stroke="#8B8078" stroke-width="1.4" /><circle id="host-pe-band-cb7fc6d815--point:upper:5a7cf683f7" data-folio-id="point:upper:5a7cf683f7" role="listitem" data-reading-order="22" cx="716" cy="120" r="4" fill="#F6F0EA" stroke="#8B8078" stroke-width="1.4" /><circle id="host-pe-band-cb7fc6d815--point:upper:97b27aed5e" data-folio-id="point:upper:97b27aed5e" role="listitem" data-reading-order="23" cx="820" cy="132" r="4" fill="#F6F0EA" stroke="#8B8078" stroke-width="1.4" /><polyline id="host-pe-band-cb7fc6d815--line:upper:0" data-folio-id="line:upper:0" points="100,96 204,96 304,100 408,100 512,104 616,104 716,120 820,132" fill="none" stroke="#8B8078" stroke-width="1.6" stroke-dasharray="6 4" /><text x="844" y="160" fill="#5A4A43" font-size="9" font-family='"Source Serif 4", Charter, Georgia, serif'>P80 upper</text><g id="host-pe-band-cb7fc6d815--annotation:current" data-folio-id="annotation:current" role="listitem" data-reading-order="25"><path d="M 820 216 L 792 216 Q 788 216 788 212 L 788 184" fill="none" stroke="#B83D2E" stroke-width="1" /><rect x="692" y="164" width="96" height="40" rx="4" fill="#FBF7F3" stroke="#B83D2E" stroke-width="1" /><text x="700" y="188" fill="#191514" font-size="8" font-family='"Source Serif 4", Charter, Georgia, serif'>55.0x · P51</text></g></svg>
+</div>
+<figcaption id="folio-caption-pe-band">Illustrative reported-basis TTM; 8 quarterly samples from 1,305 daily observations, first band about 600 observations; the y-axis starts at 20x and the rule at 54.7x marks the current rolling median. The multiple was above its band in 2023 and below it in 2025; at 55x it is back at the middle. Descriptive, not a signal.</figcaption>
+<div class="folio-data-fallback" id="folio-data-pe-band">
+<p class="folio-data-summary">8 categories across 3 series.</p>
+<table class="folio-table compact" data-folio-data-table="true"><thead><tr>
+<th scope="col">Category</th>
+<th scope="col">PE(TTM)</th>
+<th scope="col">P20 lower</th>
+<th scope="col">P80 upper</th>
+</tr></thead><tbody>
+<tr>
+<td>2023-Q3</td>
+<td>97.1</td>
+<td>58.9</td>
+<td>94.46</td>
+</tr>
+<tr>
+<td>2023-Q4</td>
+<td>81.21</td>
+<td>60.9</td>
+<td>94.46</td>
+</tr>
+<tr>
+<td>2024-Q1</td>
+<td>80.77</td>
+<td>62.24</td>
+<td>93.6</td>
+</tr>
+<tr>
+<td>2024-Q3</td>
+<td>59.97</td>
+<td>60.9</td>
+<td>93.6</td>
+</tr>
+<tr>
+<td>2025-Q1</td>
+<td>38.79</td>
+<td>52.69</td>
+<td>92.47</td>
+</tr>
+<tr>
+<td>2025-Q3</td>
+<td>46.28</td>
+<td>44.76</td>
+<td>92.47</td>
+</tr>
+<tr>
+<td>2026-Q1</td>
+<td>51.59</td>
+<td>44.76</td>
+<td>86.39</td>
+</tr>
+<tr>
+<td>2026-Q2</td>
+<td>55</td>
+<td>44.76</td>
+<td>82.05</td>
+</tr>
+</tbody></table></div>
+<script type="application/json" class="folio-diagram-manifest">{&quot;advisory&quot;:null,&quot;artifact&quot;:&quot;assets/folio/line-chart-pe-band-cb7fc6d815-059346d881d2.svg&quot;,&quot;artifact_sha256&quot;:&quot;059346d881d2b50880078fa40736f5a9c64b3454e2c94f8d7f2952a7a28a2980&quot;,&quot;canvas&quot;:&quot;figure&quot;,&quot;caption&quot;:&quot;Illustrative reported-basis TTM; 8 quarterly samples from 1,305 daily observations, first band about 600 observations; the y-axis starts at 20x and the rule at 54.7x marks the current rolling median. The multiple was above its band in 2023 and below it in 2025; at 55x it is back at the middle. Descriptive, not a signal.&quot;,&quot;data&quot;:{&quot;headers&quot;:[&quot;Category&quot;,&quot;PE(TTM)&quot;,&quot;P20 lower&quot;,&quot;P80 upper&quot;],&quot;rows&quot;:[[&quot;2023-Q3&quot;,&quot;97.1&quot;,&quot;58.9&quot;,&quot;94.46&quot;],[&quot;2023-Q4&quot;,&quot;81.21&quot;,&quot;60.9&quot;,&quot;94.46&quot;],[&quot;2024-Q1&quot;,&quot;80.77&quot;,&quot;62.24&quot;,&quot;93.6&quot;],[&quot;2024-Q3&quot;,&quot;59.97&quot;,&quot;60.9&quot;,&quot;93.6&quot;],[&quot;2025-Q1&quot;,&quot;38.79&quot;,&quot;52.69&quot;,&quot;92.47&quot;],[&quot;2025-Q3&quot;,&quot;46.28&quot;,&quot;44.76&quot;,&quot;92.47&quot;],[&quot;2026-Q1&quot;,&quot;51.59&quot;,&quot;44.76&quot;,&quot;86.39&quot;],[&quot;2026-Q2&quot;,&quot;55&quot;,&quot;44.76&quot;,&quot;82.05&quot;]],&quot;summary&quot;:&quot;8 categories across 3 series.&quot;},&quot;description&quot;:&quot;NVIDIA PE(TTM) Band. PE(TTM): 2023-Q3 97.1, 2023-Q4 81.21, 2024-Q1 80.77, 2024-Q3 59.97, 2025-Q1 38.79, 2025-Q3 46.28, 2026-Q1 51.59, 2026-Q2 55.0; P20 lower: 2023-Q3 58.9, 2023-Q4 60.9, 2024-Q1 62.24, 2024-Q3 60.9, 2025-Q1 52.69, 2025-Q3 44.76, 2026-Q1 44.76, 2026-Q2 44.76; P80 upper: 2023-Q3 94.46, 2023-Q4 94.46, 2024-Q1 93.6, 2024-Q3 93.6, 2025-Q1 92.47, 2025-Q3 92.47, 2026-Q1 86.39, 2026-Q2 82.05. Source: Illustrative daily series; P20/P80 band from a trailing window of up to 750 observations (first quarter about 600); quarterly samples. References: median 54.7x 54.72. Annotations: 55.0x · P51&quot;,&quot;fixture&quot;:&quot;data/nvda-pe-band-folio.json&quot;,&quot;fixture_sha256&quot;:&quot;cb7fc6d8156a8e029e9e57d45dc22817e23301d44ee9a2625a2b045b3466d0ee&quot;,&quot;host_contract&quot;:&quot;a4-portrait&quot;,&quot;kind&quot;:&quot;line-chart&quot;,&quot;language&quot;:&quot;en-US&quot;,&quot;placement&quot;:{&quot;fit&quot;:{&quot;font_unit&quot;:&quot;pt&quot;,&quot;height&quot;:76.083333,&quot;min_font_size&quot;:3.921,&quot;retained_scale&quot;:1.0,&quot;warnings&quot;:[&quot;smallest text is 3.9pt; preferred &gt;= 6pt; review at final size&quot;],&quot;width&quot;:166.0},&quot;max_artifact&quot;:[166,140.25],&quot;safe_area&quot;:[22,20,166,255],&quot;source_min_font&quot;:8.0,&quot;unit&quot;:&quot;mm&quot;},&quot;profile&quot;:&quot;embed&quot;,&quot;registry_key&quot;:&quot;line-chart@3&quot;,&quot;schema_version&quot;:&quot;1.1&quot;,&quot;slot&quot;:&quot;pe-band&quot;,&quot;source_dimensions&quot;:[960,440],&quot;theme&quot;:&quot;folio&quot;,&quot;variant&quot;:&quot;plain&quot;}</script>
+</figure>
+
+<div class="decision-strip">
+  <div class="decision-label">Valuation read</div>
+  <div class="decision-text">Mid-band is not a buy signal. The band supports reasonable as a cross-check; the reverse DCF still requires a 22.5% ten-year NOPAT CAGR.</div>
+  <div class="decision-owner">Confidence: Medium</div>
+</div>
+
+<table class="compact financial"><thead><tr><th>Read</th><th>Current</th><th>Why it matters</th></tr></thead><tbody><tr><td>Position</td><td>55.0x vs 44.8x / 54.7x / 82.0x</td><td>At the middle of the band, not at an extreme</td></tr><tr><td>Percentile</td><td>51st of 750 observations</td><td>Half the window is below; the read remains window-dependent</td></tr><tr><td>Slope</td><td>Falling</td><td>The rolling median fell from roughly 87x in late 2023 to 55x today</td></tr><tr><td>Regime</td><td>AI capex up; real yields up</td><td>A raw PE band is not rate-adjusted</td></tr><tr><td>Failure checks</td><td>Denominator illustrative; earnings cyclical</td><td>Confidence capped at Medium; no standalone label</td></tr></tbody></table>
+
+<div class="two-col">
+  <section>
+    <h2>Red Flags</h2>
+    <ul class="dash"><li>The PE series is illustrative, not reconciled to filings. A synthetic PE series is Tier 3; confidence is capped at Medium.</li><li>NVIDIA's earnings are cyclical and concentrated. A PE band on peak AI earnings can look cheap for the wrong reason.</li><li>The rolling median is falling. A lower multiple on a lower earnings base is not a cheaper company.</li><li>The band is raw PE, not rate-adjusted. A higher real-yield regime compresses the distribution; the percentile is not a target.</li><li>P20/P80 is a 60% central band, not a 68% band, and realized coverage is not computed. Do not call it a probability.</li></ul>
+  </section>
+  <section>
+    <h2>Decision Impact</h2>
+    <ul class="dash"><li>Valuation layer: supports reasonable as a cross-check; cannot produce priced for perfection or not solvable alone.</li><li>Company layer: the 16/18 quality score and clean earnings read stand; the band does not change them.</li><li>Label: hold/watch. The band alone cannot support add-candidate watch or trim-review.</li><li>Confidence: Medium. The denominator is illustrative, and a 750-observation window is shorter than a full cycle.</li><li>Output: the figure is a context exhibit, not a target price or a probability of reversion.</li></ul>
+  </section>
+</div>
+
+<section>
+  <h2>What Would Change The View <span class="sub">Upgrade / downgrade / review</span></h2>
+  <div class="timeline"><div class="tl-step"><div class="tl-year">Upgrade</div><div class="tl-head">Price resets</div><div class="tl-body">PE falls below the lower band while TTM revisions stay positive, and the implied ten-year NOPAT CAGR falls toward 15%.</div></div><div class="tl-step"><div class="tl-year">Downgrade</div><div class="tl-head">Multiple expands</div><div class="tl-body">PE moves above the upper band while revisions flatten; or the TTM denominator deteriorates and the percentile falls for the wrong reason.</div></div><div class="tl-step"><div class="tl-year">Review</div><div class="tl-head">Every quarter</div><div class="tl-body">Recompute on the announcement date, not the period end; switch the TTM denominator only when the filing is published.</div></div></div>
+</section>
+
+<div class="callout">A band locates the multiple. It does not explain it.</div>
+
+<section>
+  <h2>Data Freshness</h2>
+  <table class="compact financial"><thead><tr><th>Data</th><th>Value</th><th>As of</th><th>Published</th><th>Retrieved</th><th>Source</th><th>Freshness</th></tr></thead><tbody><tr><td>PE(TTM) series</td><td>1,305 daily observations</td><td>2026-05-15</td><td>n/a</td><td>2026-11-23</td><td>Illustrative dataset</td><td>Lagged</td></tr><tr><td>TTM net profit denominator</td><td>Illustrative, not reconciled</td><td>2026-05-15</td><td>n/a</td><td>2026-11-23</td><td>Illustrative dataset</td><td>Unavailable</td></tr><tr><td>Band method</td><td>P20/P80, 750-obs window</td><td>2026-05-15</td><td>n/a</td><td>2026-11-23</td><td>MarketLens script</td><td>Fresh</td></tr><tr><td>Share count / corporate actions</td><td>Not reconciled</td><td>n/a</td><td>n/a</td><td>2026-11-23</td><td>Requires filings</td><td>Unavailable</td></tr><tr><td>Price / market cap</td><td>Illustrative $225.32 / $5.52T</td><td>2026-05-15</td><td>2026-05-16</td><td>2026-11-23</td><td>Illustrative snapshot</td><td>Lagged</td></tr></tbody></table>
+</section>
+
+<div class="footer">
+  <span><strong>Sources:</strong> Illustrative NVDA PE series (2021-05-17 to 2026-05-15); MarketLens valuation-framework.md and scripts/pe_band_chart.py; NVIDIA FY26 results for denominator context. Not live market data.</span>
+  <span>This is public-market research for reference only and does not constitute investment advice.</span>
+</div>
+
+</body>
+</html>

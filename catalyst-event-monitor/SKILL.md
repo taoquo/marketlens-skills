@@ -3,14 +3,14 @@ name: catalyst-event-monitor
 description: Use when a user asks which upcoming public-market events matter, how to rank catalysts, what expectations are priced in, how an event could move a stock/sector, what data to watch before/after earnings, guidance, approvals, policy decisions, buybacks, unlocks, litigation, M&A, investor days, or whether a completed event strengthened, delayed, impaired, broke, or left neutral an investment thesis.
 license: MIT
 metadata:
-  version: 0.8
+  version: 0.10
 ---
 
 # Catalyst Event Monitor
 
 ## Core Rule
 
-Provide public-market catalyst and event research, not personalized investment advice. Match the user's language. State dates for every event and data point, distinguish confirmed events from expected or rumored events, cite sources, show confidence and limits, and end with a short disclaimer that the analysis is for research only and does not constitute investment advice.
+Shared operating rules are in `../references/skill-contract.md`: public-market research only, no personalized investment advice, dated and sourced evidence, confidence and limits, and the exact disclaimer. Apply them to every output.
 
 Separate event importance from whether the event is tradable. An event can be material to the thesis and still offer no usable setup.
 
@@ -44,10 +44,8 @@ Read only the references needed:
 - For expectation gaps, scenario trees, event reaction paths, and valuation-anchor impact, read `references/scenario-framework.md`.
 - For post-event review and thesis status updates, read `references/post-event-review.md`.
 - For industry-specific event checklists, read `references/sector-event-checklists.md`.
-- For shared scoring, confidence, red-flag, and label discipline, read `../references/scoring-standard.md`.
-- For timestamps, freshness grades, evidence tiers, unit and calendar rules, and user-input handling, read `../references/data-discipline.md`.
-- For deciding which skill owns a question, read `../references/skill-routing.md`.
-- For review of prior catalyst calls, and for how an unconfirmed catalyst thesis decays, read `../references/review-and-calibration.md`.
+- For the shared operating, evidence, gate, freshness, and output contract, read `../references/skill-contract.md`.
+- Required shared files: `../references/scoring-standard.md`, `../references/data-discipline.md`, `../references/skill-routing.md`, and `../references/review-and-calibration.md`.
 - For the reference class behind any scenario probability, approval rate, deal-completion rate, or post-event drift claim, read `../references/base-rates.md`.
 - For crowded shorts, squeeze conditions, and how an event can support a negative thesis, read `../references/short-and-relative-value.md`.
 - For refinancing, covenant, placement, or rating-action events, read `../references/credit-and-cross-asset.md`.
@@ -57,7 +55,7 @@ Read only the references needed:
 
 ## Evidence Standard
 
-Use primary or official sources first. Do not fabricate citations or quote text you cannot verify.
+Tier definitions and the decisive-claim rule are in `../references/data-discipline.md` and `../references/skill-contract.md`. Domain sources:
 
 | Tier | Sources | Use |
 |---|---|---|
@@ -65,13 +63,11 @@ Use primary or official sources first. Do not fabricate citations or quote text 
 | Tier 2 | Company IR calendars, earnings call transcripts, official industry/regulator data, exchange calendars | Event context, watch data, historical cadence |
 | Tier 3 | Financial platforms, media, broker notes, event databases, consensus datasets | Context only; never sole basis for a decisive event conclusion |
 
-Always include an `Evidence Sources` section with source name, date, link, and what it supports.
-
 ## Conclusion Gates
 
-Use research language such as hard catalyst, soft catalyst, narrative catalyst, priority catalyst, monitor closely, event watch, thesis strengthened, neutral, thesis delayed, thesis impaired, thesis broken, crowded unwind, or evidence-gap. Map the catalyst and post-event read to a shared label using the `Label Layering` table in `../references/scoring-standard.md`. Do not present personalized buy/sell advice, exact allocation instructions, or transaction-prescriptive event trades.
+Map the catalyst and post-event read to a shared label using the `Label Layering` table in `../references/scoring-standard.md`, and apply the shared gate rules in `../references/skill-contract.md`. Do not present personalized buy/sell advice, exact allocation instructions, or transaction-prescriptive event trades.
 
-Do not give a strong event conclusion unless these are satisfied:
+Domain-specific gates. Do not give a strong event conclusion unless these are satisfied:
 
 - Event date or expected timing is stated, or the uncertainty is explicit.
 - Event source is cited and classified as confirmed, expected, rumored, or conditional.
@@ -80,13 +76,13 @@ Do not give a strong event conclusion unless these are satisfied:
 - The mechanism is explicit: revenue, margin, cash flow, valuation multiple, discount rate, balance sheet, policy access, legal liability, or sentiment.
 - At least one post-event data point is defined in advance for judging whether the event strengthened, stayed neutral, delayed, impaired, broke, or triggered a crowded unwind in the thesis.
 
-If any gate fails, downgrade to an event-watch conclusion and state what evidence is missing.
+If any gate fails, downgrade to an event-watch conclusion, state what evidence is missing, and apply the downgrade rule in `../references/skill-contract.md`.
 
 An important event is not automatically an attractive setup. If the expectation gap is unclear, implied move is already demanding, crowding is extreme, or downside is hard to bound, use `event watch` or `monitor closely`.
 
 ## Data Freshness Protocol
 
-Timestamps, freshness grades, evidence tiers, unit and calendar rules, and the core figure check are defined in `../references/data-discipline.md`. Load that file before writing the `Data Freshness` table and use its five freshness grades verbatim.
+Apply the timestamp, freshness, and core-figure rules in `../references/data-discipline.md` and `../references/skill-contract.md`. Domain additions:
 
 Catalyst-specific additions:
 

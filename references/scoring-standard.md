@@ -185,15 +185,8 @@ assumption made in this run. An assumed layer cannot support a strong label.
 
 ## Standard Output Blocks
 
-Every MarketLens output must include these blocks, in this order at the end of the
-report: `Red Flags`, `Decision Impact`, `What Would Change The View`, `Data Freshness`,
-`Evidence Sources`, and `Disclaimer`. Use this exact disclaimer sentence:
-
-```text
-This is public-market research for reference only and does not constitute investment advice.
-```
-
-Any output with a 0-3 scorecard must additionally include:
+The required blocks, their relative order, and the exact disclaimer are defined in
+`skill-contract.md`. Any output with a 0-3 scorecard must additionally include:
 
 ```markdown
 ## Score Summary

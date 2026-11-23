@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<!-- ==================================================================
+     ONE-PAGER · English · parchment design system
+     Single A4 proposal / report / executive summary
+     Build: python3 scripts/build.py one-pager-en
+     Target: exactly 1 page
+     ================================================================== -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AI watchlist: nine tickers, one duration bet</title>
+<meta name="author" content="MarketLens">
+<meta name="description" content="An equal-weight AI watchlist concentrates in one duration bet, shared accounting practices, and the same management teams.">
+<meta name="keywords" content="portfolio risk,AI watchlist,NVIDIA,concentration,implied expectations">
+<meta name="generator" content="Folio">
+<style>
+
+  @page {
+    size: A4;
+    margin: 15mm 18mm 15mm 18mm;
+    background: #F6F0EA;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --color-surface-page: #F6F0EA;
+    --color-surface-card:     #FBF7F3;
+    --color-text-primary:#191514;
+    --color-text-warm: #3A312D;
+    --color-text-secondary:     #5A4A43;
+    --color-text-muted: #756A63;
+    --color-accent-brand:     #B83D2E;
+    --color-border-default: #E6DACD;
+    --color-border-soft: #E5DBCD;
+    --color-accent-tag:    #F1D2CC;
+
+    --serif: "Source Serif 4", Charter, Georgia,
+             Palatino, "Times New Roman", serif;
+    --sans: var(--serif);
+  }
+
+  html, body { background: var(--color-surface-page); }
+
+  @media screen {
+    body { max-width: 210mm; margin: 0 auto; padding: 15mm 18mm; }
+  }
+
+  body {
+    color: var(--color-text-primary);
+    font-family: var(--serif);
+    font-size: 10pt;
+    line-height: 1.45;
+    /* Paragraph flow; declared in references/profiles/typography/folio-v1.yaml. */
+    widows: 2;
+    orphans: 2;
+    hyphens: manual;
+  }
+
+  .serif { font-family: var(--serif); }
+
+  .header {
+    border-top: 1.2pt solid var(--color-accent-brand);
+    padding-top: 7pt;
+    margin-bottom: 12pt;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20pt;
+  }
+  .title-block { flex: 1; }
+  .eyebrow {
+    font-size: 9pt;
+    color: var(--color-accent-brand);
+    letter-spacing: 1pt;
+    text-transform: uppercase;
+    margin-bottom: 4pt;
+    font-weight: 500;
+  }
+  h1 {
+    font-family: var(--serif);
+    font-size: 26pt;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    line-height: 1.12;
+    letter-spacing: -0.3pt;
+    margin-bottom: 5pt;
+  }
+  .subtitle {
+    font-size: 11.5pt;
+    color: var(--color-text-secondary);
+    line-height: 1.4;
+  }
+  .meta {
+    font-size: 9pt;
+    color: var(--color-text-muted);
+    text-align: right;
+    line-height: 1.5;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* METRICS - horizontal baseline, no containers (matches resume aesthetic). */
+  .metrics {
+    display: flex;
+    gap: 12pt;
+    margin-bottom: 14pt;
+    padding: 6pt 0;
+    border-top: 0.5pt solid var(--color-border-default);
+    border-bottom: 0.5pt solid var(--color-border-default);
+  }
+  .metric {
+    flex: 1;
+    background: transparent;
+    padding: 0;
+    display: flex;
+    align-items: baseline;
+    gap: 5pt;
+    break-inside: avoid;
+  }
+  .metric-value {
+    font-family: var(--serif);
+    font-size: 22pt;
+    font-weight: 500;
+    color: var(--color-accent-brand);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    letter-spacing: -0.3pt;
+  }
+  .metric-label {
+    font-size: 9pt;
+    color: var(--color-text-secondary);
+    line-height: 1.3;
+  }
+
+  section { margin-bottom: 18pt; break-inside: avoid; }
+  section:last-of-type { margin-bottom: 0; }
+
+  h2 {
+    font-family: var(--serif);
+    font-size: 16pt;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    margin-bottom: 6pt;
+  }
+  h2 .sub {
+    font-size: 9pt;
+    color: var(--color-text-muted);
+    font-weight: 400;
+    margin-left: 6pt;
+  }
+
+  p { margin-bottom: 6pt; line-height: 1.45; }
+  p:last-child { margin-bottom: 0; }
+
+  .lead {
+    font-size: 12.5pt;
+    line-height: 1.5;
+    color: var(--color-text-warm);
+    margin-bottom: 10pt;
+  }
+
+  .decision-strip {
+    display: grid;
+    grid-template-columns: 66pt 1fr 82pt;
+    gap: 10pt;
+    align-items: baseline;
+    padding: 7pt 0;
+    margin: 0 0 14pt 0;
+    border-top: 0.8pt solid var(--color-text-primary);
+    border-bottom: 0.3pt dotted var(--color-border-default);
+    break-inside: avoid;
+  }
+  .decision-label {
+    font-size: 8.5pt;
+    color: var(--color-text-muted);
+    letter-spacing: 0.7pt;
+    text-transform: uppercase;
+  }
+  .decision-text {
+    font-size: 11pt;
+    color: var(--color-text-primary);
+    line-height: 1.42;
+  }
+  .decision-owner {
+    font-size: 9pt;
+    color: var(--color-text-secondary);
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hl { color: var(--color-accent-brand); font-weight: 500; }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18pt;
+  }
+
+  ul.dash {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  ul.dash li {
+    position: relative;
+    padding-left: 14pt;
+    margin-bottom: 4pt;
+    line-height: 1.45;
+  }
+  ul.dash li::before {
+    content: "\2013";
+    position: absolute;
+    left: 0;
+    color: var(--color-accent-brand);
+  }
+
+  .timeline {
+    display: flex;
+    gap: 12pt;
+    margin-top: 6pt;
+  }
+  .tl-step { flex: 1; break-inside: avoid; }
+  .tl-year {
+    font-family: var(--serif);
+    font-size: 11pt;
+    font-weight: 500;
+    color: var(--color-accent-brand);
+    margin-bottom: 2pt;
+    letter-spacing: 0.3pt;
+    text-transform: uppercase;
+  }
+  .tl-head {
+    font-size: 10pt;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    margin-bottom: 2pt;
+  }
+  .tl-body {
+    font-size: 9pt;
+    color: var(--color-text-secondary);
+    line-height: 1.45;
+  }
+
+  .tag {
+    display: inline-block;
+    background: var(--color-accent-tag);
+    color: var(--color-accent-brand);
+    font-size: 9pt;
+    font-weight: 500;
+    padding: 1pt 6pt;
+    border-radius: 3pt;
+    letter-spacing: 0.4pt;
+    text-transform: uppercase;
+    margin-right: 3pt;
+  }
+
+  /* TABLE (folio-table) */
+  table, .folio-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9pt;
+    margin: 8pt 0;
+    break-inside: avoid;
+  }
+  table th, .folio-table th {
+    text-align: left;
+    font-weight: 500;
+    color: var(--color-text-warm);
+    padding: 4pt 6pt;
+    border-bottom: 1pt solid var(--color-border-default);
+    background: transparent;
+  }
+  table td, .folio-table td {
+    padding: 3pt 6pt;
+    border-bottom: 0.3pt solid var(--color-border-soft);
+    vertical-align: top;
+  }
+  table.compact th, .folio-table.compact th { padding: 2pt 5pt; font-size: 8pt; }
+  table.compact td, .folio-table.compact td { padding: 1pt 5pt; font-size: 8pt; line-height: 1.4; }
+  table.financial td:not(:first-child), .folio-table.financial td:not(:first-child) {
+    text-align: right; font-variant-numeric: tabular-nums;
+  }
+  table.financial th:not(:first-child), .folio-table.financial th:not(:first-child) { text-align: right; }
+  table.striped tbody tr:nth-child(even) td, .folio-table.striped tbody tr:nth-child(even) td {
+    background: var(--color-surface-card);
+  }
+  table .total td, .folio-table .total td {
+    font-weight: 500; border-top: 1pt solid var(--color-accent-brand); border-bottom: none; color: var(--color-text-primary);
+  }
+
+  /* CALLOUT - transparent, single brand bar. No filled container. */
+  .callout {
+    background: transparent;
+    border-left: 1.8pt solid var(--color-accent-brand);
+    padding: 4pt 0 4pt 14pt;
+    margin: 10pt 0;
+    font-size: 10.5pt;
+    line-height: 1.55;
+    color: var(--color-text-secondary);
+    break-inside: avoid;
+  }
+  .callout .hl, .callout .em-brand { color: var(--color-accent-brand); }
+
+  .footer {
+    margin-top: 18pt;
+    padding-top: 6pt;
+    border-top: 0.3pt dotted var(--color-border-default);
+    font-size: 9pt;
+    color: var(--color-text-muted);
+    display: flex;
+    justify-content: space-between;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.3pt;
+  }
+.footer { gap: 18pt; } .footer span:last-child { flex: 0 1 46%; text-align: right; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="title-block">
+    <div class="eyebrow">$portfolio-risk-monitor · v0.9 case</div>
+    <h1>AI watchlist: nine tickers, one duration bet</h1>
+    <div class="subtitle">The concentration is not in the sector label; it is in the assumptions, the accounting practices, and the same management teams allocating capital.</div>
+  </div>
+  <div class="meta">
+    MarketLens<br>
+    2026.05.16<br>
+    v0.9 case
+  </div>
+</div>
+
+<div class="metrics"><div class="metric"><div class="metric-value">9</div><div class="metric-label">Names</div></div><div class="metric"><div class="metric-value">33%</div><div class="metric-label">Top-3 weight</div></div><div class="metric"><div class="metric-value">5/9</div><div class="metric-label">g >6%</div></div><div class="metric"><div class="metric-value">6/9</div><div class="metric-label">Reinvest >40%</div></div></div>
+
+<p class="lead">Nine tickers look like diversification; the exposure does not. Five of nine require perpetual growth above the long-run nominal global rate, six reinvest more than 40% of operating cash flow, and the same accounting conventions — SBC intensity, revenue recognition, capitalization — run across the chain. The portfolio is <span class="hl">risk-concentrated</span>, not a collection of independent bets.</p>
+
+<div class="decision-strip">
+  <div class="decision-label">Label</div>
+  <div class="decision-text">Trim-review the name whose price is priced for perfection; evidence-gap the names whose implied assumptions are unmeasured; do not add another name in the same cluster.</div>
+  <div class="decision-owner">Confidence: Medium (4/9 unmeasured)</div>
+</div>
+
+<table class="compact financial"><thead><tr><th>Lens</th><th>Finding</th><th>Confidence</th></tr></thead><tbody><tr><td>Name concentration</td><td>11.1% single name; 33% top-3; 56% top-5</td><td>High</td></tr><tr><td>Sector / industry</td><td>7/9 share the AI compute and cloud profit pool</td><td>High</td></tr><tr><td>Factor / style</td><td>Growth, momentum, long duration, high beta</td><td>Medium</td></tr><tr><td>Macro</td><td>Real rates, USD liquidity, AI capex budgets</td><td>Medium</td></tr><tr><td>Implied assumption</td><td>5/9 require >6% perpetual growth</td><td>Medium</td></tr><tr><td>Reinvestment</td><td>6/9 reinvest >40% of operating cash flow</td><td>Medium</td></tr></tbody></table>
+
+<div class="two-col">
+  <section>
+    <h2>Red Flags</h2>
+    <ul class="dash"><li>Three shared assumptions can fail together: real rates up, cloud capex cut, and accounting conventions exposed in a slowdown.</li><li>A fourth is that the same management teams convert this year's spend into returns above cost of capital; it does not fail ticker by ticker.</li><li>Gross exposure is not diversification, upstream/downstream is not a hedge, and historical ROIIC is not evidence for this cycle.</li><li>If two or more holdings breach the same earnings-quality screen, treat it as one accounting practice, not two independent company problems.</li></ul>
+  </section>
+  <section>
+    <h2>Decision Impact</h2>
+    <ul class="dash"><li>Portfolio label risk-concentrated. NVDA is trim-review on priced-for-perfection; TSM and MSFT are high-priority watch on the lowest implied growth.</li><li>ASML and AVGO are hold/watch; AMD, GOOGL, META, and TSLA are evidence-gap because their implied assumptions are unmeasured.</li><li>If the real portfolio's top 5 is above 50%, run a concentration review instead of adding another name.</li><li>Data confidence is capped at Medium because 4/9 implied assumptions are unmeasured; no weight changes are given.</li></ul>
+  </section>
+</div>
+
+<section>
+  <h2>What Would Change The View <span class="sub">Upgrade / downgrade / review</span></h2>
+  <div class="timeline"><div class="tl-step"><div class="tl-year">Upgrade</div><div class="tl-head">Assumptions ease</div><div class="tl-body">Implied growth falls below 5% with earnings revisions intact; the four unmeasured names get normalized reads; AI capex returns become measurable.</div></div><div class="tl-step"><div class="tl-year">Downgrade</div><div class="tl-head">Correlation shows</div><div class="tl-body">Multiple names fall on the same day without company-specific news; HY OAS and issuance windows worsen; two names breach the same screen with inconsistent explanations.</div></div><div class="tl-step"><div class="tl-year">Review</div><div class="tl-head">Quarterly</div><div class="tl-body">Track incremental capital return and reinvestment rate for the six names. If they diverge, the portfolio risk is rising, not the opportunity.</div></div></div>
+</section>
+
+<div class="callout">Nine tickers, one duration bet. The portfolio is concentrated in the assumptions, not the labels.</div>
+
+<section>
+  <h2>Data Freshness</h2>
+  <table class="compact financial"><thead><tr><th>Data</th><th>Value</th><th>As of</th><th>Published</th><th>Retrieved</th><th>Source</th><th>Freshness</th></tr></thead><tbody><tr><td>Watchlist holdings</td><td>9 names, equal weight</td><td>2026-05-16</td><td>n/a</td><td>2026-05-16</td><td>User-provided assumption</td><td>Fresh</td></tr><tr><td>NVDA price / multiple</td><td>$225.32 / 55x</td><td>2026-05-15</td><td>2026-05-16</td><td>2026-05-16</td><td>Quote snapshot</td><td>Fresh</td></tr><tr><td>Peer multiples</td><td>Illustrative screen</td><td>2026-05-12</td><td>2026-05-13</td><td>2026-05-16</td><td>Third-party platform</td><td>Fresh</td></tr><tr><td>Implied assumptions</td><td>5/9 measured; 4/9 unmeasured</td><td>2026-05-16</td><td>n/a</td><td>2026-05-16</td><td>MarketLens reverse DCF</td><td>Unavailable</td></tr><tr><td>Real weights / cost basis</td><td>Not provided</td><td>n/a</td><td>n/a</td><td>2026-05-16</td><td>User did not supply</td><td>Unavailable</td></tr></tbody></table>
+</section>
+
+<div class="footer">
+  <span><strong>Sources:</strong> NVIDIA, TSM, ASML, AVGO, MSFT, GOOGL, AMD, META, and TSLA filings; market snapshot; MarketLens concentration and implied-expectations screens.</span>
+  <span>This is public-market research for reference only and does not constitute investment advice.</span>
+</div>
+
+</body>
+</html>
