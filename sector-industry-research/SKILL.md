@@ -3,7 +3,7 @@ name: sector-industry-research
 description: Use when analyzing sectors, industries,产业链, peer groups, industry cycles, supply-demand, inventory, pricing, capacity, profit pools, policy or technology disruption, competitive structure, subsector scorecards, industry beta, sector rotation, trade expression, catalysts, stop-loss/stop-error triggers, or questions like which companies benefit most from an industry trend across US, Hong Kong, or A-share markets.
 license: MIT
 metadata:
-  version: 0.10
+  version: 0.11
 ---
 
 # Sector Industry Research

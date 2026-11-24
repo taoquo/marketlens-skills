@@ -26,6 +26,38 @@ Every `SKILL.md` must route these four shared files:
 
 Route the six cross-cutting files by trigger, as defined in `skill-routing.md`.
 
+## Research State Card
+
+When a request spans more than one skill, keep one compact state card and pass it forward.
+It is the only shared context between layers; do not rely on a downstream skill remembering
+an upstream answer.
+
+| Field | Content |
+|---|---|
+| `question` | The user's question in one sentence, including the decision horizon |
+| `as_of` | The market date the answer is anchored to |
+| `mode` | The research desk mode from `skill-routing.md`: `quick`, `full`, `event`, or `portfolio` |
+| `regime` | Market-regime read, date, and confidence |
+| `sector` | Sector or industry read, date, and confidence |
+| `company` | Company quality and valuation read, including the band or implied-expectations result |
+| `catalyst` | Dated catalyst, pricing read, and scenario |
+| `portfolio` | Role, concentration, and correlated-risk read |
+| `label` | One shared research label, with the binding constraint named |
+| `freshness` | Missing, stale, or unavailable inputs and their caps |
+| `source_pool` | Source IDs from `data-discipline.md`, not a second bibliography |
+| `open_questions` | Evidence that would change the view, and the next review date |
+
+Rules:
+
+- Create the card before the first layer and update it after each layer. A field that was
+  not researched stays `Unavailable`; do not fill it by assumption.
+- The card is a working artifact, not a required output block. Carry what matters into the
+  final output; do not paste the whole card unless the user asks for it.
+- Downstream layers read the card and may tighten a label, never loosen one. If a layer is
+  missing, follow the degradation rule in `skill-routing.md`.
+- Keep the source pool IDs stable. A downstream layer that adds evidence appends to the
+  pool rather than renumbering it.
+
 ## Evidence Tiers
 
 Tier definitions, evidence weighting, and the rule that a decisive claim needs at
@@ -41,6 +73,10 @@ personalized buy/sell advice, exact allocation instructions, or transaction orde
 
 If any gate in the skill's own `Conclusion Gates` fails, downgrade to a watchlist-style
 conclusion, state the missing data, and name the evidence that would strengthen the view.
+
+Before presenting the output as complete, run the `Pre-Publication Review` in
+`review-and-calibration.md`. A `REVISE` verdict blocks publication until the blocking item
+is fixed or the conclusion is capped and the residual issue recorded.
 
 ## Data Freshness
 
@@ -63,6 +99,9 @@ Every output must end with these blocks, in this order:
 Include `## Score Summary` before `## Red Flags` when the output uses a 0 to 3
 scorecard. A skill that judges quality without a numeric scorecard may substitute a
 named read table, such as `## Setup Quality`, for `## Score Summary`.
+
+`## Evidence Sources` lists the source-pool IDs and locators that carry the conclusion. It
+is not a padded bibliography; an entry that does not support a stated claim is omitted.
 
 The disclaimer block must use this exact sentence:
 

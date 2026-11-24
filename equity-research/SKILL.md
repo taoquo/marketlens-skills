@@ -3,7 +3,7 @@ name: equity-research
 description: Use when analyzing listed companies or stocks across US, Hong Kong, or A-share markets, including earnings reports, long-term holding quality, fundamentals, valuation, historical valuation bands, moat, cash flow, management, valuation-derived trigger levels, position review triggers, market-specific disclosure rules, or user questions phrased as whether a stock is worth buying, holding, adding, trimming, or exiting.
 license: MIT
 metadata:
-  version: 0.10
+  version: 0.11
 ---
 
 # Equity Research
@@ -165,7 +165,7 @@ Use when the user asks whether the current multiple is cheap or expensive agains
 - Load `references/valuation-framework.md` and follow `Historical Valuation Band`.
 - Require positive, comparable TTM earnings and at least 750 trading days of history; prefer 1,250 days or one full cycle.
 - Use a trailing point-in-time window at each date. A full-sample band is descriptive only and cannot be used as a signal or in a backtest.
-- Report position, percentile, slope, and the failure checks: structural break, denominator collapse or peak, one-offs, negative earnings, corporate actions, and rates.
+- Report position, percentile, slope, the EPS/PE decomposition of the price move, and the failure checks: structural break, denominator collapse or peak, one-offs, negative earnings, corporate actions, and rates.
 - When the user asks for a visual, produce the Valuation Band figure defined in `references/valuation-framework.md`; if the host cannot render, use the table fallback.
 - Map the result to the five valuation reads in `../references/implied-expectations.md`, then to a label through `../references/scoring-standard.md`. The band alone cannot support `add-candidate watch` or `trim-review`.
 - If the user asks what to do, continue into `decision-framework`; do not turn the band into a buy/sell instruction.
@@ -207,7 +207,7 @@ Do not provide personalized allocation across the user's total assets unless the
 [Growth value share of EV, the solved implied variable with its WACC range and terminal assumption, the absolute quantity it requires, the company own historical rate, and the resulting read: undemanding, reasonable, demanding, priced for perfection, or not solvable.]
 
 ## Valuation And Decision Framework
-[Fair value range as a cross-check on the implied read, current price/date, trigger levels if conclusion gates pass, review triggers, kill conditions. If a historical band is used, state the multiple and denominator convention, window and observations, band method and coverage, current position/percentile/slope, failure checks, and that it is a cross-check rather than a standalone label. If the user wants a visual, include the Valuation Band figure; otherwise include the same fields as a table.]
+[Fair value range as a cross-check on the implied read, current price/date, trigger levels if conclusion gates pass, review triggers, kill conditions. If a historical band is used, state the multiple and denominator convention, window and observations, band method and coverage, current position/percentile/slope, the EPS/PE decomposition of the price move, failure checks, and that it is a cross-check rather than a standalone label. If the user wants a visual, include the Valuation Band figure; otherwise include the same fields as a table.]
 
 ## Score Summary
 | Dimension | Score | Evidence | Confidence | Comment |

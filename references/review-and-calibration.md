@@ -1,12 +1,56 @@
 # Review And Calibration
 
-Use this file to review whether prior MarketLens scorecards and research labels worked as intended.
+Use this file to review a draft before publication and to review whether prior MarketLens
+scorecards and research labels worked as intended.
 
 ## Purpose
 
 Review turns a research framework into a learning loop. It should identify whether the original conclusion was right for the right reason, right for the wrong reason, early, late, or wrong.
 
 This process is for research calibration only. It does not create a mechanical trading system.
+
+## Pre-Publication Review
+
+Run this gate before a research output is presented as complete. It checks content, not
+structure; `scripts/validate_skills.py` already checks frontmatter, routing, output blocks,
+versions, and example coverage.
+
+Review the draft against six dimensions:
+
+| Dimension | Required check |
+|---|---|
+| Source sufficiency | Every decisive claim has at least one Tier 1 or Tier 2 source, or is explicitly labelled as an estimate or opinion |
+| Factual accuracy | The core figure check was run; number, unit, period, currency, and accounting basis agree with the source |
+| Balance | The main counter-case, alternative explanation, and failure boundary are stated |
+| Depth | The conclusion rests on a mechanism, dated evidence, and a falsifiable condition, not a generic narrative |
+| Structure | The output uses the relevant layer of the decision chain and does not let a downstream read outrun its inputs |
+| Format | The six required output blocks, three timestamps, freshness grades, and exact disclaimer are present |
+
+Return one of two verdicts:
+
+- `PASS`: no blocking issue. Non-blocking suggestions may be listed separately.
+- `REVISE`: at least one blocking issue. Each item names the location, the defect, and the
+  required fix.
+
+Blocking conditions are limited to:
+
+- A decisive claim has no Tier 1 or Tier 2 source and is not labelled as an estimate or opinion.
+- The core figure check is missing, or a unit, period, currency, or accounting basis conflicts
+  with the source.
+- A conclusion gate or chain constraint failed, but the label was not capped.
+- The label conflicts with `scoring-standard.md`, including an averaged or ungrounded
+  `hold/watch`.
+- The exact disclaimer is missing or rewritten.
+
+Allow at most one revision round for a single-skill output and two for a multi-skill report.
+If blocking issues remain after the limit, publish only with the conclusion capped at
+`monitor closely` or `evidence-gap` when a research label is used; otherwise mark the
+conclusion provisional and name the missing evidence. Record the residual issues under
+`## Confidence And Limits` or `## What Would Change The View`. Do not add a new mandatory
+output block for this gate.
+
+This gate is about the baseline, not the reviewer's taste. Do not return `REVISE` for a
+stylistic preference when the evidence and structure hold.
 
 ## Review Cadence
 
@@ -32,7 +76,7 @@ Use this structure:
 | Scope | Company, event, industry, regime, or portfolio |
 | Original label | Research label used at the time |
 | Original score | Scorecard total or axis score, if applicable |
-| Key evidence | Sources and dates that drove the conclusion |
+| Key evidence | Source-pool IDs, sources, and dates that drove the conclusion |
 | Key assumption | The assumption that mattered most |
 | Red flags | Red flags known at the time |
 | 1-week result | Price, event, data, or thesis result |

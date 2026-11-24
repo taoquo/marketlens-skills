@@ -326,14 +326,14 @@ figure[data-folio-diagram-slot="pe-band"] figcaption, .folio-figure figcaption {
 .folio-data-fallback th, .folio-data-fallback td { padding: 0.5pt 4pt !important; }
 .lead { line-height: 1.45; margin-bottom: 8pt; }
 .decision-strip { margin-bottom: 8pt; }
-section { margin-bottom: 6pt; }
-h2 { margin-bottom: 4pt; }
-ul.dash li { margin-bottom: 1pt; }
-.callout { margin: 6pt 0; }
+section { margin-bottom: 4pt; }
+h2 { margin-bottom: 3pt; }
+ul.dash li { margin-bottom: 0; }
+.callout { margin: 5pt 0; }
 table { margin: 3pt 0; }
-table.compact th, table.compact td { padding: 0.5pt 5pt; }
+table.compact th, table.compact td { padding: 0.3pt 5pt; }
 table.compact td { font-size: 7.5pt; }
-.footer { margin-top: 6pt; padding-top: 4pt; }
+.footer { margin-top: 4pt; padding-top: 3pt; }
 
 </style>
 <style id="folio-diagram-host-styles">
@@ -363,7 +363,7 @@ table.compact td { font-size: 7.5pt; }
 
 <div class="metrics"><div class="metric"><div class="metric-value">55.0x</div><div class="metric-label">PE(TTM)</div></div><div class="metric"><div class="metric-value">51st</div><div class="metric-label">Percentile</div></div><div class="metric"><div class="metric-value">44.8x</div><div class="metric-label">Lower band</div></div><div class="metric"><div class="metric-value">82.0x</div><div class="metric-label">Upper band</div></div></div>
 
-<p class="lead">The band answers a narrow question: where does 55x sit in NVIDIA's own history? At the 51st percentile it is almost exactly at the median of its trailing 750-observation window. That is neither cheap nor expensive; it is unremarkable. The useful part is the slope: the rolling median has fallen from roughly 87x in late 2023 to 55x today, so the same absolute multiple now demands less than it did two years ago. The band cannot tell you whether the earnings base or the implied growth is right; the reverse DCF still does that work.</p>
+<p class="lead">The band answers a narrow question: where does 55x sit in NVIDIA's own history? At the 51st percentile it is almost exactly at the median of its trailing 750-observation window. That is neither cheap nor expensive; it is unremarkable. The useful part is the slope: the rolling median has fallen from roughly 87x in late 2023 to 55x today, so the same absolute multiple now demands less than it did two years ago. The move was EPS-led: an illustrative TTM EPS path from $0.42 to $4.10 more than offset the multiple compression from 97x to 55x, so the price gain is not a re-rating. The band cannot tell you whether the earnings base or the implied growth is right; the reverse DCF still does that work.</p>
 
 <figure data-folio-diagram-slot="pe-band" data-folio-kind="line-chart" data-folio-profile="embed" data-folio-theme="folio" data-folio-variant="plain" data-folio-fixture-sha256="cb7fc6d8156a8e029e9e57d45dc22817e23301d44ee9a2625a2b045b3466d0ee" data-folio-artifact-sha256="059346d881d2b50880078fa40736f5a9c64b3454e2c94f8d7f2952a7a28a2980" role="group" aria-labelledby="folio-caption-pe-band" aria-describedby="folio-data-pe-band">
 <div class="folio-diagram-artifact" style="--folio-host-max-width:166mm;--folio-host-max-height:140.25mm;--folio-host-fit-width:166.0mm">
@@ -436,12 +436,12 @@ table.compact td { font-size: 7.5pt; }
   <div class="decision-owner">Confidence: Medium</div>
 </div>
 
-<table class="compact financial"><thead><tr><th>Read</th><th>Current</th><th>Why it matters</th></tr></thead><tbody><tr><td>Position</td><td>55.0x vs 44.8x / 54.7x / 82.0x</td><td>At the middle of the band, not at an extreme</td></tr><tr><td>Percentile</td><td>51st of 750 observations</td><td>Half the window is below; the read remains window-dependent</td></tr><tr><td>Slope</td><td>Falling</td><td>The rolling median fell from roughly 87x in late 2023 to 55x today</td></tr><tr><td>Regime</td><td>AI capex up; real yields up</td><td>A raw PE band is not rate-adjusted</td></tr><tr><td>Failure checks</td><td>Denominator illustrative; earnings cyclical</td><td>Confidence capped at Medium; no standalone label</td></tr></tbody></table>
+<table class="compact financial"><thead><tr><th>Read</th><th>Current</th><th>Why it matters</th></tr></thead><tbody><tr><td>Position</td><td>55.0x vs 44.8x / 54.7x / 82.0x</td><td>At the middle of the band, not at an extreme</td></tr><tr><td>Percentile</td><td>51st of 750 observations</td><td>Half the window is below; the read remains window-dependent</td></tr><tr><td>Slope</td><td>Falling</td><td>The rolling median fell from roughly 87x in late 2023 to 55x today</td></tr><tr><td>Regime</td><td>AI capex up; real yields up</td><td>A raw PE band is not rate-adjusted</td></tr><tr><td>Decomposition</td><td>Price +452%; EPS +875%; PE -43%</td><td>EPS-led: TTM EPS rose ~9.8x while the multiple fell from 97.1x to 55.0x; not a re-rating</td></tr></tbody></table>
 
 <div class="two-col">
   <section>
     <h2>Red Flags</h2>
-    <ul class="dash"><li>The PE series is illustrative, not reconciled to filings. A synthetic PE series is Tier 3; confidence is capped at Medium.</li><li>NVIDIA's earnings are cyclical and concentrated. A PE band on peak AI earnings can look cheap for the wrong reason.</li><li>The rolling median is falling. A lower multiple on a lower earnings base is not a cheaper company.</li><li>The band is raw PE, not rate-adjusted. A higher real-yield regime compresses the distribution; the percentile is not a target.</li><li>P20/P80 is a 60% central band, not a 68% band, and realized coverage is not computed. Do not call it a probability.</li></ul>
+    <ul class="dash"><li>The PE series is illustrative, not reconciled to filings. A synthetic PE series is Tier 3; confidence is capped at Medium. The decomposition uses an illustrative EPS path, not a reconciled filing series; it is arithmetic, not a second valuation model.</li><li>NVIDIA's earnings are cyclical and concentrated. A PE band on peak AI earnings can look cheap for the wrong reason.</li><li>The rolling median is falling. A lower multiple on a lower earnings base is not a cheaper company.</li><li>The band is raw PE, not rate-adjusted; a higher real-yield regime compresses the distribution. P20/P80 is a 60% central band, not a 68% band, and realized coverage is not computed. Do not call it a probability.</li></ul>
   </section>
   <section>
     <h2>Decision Impact</h2>
@@ -458,11 +458,11 @@ table.compact td { font-size: 7.5pt; }
 
 <section>
   <h2>Data Freshness</h2>
-  <table class="compact financial"><thead><tr><th>Data</th><th>Value</th><th>As of</th><th>Published</th><th>Retrieved</th><th>Source</th><th>Freshness</th></tr></thead><tbody><tr><td>PE(TTM) series</td><td>1,305 daily observations</td><td>2026-05-15</td><td>n/a</td><td>2026-11-23</td><td>Illustrative dataset</td><td>Lagged</td></tr><tr><td>TTM net profit denominator</td><td>Illustrative, not reconciled</td><td>2026-05-15</td><td>n/a</td><td>2026-11-23</td><td>Illustrative dataset</td><td>Unavailable</td></tr><tr><td>Band method</td><td>P20/P80, 750-obs window</td><td>2026-05-15</td><td>n/a</td><td>2026-11-23</td><td>MarketLens script</td><td>Fresh</td></tr><tr><td>Share count / corporate actions</td><td>Not reconciled</td><td>n/a</td><td>n/a</td><td>2026-11-23</td><td>Requires filings</td><td>Unavailable</td></tr><tr><td>Price / market cap</td><td>Illustrative $225.32 / $5.52T</td><td>2026-05-15</td><td>2026-05-16</td><td>2026-11-23</td><td>Illustrative snapshot</td><td>Lagged</td></tr></tbody></table>
+  <table class="compact financial"><thead><tr><th>Data</th><th>Value</th><th>As of</th><th>Published</th><th>Retrieved</th><th>Source</th><th>Freshness</th></tr></thead><tbody><tr><td>PE(TTM) series</td><td>1,305 daily observations</td><td>2026-05-15</td><td>n/a</td><td>2026-11-23</td><td>Illustrative dataset</td><td>Lagged</td></tr><tr><td>TTM net profit / EPS path</td><td>Illustrative, not reconciled</td><td>2026-05-15</td><td>n/a</td><td>2026-11-23</td><td>Illustrative dataset</td><td>Unavailable</td></tr><tr><td>Band method</td><td>P20/P80, 750-obs window</td><td>2026-05-15</td><td>n/a</td><td>2026-11-23</td><td>MarketLens script</td><td>Fresh</td></tr><tr><td>Share count / corporate actions</td><td>Not reconciled</td><td>n/a</td><td>n/a</td><td>2026-11-23</td><td>Requires filings</td><td>Unavailable</td></tr><tr><td>Price / market cap</td><td>Illustrative $225.32 / $5.52T</td><td>2026-05-15</td><td>2026-05-16</td><td>2026-11-23</td><td>Illustrative snapshot</td><td>Lagged</td></tr></tbody></table>
 </section>
 
 <div class="footer">
-  <span><strong>Sources:</strong> Illustrative NVDA PE series (2021-05-17 to 2026-05-15); MarketLens valuation-framework.md and scripts/pe_band_chart.py; NVIDIA FY26 results for denominator context. Not live market data.</span>
+  <span><strong>Sources:</strong> Illustrative NVDA PE and EPS paths (2021-05-17 to 2026-05-15); MarketLens valuation-framework.md and scripts/pe_band_chart.py; NVIDIA FY26 results for denominator context. Not live market data.</span>
   <span>This is public-market research for reference only and does not constitute investment advice.</span>
 </div>
 

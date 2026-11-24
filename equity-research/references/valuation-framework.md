@@ -69,7 +69,7 @@ Use it when the company has positive, comparable TTM earnings and at least three
 
 ### Reading The Signal
 
-Report four things, not one:
+Report five reads, not one:
 
 | Read | What to report | Why it matters |
 |---|---|---|
@@ -77,6 +77,13 @@ Report four things, not one:
 | Percentile | Share of the window at or below the current multiple, with the window stated | Distribution-free, but still window-dependent |
 | Slope | Direction and size of the rolling median multiple over the last 1-2 years | A falling centre can make the same absolute multiple look cheaper than it is |
 | Regime | Earnings trend, rates/ERP, and any structural break | A low multiple on falling earnings, or in a higher-rate regime, is not automatically cheap |
+| Decomposition | Change in price over the window split into the EPS(TTM) contribution and the multiple contribution, and which dominated | A rising price on flat or falling EPS is a re-rating, not fundamental improvement; a falling multiple on rising EPS is a de-rating despite improving earnings |
+
+Decompose on a log basis, where the identity is exact: `log(price) = log(EPS) + log(PE)`,
+so `change in log price = change in log EPS + change in log PE`. Use the same window and
+denominator convention as the band. If the multiple dominates, the move is about the
+discount rate, positioning, or sentiment; if EPS dominates, run the earnings-quality
+screens before crediting it. Report both contributions in the output.
 
 Map the result to the five valuation reads in `../../references/implied-expectations.md`: undemanding, reasonable, demanding, priced for perfection, or not solvable. The band can support the first three as a cross-check; it cannot produce `priced for perfection` or `not solvable` without the implied-variable solve and the earnings-quality screens. A band position alone cannot support `add-candidate watch`, `trim-review`, or any action label.
 
@@ -106,6 +113,7 @@ When a historical band is used, state:
 - The window, number of observations, and whether it covers a full cycle.
 - The band method and coverage: P20/P80, P16/P84, or log-PE μ ± kσ, with `k` and realised coverage.
 - The current position, percentile, and slope.
+- The EPS(TTM) and multiple contribution to the price move over the same window.
 - The failure checks and any that are unavailable.
 - The resulting valuation read and the confidence cap. If the denominator is not reconciled to filings, cap confidence at Medium; if the history is shorter than 750 days, use `evidence-gap` rather than a strong read.
 

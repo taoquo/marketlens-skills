@@ -2,15 +2,28 @@
 
 [English](README.md)
 
-MarketLens Skills 是一个可发布的金融投研 Skill 仓库，用于 AI 辅助公开市场研究。
+MarketLens Skills 是一个可发布的金融投研 Skill 仓库，用于 AI 辅助公开市场研究。仓库包含六个 Markdown skill 和一层共享 reference；没有运行时或应用构建。
 
 仓库地址：https://github.com/taoquo/marketlens-skills
 
-当前包含六个面向生产使用的 Skill：
+## 目录
+
+- [Skills](#skills)
+- [安装](#安装)
+- [使用示例](#使用示例)
+- [共享契约](#共享契约)
+- [数据纪律](#数据纪律)
+- [跨层覆盖](#跨层覆盖)
+- [决策链](#决策链)
+- [示例](#示例)
+- [校验](#校验)
+- [免责声明](#免责声明)
+
+## Skills
 
 | Skill | 用途 |
 |---|---|
-| `equity-research` | 覆盖美股、港股、A股的个股研究，包含质量评分、盈利质量筛子、基本面、隐含预期估值、历史估值带、护城河、区域披露规则、风险信号和数据实效性。 |
+| `equity-research` | 覆盖美股、港股、A股的个股研究，包含质量评分、盈利质量筛子、基本面、隐含预期估值、历史估值带、护城河、区域披露规则、风险信号和数据时效性。 |
 | `market-regime-monitor` | 市场环境判断，覆盖流动性、情绪、仓位、估值拥挤度、置信度评分、风险预算影响和跨市场风险传导。 |
 | `sector-industry-research` | 行业与产业链研究，覆盖周期位置、供需、库存、价格、产能、利润池、政策/技术变化、交易表达、同业比较和上市公司映射。 |
 | `catalyst-event-monitor` | 事件驱动研究，覆盖未来催化、预期差、市场定价、交易设定、情景路径、事件前观察数据和事件后 thesis 更新。 |
@@ -25,8 +38,7 @@ MarketLens Skills 是一个可发布的金融投研 Skill 仓库，用于 AI 辅
 npx skills add https://github.com/taoquo/marketlens-skills --all
 ```
 
-或者克隆仓库后，把 skill 软链接/复制到 Codex 项目。每个 skill 通过 `../references/...` 读取共享
-规范，因此顶层 `references/` 目录必须和各 skill 目录放在同一层：
+或者克隆仓库后，把 skill 软链接/复制到 Codex 项目。每个 skill 通过 `../references/...` 读取共享规范，因此顶层 `references/` 目录必须和各 skill 目录放在同一层：
 
 ```bash
 git clone https://github.com/taoquo/marketlens-skills.git
@@ -73,19 +85,19 @@ Use $trade-plan-risk-manager 复盘一笔交易属于 thesis 错误、时机错�
 
 ## 共享契约
 
-`references/skill-contract.md` 存放所有 skill 继承的操作规则：只做公开市场研究、不做个性化建议、
-四条强制共享引用、证据分级纪律、结论门禁行为、三个时间戳与五个时效等级，以及六个必需输出块及其顺序。
-各份 `SKILL.md` 只保留自己领域特有的 Core Rule、证据来源、门禁、降级矩阵、工作流和输出模板。
+`references/skill-contract.md` 存放所有 skill 继承的操作规则：只做公开市场研究、不做个性化建议、强制共享路由（`skill-contract.md` 加四份共享引用）、证据分级纪律、结论门禁行为、三个时间戳与五个时效等级，以及六个必需输出块及其顺序。
 
-`VERSION` 是唯一版本源。`scripts/validate-skills.sh` 会校验每份 `SKILL.md`、`VERSION` 与
-`CHANGELOG.md` 最新标题一致，并校验中英文 README 的示例覆盖和图片路径与 `examples/` 匹配。
+它还定义了跨 skill 运行的研究状态卡：同一张卡携带问题、日期、模式、各层读数、标签、约束条件、时效性、来源池 ID 和待解问题。各份 `SKILL.md` 只保留自己领域特有的 Core Rule、证据来源、门禁、降级矩阵、工作流和输出模板。
+
+`VERSION` 是唯一版本源。`scripts/validate-skills.sh` 会校验每份 `SKILL.md`、`VERSION` 与 `CHANGELOG.md` 最新标题一致，并校验中英文 README 的示例覆盖和图片路径与 `examples/` 匹配。
 
 ## 数据纪律
 
-`references/data-discipline.md` 存放所有 skill 共用的数据规则，各份 `SKILL.md`
-只补充自己领域特有的部分：
+`references/data-discipline.md` 存放所有 skill 共用的数据规则，各份 `SKILL.md` 只补充自己领域特有的部分：
 
 - 优先使用官方源和一手来源，全仓统一的三级证据模型；
+- 来源池使用稳定 ID，并建立 claim 到来源的映射；同一份公告被多家供应商转载不算多个独立来源；
+- 事实、估计、观点在句子层面分开标注，来源紧贴对应的 claim；
 - `as_of`、`published_at`、`retrieved_at` 分开记录，不得合并成一个日期；
 - 封闭枚举的时效等级：`Fresh`、`Lagged`、`Stale`、`Undated`、`Unavailable`；
 - 核心数字校验表：原文措词、单位、期间、交叉核对，以及四种处理方式之一；
@@ -93,106 +105,142 @@ Use $trade-plan-risk-manager 复盘一笔交易属于 thesis 错误、时机错�
 - 用户输入分为计划参数、事实声明、偏好三类，使用前先跑一致性检查；
 - 缺失数据标记为 unavailable 并当作置信度上限，不得硬转成看多或看空信号。
 
-每个 skill 还各自带一张降级矩阵，把“缺失或过期的输入”映射到“必须采取的处理方式”，
-让数据缺口以确定方式改变输出，而不是写一句备注就过。
+每个 skill 还各自带一张降级矩阵，把“缺失或过期的输入”映射到“必须采取的处理方式”，让数据缺口以确定方式改变输出，而不是写一句备注就过。
 
-skill 在不同会话之间没有记忆，所以 `references/review-and-calibration.md` 定义了
-`research-log/` 追加式记录：下结论时就写入日志，1 周 / 1 个月 / 3 个月的复盘
-节奏才能真正闭环。该目录已 gitignore，首次创建前必须先询问用户。
-同一份文件还定义了 `Thesis Decay`（论点衰减）：未重新确认的标签不默认仍然成立；
-价格向论点方向运动但基本面证据没有跟上时，应该降低而不是提高置信度。
+skill 在不同会话之间没有记忆，所以 `references/review-and-calibration.md` 定义了 `research-log/` 追加式记录：下结论时就写入日志，1 周 / 1 个月 / 3 个月的复盘节奏才能真正闭环。该目录已 gitignore，首次创建前必须先询问用户。
+
+同一份文件还定义了 `Thesis Decay`（论点衰减）：未重新确认的标签不默认仍然成立；价格向论点方向运动但基本面证据没有跟上时，应该降低而不是提高置信度。它还定义了发布前审稿闸门：六个内容维度、`PASS` 或 `REVISE`、五条阻塞条件，以及输出定稿前的有限轮修订。
 
 ## 跨层覆盖
 
-六份共享 reference 不归任何单一 skill，因为它们会影响决策链上不止一层。
-各自的加载触发条件列在 `references/skill-routing.md`：
+六份跨层 reference 不归任何单一 skill，因为它们会影响决策链上不止一层。各自的加载触发条件列在 `references/skill-routing.md`：
 
 - `references/implied-expectations.md`：把估值问题从“值多少钱”反转为“当前价格隐含了什么假设”。先拆分 EV 中的零增长部分与增长部分，再用反向 DCF 只求解一个变量并将其翻译成绝对量（终局年收入、销量、隐含市占率），并将常见倍数读作一条可检验的命题。DCF 不适用的业务模型（银行、保险、REIT、公用事业、周期品、未盈利平台、未有收入生物科技）另有对应的求解对象。安全边际不再表达为对测算公平价值的折价，而是隐含假设与历史记录的距离。
-- `references/earnings-quality-screens.md`：把定性的红旗清单转成可计算的比率和阈值。现金转化、应计比率、运资与收入增速差、成本资本化、资产负债表完整性，全部只需一份财报加上年同期数据即可算出，不依赖数据供应商。阈值突破数量直接映射到置信度上限和标签上限；行业替换表说明哪些筛子不适用、换成什么。
+- `references/earnings-quality-screens.md`：把定性的红旗清单转成可计算的比率和阈值。现金转化、应计比率、营运资金与收入增速差、成本资本化、资产负债表完整性，全部只需一份财报加上年同期数据即可算出，不依赖数据供应商。阈值突破数量直接映射到置信度上限和标签上限；行业替换表说明哪些筛子不适用、换成什么。
 - `references/credit-and-cross-asset.md`：股权是次级索偿权。市场层面的信用利差、实际利率、通胀预期、期限溢价、美元互换基差进入市场环境判断；到期债阶梯、契约安全垫、评级轨迹进入个股分析。地产、金融、重资产、未盈利成长行业，缺信用读数不是“精度略低”，而是直接封顶标签。
-- `references/base-rates.md`：任何概率、可能性用词、情景权重之前，必须先给出参照类和历史基准率。覆盖审批通过率、并购完成率、指引兽现率、周期时长、利润率修复、转型成功率、产能周期、事件后漂移，并要求未调整基准率与调整后估值并列。
+- `references/base-rates.md`：任何概率、可能性用词、情景权重之前，必须先给出参照类和历史基准率。覆盖审批通过率、并购完成率、指引兑现率、周期时长、利润率修复、转型成功率、产能周期、事件后漂移，并要求未调整基准率与调整后估值并列。
 - `references/short-and-relative-value.md`：把空头视角和相对价值配对升为一等研究对象，已确认的红旗不再只能用来扣置信度。使用空头语言前必须有已核实的借券、自由流通、拥挤度数据；拿不到就只能停在 `avoid only`。
-- `references/capital-allocation-record.md`：衡量管理层把现金花到哪里去了。先做五年来源与使用账本，两侧必须配平，才允许对记录下判断；再用 12 条回报筛子衡量每条路径挣回了多少：含商誉与剔除商誉双口径、三年与五年双窗口的 ROIIC，累计减值对累计并购对价，大额并购前后三年 ROIC 变化，回购均价在公司自身股价区间的分位数，回购金额对 SBC，以及净稀释。另有 7 条筛子衡量说过的话兑现了几次，从指引兑现率到薪酬 KPI 里究竟有没有资本效率指标。聚合读数决定估值允许给出多少再投资信用：`disciplined` 按历史 ROIIC 计，`adequate` 封顶在 WACC，`value-leaking` 低于 WACC，`destructive` 直接切换到零增长锚。
+- `references/capital-allocation-record.md`：衡量管理层把现金花到哪里去了。先做五年来源与使用账本，两侧必须配平，才允许对记录下判断；再用 12 条回报筛子衡量每条路径挣回了多少，包括含商誉与剔除商誉双口径、三年与五年双窗口的 ROIIC，累计减值对累计并购对价，大额并购前后三年 ROIC 变化，回购均价在公司自身股价区间的分位数，回购金额对 SBC，以及净稀释。另有 7 条筛子衡量说过的话兑现了几次，从指引兑现率到薪酬 KPI 里究竟有没有资本效率指标。聚合读数决定估值允许给出多少再投资信用：`disciplined` 按历史 ROIIC 计，`adequate` 封顶在 WACC，`value-leaking` 低于 WACC，`destructive` 直接切换到零增长锚。
 
-`references/skill-routing.md` 同时给出 `Out Of Scope` 表：加密资产、外汇直盘、商品期货、
-债券选券、期权策略、可转债定价、未上市公司、基金筛选、组合优化与仓位计算、
-税务与法律建议、ESG 评分、盘中执行、个人财务规划均不在覆盖范围内。
-每一行都指明了范围内最接近的替代读数，而不是让模型自行发明框架。
+`references/skill-routing.md` 同时给出 `Out Of Scope` 表：加密资产、外汇直盘、商品期货、债券选券、期权策略、可转债定价、未上市公司、基金筛选、组合优化与仓位计算、税务与法律建议、ESG 评分、盘中执行、个人财务规划均不在覆盖范围内。每一行都指明了范围内最接近的替代读数，而不是让模型自行发明框架。
 
 ## 决策链
 
-每个 skill 负责研究流程中的一层。归属划分见 `references/skill-routing.md`。
-`references/scoring-standard.md` 存放共享评分规则、各层领域读数到共用标签的映射，
-以及具有约束力的决策链限制。多个 skill 同时适用时，按完整决策链处理：
+每个 skill 负责研究流程中的一层。归属划分见 `references/skill-routing.md`。`references/scoring-standard.md` 存放共享评分规则、各层领域读数到共用标签的映射，以及具有约束力的决策链限制。多个 skill 同时适用时，按完整决策链处理：
 
 ```text
 市场环境 -> 行业/产业设置 -> 公司质量与估值 -> 催化剂/时机 -> 组合角色与风险 -> 研究标签 -> 条件交易计划与风险复核
 ```
 
+### 研究台模式
+
+`references/skill-routing.md` 为跨 skill 请求定义四种模式：
+
+| 模式 | 适用场景 | 层序 |
+|---|---|---|
+| `quick` | 单一层就能回答 | 只走拥有该问题的 skill |
+| `full` | 需要沿决策链给出研究标签 | 市场环境 -> 行业 -> 公司 -> 催化剂 -> 组合 -> 标签 |
+| `event` | 决策点是某个有日期的事件 | 催化剂 -> 公司 -> 交易计划 |
+| `portfolio` | 问题是暴露、集中度或优先级 | 组合 -> 市场环境 -> 公司 |
+
+每种模式都给出跳过规则和缺层封顶；一次运行仍然只输出一个标签、一个约束条件和一个复核日期。这些模式是路由辅助，不是新 skill，也不是运行时。
+
 各版本改动记录见 [CHANGELOG.md](CHANGELOG.md)。
 
 ## 示例
 
-`examples/` 目录包含 7 个使用 Folio 排版的英文验证案例：v0.9 重建的 6 个案例以 NVIDIA 为核心，
-外加 1 个 v0.10 的历史估值带案例。每个案例都用来检验本版的判定门槛：价格隐含了什么、报表利润能否
-通过筛子、经营现金流实际流向了哪里、以及结论允许挂什么标签。每个案例提供 `.png`（下方预览，
-单页连续长图）、`.html` 和 `.pdf`（A4 分页）三种格式：
+`examples/` 目录包含 7 个使用 Folio 排版的英文验证案例：v0.9 重建的 6 个案例以 NVIDIA 为核心，外加 1 个 v0.10 的历史估值带案例。每个案例都用来检验当前门槛：价格隐含了什么、报表利润能否通过筛子、经营现金流实际流向了哪里，以及结论允许挂什么标签。
 
-`equity-research` · NVIDIA 六维质量分 16/18，盈利质量 clean、资本配置读数 adequate，但反向 DCF 显示 EV 的 80% 来自增长。
+连续长图默认折叠。PDF 适合按 A4 分页阅读，HTML 是排版源文件。
+
+### 案例索引
+
+覆盖关系是至少一个 skill 对一个案例：6 个 skill 对 7 个案例，其中 `equity-research` 另有一个历史估值带案例。
+
+| Skill | 案例 | 页数 | 文件 |
+|---|---|---:|---|
+| `equity-research` | `marketlens-v09-equity-research-nvda` | 4 | [HTML](examples/marketlens-v09-equity-research-nvda.html) · [PDF](examples/marketlens-v09-equity-research-nvda.pdf) · [PNG](examples/marketlens-v09-equity-research-nvda.png) |
+| `equity-research` | `marketlens-v010-valuation-band-nvda` | 2 | [HTML](examples/marketlens-v010-valuation-band-nvda.html) · [PDF](examples/marketlens-v010-valuation-band-nvda.pdf) · [PNG](examples/marketlens-v010-valuation-band-nvda.png) |
+| `market-regime-monitor` | `marketlens-v09-market-regime-nvda` | 2 | [HTML](examples/marketlens-v09-market-regime-nvda.html) · [PDF](examples/marketlens-v09-market-regime-nvda.pdf) · [PNG](examples/marketlens-v09-market-regime-nvda.png) |
+| `sector-industry-research` | `marketlens-v09-sector-ai-server` | 2 | [HTML](examples/marketlens-v09-sector-ai-server.html) · [PDF](examples/marketlens-v09-sector-ai-server.pdf) · [PNG](examples/marketlens-v09-sector-ai-server.png) |
+| `catalyst-event-monitor` | `marketlens-v09-catalyst-nvda-earnings` | 2 | [HTML](examples/marketlens-v09-catalyst-nvda-earnings.html) · [PDF](examples/marketlens-v09-catalyst-nvda-earnings.pdf) · [PNG](examples/marketlens-v09-catalyst-nvda-earnings.png) |
+| `portfolio-risk-monitor` | `marketlens-v09-portfolio-ai-nvda` | 2 | [HTML](examples/marketlens-v09-portfolio-ai-nvda.html) · [PDF](examples/marketlens-v09-portfolio-ai-nvda.pdf) · [PNG](examples/marketlens-v09-portfolio-ai-nvda.png) |
+| `trade-plan-risk-manager` | `marketlens-v09-trade-plan-nvda` | 2 | [HTML](examples/marketlens-v09-trade-plan-nvda.html) · [PDF](examples/marketlens-v09-trade-plan-nvda.pdf) · [PNG](examples/marketlens-v09-trade-plan-nvda.png) |
+
+### 案例预览
+
+<details>
+<summary><strong>equity-research · NVIDIA 质量案例</strong> — 4 页</summary>
+
+NVIDIA 六维质量分 16/18，盈利质量 clean、资本配置读数 adequate，但反向 DCF 显示 EV 的 80% 来自增长。
 
 ![个股研究案例](examples/marketlens-v09-equity-research-nvda.png)
 
-`equity-research` · NVIDIA PE(TTM) 估值带：55x 位于自身 750 个观测窗口的第 51 百分位，滚动中轨正在下移；估值带仍是交叉校验，不单独决定标签。案例使用 Folio 折线图，含 8 个季度样本和可见数据表。数据为示例数据。
+</details>
+
+<details>
+<summary><strong>equity-research · NVIDIA PE(TTM) 估值带</strong> — 2 页</summary>
+
+NVIDIA 55x 位于自身 1,305 个观测、750 观测滚动窗口的第 51 百分位，滚动中轨正在下移。2023-Q3 至 2026-Q2 的变动由 EPS 主导：价格 +452%，EPS +875%，倍数 -43%。估值带仍是交叉校验，不单独决定标签。数据为示例数据。
 
 ![估值带案例](examples/marketlens-v010-valuation-band-nvda.png)
 
-`market-regime-monitor` · 美股科技股三轴环境：股票还在涨，但信用与实际利率轴已经转负，合计 -3 落入 tight or crowded，NVIDIA 是这个久期押注最干净的表达。
+</details>
+
+<details>
+<summary><strong>market-regime-monitor · 美股科技股环境</strong> — 2 页</summary>
+
+美股科技股三轴环境：股票还在涨，但信用与实际利率轴已经转负，合计 -3 落入 tight or crowded，NVIDIA 是这个久期押注最干净的表达。
 
 ![市场环境案例](examples/marketlens-v09-market-regime-nvda.png)
 
-`sector-industry-research` · AI 服务器产业链按倍数、隐含假设、增量资本回报各排一次，三张名单只在瓶颈供应商这一段重合。
+</details>
+
+<details>
+<summary><strong>sector-industry-research · AI 服务器产业链</strong> — 2 页</summary>
+
+AI 服务器产业链按倍数、隐含假设、增量资本回报各排一次，三张名单只在瓶颈供应商这一段重合。
 
 ![行业研究案例](examples/marketlens-v09-sector-ai-server.png)
 
-`catalyst-event-monitor` · NVIDIA 财报先问事件是否只交付 55x 与 80% 增长占比已隐含之物，再按经营来源、应计、资本化、一次性项目和税务分解结果。
+</details>
+
+<details>
+<summary><strong>catalyst-event-monitor · NVIDIA 财报</strong> — 2 页</summary>
+
+NVIDIA 财报先问事件是否只交付 55x 与 80% 增长占比已隐含之物，再按经营来源、应计、资本化、一次性项目和税务分解结果。
 
 ![事件催化案例](examples/marketlens-v09-catalyst-nvda-earnings.png)
 
-`portfolio-risk-monitor` · 等权 AI 观察池，九个 ticker 归结为一个久期押注、一套共用的会计惯例，以及对同一批管理层投放决定的再投资依赖。
+</details>
+
+<details>
+<summary><strong>portfolio-risk-monitor · AI 观察池</strong> — 2 页</summary>
+
+等权 AI 观察池，九个 ticker 归结为一个久期押注、一套共用的会计惯例，以及对同一批管理层投放决定的再投资依赖。
 
 ![组合风险案例](examples/marketlens-v09-portfolio-ai-nvda.png)
 
-`trade-plan-risk-manager` · NVIDIA 计划因 upside case 重述价格已隐含的假设而降为 monitor closely，流动性实测为 Deep，仓位意图因交付依赖再折一档。
+</details>
+
+<details>
+<summary><strong>trade-plan-risk-manager · NVIDIA 计划</strong> — 2 页</summary>
+
+NVIDIA 计划因 upside case 重述价格已隐含的假设而降为 monitor closely，流动性实测为 Deep，仓位意图因交付依赖再折一档。
 
 ![交易计划风险案例](examples/marketlens-v09-trade-plan-nvda.png)
 
-### 覆盖情况
+</details>
 
-覆盖关系是至少一个 skill 对一个案例：6 个 skill 对 7 个案例，其中 `equity-research`
-另有一个历史估值带案例。没有哪个 skill 缺少完整案例，也没有哪个案例对不上已发布的 skill。
+### 输出与覆盖
 
-| Skill | 案例 | HTML / PDF 页数 |
-|---|---|---|
-| `equity-research` | `marketlens-v09-equity-research-nvda` | 4 |
-| `equity-research` | `marketlens-v010-valuation-band-nvda` | 2 |
-| `market-regime-monitor` | `marketlens-v09-market-regime-nvda` | 2 |
-| `sector-industry-research` | `marketlens-v09-sector-ai-server` | 2 |
-| `catalyst-event-monitor` | `marketlens-v09-catalyst-nvda-earnings` | 2 |
-| `portfolio-risk-monitor` | `marketlens-v09-portfolio-ai-nvda` | 2 |
-| `trade-plan-risk-manager` | `marketlens-v09-trade-plan-nvda` | 2 |
+每个案例都带齐六个强制输出块：`Red Flags`、`Decision Impact`、`What Would Change The View`、`Data Freshness`、`Evidence Sources` 和 `Disclaimer`。在排版案例里，后两者由页脚的 `Sources` 列表与结尾免责声明承担，不单独立标题。每张 `Data Freshness` 表都记录 `references/data-discipline.md` 定义的三个时间戳，并用五个封闭枚举值 `Fresh` / `Lagged` / `Stale` / `Undated` / `Unavailable` 给每一项输入定级，因此每个案例的置信度封顶都能追溯到具体某一项缺失或滞后的输入。带评分的输出额外包含 `Score Summary` 表；`trade-plan-risk-manager` 按 `references/scoring-standard.md` 的例外规则改用 `Setup Quality`。它们只用于展示输出预览，不构成投资建议。
 
-每个案例都带齐六个强制输出块：`Red Flags`、`Decision Impact`、`What Would Change The View`、
-`Data Freshness`、`Evidence Sources` 和 `Disclaimer`。在排版案例里，后两者由页脚的
-`Sources` 列表与结尾免责声明承担，不单独立标题。每张 `Data Freshness` 表都记录
-`references/data-discipline.md` 定义的三个时间戳，并用五个封闭枚举值
-`Fresh` / `Lagged` / `Stale` / `Undated` / `Unavailable` 给每一项输入定级，
-因此每个案例的置信度封顶都能追溯到具体某一项缺失或滞后的输入。带评分的输出额外包含
-`Score Summary` 表；`trade-plan-risk-manager` 按 `references/scoring-standard.md` 的例外规则
-改用 `Setup Quality`。它们只用于展示输出预览，不构成投资建议。v0.9 重建了英文案例；
-v0.10 增加了历史估值带方法和第 7 个案例。v0.9 的案例继续有效。
+v0.9 重建了英文案例；v0.10 增加了历史估值带方法和第 7 个案例；v0.11 增加研究质量层，并让 v0.10 估值带案例展示 EPS/PE 分解。v0.9 的案例继续有效。
 
-方法、数据格式、命令行工具和读图方式见[历史估值带教程](docs/valuation-band.zh-CN.md)。
-案例本身是 Folio `line-chart` 图；本地绘图脚本仍是无依赖的独立回退：
+### 估值带教程
+
+方法、数据格式、命令行工具和读图方式见[历史估值带教程](docs/valuation-band.zh-CN.md)。案例本身是 Folio `line-chart` 图；本地绘图脚本仍是无依赖的独立回退：
 
 ```bash
 python3 scripts/pe_band_chart.py \
@@ -214,8 +262,7 @@ bash scripts/build-skills.sh
 REQUIRE_DIST=1 bash scripts/validate-skills.sh
 ```
 
-脚本按目录结构自动发现 skill，新增 skill 无需改脚本或 CI。GitHub Actions 在每次 push 和
-pull request 上执行同样的三条命令。
+脚本按目录结构自动发现 skill，新增 skill 无需改脚本或 CI。GitHub Actions 在每次 push 和 pull request 上执行同样的三条命令。
 
 ## 免责声明
 

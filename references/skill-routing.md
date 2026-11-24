@@ -42,6 +42,36 @@ conclusion in more than one layer. Load them by trigger rather than by skill.
 - Never route a question into personalized advice. Every skill stays at research
   labels, conditional triggers, and monitoring language.
 
+## Research Desk Modes
+
+Use these modes when a request spans more than one skill. The mode selects the layers; it
+does not add a new owner, a new skill, or a new output contract.
+
+| Mode | Use when | Layer order |
+|---|---|---|
+| `quick` | One layer owns the question | The owning skill only |
+| `full` | The question needs a research label across the chain | `market-regime-monitor` -> `sector-industry-research` -> `equity-research` -> `catalyst-event-monitor` -> `portfolio-risk-monitor` -> label |
+| `event` | A dated event is the decision point | `catalyst-event-monitor` -> `equity-research` -> `trade-plan-risk-manager` |
+| `portfolio` | The question is exposure, concentration, or priority | `portfolio-risk-monitor` -> `market-regime-monitor` -> `equity-research` |
+
+Rules:
+
+- State the selected mode at the start, or say why the request does not need a multi-skill
+  run.
+- Skip a layer only when it cannot change the answer. Record the skip and its reason under
+  the state card `open_questions`; a skipped layer is not evidence.
+- Carry the research state card from `skill-contract.md` through the run. Each layer updates
+  only its own fields and the source pool.
+- A missing layer is `Unavailable`, never neutral support. Apply the `evidence-gap` chain
+  row in `scoring-standard.md`: the final label cannot be stronger than `monitor closely`.
+  Name the missing input.
+- Do not run the full chain when a single skill answers the question. The modes are a
+  routing aid, not a completeness contest.
+- In `full` mode, add `trade-plan-risk-manager` only when the user asks for conditional
+  triggers, a plan, or execution risk. The research label itself does not require it.
+- A multi-skill run must end with one label, one binding constraint, and one review date.
+  Do not emit one label per skill as the final answer.
+
 ## Out Of Scope
 
 MarketLens covers listed equity research and the risk framing around it. The

@@ -55,26 +55,33 @@ The shared layer is not optional prose — it is the product's consistency mecha
 
 - `references/skill-contract.md` — the operating contract every skill routes: core rule,
   mandatory shared routes, evidence tiers, conclusion-gate behavior, the three timestamps
-  and five freshness grades, and the six mandatory output blocks in order. `SKILL.md`
-  keeps only domain-specific deltas.
+  and five freshness grades, the six mandatory output blocks in order, and the research
+  state card that carries one multi-skill run across layers. `SKILL.md` keeps only
+  domain-specific deltas.
 - `references/skill-routing.md` — ownership table (which skill owns what), trigger table
-  for the six cross-cutting files, and the out-of-scope list. A new skill needs one
-  routing entry, not edits across every other skill.
+  for the six cross-cutting files, research desk modes (`quick`, `full`, `event`,
+  `portfolio`), and the out-of-scope list. A new skill needs one routing entry, not edits
+  across every other skill.
 - `references/scoring-standard.md` — 0–3 scorecard direction, confidence, data-quality
   weighting, red-flag overrides, the nine research labels, label layering from each
-  skill's domain read, and the binding cross-module **chain constraints**.
+  skill's domain read, the binding cross-module **chain constraints**, and label
+  adjudication (name the binding constraint; never average conflicting layers).
 - `references/data-discipline.md` — the three timestamps, the closed freshness enum
-  (`Fresh` / `Lagged` / `Stale` / `Undated` / `Unavailable`), evidence tiers, core-figure
-  check, unit/currency/calendar rules, and user-input classification.
-- `references/review-and-calibration.md` — review cadence and the append-only
-  `research-log/` convention (gitignored; never create it without asking).
+  (`Fresh` / `Lagged` / `Stale` / `Undated` / `Unavailable`), evidence tiers, source pool
+  and claim-citation rules, core-figure check, unit/currency/calendar rules, and
+  user-input classification.
+- `references/review-and-calibration.md` — review cadence, the append-only `research-log/`
+  convention (gitignored; never create it without asking), thesis decay, and the
+  pre-publication content review gate (`PASS` / `REVISE`, bounded revision rounds).
 - `implied-expectations.md`, `earnings-quality-screens.md`, `capital-allocation-record.md`,
   `credit-and-cross-asset.md`, `base-rates.md`, `short-and-relative-value.md` — cross-cutting
   analytical methods loaded by trigger, not by skill.
 
 The decision chain is `Market Regime -> Sector/Industry -> Company Quality & Valuation ->
 Catalyst/Timing -> Portfolio Role & Risk -> Research Label`. Upstream layers only tighten
-a downstream label, never loosen it.
+a downstream label, never loosen it. `skill-routing.md` maps the chain to four research desk
+modes (`quick`, `full`, `event`, `portfolio`) with a layer order, skip rule, and missing-layer
+cap; a multi-skill run still ends with one label, one binding constraint, and one review date.
 
 ## Invariants enforced by the validator
 
@@ -112,13 +119,21 @@ Editing content without these breaks CI:
 
 - **Version is repo-wide and single-sourced.** Bump `VERSION`, every `SKILL.md`
   `metadata.version`, and the top `CHANGELOG.md` heading together. The current release is
-  0.10; the examples are the six English v0.9 cases in `examples/marketlens-v09-*` plus the
-  v0.10 valuation-band case in `examples/marketlens-v010-*`, with NVIDIA as the core case,
-  until methodology or example content changes again.
+  0.11; the examples are the six English v0.9 cases in `examples/marketlens-v09-*` plus the
+  v0.10 valuation-band case in `examples/marketlens-v010-*`, with NVIDIA as the core case.
+  v0.11 adds the research quality layer; the v0.10 valuation-band case now carries the
+  EPS/PE decomposition, and no new example is added.
 - **Shared rules live in `skill-contract.md`.** Do not re-add the core-rule, evidence-tier,
   gate, freshness, routing, or output-block boilerplate to individual `SKILL.md` files.
   Keep only the domain-specific Core Rule, evidence sources, gates, degradation table,
   workflow, and output template.
+- **Source quality is not source count.** The source pool maps each decisive claim to a
+  dated record. Duplicate vendor copies of one filing are one source, and a Tier 3 article
+  quoting a Tier 1 filing adds no independent support. Do not pad the pool to reach a number.
+- **Validation checks structure, not conclusions.** Before presenting an output as complete,
+  run the `Pre-Publication Review` in `review-and-calibration.md`. It is a content gate with
+  `PASS` / `REVISE`, bounded revision rounds, and residual issues recorded in the existing
+  confidence blocks; it does not add a mandatory output block.
 - **Historical valuation bands are a valuation-layer cross-check.** The method lives in
   `equity-research/references/valuation-framework.md`, not in a new skill or a top-level shared
   file. It uses rolling, point-in-time windows; a full-sample band is descriptive only and

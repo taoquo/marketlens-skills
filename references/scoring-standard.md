@@ -145,7 +145,7 @@ Market Regime
           -> Research Label
 ```
 
-The chain prevents one attractive score from overpowering the full decision context. A high-quality company can still be a `hold/watch` or `trim-review` if valuation, regime, event pricing, or portfolio concentration is unfavorable.
+The chain prevents one attractive score from overpowering the full decision context. A high-quality company can still be a `hold/watch` or `trim-review` if valuation, regime, event pricing, or portfolio concentration is unfavorable. The research desk modes in `skill-routing.md` select how much of this chain to run; they do not change the constraints.
 
 ### Chain Constraints
 
@@ -182,6 +182,25 @@ supportive.
 When a conclusion depends on an upstream layer, state where that input came
 from: a prior MarketLens output with its date, a user-provided view, or an
 assumption made in this run. An assumed layer cannot support a strong label.
+
+### Label Adjudication
+
+Chain constraints decide conflicts; they are not averaged.
+
+- The final label names the binding constraint: the chain row, red flag, or
+  evidence gap that set its ceiling. A label without a named constraint is
+  incomplete.
+- When layers point in different directions, apply the tighter constraint. Do
+  not average scores, split the difference, or default to the middle label.
+- `hold/watch` is a substantive read, not a fallback. State what remains intact,
+  what is missing, and the single dated evidence that would move the label.
+  `No clear signal` without those three is not a completed read.
+- If the strongest support and the binding constraint cannot be reconciled on
+  the available evidence, use `evidence-gap` and name the missing input.
+- A label that depends on an assumed upstream layer cannot be stronger than
+  `monitor closely`. Cite the provenance under `Chain Provenance`.
+- Do not upgrade a label because the downside is believed to be in the price
+  unless the implied-expectations read supports that claim.
 
 ## Standard Output Blocks
 

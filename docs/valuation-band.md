@@ -164,7 +164,7 @@ or as a signal.
 
 ## 6. How to read it
 
-Report four things, not one:
+Report five reads, not one:
 
 | Read | What to report | Why it matters |
 |---|---|---|
@@ -172,6 +172,12 @@ Report four things, not one:
 | Percentile | Share of the window at or below the current PE | Distribution-free, but still window-dependent |
 | Slope | Direction and size of the rolling median over the last 1–2 years | A falling centre can make the same absolute multiple look cheaper than it is |
 | Regime | Earnings trend, rates/ERP, and any structural break | A low multiple on falling earnings, or in a higher-rate regime, is not automatically cheap |
+| Decomposition | Split the price move into the EPS(TTM) and multiple contributions | A rising price on flat EPS is a re-rating; a falling multiple on rising EPS is a de-rating |
+
+The decomposition is exact on a log basis: `log(price) = log(EPS) + log(PE)`. Report which
+contribution dominated over the same window as the band. If the multiple dominated, the move
+is about the discount rate, positioning, or sentiment; if EPS dominated, run the earnings-quality
+screens before crediting it.
 
 Map the result to one of the five valuation reads: `undemanding`, `reasonable`, `demanding`,
 `priced for perfection`, or `not solvable`. The band can support the first three as a
@@ -206,6 +212,7 @@ The skill enters `valuation-band` mode and returns:
 - The window, observation count, and whether it covers a full cycle.
 - The band method and coverage (P20/P80, P16/P84, or log-PE μ ± kσ).
 - Current position, percentile, and slope.
+- The EPS(TTM) and multiple contribution to the price move.
 - The failure checks and any that are unavailable.
 - The valuation read and the confidence cap.
 
@@ -266,9 +273,12 @@ python3 scripts/pe_band_chart.py \
 
 Result: current PE 55.0x, lower 44.8x, middle 54.7x, upper 82.0x, percentile 51, slope falling.
 The read is mid-band and `reasonable` as a cross-check, but the falling centre means the same
-absolute multiple is less demanding than it was two years ago. The implied-expectations read
-still requires a 22.5% ten-year NOPAT CAGR, so the label remains hold/watch. The band supports
-the valuation layer; it does not set the label.
+absolute multiple is less demanding than it was two years ago. The move from 2023-Q3 to 2026-Q2
+is EPS-led: price +452%, EPS(TTM) +875%, multiple -43%. The multiple compressed while the
+earnings base expanded, so the price gain is not a re-rating. The EPS path is illustrative and
+not reconciled to filings. The implied-expectations read still requires a 22.5% ten-year NOPAT
+CAGR, so the label remains hold/watch. The band supports the valuation layer; it does not set
+the label.
 
 The case itself takes the Folio path. `examples/data/nvda-pe-band-folio.json` is the tracked
 `line-chart` fixture: eight quarterly samples from the daily series, three series (PE, P20 lower,
@@ -320,7 +330,7 @@ needs the full daily series rather than the chart's quarterly samples.
 - [ ] Total market cap and all share classes; share count changes handled.
 - [ ] Rolling, point-in-time band; no full-sample signal.
 - [ ] Window, observations, method, and coverage stated.
-- [ ] Position, percentile, slope, and regime reported.
+- [ ] Position, percentile, slope, regime, and EPS/PE decomposition reported.
 - [ ] Failure checks run; missing checks marked unavailable.
 - [ ] Figure or table fallback produced; no invented chart.
 - [ ] Folio line chart: at most 12 categories and 3 series; the rolling middle is in the table and

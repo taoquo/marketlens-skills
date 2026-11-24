@@ -53,6 +53,52 @@ confidence at Medium and cannot support a strong action-style label.
 
 Do not fabricate citations or quote text you cannot verify.
 
+## Source Pool And Claim Citation
+
+Build a source pool before the first conclusion and reuse it across every layer of the
+same research run. The pool is the audit trail from a claim back to a dated record; it is
+not a bibliography padded to a target count.
+
+| Field | Required content |
+|---|---|
+| ID | Stable short id, such as `S1` |
+| Tier | `Tier 1`, `Tier 2`, or `Tier 3` |
+| Publisher | Issuer, exchange, regulator, data vendor, or publication |
+| Title | Document, page, or dataset title |
+| `as_of` | Period, market date, or event date the source describes |
+| `published_at` | Publication date, if available |
+| `retrieved_at` | Date the source was viewed or fetched |
+| Locator | URL, filing number, accession number, or other stable locator |
+| Used in | The layer, table, or output block that uses it |
+
+Rules:
+
+- Every decisive claim maps to at least one pool ID. A claim without a pool entry is an
+  estimate or an opinion, and must be labelled as one.
+- Entries that describe the same underlying record are one source. The same filing
+  republished by three vendors is not three independent sources.
+- Judge independence by origin and incentive, not by count. A Tier 3 article quoting the
+  same Tier 1 filing adds no independent support.
+- A source that cannot be located does not enter the pool. List it as `Unavailable` in
+  `Data Freshness` and state the confidence impact.
+- Carry the pool forward across skills in the research state card defined in
+  `skill-contract.md`. Do not rebuild it at each layer.
+- Report only the entries that carry a conclusion. Do not pad the pool to reach a source
+  count.
+
+### Claim Citation
+
+- Separate fact, estimate, and opinion in the sentence itself. Use wording such as
+  `the filing reports`, `the model estimates`, and `the view argues`.
+- Put the source next to the claim it supports, not only in a closing list. A reader must
+  be able to tell which source supports which number.
+- Quote only text that was opened and can be located. Do not reconstruct a quotation, a
+  date, or a figure from memory.
+- When two sources conflict, cite both, state the conflict, and name the source the
+  analysis uses and why. Do not silently choose the convenient one.
+- A source's tier and its `as_of` date travel with the claim. A precise number from an
+  undated page is still undated.
+
 ## Core Figure Check
 
 Run every figure that carries a conclusion through this table before making a

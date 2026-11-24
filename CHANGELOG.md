@@ -3,6 +3,43 @@
 Release history for MarketLens Skills. Versions match `metadata.version` in each
 `SKILL.md` and the top-level `VERSION` file.
 
+## v0.11 Research Quality Layer: Source Pools, Adjudication, And A Pre-Publication Gate
+
+This release adds the operating discipline between a single skill's analysis and a finished
+research answer. It does not add a skill; the v0.10 valuation-band case now carries the new
+decomposition read.
+
+- `references/data-discipline.md`: new `Source Pool And Claim Citation` sections. A source
+  pool with stable IDs, three timestamps, locator, tier, and use; every decisive claim maps
+  to a pool ID; duplicate vendor copies of one filing count once; independence is judged by
+  origin, not count; fact, estimate, and opinion are separated at the sentence level;
+  conflicting sources are cited together. No source-count target is imposed.
+- `references/scoring-standard.md`: new `Label Adjudication` rules. The final label names the
+  binding chain constraint; conflicting layers apply the tighter constraint rather than an
+  average; `hold/watch` states what remains intact, what is missing, and the dated evidence
+  that would move it; a label built on an assumed upstream layer is capped.
+- `equity-research/references/valuation-framework.md`: the valuation-band read adds a
+  `Decomposition` row and an output field. On a log basis, the price move splits exactly into
+  the EPS(TTM) and multiple contributions, so a re-rating is not mistaken for earnings
+  improvement. The skill mode, output template, and both valuation-band guides carry the
+  same requirement.
+- `references/review-and-calibration.md`: new `Pre-Publication Review` gate. Six content
+  dimensions, two verdicts (`PASS` / `REVISE`), five blocking conditions, one revision round
+  for a single-skill output and two for a multi-skill report, and residual issues recorded in
+  the existing confidence blocks rather than a new mandatory block. The review record now
+  cites source-pool IDs.
+- `references/skill-contract.md`: new `Research State Card` for multi-skill runs. One compact
+  card carries the question, date, mode, layer reads, label, binding constraint, freshness,
+  source-pool IDs, and open questions. Downstream layers may tighten but not loosen. The
+  output contract now ties `Evidence Sources` to the pool.
+- `references/skill-routing.md`: new `Research Desk Modes` (`quick`, `full`, `event`,
+  `portfolio`) with layer order, skip rules, missing-layer handling, and the one-label
+  requirement. No orchestration runtime or new skill is introduced.
+- READMEs and `CLAUDE.md` updated for the new quality layer. The v0.9 examples remain
+  current; the v0.10 valuation-band case now shows the EPS/PE decomposition alongside the
+  band, with re-rendered `.pdf` and `.png`.
+- `VERSION` and all `metadata.version` fields move to 0.11.
+
 ## v0.10 Historical Valuation Band: A Rolling, Point-In-Time Cross-Check
 
 This release adds one valuation-layer method, not a new skill. It answers whether the current
