@@ -119,6 +119,32 @@ A quantity-scale anomaly is a figure that is off by roughly a factor of 10 or
 more versus the source, peer data, or the historical range. Mark it
 `Use with caveat` or `Exclude`; never smooth it into the narrative.
 
+### Silent Failure Checks
+
+A source can return a successful-looking response that is wrong. Run the applicable checks
+before assigning `Use`:
+
+| Failure mode | Example | Required check | If unresolved |
+|---|---|---|---|
+| Success status, error payload | HTTP 200 with an error code in the body | Read the business status, not only the transport status | `Unavailable` |
+| Empty list versus no data | A valid ticker returns an empty list; a mistyped ticker returns the same empty list | Re-run with a known-positive control and a second identifier; check the source count | `Unavailable` or `Proxy only` |
+| Unit or scale mismatch | A price scaled by 1,000 instead of 100; millions versus billions; percent versus decimal | Compare with a second source or a known quantity; check the order of magnitude | `Use with caveat` or `Exclude` |
+| Identifier normalization | Ticker case, exchange suffix, share class, ADR or A/H structure | Preserve the source's required form; test one known identifier | `Unavailable` |
+| Field drift | A vendor changes a field position or renames a column | Parse by named field; check the schema or version; compare two responses | `Use with caveat` |
+| Placeholder or pre-disclosure row | A newest row has null cash or a `预披露` status | Read the status or progress field; do not treat null as zero | `Use with caveat` |
+| Stale endpoint | A quote endpoint returns 200 with an old `quote_time` | Compare `as_of` with the market date; test a second endpoint | `Stale` or `Unavailable` |
+| Duplicate sources | Two vendors carry the same filing | Trace to the origin; count it as one source | One source |
+| Calendar, currency, or accounting mismatch | FY versus CY, HKD versus USD, GAAP versus IFRS | Label and reconcile before comparing | `Use with caveat` or `Exclude` |
+
+Rules:
+
+- Record the silent-failure check in the core figure check `Cross-check` column for every
+  decisive figure.
+- A second vendor copy is not an independent cross-check.
+- If the check cannot distinguish valid data from a failure, mark it `Unavailable` or
+  `Use with caveat`; never treat it as zero or as neutral evidence.
+- A quantity-scale anomaly of roughly 10 times or more is a failure until proven otherwise.
+
 ## Units, Currency, And Calendar
 
 - Print the unit and currency next to every number. A bare number is not a data point.

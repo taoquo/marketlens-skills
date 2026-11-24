@@ -36,18 +36,18 @@
 
 ```csv
 date,pe
-2026-05-13,54.80
-2026-05-14,54.90
-2026-05-15,55.00
+2026-11-20,13.37
+2026-11-23,17.73
+2026-11-24,16.67
 ```
 
 第二种是市值和 TTM 归母净利润，脚本计算 `PE = market_cap / ttm_net_profit`：
 
 ```csv
 date,market_cap,ttm_net_profit
-2026-05-13,5480000000000,100000000000
-2026-05-14,5490000000000,100000000000
-2026-05-15,5500000000000,100000000000
+2026-11-20,2990000000000,224000000000
+2026-11-23,3966000000000,224000000000
+2026-11-24,3740000000000,224000000000
 ```
 
 规则：
@@ -86,7 +86,7 @@ python3 scripts/pe_band_chart.py \
 命令还会打印一行摘要：
 
 ```text
-Latest: 2026-05-15 PE 55.00 | lower 44.756 | mid 54.72 | upper 82.048 | percentile 51.33 | slope falling | window 750 | observations 1305
+Latest: 2026-11-24 PE 16.67 | lower 32.496 | mid 49.14 | upper 64.882 | percentile 0.53 | slope falling | window 750 | observations 1410
 ```
 
 用浏览器打开 SVG，或嵌入 HTML/PDF 交付物。图表必需元素见
@@ -179,7 +179,7 @@ Latest: 2026-05-15 PE 55.00 | lower 44.756 | mid 54.72 | upper 82.048 | percenti
 可以直接问 equity-research skill：
 
 ```text
-Use $equity-research 给我看英伟达的 PE(TTM) 估值带，55x 在它自己的历史里处在什么位置。
+Use $equity-research 给我看英伟达的 PE(TTM) 估值带，16.7x 在它自己的历史里处在什么位置。
 Use $equity-research 把微软当前倍数放进一个五年滚动百分位带里。
 ```
 
@@ -218,10 +218,10 @@ skill 会进入 `valuation-band` 模式，输出：
 - 宿主无法画图时，输出同字段的表格回退。
 - 不能把图说成买入/卖出信号、目标价或均值回归概率。
 
-脚本为独立 SVG 实现了这些元素。NVIDIA 案例改用 Folio 的 `line-chart`：画布 960×440，通过
-`data-folio-diagram-slot` 宿主槽位嵌入；图上是从逐日序列抽出的 8 个季度样本，三条序列
-（PE、P20、P80），以及当前中轨的参考线。y 轴从 20x 起，因此图注明确说明截断。
-`embed-drawing` 会生成可见的 8 行数据表、宿主适配记录和最终字号检查；
+脚本为独立 SVG 实现了这些元素。NVIDIA 案例改用 Folio 的 `line-chart`：画布 960×460，通过
+`data-folio-diagram-slot` 宿主槽位嵌入；图上是从逐日序列抽出的 10 个季度样本，三条序列
+（PE、P20、P80），以及当前中轨的参考线。y 轴从 0x 起，图注说明估值带是描述性的、分母处在
+周期高点。`embed-drawing` 会生成可见的 10 行数据表、宿主适配记录和最终字号检查；
 `scripts/pe_band_chart.py` 仍是独立图表的回退方案，并输出逐日的
 `date,pe,lower,middle,upper,percentile` 表。
 
@@ -236,20 +236,22 @@ python3 scripts/pe_band_chart.py \
   --window 750 --min-obs 250 \
   --method percentile --lower 20 --upper 80 \
   --title "NVIDIA PE(TTM) Band" \
-  --subtitle "NVDA · 1,305 observations · rolling 750-observation window · illustrative reported-basis TTM · through 2026-05-15" \
-  --source "Source: illustrative dataset, not live market data" \
+  --subtitle "NVDA · 1,410 observations · rolling 750-observation window · reported-basis TTM · through 2026-11-24" \
+  --source "Source: quarter-end PE anchors from a vendor series, daily path interpolated; not a live feed" \
   --note "Point-in-time rolling band. Descriptive, not a signal, forecast, or target price."
 ```
 
-结果：当前 PE 55.0x，下轨 44.8x，中轨 54.7x，上轨 82.0x，百分位 51，斜率 falling。
-读数落在带中部，作为交叉校验是 `reasonable`；但中轨在下移，同一个绝对倍数比两年前更不苛刻。
-2023-Q3 至 2026-Q2 的变动由 EPS 主导：价格 +452%，EPS(TTM) +875%，倍数 -43%。倍数在压缩，
-盈利基础在扩张，所以价格上升不是重估。EPS 路径是示例数据，未与财报勾稽。隐含预期读数仍要求
-22.5% 的十年 NOPAT CAGR，所以标签仍是 hold/watch。估值带支持估值层，但不决定标签。
+结果：当前 PE 16.7x，下轨 32.5x，中轨 49.1x，上轨 64.9x，百分位 0.5，斜率 falling。
+读数在带下方，作为交叉校验是 `undemanding`；但分母处在周期高点：TTM EPS $9.31 同比增长
+143%，Q3 CFO/NI 只有 0.74。2023-Q4 至 2026-Q4 的变动由 EPS 主导：价格 +213%，EPS(TTM)
++1,125%，倍数 -74.4%。倍数在压缩，盈利基础在扩张，所以价格上升不是重估。EPS 路径锚定在
+季末财报数字上，日线在锚点之间插值，因此仍是示例数据。隐含预期读数现在只要求 6.2% 的十年
+NOPAT CAGR，估值层因此不苛刻；标签仍是 hold/watch，因为约束在现金流转化与治理，不在价格。
+估值带支持估值层，但不决定标签。
 
 案例本身走 Folio 路径。`examples/data/nvda-pe-band-folio.json` 是仓库跟踪的 `line-chart`
-fixture：从逐日序列抽 8 个季度样本，三条序列（PE、P20 下轨、P80 上轨），当前中轨的参考线，
-以及当前点的标注。DSL 上限是 12 个类别、3 条序列，所以案例按季度抽样而不是画 1,305 个逐日点，
+fixture：从逐日序列抽 10 个季度样本，三条序列（PE、P20 下轨、P80 上轨），当前中轨的参考线，
+以及当前点的标注。DSL 上限是 12 个类别、3 条序列，所以案例按季度抽样而不是画 1,410 个逐日点，
 中轨放在表格和图注里。填入宿主槽位：
 
 ```bash
@@ -260,7 +262,7 @@ python3.12 ~/.claude/skills/folio/scripts/folio.py embed-drawing \
   --output-host path/to/filled.html \
   --artifact-dir examples/assets/folio \
   --slot pe-band \
-  --caption "Illustrative reported-basis TTM; 8 quarterly samples from 1,305 daily observations; the y-axis starts at 20x. Descriptive, not a signal." \
+  --caption "Reported-basis TTM; 10 quarterly samples from 1,410 daily observations; the y-axis starts at 0x. Descriptive, not a signal." \
   --profile embed
 ```
 
@@ -274,10 +276,10 @@ python3.12 ~/.claude/skills/folio/scripts/folio.py embed-drawing \
 
 | 日期 | PE | 下轨 | 中轨 | 上轨 | 百分位 |
 |---|---:|---:|---:|---:|---:|
-| 2026-05-15 | 55.00 | 44.76 | 54.72 | 82.05 | 51.33 |
+| 2026-11-24 | 16.67 | 32.50 | 49.14 | 64.88 | 0.53 |
 
-再加一句文字摘要：`PE 55.0x，P20/P80 带 44.8x–82.0x，中轨 54.7x，百分位 51，斜率 falling，
-750 观测窗口，共 1,305 个观测。` 不要描述没有生成的图。
+再加一句文字摘要：`PE 16.7x，P20/P80 带 32.5x–64.9x，中轨 49.1x，百分位 0.5，斜率 falling，
+750 观测窗口，共 1,410 个观测。` 不要描述没有生成的图。
 
 Folio `embed-drawing` 路径会根据 fixture 的序列自动生成可见表格，因此图和回退表不会在绘图值上
 不一致。脚本的 `--table-output` CSV 则给出每个日期的中轨和百分位；宿主需要完整逐日序列而不是

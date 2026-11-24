@@ -202,6 +202,14 @@ Chain constraints decide conflicts; they are not averaged.
 - Do not upgrade a label because the downside is believed to be in the price
   unless the implied-expectations read supports that claim.
 
+### Adversarial Check
+
+A label stronger than `hold/watch` must survive the strongest case against it. Name the
+opposing case, the evidence that supports it, and why it fails, is already priced, or is
+covered by a trigger. A bearish label runs the symmetric bull case. If the opposing case
+cannot be answered, use `evidence-gap` or the tighter label; do not leave the strong label
+in place. The process is the `Red-Team Pass` in `review-and-calibration.md`.
+
 ## Standard Output Blocks
 
 The required blocks, their relative order, and the exact disclaimer are defined in
@@ -219,8 +227,24 @@ The required blocks, their relative order, and the exact disclaimer are defined 
 [How the score changes the research label, event watch, or risk response.]
 
 ## What Would Change The View
-[Concrete upgrade or downgrade triggers.]
+[2-4 measurable triggers: metric, threshold, window, direction, and the layer or constraint tested.]
 ```
+
+### Falsifiable Triggers
+
+`## What Would Change The View` carries 2-4 triggers. Each trigger states:
+
+- the metric or dated event;
+- the threshold or observable condition;
+- the window or date by which it can be observed;
+- the direction: upgrade, downgrade, or exit review;
+- the layer or chain constraint it tests.
+
+At least one trigger must test the binding constraint named in the label. Reject wording such
+as `if fundamentals deteriorate` or `if the thesis changes` unless it is tied to a measurable
+condition. If no trigger can be measured with the available data, use `evidence-gap` and name
+the data that would make it measurable. A red-team objection can become a trigger. Do not
+present a monitoring threshold as a sourced level; say which it is.
 
 Skills that judge quality without a numeric scorecard may replace `Score Summary` with a
 named read table, such as the `Setup Quality` table in `trade-plan-risk-manager`. The

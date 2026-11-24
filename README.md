@@ -87,7 +87,7 @@ Use $trade-plan-risk-manager to review whether a completed trade was a thesis er
 
 ## Shared Contract
 
-`references/skill-contract.md` holds the operating rules every skill inherits: public-market research only, no personalized advice, the mandatory shared routes (the contract plus four references), evidence-tier discipline, conclusion-gate behavior, the three timestamps and five freshness grades, and the six mandatory output blocks in order. It also defines the research state card that carries one question, date, mode, layer reads, label, binding constraint, freshness, and source-pool IDs across a multi-skill run. Each `SKILL.md` keeps only its domain-specific Core Rule, evidence sources, gates, degradation table, workflow, and output template.
+`references/skill-contract.md` holds the operating rules every skill inherits: public-market research only, no personalized advice, the mandatory shared routes (the contract plus four references), evidence-tier discipline, conclusion-gate behavior, the three timestamps and five freshness grades, and the six mandatory output blocks in order. The review gate separates author, reviewer, reviser, and publisher, runs a red-team pass for labels stronger than `hold/watch`, and requires measurable `What Would Change The View` triggers. It also defines the research state card that carries one question, date, mode, layer reads, label, binding constraint, freshness, and source-pool IDs across a multi-skill run. Each `SKILL.md` keeps only its domain-specific Core Rule, evidence sources, gates, degradation table, workflow, and output template.
 
 `VERSION` is the single release source. `scripts/validate-skills.sh` checks that every `SKILL.md`, `VERSION`, and the latest `CHANGELOG.md` heading agree, and that README example coverage and image paths match `examples/`.
 
@@ -101,13 +101,14 @@ Use $trade-plan-risk-manager to review whether a completed trade was a thesis er
 - `as_of`, `published_at`, and `retrieved_at` recorded separately, never collapsed;
 - a closed set of freshness grades: `Fresh`, `Lagged`, `Stale`, `Undated`, `Unavailable`;
 - a core figure check with original wording, unit, period, cross-check, and one of four treatments;
+- silent-failure checks for successful-looking but wrong data: error payloads, empty-list ambiguity, unit scaling, identifier drift, field drift, placeholder rows, and stale endpoints;
 - unit, currency, accounting-standard, and fiscal-calendar labelling before any cross-market comparison;
 - user input classified as plan parameter, fact claim, or preference, with consistency checks before use;
 - missing data marked unavailable and treated as a confidence limit, never as a directional signal.
 
 Every skill also carries a degradation table mapping each missing or stale input to the required handling, so a data gap changes the output in a defined way instead of being noted and ignored.
 
-A skill has no memory between sessions, so `references/review-and-calibration.md` defines a `research-log/` append-only record. A call is written there when it is made, which is what lets the 1-week, 1-month, and 3-month review cadence actually close. The directory is gitignored and never created without asking first. The same file defines `Thesis Decay`: a label that has not been reconfirmed is not intact by default, and price moving toward the thesis without fundamental follow-through reduces confidence rather than raising it. It also defines the pre-publication review gate: six content dimensions, `PASS` or `REVISE`, five blocking conditions, and a bounded revision rounds before an output is presented as complete.
+A skill has no memory between sessions, so `references/review-and-calibration.md` defines a `research-log/` append-only record. A call is written there when it is made, which is what lets the 1-week, 1-month, and 3-month review cadence actually close. The directory is gitignored and never created without asking first. The same file defines `Thesis Decay`: a label that has not been reconfirmed is not intact by default, and price moving toward the thesis without fundamental follow-through reduces confidence rather than raising it. It also defines the pre-publication review gate: six content dimensions, `PASS` or `REVISE`, seven blocking conditions, separated author/reviewer/reviser/publisher passes, a red-team pass for strong labels, and bounded revision rounds before an output is presented as complete.
 
 ## Cross-Cutting Coverage
 
@@ -170,7 +171,7 @@ Coverage is at least one case per skill: six skills and seven cases, with a seco
 <details>
 <summary><strong>equity-research · NVIDIA quality case</strong> — 4 pages</summary>
 
-NVIDIA at 16/18 quality across six dimensions, with a clean earnings read, an adequate capital-allocation record, and a reverse DCF where 80 percent of EV is growth.
+NVIDIA at 14/18 quality across six dimensions: earnings quality at watch on three screen breaches, an unresolved governance event, and a reverse DCF that now requires only 6.2 percent growth. The label stays hold/watch because the evidence, not the price, is the constraint.
 
 ![Equity research case](examples/marketlens-v09-equity-research-nvda.png)
 
@@ -179,7 +180,7 @@ NVIDIA at 16/18 quality across six dimensions, with a clean earnings read, an ad
 <details>
 <summary><strong>equity-research · NVIDIA PE(TTM) band</strong> — 2 pages</summary>
 
-NVIDIA at 55x sits at the 51st percentile of its own 1,305-observation history, measured on a rolling 750-observation window, and the rolling median is falling. The 2023-Q3 to 2026-Q2 move is EPS-led: price +452%, EPS +875%, multiple -43%. The band remains a cross-check rather than a label. Illustrative data.
+NVIDIA at 16.7x sits at the 0.5th percentile of its own 1,410-observation history, measured on a rolling 750-observation window, below a 32.5x lower band and a 64.9x upper band. The move is EPS-led: price +213%, EPS +1,125%, multiple -74.4%. The band remains a cross-check rather than a label, because the TTM denominator is peak-cycle earnings. Illustrative data.
 
 ![Valuation band case](examples/marketlens-v010-valuation-band-nvda.png)
 
@@ -188,7 +189,7 @@ NVIDIA at 55x sits at the 51st percentile of its own 1,305-observation history, 
 <details>
 <summary><strong>market-regime-monitor · US technology regime</strong> — 2 pages</summary>
 
-US technology-stock regime on three axes: equities are still rising while credit and real rates already score negative, totalling -3 for tight or crowded, with NVIDIA as the cleanest expression of the duration bet.
+US technology-stock regime on three axes scores -5: HY OAS at 352bp, a 2.88 percent 10-year real yield, and VIX at 35.9 put the regime at fragile / de-risking, which caps high-beta AI at monitor closely even while NVIDIA's earnings still compound.
 
 ![Market regime case](examples/marketlens-v09-market-regime-nvda.png)
 
@@ -197,7 +198,7 @@ US technology-stock regime on three axes: equities are still rising while credit
 <details>
 <summary><strong>sector-industry-research · AI server supply chain</strong> — 2 pages</summary>
 
-The AI server supply chain ranked three times: by multiple, by implied assumption, and by return on incremental capital, producing three different lists that overlap on the bottleneck suppliers.
+The AI server supply chain ranked three times: by multiple, by implied assumption, and by return on incremental capital. NVIDIA's de-rating to 17x makes the GPU reasonable but cash-capped; foundry and advanced packaging still own the scarce step.
 
 ![Sector industry case](examples/marketlens-v09-sector-ai-server.png)
 
@@ -206,7 +207,7 @@ The AI server supply chain ranked three times: by multiple, by implied assumptio
 <details>
 <summary><strong>catalyst-event-monitor · NVIDIA earnings</strong> — 2 pages</summary>
 
-NVIDIA earnings, asking first whether the event only delivers what 55x and 80 percent growth share already imply, then decomposing the result by operating source, accrual, capitalization, one-off, and tax.
+NVIDIA's Q3 delivered a real gap: revenue of $115.8B and a $130B Q4 guide, but the stock fell on margin and governance, then rallied 31 percent on the CEO's return. The next event on Feb 23 carries a ±22.2 percent implied move, so the label stays event watch.
 
 ![Catalyst event case](examples/marketlens-v09-catalyst-nvda-earnings.png)
 
@@ -215,7 +216,7 @@ NVIDIA earnings, asking first whether the event only delivers what 55x and 80 pe
 <details>
 <summary><strong>portfolio-risk-monitor · AI watchlist</strong> — 2 pages</summary>
 
-An equal-weight AI watchlist where nine tickers resolve into one duration bet, one shared accounting practice, and one reinvestment dependence on the same set of management teams.
+An equal-weight AI watchlist where nine tickers still resolve into one duration bet, one shared accounting practice, and one reinvestment dependence. The November de-rating helped the valuation leg but not the concentration: 33 percent in the top three and 4 of 9 implied assumptions unmeasured.
 
 ![Portfolio risk case](examples/marketlens-v09-portfolio-ai-nvda.png)
 
@@ -224,7 +225,7 @@ An equal-weight AI watchlist where nine tickers resolve into one duration bet, o
 <details>
 <summary><strong>trade-plan-risk-manager · NVIDIA plan</strong> — 2 pages</summary>
 
-The NVIDIA plan is downgraded to monitor closely because the upside case restates what the price already requires, with liquidity measured as Deep and position intent discounted one notch for delivery dependence.
+The NVIDIA plan stays at monitor closely for the opposite reason than in May: the valuation block has cleared, but cash conversion, an unresolved governance event, and a fragile regime keep the setup conditional and position intent one notch down.
 
 ![Trade plan risk case](examples/marketlens-v09-trade-plan-nvda.png)
 
@@ -234,7 +235,7 @@ The NVIDIA plan is downgraded to monitor closely because the upside case restate
 
 Every case carries the six mandatory blocks: `Red Flags`, `Decision Impact`, `What Would Change The View`, `Data Freshness`, `Evidence Sources`, and `Disclaimer`. In the typeset cases the last two are carried by the footer `Sources` list and the closing disclaimer line rather than by their own headings. Each `Data Freshness` table records the three timestamps from `references/data-discipline.md` and grades every input with one of the five closed grades `Fresh` / `Lagged` / `Stale` / `Undated` / `Unavailable`, so the confidence cap in each case is traceable to a named missing or lagged input. Scored outputs add a `Score Summary` table; `trade-plan-risk-manager` uses `Setup Quality` instead, as allowed by `references/scoring-standard.md`. They are output-format previews and do not constitute investment advice.
 
-v0.9 rebuilt the examples in English; v0.10 added the historical valuation band method and a seventh case; v0.11 adds the research quality layer, and the v0.10 band case now shows the EPS/PE decomposition. The v0.9 cases remain current.
+v0.9 rebuilt the examples in English; v0.10 added the historical valuation band method and a seventh case; v0.11 added the research quality layer; v0.12 adds adversarial review, falsifiable triggers, silent-failure checks, and a behavioral verification record. The v0.10 band case still shows the EPS/PE decomposition, and the existing cases remain current.
 
 ### Valuation Band Guide
 
@@ -260,7 +261,7 @@ bash scripts/build-skills.sh
 REQUIRE_DIST=1 bash scripts/validate-skills.sh
 ```
 
-Skills are discovered from the directory layout, so a new skill needs no script or CI edit. GitHub Actions runs the same three commands on every push and pull request.
+Skills are discovered from the directory layout, so a new skill needs no script or CI edit. GitHub Actions runs the same three commands on every push and pull request. Structural validation does not test behavior. [docs/verification.md](docs/verification.md) records the behavioral scenarios for label caps, source-pool handling, red-team review, falsifiable triggers, and silent-failure checks, including what has not been run.
 
 ## Disclaimer
 

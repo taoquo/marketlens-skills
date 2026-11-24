@@ -85,7 +85,7 @@ Use $trade-plan-risk-manager 复盘一笔交易属于 thesis 错误、时机错�
 
 ## 共享契约
 
-`references/skill-contract.md` 存放所有 skill 继承的操作规则：只做公开市场研究、不做个性化建议、强制共享路由（`skill-contract.md` 加四份共享引用）、证据分级纪律、结论门禁行为、三个时间戳与五个时效等级，以及六个必需输出块及其顺序。
+`references/skill-contract.md` 存放所有 skill 继承的操作规则：只做公开市场研究、不做个性化建议、强制共享路由（`skill-contract.md` 加四份共享引用）、证据分级纪律、结论门禁行为、三个时间戳与五个时效等级，以及六个必需输出块及其顺序。审稿闸门把作者、审稿人、修订人和发布/终校分开，对强于 `hold/watch` 的标签执行红队检查，并要求 `What Would Change The View` 使用可测量触发器。
 
 它还定义了跨 skill 运行的研究状态卡：同一张卡携带问题、日期、模式、各层读数、标签、约束条件、时效性、来源池 ID 和待解问题。各份 `SKILL.md` 只保留自己领域特有的 Core Rule、证据来源、门禁、降级矩阵、工作流和输出模板。
 
@@ -101,6 +101,7 @@ Use $trade-plan-risk-manager 复盘一笔交易属于 thesis 错误、时机错�
 - `as_of`、`published_at`、`retrieved_at` 分开记录，不得合并成一个日期；
 - 封闭枚举的时效等级：`Fresh`、`Lagged`、`Stale`、`Undated`、`Unavailable`；
 - 核心数字校验表：原文措词、单位、期间、交叉核对，以及四种处理方式之一；
+- 静默失败检查：成功状态但错误 payload、空列表歧义、单位缩放、标识符漂移、字段漂移、占位行和过期接口；
 - 跳市场对比前必须标注单位、币种、会计准则和财年口径；
 - 用户输入分为计划参数、事实声明、偏好三类，使用前先跑一致性检查；
 - 缺失数据标记为 unavailable 并当作置信度上限，不得硬转成看多或看空信号。
@@ -109,7 +110,7 @@ Use $trade-plan-risk-manager 复盘一笔交易属于 thesis 错误、时机错�
 
 skill 在不同会话之间没有记忆，所以 `references/review-and-calibration.md` 定义了 `research-log/` 追加式记录：下结论时就写入日志，1 周 / 1 个月 / 3 个月的复盘节奏才能真正闭环。该目录已 gitignore，首次创建前必须先询问用户。
 
-同一份文件还定义了 `Thesis Decay`（论点衰减）：未重新确认的标签不默认仍然成立；价格向论点方向运动但基本面证据没有跟上时，应该降低而不是提高置信度。它还定义了发布前审稿闸门：六个内容维度、`PASS` 或 `REVISE`、五条阻塞条件，以及输出定稿前的有限轮修订。
+同一份文件还定义了 `Thesis Decay`（论点衰减）：未重新确认的标签不默认仍然成立；价格向论点方向运动但基本面证据没有跟上时，应该降低而不是提高置信度。它还定义了发布前审稿闸门：六个内容维度、`PASS` 或 `REVISE`、七条阻塞条件、作者/审稿人/修订人/发布人的职责分离、强标签的红队检查，以及输出定稿前的有限轮修订。
 
 ## 跨层覆盖
 
@@ -172,7 +173,7 @@ skill 在不同会话之间没有记忆，所以 `references/review-and-calibrat
 <details>
 <summary><strong>equity-research · NVIDIA 质量案例</strong> — 4 页</summary>
 
-NVIDIA 六维质量分 16/18，盈利质量 clean、资本配置读数 adequate，但反向 DCF 显示 EV 的 80% 来自增长。
+NVIDIA 六维质量分 14/18：盈利质量因三项筛选未过落在 watch，治理事件尚未了结，反向 DCF 现在只需要 6.2% 的十年增长。标签仍是 hold/watch，约束在证据而不在价格。
 
 ![个股研究案例](examples/marketlens-v09-equity-research-nvda.png)
 
@@ -181,7 +182,7 @@ NVIDIA 六维质量分 16/18，盈利质量 clean、资本配置读数 adequate�
 <details>
 <summary><strong>equity-research · NVIDIA PE(TTM) 估值带</strong> — 2 页</summary>
 
-NVIDIA 55x 位于自身 1,305 个观测、750 观测滚动窗口的第 51 百分位，滚动中轨正在下移。2023-Q3 至 2026-Q2 的变动由 EPS 主导：价格 +452%，EPS +875%，倍数 -43%。估值带仍是交叉校验，不单独决定标签。数据为示例数据。
+NVIDIA 16.7x 位于自身 1,410 个观测、750 观测滚动窗口的第 0.5 百分位，低于 32.5x 下轨与 64.9x 上轨。变动由 EPS 主导：价格 +213%，EPS +1,125%，倍数 -74.4%。估值带仍是交叉校验，不单独决定标签，因为 TTM 分母处在周期高点。数据为示例数据。
 
 ![估值带案例](examples/marketlens-v010-valuation-band-nvda.png)
 
@@ -190,7 +191,7 @@ NVIDIA 55x 位于自身 1,305 个观测、750 观测滚动窗口的第 51 百分
 <details>
 <summary><strong>market-regime-monitor · 美股科技股环境</strong> — 2 页</summary>
 
-美股科技股三轴环境：股票还在涨，但信用与实际利率轴已经转负，合计 -3 落入 tight or crowded，NVIDIA 是这个久期押注最干净的表达。
+美股科技股三轴环境合计 -5：HY OAS 352bp、10 年实际利率 2.88%、VIX 35.9，环境落在 fragile / de-risking，高 beta AI 因此被封顶在 monitor closely，即便 NVIDIA 盈利仍在复利。
 
 ![市场环境案例](examples/marketlens-v09-market-regime-nvda.png)
 
@@ -199,7 +200,7 @@ NVIDIA 55x 位于自身 1,305 个观测、750 观测滚动窗口的第 51 百分
 <details>
 <summary><strong>sector-industry-research · AI 服务器产业链</strong> — 2 页</summary>
 
-AI 服务器产业链按倍数、隐含假设、增量资本回报各排一次，三张名单只在瓶颈供应商这一段重合。
+AI 服务器产业链按倍数、隐含假设、增量资本回报各排一次。NVIDIA 杀到 17x 后 GPU 读数变得合理但受现金流封顶；晶圆代工与先进封装仍掌握稀缺环节。
 
 ![行业研究案例](examples/marketlens-v09-sector-ai-server.png)
 
@@ -208,7 +209,7 @@ AI 服务器产业链按倍数、隐含假设、增量资本回报各排一次�
 <details>
 <summary><strong>catalyst-event-monitor · NVIDIA 财报</strong> — 2 页</summary>
 
-NVIDIA 财报先问事件是否只交付 55x 与 80% 增长占比已隐含之物，再按经营来源、应计、资本化、一次性项目和税务分解结果。
+NVIDIA Q3 交付了真实的超预期：营收 $115.8B、Q4 指引 $130B，但股价因毛利率与治理事件下跌，又在 CEO 复职后单日反弹 31%。下一次事件在 2 月 23 日，隐含波动 ±22.2%，标签维持 event watch。
 
 ![事件催化案例](examples/marketlens-v09-catalyst-nvda-earnings.png)
 
@@ -217,7 +218,7 @@ NVIDIA 财报先问事件是否只交付 55x 与 80% 增长占比已隐含之物
 <details>
 <summary><strong>portfolio-risk-monitor · AI 观察池</strong> — 2 页</summary>
 
-等权 AI 观察池，九个 ticker 归结为一个久期押注、一套共用的会计惯例，以及对同一批管理层投放决定的再投资依赖。
+等权 AI 观察池，九个 ticker 仍归结为一个久期押注、一套共用的会计惯例和同一批再投资依赖。11 月的杀估值帮助了估值腿，却没有解决集中度：前三名占 33%，9 个隐含假设里有 4 个没有实测。
 
 ![组合风险案例](examples/marketlens-v09-portfolio-ai-nvda.png)
 
@@ -226,7 +227,7 @@ NVIDIA 财报先问事件是否只交付 55x 与 80% 增长占比已隐含之物
 <details>
 <summary><strong>trade-plan-risk-manager · NVIDIA 计划</strong> — 2 页</summary>
 
-NVIDIA 计划因 upside case 重述价格已隐含的假设而降为 monitor closely，流动性实测为 Deep，仓位意图因交付依赖再折一档。
+NVIDIA 计划维持 monitor closely，但理由与 5 月相反：估值障碍已经清除，现金流转化、未了结的治理事件和 fragile 的环境让这个 setup 仍是条件性的，仓位意图再折一档。
 
 ![交易计划风险案例](examples/marketlens-v09-trade-plan-nvda.png)
 
@@ -236,7 +237,7 @@ NVIDIA 计划因 upside case 重述价格已隐含的假设而降为 monitor clo
 
 每个案例都带齐六个强制输出块：`Red Flags`、`Decision Impact`、`What Would Change The View`、`Data Freshness`、`Evidence Sources` 和 `Disclaimer`。在排版案例里，后两者由页脚的 `Sources` 列表与结尾免责声明承担，不单独立标题。每张 `Data Freshness` 表都记录 `references/data-discipline.md` 定义的三个时间戳，并用五个封闭枚举值 `Fresh` / `Lagged` / `Stale` / `Undated` / `Unavailable` 给每一项输入定级，因此每个案例的置信度封顶都能追溯到具体某一项缺失或滞后的输入。带评分的输出额外包含 `Score Summary` 表；`trade-plan-risk-manager` 按 `references/scoring-standard.md` 的例外规则改用 `Setup Quality`。它们只用于展示输出预览，不构成投资建议。
 
-v0.9 重建了英文案例；v0.10 增加了历史估值带方法和第 7 个案例；v0.11 增加研究质量层，并让 v0.10 估值带案例展示 EPS/PE 分解。v0.9 的案例继续有效。
+v0.9 重建了英文案例；v0.10 增加了历史估值带方法和第 7 个案例；v0.11 增加研究质量层；v0.12 增加对抗式审稿、可证伪触发器、静默失败检查和行为验证记录。v0.10 估值带案例仍展示 EPS/PE 分解，现有案例继续有效。
 
 ### 估值带教程
 
@@ -262,7 +263,7 @@ bash scripts/build-skills.sh
 REQUIRE_DIST=1 bash scripts/validate-skills.sh
 ```
 
-脚本按目录结构自动发现 skill，新增 skill 无需改脚本或 CI。GitHub Actions 在每次 push 和 pull request 上执行同样的三条命令。
+脚本按目录结构自动发现 skill，新增 skill 无需改脚本或 CI。GitHub Actions 在每次 push 和 pull request 上执行同样的三条命令。结构校验不测试行为；[docs/verification.md](docs/verification.md) 记录标签封顶、来源池、红队审稿、可证伪触发器和静默失败检查的行为场景，并明确哪些尚未运行。
 
 ## 免责声明
 

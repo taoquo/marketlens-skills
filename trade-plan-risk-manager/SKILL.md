@@ -3,7 +3,7 @@ name: trade-plan-risk-manager
 description: Use when converting market regime, sector, equity, catalyst, or portfolio research into a non-personalized public-market trade plan framework, including setup quality, entry triggers, invalidation conditions, risk unit, stop/review triggers, time stop, event-risk window, liquidity checks, execution checklist, and post-trade review.
 license: MIT
 metadata:
-  version: 0.11
+  version: 0.12
 ---
 
 # Trade Plan Risk Manager

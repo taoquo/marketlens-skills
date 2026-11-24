@@ -3,7 +3,7 @@ name: portfolio-risk-monitor
 description: Use when reviewing a public-market portfolio or watchlist for risk concentration, factor exposure, sector/geography/currency overlap, style crowding, drawdown risk, watchlist priority, add/trim/exit candidates, rebalance watch signals, correlated theses, or questions like which names matter most, which holdings share the same risk driver, or whether risk is concentrated in valuation, earnings, policy, FX, rates, liquidity, or market regime.
 license: MIT
 metadata:
-  version: 0.11
+  version: 0.12
 ---
 
 # Portfolio Risk Monitor

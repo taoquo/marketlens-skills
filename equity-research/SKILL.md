@@ -3,7 +3,7 @@ name: equity-research
 description: Use when analyzing listed companies or stocks across US, Hong Kong, or A-share markets, including earnings reports, long-term holding quality, fundamentals, valuation, historical valuation bands, moat, cash flow, management, valuation-derived trigger levels, position review triggers, market-specific disclosure rules, or user questions phrased as whether a stock is worth buying, holding, adding, trimming, or exiting.
 license: MIT
 metadata:
-  version: 0.11
+  version: 0.12
 ---
 
 # Equity Research

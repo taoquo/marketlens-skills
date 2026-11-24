@@ -3,6 +3,40 @@
 Release history for MarketLens Skills. Versions match `metadata.version` in each
 `SKILL.md` and the top-level `VERSION` file.
 
+## v0.12 Adversarial Review, Falsifiable Triggers, And A Verification Record
+
+This release closes the independence and behavior gaps left by v0.11. The quality layer
+becomes enforceable rather than descriptive; no new skill, runtime, example, or mandatory
+output block is added.
+
+- `references/review-and-calibration.md`: new `Separation Of Duties` for the author,
+  reviewer, reviser, and publisher passes, and a new `Red-Team Pass` for labels stronger
+  than `hold/watch` or conclusions that depend on one dated catalyst. The pre-publication
+  gate now requires measurable `What Would Change The View` triggers and adds two blocking
+  conditions, for seven in total.
+- `references/scoring-standard.md`: new `Adversarial Check` in `Label Adjudication`, and a
+  `Falsifiable Triggers` format for `## What Would Change The View`: 2-4 triggers, each with
+  a metric or event, threshold, window, direction, and tested layer, with at least one
+  testing the binding constraint.
+- `references/skill-contract.md`: conclusion gates require the red-team pass for strong
+  labels; the output contract requires falsifiable triggers; data freshness requires the
+  silent-failure checks.
+- `references/data-discipline.md`: new `Silent Failure Checks` covering success-shaped error
+  payloads, empty-list ambiguity, unit and scale errors, identifier normalization, field
+  drift, placeholder rows, stale endpoints, duplicate sources, and calendar, currency, or
+  accounting mismatches.
+- New `docs/verification.md`: structural checks, twelve behavioral scenarios, an arithmetic
+  check for the EPS/PE identity, current results, and a `Not Verified` section. Behavioral
+  rows stay `Not run` until a model session exercises them; the validator is not presented
+  as behavioral coverage.
+- All seven examples are rebuilt on the 2026-11-24 snapshot and re-rendered. The equity,
+  catalyst, portfolio, and trade cases now read the NVIDIA de-rating to 16.7x with earnings
+  quality on watch, a fragile / de-risking regime at -5, weak cash conversion, and an
+  unresolved governance event. The catalyst case carries measurable event checkpoints and a
+  red-team objection; the v0.10 valuation-band case now ends at 16.7x, below its 32.5x lower
+  band, with the EPS/PE decomposition restated as price +213%, EPS +1,125%, PE -74.4%.
+- `VERSION` and all `metadata.version` fields move to 0.12.
+
 ## v0.11 Research Quality Layer: Source Pools, Adjudication, And A Pre-Publication Gate
 
 This release adds the operating discipline between a single skill's analysis and a finished

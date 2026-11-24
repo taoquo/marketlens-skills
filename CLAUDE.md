@@ -36,7 +36,9 @@ python3 scripts/pe_band_chart.py \
 
 `scripts/validate-skills.sh` is only a wrapper around `python3 scripts/validate_skills.py`;
 there is no unit-test suite. To check one skill, run the validator and read the
-per-skill `ERROR:` lines — the validator always scans all discovered skills.
+per-skill `ERROR:` lines — the validator always scans all discovered skills. The validator
+checks structure, not behavior; the behavioral scenario matrix and its `Not run` rows live in
+`docs/verification.md`.
 
 Rendering requires `pdftoppm` plus a WeasyPrint Python with `PIL` and `pypdf`
 (default path `~/.codex/skills/folio/.venv-weasy/bin/python`, override with
@@ -56,23 +58,27 @@ The shared layer is not optional prose — it is the product's consistency mecha
 - `references/skill-contract.md` — the operating contract every skill routes: core rule,
   mandatory shared routes, evidence tiers, conclusion-gate behavior, the three timestamps
   and five freshness grades, the six mandatory output blocks in order, and the research
-  state card that carries one multi-skill run across layers. `SKILL.md` keeps only
-  domain-specific deltas.
+  state card that carries one multi-skill run across layers. Conclusion gates require the
+  red-team pass for strong labels; the output contract requires falsifiable triggers.
+  `SKILL.md` keeps only domain-specific deltas.
 - `references/skill-routing.md` — ownership table (which skill owns what), trigger table
   for the six cross-cutting files, research desk modes (`quick`, `full`, `event`,
   `portfolio`), and the out-of-scope list. A new skill needs one routing entry, not edits
   across every other skill.
 - `references/scoring-standard.md` — 0–3 scorecard direction, confidence, data-quality
   weighting, red-flag overrides, the nine research labels, label layering from each
-  skill's domain read, the binding cross-module **chain constraints**, and label
-  adjudication (name the binding constraint; never average conflicting layers).
+  skill's domain read, the binding cross-module **chain constraints**, label adjudication
+  (name the binding constraint; never average conflicting layers), and the adversarial
+  check that makes a strong label answer its best counter-case.
 - `references/data-discipline.md` — the three timestamps, the closed freshness enum
   (`Fresh` / `Lagged` / `Stale` / `Undated` / `Unavailable`), evidence tiers, source pool
-  and claim-citation rules, core-figure check, unit/currency/calendar rules, and
-  user-input classification.
+  and claim-citation rules, core-figure check, silent-failure checks,
+  unit/currency/calendar rules, and user-input classification.
 - `references/review-and-calibration.md` — review cadence, the append-only `research-log/`
   convention (gitignored; never create it without asking), thesis decay, and the
-  pre-publication content review gate (`PASS` / `REVISE`, bounded revision rounds).
+  pre-publication content review gate (`PASS` / `REVISE`, seven blocking conditions,
+  separated author/reviewer/reviser/publisher passes, the red-team pass, and bounded
+  revision rounds).
 - `implied-expectations.md`, `earnings-quality-screens.md`, `capital-allocation-record.md`,
   `credit-and-cross-asset.md`, `base-rates.md`, `short-and-relative-value.md` — cross-cutting
   analytical methods loaded by trigger, not by skill.
@@ -119,10 +125,12 @@ Editing content without these breaks CI:
 
 - **Version is repo-wide and single-sourced.** Bump `VERSION`, every `SKILL.md`
   `metadata.version`, and the top `CHANGELOG.md` heading together. The current release is
-  0.11; the examples are the six English v0.9 cases in `examples/marketlens-v09-*` plus the
+  0.12; the examples are the six English v0.9 cases in `examples/marketlens-v09-*` plus the
   v0.10 valuation-band case in `examples/marketlens-v010-*`, with NVIDIA as the core case.
-  v0.11 adds the research quality layer; the v0.10 valuation-band case now carries the
-  EPS/PE decomposition, and no new example is added.
+  v0.11 added the research quality layer; v0.12 adds adversarial review, falsifiable
+  triggers, silent-failure checks, and a behavioral verification record. The v0.10
+  valuation-band case still carries the EPS/PE decomposition, the catalyst case carries
+  measurable event checkpoints, and no new example is added.
 - **Shared rules live in `skill-contract.md`.** Do not re-add the core-rule, evidence-tier,
   gate, freshness, routing, or output-block boilerplate to individual `SKILL.md` files.
   Keep only the domain-specific Core Rule, evidence sources, gates, degradation table,
@@ -133,7 +141,20 @@ Editing content without these breaks CI:
 - **Validation checks structure, not conclusions.** Before presenting an output as complete,
   run the `Pre-Publication Review` in `review-and-calibration.md`. It is a content gate with
   `PASS` / `REVISE`, bounded revision rounds, and residual issues recorded in the existing
-  confidence blocks; it does not add a mandatory output block.
+  confidence blocks; it does not add a mandatory output block. The behavioral scenario matrix
+  is in `docs/verification.md`; a `Not run` row is a gap, not a pass.
+- **Adversarial review is role-separated.** The author, reviewer, reviser, and publisher are
+  distinct passes. A label stronger than `hold/watch`, or a conclusion that depends on one
+  dated catalyst, runs the `Red-Team Pass` and names its strongest opposing case. The
+  reviewer does not rewrite; the reviser applies the required label but does not relabel on
+  its own authority, add facts, or rewrite the thesis; the publisher does not repair content.
+- **`What Would Change The View` is falsifiable.** It carries 2-4 triggers, each with a
+  metric or event, threshold, window, direction, and tested layer. At least one trigger tests
+  the binding constraint. Reject `if fundamentals deteriorate` without a measurable condition.
+- **Silent failures are data failures.** A success status, a non-empty payload, or a second
+  vendor copy does not prove the figure is valid. Run the silent-failure checks in
+  `data-discipline.md` for every decisive figure, and record the result in the core figure
+  check `Cross-check` column.
 - **Historical valuation bands are a valuation-layer cross-check.** The method lives in
   `equity-research/references/valuation-framework.md`, not in a new skill or a top-level shared
   file. It uses rolling, point-in-time windows; a full-sample band is descriptive only and

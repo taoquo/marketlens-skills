@@ -75,15 +75,16 @@ If any gate in the skill's own `Conclusion Gates` fails, downgrade to a watchlis
 conclusion, state the missing data, and name the evidence that would strengthen the view.
 
 Before presenting the output as complete, run the `Pre-Publication Review` in
-`review-and-calibration.md`. A `REVISE` verdict blocks publication until the blocking item
-is fixed or the conclusion is capped and the residual issue recorded.
+`review-and-calibration.md`, including the `Red-Team Pass` when the label is stronger than
+`hold/watch` or depends on one dated catalyst. A `REVISE` verdict blocks publication until
+the blocking item is fixed or the conclusion is capped and the residual issue recorded.
 
 ## Data Freshness
 
 Record `as_of`, `published_at`, and `retrieved_at` separately for every data point.
 Use only the five grades `Fresh`, `Lagged`, `Stale`, `Undated`, `Unavailable`. Missing
-data is a confidence limit, never a directional signal. Run the core figure check in
-`data-discipline.md` before any claim that carries a conclusion.
+data is a confidence limit, never a directional signal. Run the core figure check and the
+silent-failure checks in `data-discipline.md` before any claim that carries a conclusion.
 
 ## Output Contract
 
@@ -102,6 +103,12 @@ named read table, such as `## Setup Quality`, for `## Score Summary`.
 
 `## Evidence Sources` lists the source-pool IDs and locators that carry the conclusion. It
 is not a padded bibliography; an entry that does not support a stated claim is omitted.
+
+`## What Would Change The View` uses the falsifiable trigger format in
+`scoring-standard.md`: 2-4 measurable triggers, at least one testing the binding constraint.
+A label stronger than `hold/watch` must name the strongest opposing case and why it fails.
+The red-team pass is recorded under `## Red Flags` or `## What Would Change The View`; it is
+not a new output block.
 
 The disclaimer block must use this exact sentence:
 

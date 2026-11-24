@@ -40,18 +40,18 @@ The utility accepts either a ready-made PE series:
 
 ```csv
 date,pe
-2026-05-13,54.80
-2026-05-14,54.90
-2026-05-15,55.00
+2026-11-20,13.37
+2026-11-23,17.73
+2026-11-24,16.67
 ```
 
 or market cap and TTM net profit, from which it computes `PE = market_cap / ttm_net_profit`:
 
 ```csv
 date,market_cap,ttm_net_profit
-2026-05-13,5480000000000,100000000000
-2026-05-14,5490000000000,100000000000
-2026-05-15,5500000000000,100000000000
+2026-11-20,2990000000000,224000000000
+2026-11-23,3966000000000,224000000000
+2026-11-24,3740000000000,224000000000
 ```
 
 Rules:
@@ -96,7 +96,7 @@ It writes:
 The command also prints a one-line summary:
 
 ```text
-Latest: 2026-05-15 PE 55.00 | lower 44.756 | mid 54.72 | upper 82.048 | percentile 51.33 | slope falling | window 750 | observations 1305
+Latest: 2026-11-24 PE 16.67 | lower 32.496 | mid 49.14 | upper 64.882 | percentile 0.53 | slope falling | window 750 | observations 1410
 ```
 
 Open the SVG in a browser, or embed it in an HTML or PDF deliverable. The Figure Contract in
@@ -202,7 +202,7 @@ is not rate-adjusted.
 Ask the equity-research skill a question such as:
 
 ```text
-Use $equity-research to show NVIDIA's PE(TTM) band and tell me where 55x sits in its own history.
+Use $equity-research to show NVIDIA's PE(TTM) band and tell me where 16.7x sits in its own history.
 Use $equity-research to put Microsoft's current multiple in a rolling five-year percentile band.
 ```
 
@@ -247,10 +247,11 @@ Rules:
 - Never present the figure as a buy/sell signal, target price, or probability of reversion.
 
 The utility implements these elements for a standalone SVG. The NVIDIA case instead uses Folio's
-`line-chart` drawing at 960×440, embedded through a `data-folio-diagram-slot` host slot: eight
+`line-chart` drawing at 960×460, embedded through a `data-folio-diagram-slot` host slot: ten
 quarterly samples from the daily series, three series (PE, P20, P80), and a current-median
-reference rule. The chart's y-axis starts at 20x, so the caption states the truncation.
-`embed-drawing` generates the visible eight-row data table and the host-fit trace;
+reference rule. The chart's y-axis starts at 0x, and the caption states that the band is
+descriptive and the denominator is peak-cycle earnings. `embed-drawing` generates the visible
+ten-row data table and the host-fit trace;
 `scripts/pe_band_chart.py` remains the dependency-free fallback and writes the daily
 `date,pe,lower,middle,upper,percentile` table.
 
@@ -266,25 +267,27 @@ python3 scripts/pe_band_chart.py \
   --window 750 --min-obs 250 \
   --method percentile --lower 20 --upper 80 \
   --title "NVIDIA PE(TTM) Band" \
-  --subtitle "NVDA · 1,305 observations · rolling 750-observation window · illustrative reported-basis TTM · through 2026-05-15" \
-  --source "Source: illustrative dataset, not live market data" \
+  --subtitle "NVDA · 1,410 observations · rolling 750-observation window · reported-basis TTM · through 2026-11-24" \
+  --source "Source: quarter-end PE anchors from a vendor series, daily path interpolated; not a live feed" \
   --note "Point-in-time rolling band. Descriptive, not a signal, forecast, or target price."
 ```
 
-Result: current PE 55.0x, lower 44.8x, middle 54.7x, upper 82.0x, percentile 51, slope falling.
-The read is mid-band and `reasonable` as a cross-check, but the falling centre means the same
-absolute multiple is less demanding than it was two years ago. The move from 2023-Q3 to 2026-Q2
-is EPS-led: price +452%, EPS(TTM) +875%, multiple -43%. The multiple compressed while the
-earnings base expanded, so the price gain is not a re-rating. The EPS path is illustrative and
-not reconciled to filings. The implied-expectations read still requires a 22.5% ten-year NOPAT
-CAGR, so the label remains hold/watch. The band supports the valuation layer; it does not set
-the label.
+Result: current PE 16.7x, lower 32.5x, middle 49.1x, upper 64.9x, percentile 0.5, slope
+falling. The read is below the band and `undemanding` as a cross-check, but the denominator is
+peak-cycle earnings: TTM EPS of $9.31 is up 143% year on year and Q3 CFO/NI is 0.74. The move
+from 2023-Q4 to 2026-Q4 is EPS-led: price +213%, EPS(TTM) +1,125%, multiple -74.4%. The multiple
+compressed while the earnings base expanded, so the price gain is not a re-rating. The EPS path
+is anchored to quarter-end filings and interpolated between them, so the daily line is
+illustrative. The implied-expectations read now requires only a 6.2% ten-year NOPAT CAGR, so the
+valuation layer is undemanding; the label remains hold/watch because cash conversion and
+governance, not price, are the constraint. The band supports the valuation layer; it does not
+set the label.
 
 The case itself takes the Folio path. `examples/data/nvda-pe-band-folio.json` is the tracked
-`line-chart` fixture: eight quarterly samples from the daily series, three series (PE, P20 lower,
+`line-chart` fixture: ten quarterly samples from the daily series, three series (PE, P20 lower,
 P80 upper), a reference rule at the current median, and an annotation at the current point. The
 DSL cap is 12 categories and 3 series, which is why the case samples quarters rather than plotting
-1,305 daily points and why the rolling middle sits in the table and caption. The host slot is
+1,410 daily points and why the rolling middle sits in the table and caption. The host slot is
 filled with:
 
 ```bash
@@ -295,7 +298,7 @@ python3.12 ~/.claude/skills/folio/scripts/folio.py embed-drawing \
   --output-host path/to/filled.html \
   --artifact-dir examples/assets/folio \
   --slot pe-band \
-  --caption "Illustrative reported-basis TTM; 8 quarterly samples from 1,305 daily observations; the y-axis starts at 20x. Descriptive, not a signal." \
+  --caption "Reported-basis TTM; 10 quarterly samples from 1,410 daily observations; the y-axis starts at 0x. Descriptive, not a signal." \
   --profile embed
 ```
 
@@ -309,10 +312,10 @@ If a chart cannot be rendered, use the `--table-output` CSV or this compact tabl
 
 | Date | PE | Lower | Middle | Upper | Percentile |
 |---|---:|---:|---:|---:|---:|
-| 2026-05-15 | 55.00 | 44.76 | 54.72 | 82.05 | 51.33 |
+| 2026-11-24 | 16.67 | 32.50 | 49.14 | 64.88 | 0.53 |
 
-Add a text summary: `PE 55.0x, P20/P80 band 44.8x–82.0x, middle 54.7x, percentile 51, slope
-falling, 750-observation window, 1,305 observations.` Do not describe a chart that was not
+Add a text summary: `PE 16.7x, P20/P80 band 32.5x–64.9x, middle 49.1x, percentile 0.5, slope
+falling, 750-observation window, 1,410 observations.` Do not describe a chart that was not
 produced.
 
 The Folio `embed-drawing` path emits the visible table automatically from the fixture's series,

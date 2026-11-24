@@ -9,6 +9,32 @@ Review turns a research framework into a learning loop. It should identify wheth
 
 This process is for research calibration only. It does not create a mechanical trading system.
 
+## Separation Of Duties
+
+The review gate is only independent if the role that judges is not the role that wrote the
+draft. Run the following as distinct passes, even when one model performs all of them.
+
+| Pass | May do | Must not do | Output |
+|---|---|---|---|
+| Author | Build the analysis, select the label, write the draft | Approve its own draft | Draft with source-pool IDs |
+| Reviewer | Apply the six dimensions and the red-team pass | Rewrite, add facts, or change the label | `PASS` or `REVISE`, with blocking items |
+| Reviser | Fix blocking items, apply the label the reviewer requires, and add cited evidence | Change the thesis or relabel on its own authority, or introduce unsourced facts | Revised draft plus a response to every item |
+| Publisher | Format, check links, units, periods, block order, and the disclaimer | Change content or conclusions | Final output |
+
+Rules:
+
+- The reviewer receives the draft, the rubric, the source pool, and the required blocks. It
+  does not receive the author's rationale or defence. If the host supports subagents, run the
+  reviewer in a fresh context.
+- A `PASS` still states the strongest remaining objection and the residual risk.
+- The reviser answers every blocking item as fixed or not fixed with a reason. It applies a
+  required downgrade or cap, but does not relabel on its own authority. An unresolved item is
+  capped and recorded under `## Confidence And Limits` or `## What Would Change The View`.
+- The publisher does not repair a substantive defect by editing prose. A content defect goes
+  back to the reviewer and reviser.
+- Do not merge review and revision into one step. The separation is what stops a draft from
+  passing because its author can explain it.
+
 ## Pre-Publication Review
 
 Run this gate before a research output is presented as complete. It checks content, not
@@ -21,8 +47,8 @@ Review the draft against six dimensions:
 |---|---|
 | Source sufficiency | Every decisive claim has at least one Tier 1 or Tier 2 source, or is explicitly labelled as an estimate or opinion |
 | Factual accuracy | The core figure check was run; number, unit, period, currency, and accounting basis agree with the source |
-| Balance | The main counter-case, alternative explanation, and failure boundary are stated |
-| Depth | The conclusion rests on a mechanism, dated evidence, and a falsifiable condition, not a generic narrative |
+| Balance | The main counter-case, alternative explanation, and failure boundary are stated; a label stronger than `hold/watch` has passed the red-team pass below |
+| Depth | The conclusion rests on a mechanism, dated evidence, and a falsifiable condition; `## What Would Change The View` uses measurable triggers |
 | Structure | The output uses the relevant layer of the decision chain and does not let a downstream read outrun its inputs |
 | Format | The six required output blocks, three timestamps, freshness grades, and exact disclaimer are present |
 
@@ -41,6 +67,10 @@ Blocking conditions are limited to:
 - The label conflicts with `scoring-standard.md`, including an averaged or ungrounded
   `hold/watch`.
 - The exact disclaimer is missing or rewritten.
+- A label stronger than `hold/watch` does not name the strongest opposing case, or that case
+  defeats the binding constraint but the label was not changed.
+- `## What Would Change The View` has no measurable trigger, or no trigger tests the binding
+  constraint.
 
 Allow at most one revision round for a single-skill output and two for a multi-skill report.
 If blocking issues remain after the limit, publish only with the conclusion capped at
@@ -51,6 +81,28 @@ output block for this gate.
 
 This gate is about the baseline, not the reviewer's taste. Do not return `REVISE` for a
 stylistic preference when the evidence and structure hold.
+
+## Red-Team Pass
+
+Run this pass as part of the pre-publication review when the draft carries a label stronger
+than `hold/watch` (`add-candidate watch`, `high-priority watch`, `trim-review`,
+`exit-review`, `avoid`) or when the conclusion depends on one dated catalyst. A bearish label
+runs the symmetric bull case.
+
+1. Write 3-5 numbered objections to the conclusion. Each names the mechanism, the layer it
+   attacks (regime, sector, company, valuation, catalyst, or portfolio), and the source-pool
+   ID or locator that supports it.
+2. Rank them. Name the single strongest objection and state whether it defeats the binding
+   constraint named in the label.
+3. If it does, downgrade one step or use `evidence-gap`; do not keep the label because the
+   rest of the evidence is supportive. If it does not, state why it fails, is already priced,
+   or is covered by a named trigger.
+4. Promote the strongest surviving objection into `## What Would Change The View` or
+   `## Red Flags`.
+5. Keep the result to a short paragraph. Do not add a new mandatory output block.
+
+The pass is deliberately adversarial. It is not a request for a balanced summary, and it is
+not satisfied by restating the existing red flags.
 
 ## Review Cadence
 
