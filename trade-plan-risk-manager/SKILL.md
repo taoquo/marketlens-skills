@@ -16,7 +16,7 @@ This skill does not tell the user to buy, sell, short, use leverage, use options
 
 ## Skill Boundary
 
-Use this skill for trade setup conversion, pre-trade checklist, risk unit framing, execution-risk review, and post-trade review. This skill consumes the other MarketLens skills; route research questions through `../references/skill-routing.md`.
+Use this skill for trade setup conversion, pre-trade checklist, risk unit framing, execution-risk review, and post-trade review. This skill consumes the other lens skills; route research questions through `../references/skill-routing.md`.
 
 This skill should synthesize prior skill outputs when available. It should not redo full company, industry, market, event, or portfolio research unless the missing input directly blocks the trade plan.
 
@@ -59,7 +59,7 @@ Tier definitions and the decisive-claim rule are in `../references/data-discipli
 | Tier | Sources | Use |
 |---|---|---|
 | Tier 1 | Official filings, company announcements, exchange disclosures, regulator notices, official event calendars | Event timing, company facts, terms, legal status |
-| Tier 2 | Exchange data, official macro/rates/FX data, company IR, options/volatility data when sourced, prior MarketLens outputs with their dates | Price, liquidity, volatility, regime, event-risk context |
+| Tier 2 | Exchange data, official macro/rates/FX data, company IR, options/volatility data when sourced, prior lens outputs with their dates | Price, liquidity, volatility, regime, event-risk context |
 | Tier 3 | Financial platforms, media, broker notes, consensus datasets, technical summaries | Context and proxy data only |
 
 A user-provided thesis or plan is not evidence. It is the object being tested. Classify it using the User-Provided Input rules in `../references/data-discipline.md`:
@@ -93,7 +93,7 @@ Apply the timestamp, freshness, and user-input rules in `../references/data-disc
 Plan-specific additions:
 
 - Price, key levels, volatility, and event dates must be dated before any precise trigger language.
-- Every upstream research input needs provenance: a prior MarketLens output with its date, a user-provided view, or an assumption made in this run. An assumed input cannot support a `tradable setup` label.
+- Every upstream research input needs provenance: a prior lens output with its date, a user-provided view, or an assumption made in this run. An assumed input cannot support a `tradable setup` label.
 - Re-check the freshness of the research basis, not only the price. A plan resting on a three-month-old regime read is stale even with a live quote.
 
 Degrade conclusions as follows:

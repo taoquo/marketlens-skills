@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Structural validation for MarketLens skills.
+"""Structural validation for lens skills.
 
 Checks, per skill directory discovered under the repository root:
   - SKILL.md frontmatter (name, description, license, metadata.version)

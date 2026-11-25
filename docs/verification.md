@@ -1,6 +1,6 @@
 # Verification Record
 
-MarketLens has two verification layers:
+lens has two verification layers:
 
 - **Structural** — `scripts/validate_skills.py` checks frontmatter, reference routing,
   output-block order, version consistency, example coverage, and dist parity.
@@ -24,7 +24,7 @@ REQUIRE_DIST=1 bash scripts/validate-skills.sh
 Render one example after changing it:
 
 ```bash
-bash scripts/render-examples.sh examples/marketlens-v010-valuation-band-nvda.html
+bash scripts/render-examples.sh examples/lens-v010-valuation-band-nvda.html
 ```
 
 Behavioral scenarios: run in a fresh session, paste the prompt or fixture, and inspect the

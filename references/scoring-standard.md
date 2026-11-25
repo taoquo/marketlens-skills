@@ -1,6 +1,6 @@
 # Scoring Standard
 
-Use this standard across MarketLens skills whenever a score, scorecard, rating, or research label is used.
+Use this standard across lens skills whenever a score, scorecard, rating, or research label is used.
 
 Timestamps, freshness grades, evidence tiers, unit and calendar rules, and
 user-input handling live in `data-discipline.md`. Load it alongside this file: a
@@ -180,7 +180,7 @@ supportive.
 ### Chain Provenance
 
 When a conclusion depends on an upstream layer, state where that input came
-from: a prior MarketLens output with its date, a user-provided view, or an
+from: a prior lens output with its date, a user-provided view, or an
 assumption made in this run. An assumed layer cannot support a strong label.
 
 ### Label Adjudication

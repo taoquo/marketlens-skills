@@ -65,12 +65,12 @@ freshness grades in `../../references/data-discipline.md` before labelling a set
 | Liquidity, ADV, spread, free float | Latest trading day or latest disclosure | State execution risk as unmeasured |
 | Event calendar for the horizon | Checked as of the plan date | Add an event-risk caveat; no time stop past the unchecked window |
 | Market regime read | Within 1 week for tactical horizons, 1 month for multi-month horizons | Treat regime as neutral, not supportive; cap at `conditional setup` |
-| Company or sector research basis | Latest reporting period, or the last dated MarketLens output | Cap at `conditional setup` and name the input to refresh |
+| Company or sector research basis | Latest reporting period, or the last dated lens output | Cap at `conditional setup` and name the input to refresh |
 | Borrow, short interest, options liquidity | Latest official or exchange release | Mark the constraint as unmeasured, no squeeze or spread claim |
 | Credit and funding inputs for a levered name | Latest filing, plus the latest issuance or rating action | Treat the funding path as unstated and cap at `conditional setup`, per `../../references/credit-and-cross-asset.md` |
 | Portfolio overlap | User-provided as of the plan date | State overlap as unknown; do not assume the trade is additive |
 
-Record the provenance of every research input: a prior MarketLens output with its
+Record the provenance of every research input: a prior lens output with its
 date, a user-provided view, or an assumption made in this run. An assumed input
 cannot support a `tradable setup` label.
 

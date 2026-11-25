@@ -1,6 +1,6 @@
 # Skill Routing
 
-Use this file to decide which MarketLens skill owns a question. Each SKILL.md
+Use this file to decide which lens skill owns a question. Each SKILL.md
 states what it owns and points here for everything else, so a new skill only
 needs one routing entry instead of an edit in every other SKILL.md.
 
@@ -74,7 +74,7 @@ Rules:
 
 ## Out Of Scope
 
-MarketLens covers listed equity research and the risk framing around it. The
+lens covers listed equity research and the risk framing around it. The
 topics below are outside that coverage. Say so plainly, name the closest thing the
 toolkit can do, and stop there rather than improvising a framework.
 

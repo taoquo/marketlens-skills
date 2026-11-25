@@ -1,8 +1,12 @@
-# MarketLens Skills
+<p><img src="assets/lens-mark.svg" width="44" height="44" alt="lens mark"></p>
+
+# lens
 
 [中文文档](README.zh-CN.md)
 
-MarketLens Skills is a publishable skill repository for AI-assisted public-market research. It ships six Markdown skills and one shared reference layer; there is no runtime or application build.
+lens turns public filings and market prices into a research label an agent can defend: what the price implies, whether the earnings are real, and what the evidence allows.
+
+Six skills share one reference layer — market regime, sector, company, catalyst, portfolio, and trade planning. Every answer ends with one label, the single constraint that binds it, and the date it must be reviewed.
 
 Repository: https://github.com/taoquo/marketlens-skills
 
@@ -158,13 +162,13 @@ Coverage is at least one case per skill: six skills and seven cases, with a seco
 
 | Skill | Case | Pages | Files |
 |---|---|---:|---|
-| `equity-research` | `marketlens-v09-equity-research-nvda` | 4 | [HTML](examples/marketlens-v09-equity-research-nvda.html) · [PDF](examples/marketlens-v09-equity-research-nvda.pdf) · [PNG](examples/marketlens-v09-equity-research-nvda.png) |
-| `equity-research` | `marketlens-v010-valuation-band-nvda` | 2 | [HTML](examples/marketlens-v010-valuation-band-nvda.html) · [PDF](examples/marketlens-v010-valuation-band-nvda.pdf) · [PNG](examples/marketlens-v010-valuation-band-nvda.png) |
-| `market-regime-monitor` | `marketlens-v09-market-regime-nvda` | 2 | [HTML](examples/marketlens-v09-market-regime-nvda.html) · [PDF](examples/marketlens-v09-market-regime-nvda.pdf) · [PNG](examples/marketlens-v09-market-regime-nvda.png) |
-| `sector-industry-research` | `marketlens-v09-sector-ai-server` | 2 | [HTML](examples/marketlens-v09-sector-ai-server.html) · [PDF](examples/marketlens-v09-sector-ai-server.pdf) · [PNG](examples/marketlens-v09-sector-ai-server.png) |
-| `catalyst-event-monitor` | `marketlens-v09-catalyst-nvda-earnings` | 2 | [HTML](examples/marketlens-v09-catalyst-nvda-earnings.html) · [PDF](examples/marketlens-v09-catalyst-nvda-earnings.pdf) · [PNG](examples/marketlens-v09-catalyst-nvda-earnings.png) |
-| `portfolio-risk-monitor` | `marketlens-v09-portfolio-ai-nvda` | 2 | [HTML](examples/marketlens-v09-portfolio-ai-nvda.html) · [PDF](examples/marketlens-v09-portfolio-ai-nvda.pdf) · [PNG](examples/marketlens-v09-portfolio-ai-nvda.png) |
-| `trade-plan-risk-manager` | `marketlens-v09-trade-plan-nvda` | 2 | [HTML](examples/marketlens-v09-trade-plan-nvda.html) · [PDF](examples/marketlens-v09-trade-plan-nvda.pdf) · [PNG](examples/marketlens-v09-trade-plan-nvda.png) |
+| `equity-research` | `lens-v09-equity-research-nvda` | 4 | [HTML](examples/lens-v09-equity-research-nvda.html) · [PDF](examples/lens-v09-equity-research-nvda.pdf) · [PNG](examples/lens-v09-equity-research-nvda.png) |
+| `equity-research` | `lens-v010-valuation-band-nvda` | 2 | [HTML](examples/lens-v010-valuation-band-nvda.html) · [PDF](examples/lens-v010-valuation-band-nvda.pdf) · [PNG](examples/lens-v010-valuation-band-nvda.png) |
+| `market-regime-monitor` | `lens-v09-market-regime-nvda` | 2 | [HTML](examples/lens-v09-market-regime-nvda.html) · [PDF](examples/lens-v09-market-regime-nvda.pdf) · [PNG](examples/lens-v09-market-regime-nvda.png) |
+| `sector-industry-research` | `lens-v09-sector-ai-server` | 2 | [HTML](examples/lens-v09-sector-ai-server.html) · [PDF](examples/lens-v09-sector-ai-server.pdf) · [PNG](examples/lens-v09-sector-ai-server.png) |
+| `catalyst-event-monitor` | `lens-v09-catalyst-nvda-earnings` | 2 | [HTML](examples/lens-v09-catalyst-nvda-earnings.html) · [PDF](examples/lens-v09-catalyst-nvda-earnings.pdf) · [PNG](examples/lens-v09-catalyst-nvda-earnings.png) |
+| `portfolio-risk-monitor` | `lens-v09-portfolio-ai-nvda` | 2 | [HTML](examples/lens-v09-portfolio-ai-nvda.html) · [PDF](examples/lens-v09-portfolio-ai-nvda.pdf) · [PNG](examples/lens-v09-portfolio-ai-nvda.png) |
+| `trade-plan-risk-manager` | `lens-v09-trade-plan-nvda` | 2 | [HTML](examples/lens-v09-trade-plan-nvda.html) · [PDF](examples/lens-v09-trade-plan-nvda.pdf) · [PNG](examples/lens-v09-trade-plan-nvda.png) |
 
 ### Case Previews
 
@@ -173,7 +177,7 @@ Coverage is at least one case per skill: six skills and seven cases, with a seco
 
 NVIDIA at 14/18 quality across six dimensions: earnings quality at watch on three screen breaches, an unresolved governance event, and a reverse DCF that now requires only 6.2 percent growth. The label stays hold/watch because the evidence, not the price, is the constraint.
 
-![Equity research case](examples/marketlens-v09-equity-research-nvda.png)
+![Equity research case](examples/lens-v09-equity-research-nvda.png)
 
 </details>
 
@@ -182,7 +186,7 @@ NVIDIA at 14/18 quality across six dimensions: earnings quality at watch on thre
 
 NVIDIA at 16.7x sits at the 0.5th percentile of its own 1,410-observation history, measured on a rolling 750-observation window, below a 32.5x lower band and a 64.9x upper band. The move is EPS-led: price +213%, EPS +1,125%, multiple -74.4%. The band remains a cross-check rather than a label, because the TTM denominator is peak-cycle earnings. Illustrative data.
 
-![Valuation band case](examples/marketlens-v010-valuation-band-nvda.png)
+![Valuation band case](examples/lens-v010-valuation-band-nvda.png)
 
 </details>
 
@@ -191,7 +195,7 @@ NVIDIA at 16.7x sits at the 0.5th percentile of its own 1,410-observation histor
 
 US technology-stock regime on three axes scores -5: HY OAS at 352bp, a 2.88 percent 10-year real yield, and VIX at 35.9 put the regime at fragile / de-risking, which caps high-beta AI at monitor closely even while NVIDIA's earnings still compound.
 
-![Market regime case](examples/marketlens-v09-market-regime-nvda.png)
+![Market regime case](examples/lens-v09-market-regime-nvda.png)
 
 </details>
 
@@ -200,7 +204,7 @@ US technology-stock regime on three axes scores -5: HY OAS at 352bp, a 2.88 perc
 
 The AI server supply chain ranked three times: by multiple, by implied assumption, and by return on incremental capital. NVIDIA's de-rating to 17x makes the GPU reasonable but cash-capped; foundry and advanced packaging still own the scarce step.
 
-![Sector industry case](examples/marketlens-v09-sector-ai-server.png)
+![Sector industry case](examples/lens-v09-sector-ai-server.png)
 
 </details>
 
@@ -209,7 +213,7 @@ The AI server supply chain ranked three times: by multiple, by implied assumptio
 
 NVIDIA's Q3 delivered a real gap: revenue of $115.8B and a $130B Q4 guide, but the stock fell on margin and governance, then rallied 31 percent on the CEO's return. The next event on Feb 23 carries a ±22.2 percent implied move, so the label stays event watch.
 
-![Catalyst event case](examples/marketlens-v09-catalyst-nvda-earnings.png)
+![Catalyst event case](examples/lens-v09-catalyst-nvda-earnings.png)
 
 </details>
 
@@ -218,7 +222,7 @@ NVIDIA's Q3 delivered a real gap: revenue of $115.8B and a $130B Q4 guide, but t
 
 An equal-weight AI watchlist where nine tickers still resolve into one duration bet, one shared accounting practice, and one reinvestment dependence. The November de-rating helped the valuation leg but not the concentration: 33 percent in the top three and 4 of 9 implied assumptions unmeasured.
 
-![Portfolio risk case](examples/marketlens-v09-portfolio-ai-nvda.png)
+![Portfolio risk case](examples/lens-v09-portfolio-ai-nvda.png)
 
 </details>
 
@@ -227,7 +231,7 @@ An equal-weight AI watchlist where nine tickers still resolve into one duration 
 
 The NVIDIA plan stays at monitor closely for the opposite reason than in May: the valuation block has cleared, but cash conversion, an unresolved governance event, and a fragile regime keep the setup conditional and position intent one notch down.
 
-![Trade plan risk case](examples/marketlens-v09-trade-plan-nvda.png)
+![Trade plan risk case](examples/lens-v09-trade-plan-nvda.png)
 
 </details>
 

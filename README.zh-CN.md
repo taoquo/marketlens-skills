@@ -1,8 +1,12 @@
-# MarketLens Skills
+<p><img src="assets/lens-mark.svg" width="44" height="44" alt="lens 标记"></p>
+
+# lens
 
 [English](README.md)
 
-MarketLens Skills 是一个可发布的金融投研 Skill 仓库，用于 AI 辅助公开市场研究。仓库包含六个 Markdown skill 和一层共享 reference；没有运行时或应用构建。
+lens 把公开财报和市场价格，变成 AI agent 能为之辩护的研究标签：价格隐含了什么、盈利是否真实、证据允许说什么。
+
+六个 skill 共用一层参考规则——市场环境、行业、公司、催化、组合与交易计划。每个结论最后只有一个标签、约束它的那条条件，以及必须复核的日期。
 
 仓库地址：https://github.com/taoquo/marketlens-skills
 
@@ -160,13 +164,13 @@ skill 在不同会话之间没有记忆，所以 `references/review-and-calibrat
 
 | Skill | 案例 | 页数 | 文件 |
 |---|---|---:|---|
-| `equity-research` | `marketlens-v09-equity-research-nvda` | 4 | [HTML](examples/marketlens-v09-equity-research-nvda.html) · [PDF](examples/marketlens-v09-equity-research-nvda.pdf) · [PNG](examples/marketlens-v09-equity-research-nvda.png) |
-| `equity-research` | `marketlens-v010-valuation-band-nvda` | 2 | [HTML](examples/marketlens-v010-valuation-band-nvda.html) · [PDF](examples/marketlens-v010-valuation-band-nvda.pdf) · [PNG](examples/marketlens-v010-valuation-band-nvda.png) |
-| `market-regime-monitor` | `marketlens-v09-market-regime-nvda` | 2 | [HTML](examples/marketlens-v09-market-regime-nvda.html) · [PDF](examples/marketlens-v09-market-regime-nvda.pdf) · [PNG](examples/marketlens-v09-market-regime-nvda.png) |
-| `sector-industry-research` | `marketlens-v09-sector-ai-server` | 2 | [HTML](examples/marketlens-v09-sector-ai-server.html) · [PDF](examples/marketlens-v09-sector-ai-server.pdf) · [PNG](examples/marketlens-v09-sector-ai-server.png) |
-| `catalyst-event-monitor` | `marketlens-v09-catalyst-nvda-earnings` | 2 | [HTML](examples/marketlens-v09-catalyst-nvda-earnings.html) · [PDF](examples/marketlens-v09-catalyst-nvda-earnings.pdf) · [PNG](examples/marketlens-v09-catalyst-nvda-earnings.png) |
-| `portfolio-risk-monitor` | `marketlens-v09-portfolio-ai-nvda` | 2 | [HTML](examples/marketlens-v09-portfolio-ai-nvda.html) · [PDF](examples/marketlens-v09-portfolio-ai-nvda.pdf) · [PNG](examples/marketlens-v09-portfolio-ai-nvda.png) |
-| `trade-plan-risk-manager` | `marketlens-v09-trade-plan-nvda` | 2 | [HTML](examples/marketlens-v09-trade-plan-nvda.html) · [PDF](examples/marketlens-v09-trade-plan-nvda.pdf) · [PNG](examples/marketlens-v09-trade-plan-nvda.png) |
+| `equity-research` | `lens-v09-equity-research-nvda` | 4 | [HTML](examples/lens-v09-equity-research-nvda.html) · [PDF](examples/lens-v09-equity-research-nvda.pdf) · [PNG](examples/lens-v09-equity-research-nvda.png) |
+| `equity-research` | `lens-v010-valuation-band-nvda` | 2 | [HTML](examples/lens-v010-valuation-band-nvda.html) · [PDF](examples/lens-v010-valuation-band-nvda.pdf) · [PNG](examples/lens-v010-valuation-band-nvda.png) |
+| `market-regime-monitor` | `lens-v09-market-regime-nvda` | 2 | [HTML](examples/lens-v09-market-regime-nvda.html) · [PDF](examples/lens-v09-market-regime-nvda.pdf) · [PNG](examples/lens-v09-market-regime-nvda.png) |
+| `sector-industry-research` | `lens-v09-sector-ai-server` | 2 | [HTML](examples/lens-v09-sector-ai-server.html) · [PDF](examples/lens-v09-sector-ai-server.pdf) · [PNG](examples/lens-v09-sector-ai-server.png) |
+| `catalyst-event-monitor` | `lens-v09-catalyst-nvda-earnings` | 2 | [HTML](examples/lens-v09-catalyst-nvda-earnings.html) · [PDF](examples/lens-v09-catalyst-nvda-earnings.pdf) · [PNG](examples/lens-v09-catalyst-nvda-earnings.png) |
+| `portfolio-risk-monitor` | `lens-v09-portfolio-ai-nvda` | 2 | [HTML](examples/lens-v09-portfolio-ai-nvda.html) · [PDF](examples/lens-v09-portfolio-ai-nvda.pdf) · [PNG](examples/lens-v09-portfolio-ai-nvda.png) |
+| `trade-plan-risk-manager` | `lens-v09-trade-plan-nvda` | 2 | [HTML](examples/lens-v09-trade-plan-nvda.html) · [PDF](examples/lens-v09-trade-plan-nvda.pdf) · [PNG](examples/lens-v09-trade-plan-nvda.png) |
 
 ### 案例预览
 
@@ -175,7 +179,7 @@ skill 在不同会话之间没有记忆，所以 `references/review-and-calibrat
 
 NVIDIA 六维质量分 14/18：盈利质量因三项筛选未过落在 watch，治理事件尚未了结，反向 DCF 现在只需要 6.2% 的十年增长。标签仍是 hold/watch，约束在证据而不在价格。
 
-![个股研究案例](examples/marketlens-v09-equity-research-nvda.png)
+![个股研究案例](examples/lens-v09-equity-research-nvda.png)
 
 </details>
 
@@ -184,7 +188,7 @@ NVIDIA 六维质量分 14/18：盈利质量因三项筛选未过落在 watch，�
 
 NVIDIA 16.7x 位于自身 1,410 个观测、750 观测滚动窗口的第 0.5 百分位，低于 32.5x 下轨与 64.9x 上轨。变动由 EPS 主导：价格 +213%，EPS +1,125%，倍数 -74.4%。估值带仍是交叉校验，不单独决定标签，因为 TTM 分母处在周期高点。数据为示例数据。
 
-![估值带案例](examples/marketlens-v010-valuation-band-nvda.png)
+![估值带案例](examples/lens-v010-valuation-band-nvda.png)
 
 </details>
 
@@ -193,7 +197,7 @@ NVIDIA 16.7x 位于自身 1,410 个观测、750 观测滚动窗口的第 0.5 百
 
 美股科技股三轴环境合计 -5：HY OAS 352bp、10 年实际利率 2.88%、VIX 35.9，环境落在 fragile / de-risking，高 beta AI 因此被封顶在 monitor closely，即便 NVIDIA 盈利仍在复利。
 
-![市场环境案例](examples/marketlens-v09-market-regime-nvda.png)
+![市场环境案例](examples/lens-v09-market-regime-nvda.png)
 
 </details>
 
@@ -202,7 +206,7 @@ NVIDIA 16.7x 位于自身 1,410 个观测、750 观测滚动窗口的第 0.5 百
 
 AI 服务器产业链按倍数、隐含假设、增量资本回报各排一次。NVIDIA 杀到 17x 后 GPU 读数变得合理但受现金流封顶；晶圆代工与先进封装仍掌握稀缺环节。
 
-![行业研究案例](examples/marketlens-v09-sector-ai-server.png)
+![行业研究案例](examples/lens-v09-sector-ai-server.png)
 
 </details>
 
@@ -211,7 +215,7 @@ AI 服务器产业链按倍数、隐含假设、增量资本回报各排一次�
 
 NVIDIA Q3 交付了真实的超预期：营收 $115.8B、Q4 指引 $130B，但股价因毛利率与治理事件下跌，又在 CEO 复职后单日反弹 31%。下一次事件在 2 月 23 日，隐含波动 ±22.2%，标签维持 event watch。
 
-![事件催化案例](examples/marketlens-v09-catalyst-nvda-earnings.png)
+![事件催化案例](examples/lens-v09-catalyst-nvda-earnings.png)
 
 </details>
 
@@ -220,7 +224,7 @@ NVIDIA Q3 交付了真实的超预期：营收 $115.8B、Q4 指引 $130B，但�
 
 等权 AI 观察池，九个 ticker 仍归结为一个久期押注、一套共用的会计惯例和同一批再投资依赖。11 月的杀估值帮助了估值腿，却没有解决集中度：前三名占 33%，9 个隐含假设里有 4 个没有实测。
 
-![组合风险案例](examples/marketlens-v09-portfolio-ai-nvda.png)
+![组合风险案例](examples/lens-v09-portfolio-ai-nvda.png)
 
 </details>
 
@@ -229,7 +233,7 @@ NVIDIA Q3 交付了真实的超预期：营收 $115.8B、Q4 指引 $130B，但�
 
 NVIDIA 计划维持 monitor closely，但理由与 5 月相反：估值障碍已经清除，现金流转化、未了结的治理事件和 fragile 的环境让这个 setup 仍是条件性的，仓位意图再折一档。
 
-![交易计划风险案例](examples/marketlens-v09-trade-plan-nvda.png)
+![交易计划风险案例](examples/lens-v09-trade-plan-nvda.png)
 
 </details>
 

@@ -8,7 +8,7 @@
 方法定义在
 [`equity-research/references/valuation-framework.md`](../equity-research/references/valuation-framework.md)。
 本教程覆盖数据口径、仓库内的零依赖绘图脚本，以及如何读图。NVIDIA 完整案例见
-[`examples/marketlens-v010-valuation-band-nvda.html`](../examples/marketlens-v010-valuation-band-nvda.html)。
+[`examples/lens-v010-valuation-band-nvda.html`](../examples/lens-v010-valuation-band-nvda.html)。
 
 ## 1. 什么时候用
 

@@ -1,0 +1,6 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title>lens</title>
+  <rect x="11" y="11" width="106" height="106" rx="24" fill="#F8F1EA" stroke="#B83D2E" stroke-width="2"/>
+  <circle cx="57" cy="55" r="17" stroke="#191514" stroke-width="6"/>
+  <path d="M69.5 67.5 82 80" stroke="#191514" stroke-width="6" stroke-linecap="round"/>
+</svg>

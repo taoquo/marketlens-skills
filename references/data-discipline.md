@@ -1,6 +1,6 @@
 # Data Discipline
 
-Shared data rules for MarketLens skills. Load this file before scoring,
+Shared data rules for lens skills. Load this file before scoring,
 labelling, or writing a `Data Freshness` table. Each skill keeps only the rules
 that are specific to its domain and inherits everything here.
 

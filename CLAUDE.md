@@ -4,11 +4,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repository is
 
-MarketLens is a **skill repository**, not an application. It ships six Markdown-defined
+lens is a **skill repository**, not an application. It ships six Markdown-defined
 research skills for AI agents (equity, market regime, sector/industry, catalyst events,
 portfolio risk, trade planning) plus a shared `references/` layer. There is no package
 manifest, runtime, or application build. The "code" that matters is the prose, its
 cross-references, and the structural contract enforced by `scripts/validate_skills.py`.
+
+Identity is family-governed: the product name is lowercase `lens`, and `docs/brand.md`
+records the name, mark, and voice. `assets/lens-mark.svg` uses the taoque mark geometry and
+the single `#B83D2E` accent; do not introduce a second colour, serif stack, or mark shape.
 
 A skill is any top-level directory containing `SKILL.md`. Discovery is dynamic, so
 adding or removing a skill directory requires no script or CI edit.
@@ -26,7 +30,7 @@ bash scripts/build-skills.sh
 REQUIRE_DIST=1 bash scripts/validate-skills.sh
 
 # Re-render one example (writes .pdf and .png beside the .html)
-bash scripts/render-examples.sh examples/marketlens-v09-equity-research-nvda.html
+bash scripts/render-examples.sh examples/lens-v09-equity-research-nvda.html
 
 # Render a point-in-time PE band from a CSV (standard library only)
 python3 scripts/pe_band_chart.py \
@@ -125,8 +129,8 @@ Editing content without these breaks CI:
 
 - **Version is repo-wide and single-sourced.** Bump `VERSION`, every `SKILL.md`
   `metadata.version`, and the top `CHANGELOG.md` heading together. The current release is
-  0.12; the examples are the six English v0.9 cases in `examples/marketlens-v09-*` plus the
-  v0.10 valuation-band case in `examples/marketlens-v010-*`, with NVIDIA as the core case.
+  0.12; the examples are the six English v0.9 cases in `examples/lens-v09-*` plus the
+  v0.10 valuation-band case in `examples/lens-v010-*`, with NVIDIA as the core case.
   v0.11 added the research quality layer; v0.12 adds adversarial review, falsifiable
   triggers, silent-failure checks, and a behavioral verification record. The v0.10
   valuation-band case still carries the EPS/PE decomposition, the catalyst case carries

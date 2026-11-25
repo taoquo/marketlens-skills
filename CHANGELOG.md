@@ -35,6 +35,11 @@ output block is added.
   unresolved governance event. The catalyst case carries measurable event checkpoints and a
   red-team objection; the v0.10 valuation-band case now ends at 16.7x, below its 32.5x lower
   band, with the EPS/PE decomposition restated as price +213%, EPS +1,125%, PE -74.4%.
+- The product is renamed to `lens` and adopts the taoque family identity: a family mark in
+  `assets/lens-mark.svg`, a one-line README lede in place of the repository description,
+  and example files renamed from `marketlens-*` to `lens-*`. `docs/brand.md` records the
+  name, mark, and voice rules. The GitHub repository and install command keep the
+  `marketlens-skills` name until the repository itself is renamed.
 - `VERSION` and all `metadata.version` fields move to 0.12.
 
 ## v0.11 Research Quality Layer: Source Pools, Adjudication, And A Pre-Publication Gate

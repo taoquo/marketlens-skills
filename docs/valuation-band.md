@@ -10,7 +10,7 @@ The method is defined in
 [`equity-research/references/valuation-framework.md`](../equity-research/references/valuation-framework.md).
 This guide covers the data contract, the dependency-free chart utility in this repository, and
 how to read the result. The NVIDIA worked case is
-[`examples/marketlens-v010-valuation-band-nvda.html`](../examples/marketlens-v010-valuation-band-nvda.html).
+[`examples/lens-v010-valuation-band-nvda.html`](../examples/lens-v010-valuation-band-nvda.html).
 
 ## 1. When to use it
 

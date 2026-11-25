@@ -4,7 +4,7 @@
 The script takes a CSV of daily PE observations (or market cap and TTM net
 profit), computes a rolling lower/middle/upper band at every date using only
 the observations available up to that date, and writes a self-contained SVG.
-It is a reference implementation for the MarketLens `Historical Valuation
+It is a reference implementation for the lens `Historical Valuation
 Band` method; it is deliberately dependency-free.
 
 Examples:

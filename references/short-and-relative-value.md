@@ -1,6 +1,6 @@
 # Short And Relative Value
 
-Every MarketLens framework so far reads one direction: a good thesis becomes a
+Every lens framework so far reads one direction: a good thesis becomes a
 watch label and a bad one becomes `avoid`. That leaves the most valuable output of
 red-flag work on the floor. A confirmed accounting problem, a structural decline,
 or an overearning cyclical is not merely a reason to skip a name; it is a distinct

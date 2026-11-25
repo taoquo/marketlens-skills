@@ -1,6 +1,6 @@
 # Skill Contract
 
-Shared, non-negotiable rules for every MarketLens skill. Each `SKILL.md` loads this
+Shared, non-negotiable rules for every lens skill. Each `SKILL.md` loads this
 file and states only its domain-specific additions. The definitions referenced here
 live in `data-discipline.md` and `scoring-standard.md`.
 

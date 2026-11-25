@@ -1,6 +1,6 @@
 # Review And Calibration
 
-Use this file to review a draft before publication and to review whether prior MarketLens
+Use this file to review a draft before publication and to review whether prior lens
 scorecards and research labels worked as intended.
 
 ## Purpose
